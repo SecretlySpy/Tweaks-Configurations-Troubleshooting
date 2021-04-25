@@ -11,3 +11,5 @@ compact /c /s /a /i /exe:lzx %windir%\Panther\*
 compact /c /s /a /i /exe:lzx %windir%\SoftwareDistribution\*
 compact /c /s /a /i /exe:lzx %windir%\System32\Catroot2\*
 compact /c /s /a /i /exe:lzx %windir%\System32\LogFiles\*
+bcdedit /deletevalue useplatformclock
+bcdedit /set disabledynamictick yes
