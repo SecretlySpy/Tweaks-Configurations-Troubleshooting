@@ -1,0 +1,7 @@
+Changing the default installation folder
+Proceed with following steps to change the default location of installation folder for new installing programs.
+
+1. Type the “regedit” in start menu and open the first result it shows.
+
+2. Go for following keys
+“HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion”. And double click on “CurrentVersion”. Then on right hand side window will expand. Go for ProgramFilesDir from list. If your Operating System is 64 bit then there will be two entries ProgramFilesDir and ProgramFilesDir(x86).

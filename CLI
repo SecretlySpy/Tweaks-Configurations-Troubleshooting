@@ -1,0 +1,116 @@
+ctrl + r = search
+tab = auto complete
+Enter = moving by one line
+Space = moving by one page
+Q key = quit
+
+ls - list
+cd - change directory = ex. cd (name of directory)
+cp - copy = ex. cp (name of file or directory) (name of destination)
+mkdir - new folder = ex. mkdir Archim or mkdr 'Archim Pameroyan'
+mv - rename and move = ex1. mv (name of file or folder) (new name) || ex2. mv (name of file or folder) (name of destination)
+rm - remove = ex. rm (name of folder or file)
+cat - to open the content of the file = ex. cat Archim.txt
+more - to open the content of the file, one page at the time (Used for long contents)= ex. more Archim.txt
+
+Copying files with one specific file type:
+cp *(file extension) (name of destination) = ex. cp *png C:\Users\Archim\Desktop
+
+Copying folder including the files and subdirectory:
+cp '(name of folder)' (name of destination) -Recurse -Verbose = ex. cp 'Desktop' C:\Users\Archim\Documents -Recurse -Verbose
+
+Moving folder with only selected file type included:
+mv *_(name of folder).(extension) (name of destination) = ex. mv *_Archim.txt Desktop
+
+Removing a folder or file that you don't have permission:
+rm (name of file or folder) -Force = ex. rm Archim -Force
+
+Viewing the content of the file but only first lines:
+cat (name of the file) -Head (number of lines) = ex. cat Archim.txt -Head 5
+
+Viewing the content of the file but only last lines:
+cat (name of the file) -Tail (number of lines) = ex. cat Archim.txt -Tail 5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

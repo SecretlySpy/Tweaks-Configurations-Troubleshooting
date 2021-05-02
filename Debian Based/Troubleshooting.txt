@@ -1,0 +1,32 @@
+1. Error: cannot communicate with server: Post "http://localhost/v2/snaps/": dial unix /run/snapd.socket: connect: no such file or directory = https://www.how2shout.com/linux/solve-error-cannot-communicate-with-server-dial-unix-run-snapd-socket/
+
+- First, check the status of SNAPD service
+systemctl status snapd.service
+
+- If you get the following output then the service is not yet started.
+
+â snapd.service - Snap Daemon
+Loaded: loaded (/lib/systemd/system/snapd.service; disabled; vendor p>
+Active: inactive (dead)
+TriggeredBy: â snapd.socket
+
+- To enable the service, type the following command: 
+sudo systemctl start snapd.service
+
+2. How to add another OS in Grub Bootloader
+- Open the terminal and type the following:
+- sudo os-prober
+- sudo grub-update
+
+3. How to disable authorization password
+- sudo visudo
+- look for this line admin ALL=(ALL) ALL (probably close to the last line).
+- replace it with admin ALL=(ALL) NOPASSWD: ALL.
+- Save and exit.
+
+To disable password keyring, download and install Seahorse (Gnome) and change the password to blank.
+
+4. "Not Signed" Error : https://superuser.com/questions/1331936/how-can-i-get-past-a-repository-is-not-signed-message-when-attempting-to-upgr
+- sudo apt-get update --allow-unauthenticated && sudo apt-get update --allow-insecure-repositories
+- add [trusted=yes] in the repository URL.
+ex. deb [trusted=yes] file:/media/cdrom0 kali-rolling main contrib non-free

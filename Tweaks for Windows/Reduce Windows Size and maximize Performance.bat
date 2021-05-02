@@ -1,6 +1,6 @@
 @echo off
-title Optimize Windows for better performance&cls&echo ============================================================================&echo # Optimize Windows for better performance
-&echo ============================================================================
+title Optimize Windows for better performance&cls&echo ============================================================================&echo # Optimize Windows for better performance&echo ============================================================================
+
 Compact /CompactOS:always
 compact /c /s /a /i /exe:lzx %programFiles(x86)%\*
 compact /c /s /a /i /exe:lzx %programFiles%

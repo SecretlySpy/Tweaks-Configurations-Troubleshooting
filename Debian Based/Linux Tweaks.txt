@@ -1,0 +1,120 @@
+1. Maximum Performance Mode 
+
+To change your processor to performance mode use: 
+
+sudo echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+sudo cpufreq-set -r -g performance 
+
+or 
+
+sudo apt-get install cpufrequtils 
+sudo nano /etc/default/cpufrequtils 
+GOVERNOR="performance" 
+sudo systemctl restart cpufrequtils 
+
+You can install a CPU frequency controller with this command:
+ 
+sudo apt-get install indicator-cpufreq  
+Then reboot, go to the notification area (the right side of the top panel), click on the cpu frequence indicator and then select Performance. 
+
+To set Performance by default:
+ 
+sudo apt-get install cpufrequtils  
+echo 'GOVERNOR="performance"' | sudo tee /etc/default/cpufrequtils  
+sudo systemctl disable ondemand 
+
+Or 
+
+sudo nano /etc/rc.local 
+sleep 120 # Give CPU startup routines time to settle.
+cpupower frequency-set --governor performance
+
+2. RAM/Kernel Tweaks 
+
+Type the following to edit the file:  
+
+sudo nano /etc/sysctl.conf 
+
+Then add the following lines:
+ 
+Reduce the swap tendency vm.swappiness = 10 
+vm.vfs_cache_pressure = 50 
+vm.watermark_scale_factor = 200 
+vm.dirty_ratio = 3 
+Press Ctrl + O to save the file and Ctrl + X to exit 
+
+Important symbol reminder:  
+
+^ = means ctrl key 
+M= means enter key 
+cpufreq-info = displays cpu frequency and governor 
+watch -n 1 grep MHz /proc/cpuinfo = to monitor cpu frequency 
+cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor = To see the current governor of the cpu cores
+
+3. Maximize NVIDIA GPU Performance
+
+nvidia-settings -a "[gpu:0]/GpuPowerMizerMode=1"
+
+then add the commad to startup items to make it permanent 
+
+4. Automatically mount swap partition from external drive : https://askubuntu.com/questions/711186/how-to-automatically-mount-swap-partition
+
+- Go to GParted then right-click on the swap partition and click on Information.
+- Copy the UUID
+- Open the terminal then type the following:
+
+sudo -H gedit /etc/fstab
+
+- Replace the UUID
+
+UUID=(UUID of the swap partition) none       swap   sw         0     0
+
+- Save the file and restart your computer. Everything should be working now.
+
+5. Disabling cpu throttling : https://askubuntu.com/questions/971142/cannot-disable-cpu-throttling-on-ubuntu-16-04-lts // https://github.com/erpalma/throttled
+
+- sudo apt install git build-essential python3-dev libdbus-glib-1-dev libgirepository1.0-dev libcairo2-dev python3-venv python3-wheel
+- git clone https://github.com/erpalma/throttled.git
+- sudo ./throttled/install.sh
+- sudo systemctl stop thermald.service
+- sudo systemctl disable thermald.service
+- sudo systemctl mask thermald.service
+
+and 
+
+- sudo apt purge thermald
+- sudo nano /etc/modprobe.d/blacklist-throttling.conf
+
+copy and paste the following then save:
+
+blacklist intel_powerclamp
+blacklist intel_rapl
+blacklist intel_rapl_perf
+
+- sudo update-initramfs -u -k all
+- echo 100 | sudo tee /sys/devices/system/cpu/intel_pstate/min_perf_pct
+- lsmod | grep -i intel
+
+6. Install preload
+
+- sudo apt install preload
+
+7. Install Ananicy : https://github.com/Nefelim4ag/Ananicy
+
+- git clone https://github.com/Nefelim4ag/Ananicy.git /tmp/ananicy
+- cd /tmp/ananicy
+- sudo make install
+- sudo systemctl enable ananicy
+- sudo systemctl start ananicy
+
+8. Install Nohang : https://github.com/hakavlad/nohang
+
+-sudo apt install make fakeroot
+-git clone https://github.com/hakavlad/nohang.git && cd nohang
+-deb/build.sh
+-sudo apt install --reinstall ./deb/package.deb
+-sudo systemctl enable --now nohang-desktop.service
+-git clone https://github.com/hakavlad/nohang.git && cd nohang
+-sudo make install
+-sudo systemctl enable --now nohang.service
+-sudo systemctl enable --now nohang-desktop.service

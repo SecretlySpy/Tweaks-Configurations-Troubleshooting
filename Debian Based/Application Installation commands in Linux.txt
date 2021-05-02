@@ -1,0 +1,81 @@
+- Wine : https://vitux.com/how-to-install-wine-on-ubuntu/
+
+sudo apt install wine64 
+sudo dpkg --add-architecture i386
+wget -qO- https://dl.winehq.org/wine-builds/Release.key | sudo apt-key add -
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv F987672F
+sudo apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main'
+sudo apt-get update
+sudo apt-get install --install-recommends winehq-stable
+sudo apt-get install --install-recommends winehq-devel
+
+- HardInfo (Device Manager GUI) : https://www.howtogeek.com/716646/how-to-get-a-graphical-device-manager-for-linux/?utm_content=buffere0452&utm_medium=social&utm_source=facebook.com&utm_campaign=buffer&fbclid=IwAR07JdyxfkCvn2T8ZwezGz9kfnsBbDlmPqYBsO6SvJqF2e3_w-BH8uGbiy4
+
+sudo apt install hardinfo
+sudo modeprobe eeprom
+hardinfo
+
+- (App Centers) 
+Zorin OS:
+sudo apt install gnome-software  
+
+Kali Linux:
+sudo apt-get install plasma-discover
+
+POP OS:
+sudo ninja install
+io.elementary.appcenter
+
+Elementary OS:
+sudo add-apt-repository ppa:elementary-os/stable
+sudo add-apt-repository ppa:elementary-os/daily
+sudo bash -c 'echo "deb http://packages.elementary.io/appcenter $(lsb_release -sc) main" >> /etc/apt/sources.list.d/appcenter.list'
+sudo wget -O /etc/apt/trusted.gpg.d/appcenter.asc http://packages.elementary.io/key.asc
+sudo add-apt-repository ppa:ximion/packagekit
+sudo apt update
+sudo apt install appcenter
+
+Flatpak:
+sudo add-apt-repository ppa:alexlarsson/flatpak
+sudo apt update
+sudo apt install flatpak
+sudo apt install gnome-software-plugin-flatpak
+
+Snap:
+sudo apt install snapd
+
+Synaptic:
+sudo apt-get install synaptic
+
+- Slimbook Batter : https://itsfoss.com/slimbook-battry-optimizer-ubuntu/
+
+sudo add-apt-repository ppa:slimbook/slimbook
+sudo apt update
+sudo apt install slimbookbattery
+
+- Gnome Extension : https://linuxconfig.org/how-to-install-gnome-shell-extensions-on-ubuntu-18-04-bionic-beaver-linux
+
+sudo apt install gnome-shell-extensions
+
+then add the Gnome Shell Integration to your browser
+
+- qBittorent: https://www.qbittorrent.org/download.php // https://www.linuxbabe.com/ubuntu/install-qbittorrent-ubuntu-18-04-desktop-server
+
+sudo add-apt-repository ppa:qbittorrent-team/qbittorrent-stable
+sudo add-apt-repository ppa:qbittorrent-team/qbittorrent-unstable 
+sudo apt-get update && sudo apt-get install qbittorrent 
+
+- GDebi : https://itsfoss.com/gdebi-default-ubuntu-software-center/
+
+sudo apt install gdebi
+
+- Java JDK on Kali Linux
+
+sudo su -
+sudo apt update && sudo apt upgrade
+sudo apt install -y default-jdk
+java -version
+
+Gedit Command
+
+- sudo apt install gedit
