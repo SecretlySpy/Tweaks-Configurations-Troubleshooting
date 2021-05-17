@@ -1,0 +1,34 @@
+https://stackoverflow.com/questions/30817871/android-studio-is-slow-how-to-speed-up
+
+
+
+I.
+1. Go to Settings -> Build, Execution, Deployment -> Compiler
+2. Check the "Compile independent modules in parallel"
+3. Add the command in "Command-line Options:"
+
+--offline
+
+II.
+1. Go to Help -> Edit VM Options
+2. Put the following:
+
+-Xms8024m  <-------- depends on the RAM
+-Xmx24200m <-------- depends on the RAM
+-XX:MaxPermSize=10700m <-------- depends on the RAM
+-XX:ReservedCodeCacheSize=2659m <-------- depends on the Disk
+-XX:+UseCompressedOops
+
+III. 
+1. Search "gradle.properties"
+2. Add the following lines:
+
+org.gradle.daemon=true
+org.gradle.parallel=true
+
+IV.
+1. Go to File > Settings > Editor > File Types
+2. In the field of "Ignore files and folders" add the line:
+
+Thumbs.db;
+
