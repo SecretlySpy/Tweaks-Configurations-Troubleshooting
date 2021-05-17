@@ -1,5 +1,5 @@
 https://stackoverflow.com/questions/30817871/android-studio-is-slow-how-to-speed-up
-
+https://developer.android.com/studio/intro/studio-config
 
 
 I.
@@ -13,11 +13,13 @@ II.
 1. Go to Help -> Edit VM Options
 2. Put the following:
 
--Xms8024m  <-------- depends on the RAM
--Xmx24200m <-------- depends on the RAM
--XX:MaxPermSize=10700m <-------- depends on the RAM
--XX:ReservedCodeCacheSize=2659m <-------- depends on the Disk
--XX:+UseCompressedOops
+-Xms1024m 
+-Xmx4096m # <------ increase this to most of your RAM 
+-XX:MaxPermSize=1024m 
+-XX:ReservedCodeCacheSize=440m 
+-XX:+UseCompressedOops 
+-XX:-HeapDumpOnOutOfMemoryError 
+-Dfile.encoding=UTF-8
 
 III. 
 1. Search "gradle.properties"
@@ -32,3 +34,4 @@ IV.
 
 Thumbs.db;
 
+3. Enable Power Saver Mode (File -> Power Saver Mode)
