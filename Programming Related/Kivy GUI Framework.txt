@@ -1,0 +1,14 @@
+Kivy GUI Framework (Python) Installation and use guide
+https://kivy.org/doc/stable/gettingstarted/installation.html#install-pip
+For Desktop: https://likegeeks.com/kivy-tutorial/
+For Mobile: https://realpython.com/mobile-app-kivy-python/
+
+After the installation, open cmd as administrator:
+
+-To open Kivy Virtual Environment:
+
+kivy_venv\Scripts\activate
+
+-To open Kivy samples code:
+
+python kivy_venv\share\kivy-examples\demo\showcase\main.py
