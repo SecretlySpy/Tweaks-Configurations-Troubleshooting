@@ -1,4 +1,0 @@
-Failed to create JVM
-1. Add JDK and JRE to system variables
-2. Go to C:\Users\%USERNAME%\AppData\Roaming\Google\{studio version} 
-3. Delete VMOptions
