@@ -8,6 +8,7 @@ netsh int tcp set global autotuninglevel=normal
 netsh int tcp set global congestionprovider=ctcp
 bcdedit /deletevalue useplatformclock
 bcdedit /set disabledynamictick yes
+bcdedit /set xsavedisable 0
 Compact /CompactOS:always
 compact /c /s /a /i /exe:lzx %programFiles(x86)%\*
 compact /c /s /a /i /exe:lzx %programFiles%
