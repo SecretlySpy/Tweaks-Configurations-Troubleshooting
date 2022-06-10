@@ -1,10 +1,5 @@
 Windows Registry Editor Version 5.00
 
-; Created by: Shawn Brink
-; Created on: May 14th 2018
-; Tutorial: https://www.tenforums.com/tutorials/110230-enable-disable-windows-defender-security-center-windows-10-a.html
-
-
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService]
 "Start"=dword:00000002
 
@@ -13,3 +8,6 @@ Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity]
 "Enabled"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Policy]
+"VerifiedAndReputablePolicyState"=dword:00000001
