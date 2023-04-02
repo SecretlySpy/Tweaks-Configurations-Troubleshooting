@@ -11,3 +11,9 @@ Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Policy]
 "VerifiedAndReputablePolicyState"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\Software\Microsoft\Cryptography\Wintrust\Config]   
+"EnableCertPaddingCheck"="0"
+
+[HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Cryptography\Wintrust\Config] 
+"EnableCertPaddingCheck"="0"
