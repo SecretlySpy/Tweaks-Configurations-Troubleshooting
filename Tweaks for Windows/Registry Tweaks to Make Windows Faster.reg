@@ -41,8 +41,6 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Psched]
 "NonBestEffortLimit"=dword:00000000
 
-Windows Registry Editor Version 5.00
-
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DeviceInstall\Restrictions]
 "DenyDeviceIDs"=dword:00000001
 "DenyDeviceIDsRetroactive"=dword:00000001

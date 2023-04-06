@@ -17,3 +17,6 @@ Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Cryptography\Wintrust\Config] 
 "EnableCertPaddingCheck"="0"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Features]
+"TamperProtection"=dword:00000000
