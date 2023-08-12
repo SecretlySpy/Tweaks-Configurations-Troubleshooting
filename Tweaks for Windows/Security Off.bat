@@ -20,3 +20,12 @@ IF %ERRORLEVEL% EQU 0 (
 )
 
 pause
+
+call "%~dp0\Easy Access.bat"
+IF %ERRORLEVEL% EQU 0 (
+  echo Easy Access.bat executed successfully.
+) ELSE (
+  echo Easy Access.bat executed failed.
+)
+
+pause

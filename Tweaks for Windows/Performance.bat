@@ -34,7 +34,6 @@ devcon remove "*INTC1043"
 devcon remove "*INTC1044"
 devcon remove "*INTC1045"
 REM Removing The Intel Dynamic Platform and Thermal Framework (DPTF) - End
-
 REM Optimizing Network Connection - Start
 netsh int tcp show global
 netsh int tcp set global chimney=enabled
@@ -43,6 +42,15 @@ netsh int tcp set global autotuninglevel=normal
 netsh int tcp set supplemental custom congestionprovider=ctcp
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Psched" /v NonBestEffortLimit /t REG_DWORD /d 0 /f
 REM Optimizing Network Connection - End
+
+REM Importing Power Plans - Start
+powercfg -Import "%~dp0UPC.pow"
+pause
+powercfg -Import "%~dp0HPC.pow"
+pause
+powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
+pause
+REM Importing Power Plans - End
 
 REM Removing High Precision Event Timer (HPET) - Start
 bcdedit /deletevalue useplatformclock
