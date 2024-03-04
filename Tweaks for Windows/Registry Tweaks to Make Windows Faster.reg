@@ -9,7 +9,7 @@ Windows Registry Editor Version 5.00
 [HKEY_CURRENT_USER\Control Panel\Desktop]
 "AutoEndTasks"="1"
 "HungAppTimeout"="1000"
-"MenuShowDelay"="8"
+"MenuShowDelay"="6"
 "WaitToKillAppTimeout"="2000"
 "LowLevelHooksTimeout"="1000"
 
@@ -44,6 +44,9 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DeviceInstall\Restrictions]
 "DenyDeviceIDs"=dword:00000001
 "DenyDeviceIDsRetroactive"=dword:00000001
+
+[HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell]
+"FolderType"="NotSpecified"
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DeviceInstall\Restrictions\DenyDeviceIDs]
 "1"="*INT3400"
