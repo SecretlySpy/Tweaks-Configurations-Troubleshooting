@@ -2,7 +2,7 @@ Windows Registry Editor Version 5.00
 
 [HKEY_CLASSES_ROOT\AllFilesystemObjects\shellex\ContextMenuHandlers\Copy To]
 @="{C2FBB630-2971-11D1-A18C-00C04FD75D13}"
- 
+ 
 [HKEY_CLASSES_ROOT\AllFilesystemObjects\shellex\ContextMenuHandlers\Move To]
 @="{C2FBB631-2971-11D1-A18C-00C04FD75D13}"
 
@@ -44,11 +44,6 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DeviceInstall\Restrictions]
 "DenyDeviceIDs"=dword:00000001
 "DenyDeviceIDsRetroactive"=dword:00000001
-
-[HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell]
-"FolderType"="NotSpecified"
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DeviceInstall\Restrictions\DenyDeviceIDs]
 "1"="*INT3400"
 "2"="*INT3402"
 "3"="*INT3403"
@@ -68,4 +63,12 @@ Windows Registry Editor Version 5.00
 "17"="PCI\\VEN_8086&DEV_9A03&CC_1180"
 "18"="*INTC1044"
 "19"="PCI\\VEN_8086&DEV_A131&CC_1180"
+"20"="*INTC1041"
+"21"="*INTC1046"
+"22"="*INTC10A0"
+"23"="*INTC10A1"
+"24"="PCI\\VEN_8086&DEV_461D&CC_1180"
+"25"="PCI\\VEN_8086&DEV_A71D&CC_1180"
 
+[HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell]
+"FolderType"="NotSpecified"

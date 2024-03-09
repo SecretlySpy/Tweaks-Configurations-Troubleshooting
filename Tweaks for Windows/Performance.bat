@@ -16,32 +16,14 @@ REM Removing The Intel Dynamic Platform and Thermal Framework (DPTF) - Start
 @Rem "14"="*INTC1043"
 @Rem "15"="*INTC1044"
 @Rem "16"="*INTC1045"
-
-devcon remove "*INT3400"
-devcon remove "*INT3402"
-devcon remove "*INT3403"
-devcon remove "*INT3404"
-devcon remove "*INT3407"
-devcon remove "*INT3409"
-devcon remove "PCI\VEN_8086&DEV_1603&CC_1180"
-devcon remove "PCI\VEN_8086&DEV_1903&CC_1180"
-devcon remove "PCI\VEN_8086&DEV_8A03&CC_1180"
-devcon remove "PCI\VEN_8086&DEV_9C24&CC_1180"
-devcon remove "PCI\VEN_8086&DEV_A131&CC_1180"
-devcon remove "PCI\VEN_8086&DEV_9A03&CC_1180"
-devcon remove "*INTC1040"
-devcon remove "*INTC1043"
-devcon remove "*INTC1044"
-devcon remove "*INTC1045"
-REM Removing The Intel Dynamic Platform and Thermal Framework (DPTF) - End
-REM Optimizing Network Connection - Start
+@Rem Optimizing Network Connection - Start
 netsh int tcp show global
 netsh int tcp set global chimney=enabled
 netsh int tcp set heuristics disabled
 netsh int tcp set global autotuninglevel=normal
 netsh int tcp set supplemental custom congestionprovider=ctcp
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Psched" /v NonBestEffortLimit /t REG_DWORD /d 0 /f
-REM Optimizing Network Connection - End
+@Rem Optimizing Network Connection - End
 
 REM Importing Power Plans - Start
 powercfg -Import "%~dp0UPC.pow"
@@ -59,7 +41,7 @@ REM Removing High Precision Event Timer (HPET) - End
 
 REM Enabling AVX - Start
 bcdedit /set xsavedisable 0
-REM Enabling AVX - Start
+REM Enabling AVX - End
 
 pause
 
@@ -82,5 +64,28 @@ IF %ERRORLEVEL% EQU 0 (
   echo TakeControl.reg imported failed.
 )
 REM Import Registry Files - Start
+
+PNPUTIL /disable-device /deviceid "*INTC1040"
+PNPUTIL /disable-device /deviceid "*INTC1041"
+PNPUTIL /disable-device /deviceid "*INTC1043"
+PNPUTIL /disable-device /deviceid "*INTC1044"
+PNPUTIL /disable-device /deviceid "*INTC1045"
+PNPUTIL /disable-device /deviceid "*INTC1046"
+PNPUTIL /disable-device /deviceid "*INTC10A0"
+PNPUTIL /disable-device /deviceid "*INTC10A1"
+PNPUTIL /disable-device /deviceid "*INT3400"
+PNPUTIL /disable-device /deviceid "*INT3402"
+PNPUTIL /disable-device /deviceid "*INT3403"
+PNPUTIL /disable-device /deviceid "*INT3404"
+PNPUTIL /disable-device /deviceid "*INT3407"
+PNPUTIL /disable-device /deviceid "*INT3409"
+PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_1603&CC_1180"
+PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_1903&CC_1180"
+PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_461D&CC_1180"
+PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_8A03&CC_1180"
+PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_9A03&CC_1180"
+PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_9C24&CC_1180"
+PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_A131&CC_1180"
+PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_A71D&CC_1180"
 
 pause
