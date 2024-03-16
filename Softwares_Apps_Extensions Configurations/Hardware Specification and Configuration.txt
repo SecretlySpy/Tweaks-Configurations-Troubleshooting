@@ -1,0 +1,7 @@
+Intel I7 10875 + NVIDIA RTX 2060
+- Core Clock = 220+
+- Memory Clock = 700+
+
+**For Notebook Fan Control Configuration**
+
+HP 14 - r013ne Notebook PC >> HP Notebook 15-ba010ng
