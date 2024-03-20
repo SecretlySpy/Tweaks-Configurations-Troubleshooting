@@ -1,5 +1,5 @@
 @echo off
-title Optimizing Windows & color 0b
+title Optimizing Windows
 
 :: Check for administrative privileges and elevate if necessary
 cd /d "%~dp0" && (
@@ -12,7 +12,6 @@ cd /d "%~dp0" && (
 )
 
 :: Removing The Intel Dynamic Platform and Thermal Framework (DPTF)
-echo Removing The Intel Dynamic Platform and Thermal Framework (DPTF)...
 PNPUTIL /disable-device /deviceid "*INT3400" >nul 2>&1
 PNPUTIL /disable-device /deviceid "*INT3402" >nul 2>&1
 PNPUTIL /disable-device /deviceid "*INT3403" >nul 2>&1
@@ -31,10 +30,9 @@ if %errorlevel% equ 0 (
     echo DPTF removal failed.
 )
 
-pause
+
 
 :: Optimizing Network Connection
-echo Optimizing Network Connection...
 netsh int tcp set global chimney=enabled >nul 2>&1
 netsh int tcp set heuristics disabled >nul 2>&1
 netsh int tcp set global autotuninglevel=normal >nul 2>&1
@@ -46,10 +44,9 @@ if %errorlevel% equ 0 (
     echo Network optimization failed.
 )
 
-pause
+
 
 :: Importing Power Plans
-echo Importing Power Plans...
 powercfg -Import "%~dp0UPC.pow" >nul 2>&1
 powercfg -Import "%~dp0HPC.pow" >nul 2>&1
 powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 >nul 2>&1
@@ -59,10 +56,9 @@ if %errorlevel% equ 0 (
     echo Power plans import failed.
 )
 
-pause
+
 
 :: Removing High Precision Event Timer (HPET)
-echo Removing High Precision Event Timer (HPET)...
 bcdedit /deletevalue useplatformclock >nul 2>&1
 bcdedit /set disabledynamictick yes >nul 2>&1
 if %errorlevel% equ 0 (
@@ -71,10 +67,29 @@ if %errorlevel% equ 0 (
     echo HPET removal failed.
 )
 
-pause
+
+
+:: Disabling Modern Standby
+reg add "HKLM\System\CurrentControlSet\Control\Power" /v PlatformAoAcOverride /t REG_DWORD /d 0 /f >nul 2>&1
+if %errorlevel% equ 0 (
+    echo Disabling Modern Standby succeeded.
+) else (
+    echo Disabling Modern Standby failed.
+)
+
+
+
+:: Disabling & Modern Context Menu
+reg add HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32 /f /ve >nul 2>&1
+if %errorlevel% equ 0 (
+    echo Disabling Modern Context Menu succeeded.
+) else (
+    echo Disabling Modern Context Menu failed.
+)
+
+
 
 :: Enabling AVX
-echo Enabling AVX...
 bcdedit /set xsavedisable 0 >nul 2>&1
 if %errorlevel% equ 0 (
     echo AVX enabling succeeded.
@@ -85,7 +100,6 @@ if %errorlevel% equ 0 (
 pause
 
 :: Import Registry Tweaks
-echo Importing Registry Tweaks...
 regedit /s "%~dp0Registry Tweaks to Make Windows Faster.reg" >nul 2>&1
 if %errorlevel% equ 0 (
     echo Registry Tweaks import succeeded.
@@ -93,10 +107,9 @@ if %errorlevel% equ 0 (
     echo Registry Tweaks import failed.
 )
 
-pause
+
 
 :: Displaying message for TakeControl.reg import
-echo Importing TakeControl.reg...
 regedit /s "%~dp0TakeControl.reg" >nul 2>&1
 if %errorlevel% equ 0 (
     echo TakeControl.reg imported successfully.

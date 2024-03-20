@@ -1,13 +1,14 @@
 @echo off
+setlocal enabledelayedexpansion
 
 :: Check for admin privileges
 net session >nul 2>&1
-if %errorLevel% == 0 (
+if !errorLevel! equ 0 (
     echo Running with admin privileges
 ) else (
     echo Please run the script as an Administrator!
     pause
-    exit
+    exit /b 1
 )
 
 :: Define common values
@@ -32,7 +33,7 @@ pause
 
 :: Importing registry file
 regedit /s %~dp0Enable Windows Security.reg /f
-IF %ERRORLEVEL% EQU 0 (
+IF !errorLevel! equ 0 (
   echo Enable Windows Security.reg imported successfully.
 ) ELSE (
   echo Enable Windows Security.reg imported failed.
@@ -42,7 +43,7 @@ pause
 
 :: Execute batch file
 call "%~dp0\Basic Protection Against to Unauthorized Access.bat"
-IF %ERRORLEVEL% EQU 0 (
+IF !errorLevel! equ 0 (
   echo Basic Protection Against to Unauthorized Access.bat executed successfully.
 ) ELSE (
   echo Basic Protection Against to Unauthorized Access.bat executed failed.
