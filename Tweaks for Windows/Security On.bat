@@ -1,5 +1,15 @@
 @echo off
 
+:: Check for admin privileges
+net session >nul 2>&1
+if %errorLevel% == 0 (
+    echo Running with admin privileges
+) else (
+    echo Please run the script as an Administrator!
+    pause
+    exit
+)
+
 :: Define common values
 set "DWORD_TYPE=REG_DWORD"
 set "REG_SZ_TYPE=REG_SZ"
