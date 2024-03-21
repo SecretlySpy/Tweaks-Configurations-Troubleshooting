@@ -1,91 +1,120 @@
 @echo off
-REM Removing The Intel Dynamic Platform and Thermal Framework (DPTF) - Start
-@Rem "1"="*INT3400"
-@Rem "2"="*INT3402"
-@Rem "3"="*INT3403"
-@Rem "4"="*INT3404"
-@Rem "5"="*INT3407"
-@Rem "6"="*INT3409"
-@Rem "7"="PCI\\VEN_8086&DEV_1603&CC_1180"
-@Rem "8"="PCI\\VEN_8086&DEV_1903&CC_1180"
-@Rem "9"="PCI\\VEN_8086&DEV_8A03&CC_1180"
-@Rem "10"="PCI\\VEN_8086&DEV_9C24&CC_1180"
-@Rem "11"="PCI\\VEN_8086&DEV_A131&CC_1180"
-@Rem "12"="PCI\\VEN_8086&DEV_9A03&CC_1180"
-@Rem "13"="*INTC1040"
-@Rem "14"="*INTC1043"
-@Rem "15"="*INTC1044"
-@Rem "16"="*INTC1045"
-@Rem Optimizing Network Connection - Start
-netsh int tcp show global
-netsh int tcp set global chimney=enabled
-netsh int tcp set heuristics disabled
-netsh int tcp set global autotuninglevel=normal
-netsh int tcp set supplemental custom congestionprovider=ctcp
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Psched" /v NonBestEffortLimit /t REG_DWORD /d 0 /f
-@Rem Optimizing Network Connection - End
+title Optimizing Windows
 
-REM Importing Power Plans - Start
-powercfg -Import "%~dp0UPC.pow"
-pause
-powercfg -Import "%~dp0HPC.pow"
-pause
-powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
-pause
-REM Importing Power Plans - End
+:: Check for administrative privileges and elevate if necessary
+cd /d "%~dp0" && (
+    if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs"
+) && (
+    fsutil dirty query %systemdrive% 1>nul 2>nul || (
+        echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 %*", "", "runas", 1 >> "%temp%\getadmin.vbs"
+        "%temp%\getadmin.vbs" && exit /B
+    )
+)
 
-REM Removing High Precision Event Timer (HPET) - Start
-bcdedit /deletevalue useplatformclock
-bcdedit /set disabledynamictick yes
-REM Removing High Precision Event Timer (HPET) - End
+:: Removing The Intel Dynamic Platform and Thermal Framework (DPTF)
+PNPUTIL /disable-device /deviceid "*INT3400" >nul 2>&1
+PNPUTIL /disable-device /deviceid "*INT3402" >nul 2>&1
+PNPUTIL /disable-device /deviceid "*INT3403" >nul 2>&1
+PNPUTIL /disable-device /deviceid "*INT3404" >nul 2>&1
+PNPUTIL /disable-device /deviceid "*INT3407" >nul 2>&1
+PNPUTIL /disable-device /deviceid "*INT3409" >nul 2>&1
+PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_1603&CC_1180" >nul 2>&1
+PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_1903&CC_1180" >nul 2>&1
+PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_8A03&CC_1180" >nul 2>&1
+PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_9C24&CC_1180" >nul 2>&1
+PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_A131&CC_1180" >nul 2>&1
+PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_9A03&CC_1180" >nul 2>&1
+if %errorlevel% equ 0 (
+    echo DPTF removal succeeded.
+) else (
+    echo DPTF removal failed.
+)
 
-REM Enabling AVX - Start
-bcdedit /set xsavedisable 0
-REM Enabling AVX - End
 
-pause
 
-REM Import Registry Files - Start
-regedit /s %~dp0Registry Tweaks to Make Windows Faster.reg /f
+:: Optimizing Network Connection
+netsh int tcp set global chimney=enabled >nul 2>&1
+netsh int tcp set heuristics disabled >nul 2>&1
+netsh int tcp set global autotuninglevel=normal >nul 2>&1
+netsh int tcp set supplemental custom congestionprovider=ctcp >nul 2>&1
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Psched" /v NonBestEffortLimit /t REG_DWORD /d 0 /f >nul 2>&1
+if %errorlevel% equ 0 (
+    echo Network optimization succeeded.
+) else (
+    echo Network optimization failed.
+)
 
-IF %ERRORLEVEL% EQU 0 (
-  echo Registry Tweaks to Make Windows Faster.reg imported successfully.
-) ELSE (
-  echo Registry Tweaks to Make Windows Faster.reg imported failed.
+
+
+:: Importing Power Plans
+powercfg -Import "%~dp0UPC.pow" >nul 2>&1
+powercfg -Import "%~dp0HPC.pow" >nul 2>&1
+powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 >nul 2>&1
+if %errorlevel% equ 0 (
+    echo Power plans import succeeded.
+) else (
+    echo Power plans import failed.
+)
+
+
+
+:: Removing High Precision Event Timer (HPET)
+bcdedit /deletevalue useplatformclock >nul 2>&1
+bcdedit /set disabledynamictick yes >nul 2>&1
+if %errorlevel% equ 0 (
+    echo HPET removal succeeded.
+) else (
+    echo HPET removal failed.
+)
+
+
+
+:: Disabling Modern Standby
+reg add "HKLM\System\CurrentControlSet\Control\Power" /v PlatformAoAcOverride /t REG_DWORD /d 0 /f >nul 2>&1
+if %errorlevel% equ 0 (
+    echo Disabling Modern Standby succeeded.
+) else (
+    echo Disabling Modern Standby failed.
+)
+
+
+
+:: Disabling & Modern Context Menu
+reg add HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32 /f /ve >nul 2>&1
+if %errorlevel% equ 0 (
+    echo Disabling Modern Context Menu succeeded.
+) else (
+    echo Disabling Modern Context Menu failed.
+)
+
+
+
+:: Enabling AVX
+bcdedit /set xsavedisable 0 >nul 2>&1
+if %errorlevel% equ 0 (
+    echo AVX enabling succeeded.
+) else (
+    echo AVX enabling failed.
 )
 
 pause
 
-regedit /s %~dp0TakeControl.reg /f
-
-IF %ERRORLEVEL% EQU 0 (
-  echo TakeControl.reg imported successfully.
-) ELSE (
-  echo TakeControl.reg imported failed.
+:: Import Registry Tweaks
+regedit /s "%~dp0Registry Tweaks to Make Windows Faster.reg" >nul 2>&1
+if %errorlevel% equ 0 (
+    echo Registry Tweaks import succeeded.
+) else (
+    echo Registry Tweaks import failed.
 )
-REM Import Registry Files - Start
 
-PNPUTIL /disable-device /deviceid "*INTC1040"
-PNPUTIL /disable-device /deviceid "*INTC1041"
-PNPUTIL /disable-device /deviceid "*INTC1043"
-PNPUTIL /disable-device /deviceid "*INTC1044"
-PNPUTIL /disable-device /deviceid "*INTC1045"
-PNPUTIL /disable-device /deviceid "*INTC1046"
-PNPUTIL /disable-device /deviceid "*INTC10A0"
-PNPUTIL /disable-device /deviceid "*INTC10A1"
-PNPUTIL /disable-device /deviceid "*INT3400"
-PNPUTIL /disable-device /deviceid "*INT3402"
-PNPUTIL /disable-device /deviceid "*INT3403"
-PNPUTIL /disable-device /deviceid "*INT3404"
-PNPUTIL /disable-device /deviceid "*INT3407"
-PNPUTIL /disable-device /deviceid "*INT3409"
-PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_1603&CC_1180"
-PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_1903&CC_1180"
-PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_461D&CC_1180"
-PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_8A03&CC_1180"
-PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_9A03&CC_1180"
-PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_9C24&CC_1180"
-PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_A131&CC_1180"
-PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_A71D&CC_1180"
+
+
+:: Displaying message for TakeControl.reg import
+regedit /s "%~dp0TakeControl.reg" >nul 2>&1
+if %errorlevel% equ 0 (
+    echo TakeControl.reg imported successfully.
+) else (
+    echo TakeControl.reg import failed.
+)
 
 pause
