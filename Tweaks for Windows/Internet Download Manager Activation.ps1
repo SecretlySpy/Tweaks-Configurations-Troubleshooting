@@ -1,1 +1,1 @@
-﻿irm https://massgrave.dev/ias | iex
+﻿powershell -ExecutionPolicy Bypass -Command "irm https://massgrave.dev/ias | iex"
