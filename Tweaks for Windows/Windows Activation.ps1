@@ -1,1 +1,1 @@
-﻿irm massgrave.dev/get | iex
+﻿powershell -ExecutionPolicy Bypass -Command "irm https://get.activated.win | iex"
