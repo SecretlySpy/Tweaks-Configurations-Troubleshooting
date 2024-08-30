@@ -1,3 +1,0 @@
-Search Engine: Brave Search
-Keyword: search.brave.com
-URL Query: https://search.brave.com/search?q=%s
