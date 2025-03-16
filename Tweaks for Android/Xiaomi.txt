@@ -1,3 +1,5 @@
 Okay to Remove:
 
-com.miui.systemadsolution - Ads in Xiaomi devices
+Ads in Xiaomi devices:
+com.miui.systemadsolution
+com.miui.msa.global
