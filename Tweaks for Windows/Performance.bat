@@ -11,6 +11,14 @@ cd /d "%~dp0" && (
     )
 )
 
+:: Disable All Device Manager Power Management
+powershell -NoProfile -ExecutionPolicy Bypass -Command "Get-CimInstance -ClassName MSPower_DeviceEnable -Namespace root/WMI | Set-CimInstance -Property @{Enable = $false}"
+if %errorlevel% equ 0 (
+    echo Device Manager Power Management removal succeeded.
+) else (
+    echo Device Manager Power Management removal failed.
+)
+
 :: Removing The Intel Dynamic Platform and Thermal Framework (DPTF)
 PNPUTIL /disable-device /deviceid "*INT3400" >nul 2>&1
 PNPUTIL /disable-device /deviceid "*INT3402" >nul 2>&1
