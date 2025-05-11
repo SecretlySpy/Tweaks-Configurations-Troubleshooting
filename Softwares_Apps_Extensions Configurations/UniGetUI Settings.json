@@ -1,0 +1,20 @@
+{
+  "DisabledManagers.json": "{\r\n  \u0022Winget\u0022: false,\r\n  \u0022Scoop\u0022: false,\r\n  \u0022Chocolatey\u0022: false,\r\n  \u0022Npm\u0022: false,\r\n  \u0022Pip\u0022: false,\r\n  \u0022Cargo\u0022: false,\r\n  \u0022vcpkg\u0022: false,\r\n  \u0022.NET Tool\u0022: false,\r\n  \u0022PowerShell\u0022: false,\r\n  \u0022PowerShell7\u0022: false\r\n}",
+  "DisableInstantSearch.json": "{\r\n  \u0022Discover\u0022: false,\r\n  \u0022Updates\u0022: false,\r\n  \u0022Installed\u0022: false,\r\n  \u0022Bundles\u0022: false\r\n}",
+  "DisableSelectingUpdatesByDefault": "",
+  "DisableTelemetry": "",
+  "DoCacheAdminRights": "",
+  "DoCacheAdminRightsForBatches": "",
+  "EnableUniGetUIBeta": "",
+  "IgnoredPackageUpdates.json": "{\u0022winget\\\\Discord.Discord\u0022:\u00221.0.9001\u0022,\u0022winget\\\\Rakuten.Viber\u0022:\u002222.8.0.0\u0022,\u0022winget\\\\Mega.MEGASync\u0022:\u0022Unknown\u0022}",
+  "PackageListViewMode.json": "{\r\n  \u0022Discover\u0022: 0,\r\n  \u0022Updates\u0022: 0,\r\n  \u0022Installed\u0022: 0,\r\n  \u0022Bundles\u0022: 0\r\n}",
+  "ParallelOperationCount": "100",
+  "PreferredTheme": "dark",
+  "ShownTelemetryBanner": "",
+  "ShowVersionNumberOnTitlebar": "",
+  "SidepanelWidths.json": "{\r\n  \u0022Discover\u0022: 250,\r\n  \u0022Installed\u0022: 250,\r\n  \u0022Bundles\u0022: 250,\r\n  \u0022Updates\u0022: 250\r\n}",
+  "TransferredOldSettings": "",
+  "TransferredOldSettingsv2": "",
+  "UpdatesCheckInterval": "604800",
+  "WindowGeometry": "-8,-8,1936,1066,1"
+}
