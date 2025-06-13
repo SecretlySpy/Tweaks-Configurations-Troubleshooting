@@ -26,12 +26,23 @@ PNPUTIL /disable-device /deviceid "*INT3403" >nul 2>&1
 PNPUTIL /disable-device /deviceid "*INT3404" >nul 2>&1
 PNPUTIL /disable-device /deviceid "*INT3407" >nul 2>&1
 PNPUTIL /disable-device /deviceid "*INT3409" >nul 2>&1
+PNPUTIL /disable-device /deviceid "*INTC1040" >nul 2>&1
+PNPUTIL /disable-device /deviceid "*INTC1041" >nul 2>&1
+PNPUTIL /disable-device /deviceid "*INTC1043" >nul 2>&1
+PNPUTIL /disable-device /deviceid "*INTC1044" >nul 2>&1
+PNPUTIL /disable-device /deviceid "*INTC1045" >nul 2>&1
+PNPUTIL /disable-device /deviceid "*INTC1046" >nul 2>&1
+PNPUTIL /disable-device /deviceid "*INTC10A0" >nul 2>&1
+PNPUTIL /disable-device /deviceid "*INTC10A1" >nul 2>&1
 PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_1603&CC_1180" >nul 2>&1
 PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_1903&CC_1180" >nul 2>&1
+PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_461D&CC_1180" >nul 2>&1
 PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_8A03&CC_1180" >nul 2>&1
+PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_9A03&CC_1180" >nul 2>&1
 PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_9C24&CC_1180" >nul 2>&1
 PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_A131&CC_1180" >nul 2>&1
-PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_9A03&CC_1180" >nul 2>&1
+PNPUTIL /disable-device /deviceid "PCI\VEN_8086&DEV_A71D&CC_1180" >nul 2>&1
+
 if %errorlevel% equ 0 (
     echo DPTF removal succeeded.
 ) else (
