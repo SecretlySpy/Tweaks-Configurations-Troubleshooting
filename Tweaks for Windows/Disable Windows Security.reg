@@ -1,61 +1,77 @@
 Windows Registry Editor Version 5.00
 
+; =====================================================================
+; == WARNING: This script REDUCES system security and reverts hardening.
+; == It is intended for reversal/troubleshooting purposes only.
+; =====================================================================
+
+
+; =====================================================================
+; == Disabling Virtualization-Based Security (VBS) & Memory Integrity
+; =====================================================================
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity]
+"Enabled"=dword:00000000
+
+
+; =====================================================================
+; == Deleting Windows Defender Policies
+; == This removes enforced settings and returns control to the user/defaults.
+; =====================================================================
+
+; --- Deleting the primary policy key reverts most settings underneath it ---
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender]
+
+; --- Also remove the non-policy Tamper Protection setting ---
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Features]
+"TamperProtection"=dword:00000000
+
+
+; =====================================================================
+; == Disabling Exploit Guard & Credential Protection
+; =====================================================================
+
+; --- Disable Controlled Folder Access ---
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\Controlled Folder Access]
+"EnableControlledFolderAccess"=dword:00000000
+
+; --- Disable Local Security Authority (LSA) Protection ---
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa]
+"RunAsPPL"=dword:00000000
+
+
+; =====================================================================
+; == Deleting All Attack Surface Reduction (ASR) Rules
+; =====================================================================
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR\Rules]
+
+
+; =====================================================================
+; == Reverting Network & Legacy Protocol Hardening
+; == WARNING: Re-enabling these features carries security risks.
+; =====================================================================
+
+; --- Disable DNS-over-HTTPS (DoH) ---
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters]
+"EnableAutoDoh"=dword:00000000
+
+; --- Re-enable Autorun / Autoplay (Restores default value) ---
+[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+"NoDriveTypeAutoRun"=-
+
+; --- Re-enable insecure SMBv1 protocol (NOT RECOMMENDED) ---
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters]
+"SMB1"=dword:00000001
+
+
+; =====================================================================
+; == Setting Security Services to Disabled (NOT RECOMMENDED)
+; == This will stop Windows from monitoring its own security state.
+; =====================================================================
+
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService]
 "Start"=dword:00000004
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wscsvc]
 "Start"=dword:00000004
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity]
-"Enabled"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Policy]
-"VerifiedAndReputablePolicyState"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\Software\Microsoft\Cryptography\Wintrust\Config]
-"EnableCertPaddingCheck"="0"
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Features]
-"TamperProtection"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Features]
-"TamperProtection"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\MemoryIntegrity]
-"EnableControlledFolderAccess"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\LocalSecurityAuthorityProtection]
-"EnableControlledFolderAccess"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\VulnerabilityProtection]
-"EnableControlledFolderAccess"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender]
-"CheckAppsEnable"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\MpEngine]
-"MpEnablePus"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection]
-"DisableRealtimeMonitoring"=dword:00000001
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\Attack Surface Reduction\Rules]
-"1004"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet]
-"SubmitSamplesConsent"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\CloudProtection]
-"DisableCloudProtection"=dword:00000001
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\MpEngine]
-"MpEnablePus"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection]
-"DisableBehaviorMonitoring"=dword:00000001
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection]
-"DisableOnAccessProtection"=dword:00000001
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection]
-"DisableScanOnRealtimeEnable"=dword:00000001

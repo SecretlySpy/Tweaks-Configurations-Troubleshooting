@@ -1,61 +1,106 @@
 Windows Registry Editor Version 5.00
 
+; =====================================================================
+; == Windows Security Services
+; == Ensures essential security monitoring services are running.
+; =====================================================================
+
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService]
 "Start"=dword:00000002
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wscsvc]
 "Start"=dword:00000002
 
+
+; =====================================================================
+; == Virtualization-Based Security (VBS) & Memory Integrity
+; =====================================================================
+
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity]
 "Enabled"=dword:00000001
 
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Policy]
-"VerifiedAndReputablePolicyState"=dword:00000001
 
-[HKEY_LOCAL_MACHINE\Software\Microsoft\Cryptography\Wintrust\Config]
-"EnableCertPaddingCheck"="1"
+; =====================================================================
+; == Windows Defender Core Protection & Tamper Protection
+; == Enables core antivirus features and prevents unauthorized changes.
+; =====================================================================
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Features]
 "TamperProtection"=dword:00000005
 
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender]
+"DisableAntiSpyware"=dword:00000000
+"CheckAppsEnable"=dword:00000001
+
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Features]
 "TamperProtection"=dword:00000005
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\MemoryIntegrity]
-"EnableControlledFolderAccess"=dword:00000001
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\LocalSecurityAuthorityProtection]
-"EnableControlledFolderAccess"=dword:00000001
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\VulnerabilityProtection]
-"EnableControlledFolderAccess"=dword:00000001
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender]
-"CheckAppsEnable"=dword:00000001
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\MpEngine]
-"MpEnablePus"=dword:00000001
-
+; --- Real-Time Protection ---
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection]
 "DisableRealtimeMonitoring"=dword:00000000
+"DisableBehaviorMonitoring"=dword:00000000
+"DisableOnAccessProtection"=dword:00000000
+"DisableScanOnRealtimeEnable"=dword:00000000
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\Attack Surface Reduction\Rules]
-"1004"=dword:00000001
-
+; --- Cloud & Sample Submission ---
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet]
 "SubmitSamplesConsent"=dword:00000002
+"SpynetReporting"=dword:00000001
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\CloudProtection]
 "DisableCloudProtection"=dword:00000000
 
+; --- Potentially Unwanted Application (PUA) Protection ---
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\MpEngine]
 "MpEnablePus"=dword:00000001
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection]
-"DisableBehaviorMonitoring"=dword:00000000
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection]
-"DisableOnAccessProtection"=dword:00000000
+; =====================================================================
+; == Exploit Guard & Credential Protection
+; == Corrected keys for hardening against exploits and credential theft.
+; =====================================================================
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection]
-"DisableScanOnRealtimeEnable"=dword:00000000
+; --- Controlled Folder Access (Ransomware Protection) ---
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\Controlled Folder Access]
+"EnableControlledFolderAccess"=dword:00000001
+
+; --- Local Security Authority (LSA) Protection (Credential Theft Protection) ---
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa]
+"RunAsPPL"=dword:00000002
+
+; --- System-Wide Exploit Protection ---
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\VulnerabilityProtection]
+"EnableExploitProtection"=dword:00000001
+
+
+; =====================================================================
+; == Attack Surface Reduction (ASR) Rules
+; == Blocks common attack vectors used by malware. 1 = Block Mode.
+; =====================================================================
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR\Rules]
+"563157de-72fb-4194-9147-413155132534"=dword:00000001 ; Block executable content from email client and webmail
+"75668c1f-73b5-4cf0-bb93-3ecf5cb7cc84"=dword:00000001 ; Block Adobe Reader from creating child processes
+"D4F940AB-401B-4EFC-AADC-AD5F3C50688A"=dword:00000001 ; Block Office applications from creating executable content
+"3B576869-A4C8-452B-853A-B580B90BC733"=dword:00000001 ; Block Office applications from injecting code into other processes
+"BE9BA2D9-53EA-4CDC-84E5-9B1EEEE46550"=dword:00000001 ; Block JavaScript or VBScript from launching downloaded executable content
+"92E97FA1-2EDF-4476-BDD6-9DD0B4DDDC7B"=dword:00000001 ; Block execution of potentially obfuscated scripts
+"D3E037E1-3EB8-44C8-A917-57927947596D"=dword:00000001 ; Block credential stealing from the Windows local security authority subsystem (lsass.exe)
+"e6db77e5-3df2-4cf1-b95a-636979351e5b"=dword:00000001 ; Block process creations originating from PSExec and WMI commands
+
+
+; =====================================================================
+; == Network & Legacy Protocol Hardening
+; =====================================================================
+
+; --- Enable DNS-over-HTTPS (DoH) for encrypted DNS queries ---
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters]
+"EnableAutoDoh"=dword:00000002
+
+; --- Disable insecure Autorun / Autoplay ---
+[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+"NoDriveTypeAutoRun"=dword:000000FF
+
+; --- Disable insecure SMBv1 protocol ---
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters]
+"SMB1"=dword:00000000
