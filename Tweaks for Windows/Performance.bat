@@ -136,4 +136,30 @@ if %errorlevel% equ 0 (
     echo TakeControl.reg import failed.
 )
 
+
+
+:: ============================================================
+:: Applying HMB Tweaks via PowerShell script
+:: This script expects "Force HMB to use 64 MB.ps1" in same dir
+:: ============================================================
+
+if exist "%~dp0Force HMB to use 64 MB.ps1" (
+    echo Executing "Force HMB to use 64 MB.ps1"...
+    
+    :: --- Normal run (no UAC prompt, must already be admin) ---
+    ::powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0Force HMB to use 64 MB.ps1"
+    
+    :: --- TIP: To force run with elevation (UAC prompt), comment the above line
+    :: --- and uncomment the line below instead:
+     powershell -Command "Start-Process powershell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File \"%~dp0Force HMB to use 64 MB.ps1\"' -Verb RunAs"
+    
+    if %errorlevel% equ 0 (
+        echo Force HMB to use 64 MB.ps1 executed successfully.
+    ) else (
+        echo WARNING: Force HMB to use 64 MB.ps1 may have failed. Errorlevel: %errorlevel%
+    )
+) else (
+    echo WARNING: "Force HMB to use 64 MB.ps1" not found. Skipping.
+)
+
 pause

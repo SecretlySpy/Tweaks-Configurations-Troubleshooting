@@ -1,49 +1,64 @@
+; -------------------------------------------------------------------
+; This registry script customizes Windows behavior for performance,
+; context menu enhancements, power tweaks, service control, enable and configure NVMe Host Memory Buffer (HMB) policy and
+; device-install restrictions.
+; -------------------------------------------------------------------
 Windows Registry Editor Version 5.00
 
+; === Add "Copy To" and "Move To" commands to context menus for all files/folders ===
 [HKEY_CLASSES_ROOT\AllFilesystemObjects\shellex\ContextMenuHandlers\Copy To]
 @="{C2FBB630-2971-11D1-A18C-00C04FD75D13}"
- 
+
 [HKEY_CLASSES_ROOT\AllFilesystemObjects\shellex\ContextMenuHandlers\Move To]
 @="{C2FBB631-2971-11D1-A18C-00C04FD75D13}"
 
+; === Improve system responsiveness by reducing delays and auto-ending hung apps ===
 [HKEY_CURRENT_USER\Control Panel\Desktop]
-"AutoEndTasks"="1"
-"HungAppTimeout"="1000"
-"MenuShowDelay"="6"
-"WaitToKillAppTimeout"="2000"
-"LowLevelHooksTimeout"="1000"
+"AutoEndTasks"="1"               ; Automatically close hung applications on shutdown
+"HungAppTimeout"="1000"          ; Wait 1 second before considering an app as hung
+"MenuShowDelay"="6"              ; Menu show delay in milliseconds (faster menus)
+"WaitToKillAppTimeout"="2000"    ; Wait 2 seconds before force-closing apps
+"LowLevelHooksTimeout"="1000"    ; Timeout for low-level hooks
 
+; === Reduce mouse hover time for faster tooltip or hover-triggered actions ===
 [HKEY_CURRENT_USER\Control Panel\Mouse]
 "MouseHoverTime"="8"
 
+; === Explorer policies: disable certain prompts and behaviors ===
 [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer]
-"NoLowDiskSpaceChecks"=dword:00000001
-"LinkResolveIgnoreLinkInfo"=dword:00000001
-"NoResolveSearch"=dword:00000001
-"NoResolveTrack"=dword:00000001
-"NoInternetOpenWith"=dword:00000001
+"NoLowDiskSpaceChecks"=dword:00000001    ; Disable low disk space notifications
+"LinkResolveIgnoreLinkInfo"=dword:00000001 ; Don’t try to track target of shortcuts
+"NoResolveSearch"=dword:00000001         ; Don’t search for missing shortcuts
+"NoResolveTrack"=dword:00000001          ; Don’t track target of shortcuts
+"NoInternetOpenWith"=dword:00000001      ; Disable “look online for program” prompt
 
+; === Shorten service shutdown wait time (system-wide) ===
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control]
-"WaitToKillServiceTimeout"="2000"
+"WaitToKillServiceTimeout"="2000"        ; 2-second wait before forcing service stop
 
+; === Power settings: disable power throttling globally ===
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling]
-"PowerThrottlingOff"=dword:00000001
+"PowerThrottlingOff"=dword:00000001      ; Turn off CPU power throttling
 
+; === Disable Intel and AMD processor power management drivers ===
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\intelppm]
-"Start"=dword:00000004
+"Start"=dword:00000004                   ; Disabled
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AmdPPM]
-"Start"=dword:00000004
+"Start"=dword:00000004                   ; Disabled
 
+; === Disable Explorer startup delay to speed up login ===
 [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Serialize]
 "StartupDelayInMSec"=dword:00000000
 
+; === Remove reserved bandwidth limit for QoS packet scheduler ===
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Psched]
-"NonBestEffortLimit"=dword:00000000
+"NonBestEffortLimit"=dword:00000000      ; Allow 100% bandwidth
 
+; === Block installation of listed devices by their hardware IDs ===
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DeviceInstall\Restrictions]
-"DenyDeviceIDs"=dword:00000001
-"DenyDeviceIDsRetroactive"=dword:00000001
+"DenyDeviceIDs"=dword:00000001           ; Enable deny list
+"DenyDeviceIDsRetroactive"=dword:00000001 ; Apply deny list to existing devices
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DeviceInstall\Restrictions\DenyDeviceIDs]
 "1"="*INTC1040"
@@ -72,8 +87,77 @@ Windows Registry Editor Version 5.00
 "24"="ACPI\\VEN_PNP&DEV_0103"
 "25"="ACPI\\PNP0103"
 
+; === Set default folder template type for all folders ===
 [HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell]
-"FolderType"="NotSpecified"
+"FolderType"="NotSpecified"              ; Don’t force a specific folder template
 
+; === Prevent modern standby / AoAc override to improve compatibility ===
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power]
-"PlatformAoAcOverride"=dword:00000000
+"PlatformAoAcOverride"=dword:00000000    ; Disable Always On/Always Connected mode
+
+; Force HMB allocation globally for StorPort
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\StorPort]
+"HMBAllocationPolicy"=dword:00000002
+
+; Per‑device HMB size assignments (REG_MULTI_SZ, UTF‑16LE encoded)
+; Each entry = <Device Instance ID> + <HMB size in bytes>
+; Below IDs are NVMe device paths, followed by "67108864" (64 MB)
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\stornvme\Parameters\Device]
+"HostMemoryBufferBytes"=hex(7):\
+56,00,45,00,4e,00,5f,00,31,00,35,00,42,00,37,00,26,00,44,00,45,00,56,00,5f,00,\
+35,00,30,00,30,00,36,00,26,00,52,00,45,00,56,00,5f,00,3f,00,3f,00,20,00,36,00,\
+37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+36,00,37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+56,00,45,00,4e,00,5f,00,31,00,35,00,42,00,37,00,26,00,44,00,45,00,56,00,5f,00,\
+35,00,30,00,30,00,38,00,26,00,52,00,45,00,56,00,5f,00,3f,00,3f,00,20,00,36,00,\
+37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+36,00,37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+56,00,45,00,4e,00,5f,00,31,00,35,00,42,00,37,00,26,00,44,00,45,00,56,00,5f,00,\
+35,00,30,00,31,00,37,00,26,00,52,00,45,00,56,00,5f,00,3f,00,3f,00,20,00,36,00,\
+37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+36,00,37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+56,00,45,00,4e,00,5f,00,31,00,35,00,42,00,37,00,26,00,44,00,45,00,56,00,5f,00,\
+35,00,30,00,32,00,33,00,26,00,52,00,45,00,56,00,5f,00,3f,00,3f,00,20,00,36,00,\
+37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+36,00,37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+56,00,45,00,4e,00,5f,00,31,00,35,00,42,00,37,00,26,00,44,00,45,00,56,00,5f,00,\
+35,00,30,00,34,00,31,00,26,00,52,00,45,00,56,00,5f,00,3f,00,3f,00,20,00,36,00,\
+37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+36,00,37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+56,00,45,00,4e,00,5f,00,32,00,36,00,34,00,36,00,26,00,44,00,45,00,56,00,5f,00,\
+32,00,32,00,36,00,32,00,26,00,52,00,45,00,56,00,5f,00,3f,00,3f,00,20,00,36,00,\
+37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+36,00,37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+56,00,45,00,4e,00,5f,00,32,00,36,00,34,00,36,00,26,00,44,00,45,00,56,00,5f,00,\
+35,00,30,00,31,00,33,00,26,00,52,00,45,00,56,00,5f,00,3f,00,3f,00,20,00,36,00,\
+37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+36,00,37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+56,00,45,00,4e,00,5f,00,31,00,33,00,34,00,34,00,26,00,44,00,45,00,56,00,5f,00,\
+35,00,34,00,30,00,39,00,26,00,52,00,45,00,56,00,5f,00,3f,00,3f,00,20,00,36,00,\
+37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+36,00,37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+56,00,45,00,4e,00,5f,00,31,00,34,00,34,00,44,00,26,00,44,00,45,00,56,00,5f,00,\
+41,00,38,00,30,00,38,00,26,00,52,00,45,00,56,00,5f,00,3f,00,3f,00,20,00,36,00,\
+37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+36,00,37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+56,00,45,00,4e,00,5f,00,31,00,34,00,34,00,44,00,26,00,44,00,45,00,56,00,5f,00,\
+41,00,38,00,30,00,39,00,26,00,52,00,45,00,56,00,5f,00,3f,00,3f,00,20,00,36,00,\
+37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+36,00,37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+56,00,45,00,4e,00,5f,00,31,00,31,00,37,00,39,00,26,00,44,00,45,00,56,00,5f,00,\
+30,00,32,00,31,00,39,00,26,00,52,00,45,00,56,00,5f,00,3f,00,3f,00,20,00,36,00,\
+37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+36,00,37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+56,00,45,00,4e,00,5f,00,31,00,44,00,38,00,35,00,26,00,44,00,45,00,56,00,5f,00,\
+32,00,32,00,36,00,33,00,26,00,52,00,45,00,56,00,5f,00,3f,00,3f,00,20,00,36,00,\
+37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+36,00,37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+56,00,45,00,4e,00,5f,00,31,00,43,00,43,00,31,00,26,00,44,00,45,00,56,00,5f,00,\
+33,00,33,00,34,00,31,00,26,00,52,00,45,00,56,00,5f,00,3f,00,3f,00,20,00,36,00,\
+37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+36,00,37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+56,00,45,00,4e,00,5f,00,31,00,43,00,43,00,31,00,26,00,44,00,45,00,56,00,5f,00,\
+32,00,32,00,36,00,32,00,26,00,52,00,45,00,56,00,5f,00,3f,00,3f,00,20,00,36,00,\
+37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+36,00,37,00,31,00,30,00,38,00,38,00,36,00,34,00,00,00,\
+00,00
