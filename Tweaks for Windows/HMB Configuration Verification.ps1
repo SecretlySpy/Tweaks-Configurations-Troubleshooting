@@ -1,6 +1,6 @@
-# ======== self‑elevate if not admin ========
+# ======== self-elevate if not admin ========
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)) {
-    Write-Host "⚠️  Elevation required. Requesting administrative privileges..."
+    Write-Host "[!] Elevation required. Requesting administrative privileges..."
     Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
     exit
 }
@@ -9,7 +9,7 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 $regPath = "HKLM:\SYSTEM\CurrentControlSet\Services\stornvme\Parameters\Device"
 $value = (Get-ItemProperty -Path $regPath -Name "HostMemoryBufferBytes").HostMemoryBufferBytes
 
-Write-Host "🔎 Checking HostMemoryBufferBytes..."
+Write-Host "[i] Checking HostMemoryBufferBytes..."
 for ($i = 0; $i -lt $value.Count; $i += 2) {
     $deviceId = $value[$i]
     $hmbSize  = $value[$i+1]
@@ -19,5 +19,4 @@ for ($i = 0; $i -lt $value.Count; $i += 2) {
 # ======== pause so you can view results ========
 Write-Host ""
 Write-Host "Press any key to exit..."
-# Using ReadKey to wait for a key press
 [void][System.Console]::ReadKey($true)

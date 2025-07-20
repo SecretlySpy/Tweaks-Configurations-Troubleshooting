@@ -1,7 +1,9 @@
 @echo off
 title Optimizing Windows
 
+:: ============================================================
 :: Check for administrative privileges and elevate if necessary
+:: ============================================================
 cd /d "%~dp0" && (
     if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs"
 ) && (
@@ -11,7 +13,9 @@ cd /d "%~dp0" && (
     )
 )
 
+:: ============================================================
 :: Disable All Device Manager Power Management
+:: ============================================================
 powershell -NoProfile -ExecutionPolicy Bypass -Command "Get-CimInstance -ClassName MSPower_DeviceEnable -Namespace root/WMI | Set-CimInstance -Property @{Enable = $false}"
 if %errorlevel% equ 0 (
     echo Device Manager Power Management removal succeeded.
@@ -19,7 +23,9 @@ if %errorlevel% equ 0 (
     echo Device Manager Power Management removal failed.
 )
 
+:: ============================================================
 :: Removing The Intel Dynamic Platform and Thermal Framework (DPTF)
+:: ============================================================
 PNPUTIL /disable-device /deviceid "*INT3400" >nul 2>&1
 PNPUTIL /disable-device /deviceid "*INT3402" >nul 2>&1
 PNPUTIL /disable-device /deviceid "*INT3403" >nul 2>&1
@@ -49,9 +55,9 @@ if %errorlevel% equ 0 (
     echo DPTF removal failed.
 )
 
-
-
+:: ============================================================
 :: Optimizing Network Connection
+:: ============================================================
 netsh int tcp set global chimney=enabled >nul 2>&1
 netsh int tcp set heuristics disabled >nul 2>&1
 netsh int tcp set global autotuninglevel=normal >nul 2>&1
@@ -63,9 +69,9 @@ if %errorlevel% equ 0 (
     echo Network optimization failed.
 )
 
-
-
+:: ============================================================
 :: Importing Power Plans
+:: ============================================================
 powercfg -Import "%~dp0UPC.pow" >nul 2>&1
 powercfg -Import "%~dp0HPC.pow" >nul 2>&1
 powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 >nul 2>&1
@@ -75,9 +81,9 @@ if %errorlevel% equ 0 (
     echo Power plans import failed.
 )
 
-
-
+:: ============================================================
 :: Removing High Precision Event Timer (HPET)
+:: ============================================================
 bcdedit /deletevalue useplatformclock >nul 2>&1
 bcdedit /set disabledynamictick yes >nul 2>&1
 if %errorlevel% equ 0 (
@@ -86,9 +92,9 @@ if %errorlevel% equ 0 (
     echo HPET removal failed.
 )
 
-
-
+:: ============================================================
 :: Disabling Modern Standby
+:: ============================================================
 reg add "HKLM\System\CurrentControlSet\Control\Power" /v PlatformAoAcOverride /t REG_DWORD /d 0 /f >nul 2>&1
 if %errorlevel% equ 0 (
     echo Disabling Modern Standby succeeded.
@@ -96,9 +102,9 @@ if %errorlevel% equ 0 (
     echo Disabling Modern Standby failed.
 )
 
-
-
-:: Disabling & Modern Context Menu
+:: ============================================================
+:: Disabling Modern Context Menu
+:: ============================================================
 reg add HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32 /f /ve >nul 2>&1
 if %errorlevel% equ 0 (
     echo Disabling Modern Context Menu succeeded.
@@ -106,9 +112,9 @@ if %errorlevel% equ 0 (
     echo Disabling Modern Context Menu failed.
 )
 
-
-
+:: ============================================================
 :: Enabling AVX
+:: ============================================================
 bcdedit /set xsavedisable 0 >nul 2>&1
 if %errorlevel% equ 0 (
     echo AVX enabling succeeded.
@@ -118,7 +124,9 @@ if %errorlevel% equ 0 (
 
 pause
 
+:: ============================================================
 :: Import Registry Tweaks
+:: ============================================================
 regedit /s "%~dp0Registry Tweaks to Make Windows Faster.reg" >nul 2>&1
 if %errorlevel% equ 0 (
     echo Registry Tweaks import succeeded.
@@ -126,9 +134,9 @@ if %errorlevel% equ 0 (
     echo Registry Tweaks import failed.
 )
 
-
-
+:: ============================================================
 :: Displaying message for TakeControl.reg import
+:: ============================================================
 regedit /s "%~dp0TakeControl.reg" >nul 2>&1
 if %errorlevel% equ 0 (
     echo TakeControl.reg imported successfully.
@@ -136,23 +144,12 @@ if %errorlevel% equ 0 (
     echo TakeControl.reg import failed.
 )
 
-
-
 :: ============================================================
 :: Applying HMB Tweaks via PowerShell script
-:: This script expects "Force HMB to use 64 MB.ps1" in same dir
 :: ============================================================
-
 if exist "%~dp0Force HMB to use 64 MB.ps1" (
     echo Executing "Force HMB to use 64 MB.ps1"...
-    
-    :: --- Normal run (no UAC prompt, must already be admin) ---
-    ::powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0Force HMB to use 64 MB.ps1"
-    
-    :: --- TIP: To force run with elevation (UAC prompt), comment the above line
-    :: --- and uncomment the line below instead:
-     powershell -Command "Start-Process powershell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File \"%~dp0Force HMB to use 64 MB.ps1\"' -Verb RunAs"
-    
+    powershell -Command "Start-Process powershell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File \"%~dp0Force HMB to use 64 MB.ps1\"' -Verb RunAs"
     if %errorlevel% equ 0 (
         echo Force HMB to use 64 MB.ps1 executed successfully.
     ) else (
@@ -162,4 +159,13 @@ if exist "%~dp0Force HMB to use 64 MB.ps1" (
     echo WARNING: "Force HMB to use 64 MB.ps1" not found. Skipping.
 )
 
+:: ============================================================
+:: Final message
+:: ============================================================
+echo.
+echo ============================================================
+echo ✅ Performance tweaks have been successfully applied.
+echo 🔄 Please restart your computer for all changes to take effect.
+echo ============================================================
+echo.
 pause
