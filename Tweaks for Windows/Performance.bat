@@ -56,6 +56,13 @@ if %errorlevel% equ 0 (
 )
 
 :: ============================================================
+:: Disabling Telemetry services
+:: ============================================================
+echo Disabling Telemetry services...
+sc config DiagTrack start= disabled
+sc stop DiagTrack
+
+:: ============================================================
 :: Optimizing Network Connection
 :: ============================================================
 netsh int tcp set global chimney=enabled >nul 2>&1
