@@ -9,8 +9,8 @@
   /CalCMYKProfile (U.S. Web Coated \050SWOP\051 v2)
   /sRGBProfile (sRGB IEC61966-2.1)
   /CannotEmbedFontPolicy /Warning
-  /CompatibilityLevel 1.6
-  /CompressObjects /All
+  /CompatibilityLevel 1.3
+  /CompressObjects /Off
   /CompressPages true
   /ConvertImagesToIndexed true
   /PassThroughJPEGImages true
@@ -21,7 +21,7 @@
   /ColorConversionStrategy /LeaveColorUnchanged
   /DoThumbnails true
   /EmbedAllFonts true
-  /EmbedOpenType true
+  /EmbedOpenType false
   /ParseICCProfilesInComments true
   /EmbedJobOptions true
   /DSCReportingLevel 0
