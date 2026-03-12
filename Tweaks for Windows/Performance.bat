@@ -68,6 +68,9 @@ sc stop DiagTrack
 netsh int tcp set global chimney=enabled >nul 2>&1
 netsh int tcp set heuristics disabled >nul 2>&1
 netsh int tcp set global autotuninglevel=normal >nul 2>&1
+netsh int tcp set global rss=enabled >nul 2>&1
+netsh int tcp set global rsc=enabled >nul 2>&1
+netsh int tcp set global ecncapability=enabled >nul 2>&1
 netsh int tcp set supplemental custom congestionprovider=ctcp >nul 2>&1
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Psched" /v NonBestEffortLimit /t REG_DWORD /d 0 /f >nul 2>&1
 if %errorlevel% equ 0 (
@@ -165,7 +168,7 @@ if exist "%~dp0Force HMB to use 64 MB.ps1" (
 ) else (
     echo WARNING: "Force HMB to use 64 MB.ps1" not found. Skipping.
 )
-
+fsutil behavior set DisableDeleteNotify 0
 :: ============================================================
 :: Final message
 :: ============================================================
