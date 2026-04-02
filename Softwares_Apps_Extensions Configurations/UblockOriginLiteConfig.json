@@ -1,0 +1,41 @@
+{
+  "version": "2026.329.1951",
+  "rulesets": [
+    "+block-lan",
+    "+adguard-spyware-url",
+    "+annoyances-ai",
+    "+annoyances-cookies",
+    "+annoyances-overlays",
+    "+annoyances-social",
+    "+annoyances-widgets",
+    "+annoyances-others",
+    "+annoyances-notifications",
+    "+dpollock-0",
+    "+ublock-experimental",
+    "+ubol-tests",
+    "+alb-0",
+    "+ara-0",
+    "+bgr-0",
+    "+chn-0",
+    "+cze-0",
+    "+deu-0",
+    "+est-0",
+    "+fin-0",
+    "+grc-0",
+    "+hrv-0",
+    "+hun-0",
+    "+irn-0",
+    "+isl-0",
+    "+isr-0",
+    "+ita-0",
+    "+lva-0"
+  ],
+  "filteringModes": {
+    "none": [],
+    "basic": [],
+    "optimal": [],
+    "complete": [
+      "all-urls"
+    ]
+  }
+}
