@@ -15,7 +15,11 @@ ECHO                 **************************************
 
 :UACPrompt
     echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
-    set params = "%*:"=""
+    REM Capture all forwarded args verbatim. Quote the assignment so the var is
+    REM named "params" (no stray trailing space) and so %params% expands cleanly
+    REM into the elevated relaunch below. The old "set params = ..." form created
+    REM a variable literally named "params " and dropped the arguments.
+    set "params=%*"
     echo UAC.ShellExecute "cmd.exe", "/c ""%~s0"" %params%", "", "runas", 1 >> "%temp%\getadmin.vbs"
 
     "%temp%\getadmin.vbs"
@@ -74,7 +78,8 @@ sc config AppMgmt start= demand
 sc config AppReadiness start= demand
 sc config AppXSvc start= demand
 sc config AppVClient start= disabled
-sc config AssignedAccessManagerSvc= Auto
+REM "start=" keyword is required by sc config; without it the line errors out.
+sc config AssignedAccessManagerSvc start= Auto
 sc config autotimesvc start= demand
 sc config AxInstSV start= demand
 sc config BDESVC start= demand

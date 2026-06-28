@@ -1,7 +1,8 @@
 {
-  "version": "2026.329.1951",
+  "version": "2026.507.2008",
   "rulesets": [
     "+block-lan",
+    "+dpollock-0",
     "+adguard-spyware-url",
     "+annoyances-ai",
     "+annoyances-cookies",
@@ -10,7 +11,6 @@
     "+annoyances-widgets",
     "+annoyances-others",
     "+annoyances-notifications",
-    "+dpollock-0",
     "+ublock-experimental",
     "+ubol-tests",
     "+alb-0",
@@ -28,7 +28,22 @@
     "+isl-0",
     "+isr-0",
     "+ita-0",
-    "+lva-0"
+    "+lva-0",
+    "+fra-0",
+    "+idn-0",
+    "+ind-0",
+    "+jpn-1",
+    "+kor-1",
+    "+ltu-0",
+    "+mkd-0",
+    "+nld-0",
+    "+nor-0",
+    "+pol-0",
+    "+rou-1",
+    "+rus-0",
+    "+rus-1",
+    "+spa-0",
+    "+vie-1"
   ],
   "filteringModes": {
     "none": [],
