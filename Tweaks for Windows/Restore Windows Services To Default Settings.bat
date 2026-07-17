@@ -31,38 +31,29 @@ ECHO                 **************************************
 ::   Check if batch script executed with administrators privilege. 
 Call  :IsAdmin
 
-:: Check version of the Windows OS.
-Reg QUERY "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName | find /i "Windows XP" >Nul
-If Not Errorlevel 1 ( 
-Goto Win_XP
-) Else (
-Reg QUERY "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName | find /i "Windows Vista" >Nul
-If Not Errorlevel 1 ( 
-Goto Win_Vista
-) Else (
-Reg QUERY "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName | find /i "Windows 7" >Nul
-If Not Errorlevel 1 (
-Goto Win_7
-) Else (
-Reg QUERY "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName | find /i "Windows 8" >Nul
-If Not Errorlevel 1 (
-Goto Win_8
-) Else (
-Reg QUERY "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName | find /i "Windows 8.1" >Nul
-If Not Errorlevel 1 (
-Goto Win_8_1
-) Else (
-Systeminfo | find "Windows 11"
-If Not Errorlevel 1 (
-Goto Win_11	
-) Else (
-Reg QUERY "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName | find /i "Windows 10" >Nul
-If Not Errorlevel 1 (
-Goto Win_10
-) Else (
-Goto NotSupported
-) ) ) ) ) ) )
-Pause
+:: ---------------------------------------------------------------------------
+:: Detect the Windows version from `ver` (locale-independent; works XP -> 11).
+:: The previous code parsed the localized ProductName string and tested
+:: "Windows 8" before "Windows 8.1", so 8.1 wrongly matched the Win 8 branch;
+:: Windows 11 also reports ProductName "Windows 10", which forced a slow,
+:: locale-dependent `systeminfo | find "Windows 11"`. Numeric versions avoid
+:: both faults: XP=5.1, Vista=6.0, 7=6.1, 8=6.2, 8.1=6.3, 10/11=10.0
+:: (build >= 22000 identifies Windows 11).
+:: ---------------------------------------------------------------------------
+set "_maj=0" & set "_min=0" & set "_bld=0"
+for /f "tokens=2 delims=[]" %%i in ('ver') do set "_v=%%i"
+for /f "tokens=2-4 delims=. " %%a in ("%_v%") do (set "_maj=%%a" & set "_min=%%b" & set "_bld=%%c")
+
+if "%_maj%"=="5" if "%_min%"=="1" goto Win_XP
+if "%_maj%"=="6" (
+    if "%_min%"=="0" goto Win_Vista
+    if "%_min%"=="1" goto Win_7
+    if "%_min%"=="2" goto Win_8
+    if "%_min%"=="3" goto Win_8_1
+)
+if "%_maj%"=="10" if %_bld% GEQ 22000 goto Win_11
+if "%_maj%"=="10" goto Win_10
+goto NotSupported
 
 
 :: Restore default startup type of Windows services.

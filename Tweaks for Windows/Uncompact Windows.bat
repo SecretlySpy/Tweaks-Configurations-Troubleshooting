@@ -1,12 +1,11 @@
 @echo off
 setlocal
-title Compressed Windows for smaller size
+title Uncompress Windows (revert Compact Windows.bat)
 
 :: ===========================================================================
 :: Administrator Elevation (standardized, XP -> 11)
-:: CompactOS needs an elevated context. `net session` returns 0 only when
-:: already elevated; otherwise relaunch via PowerShell RunAs (VBS fallback for
-:: machines without PowerShell).
+:: Undo for "Compact Windows.bat": disables CompactOS and decompresses the
+:: same directory set. Needs an elevated context.
 :: ===========================================================================
 net session >nul 2>&1
 if %errorlevel% equ 0 goto :gotAdmin
@@ -24,17 +23,14 @@ exit /b
 :gotAdmin
 
 :: ===========================================================================
-:: Windows 10+ guard
-:: `Compact /CompactOS:always` and the LZX algorithm (`/exe:lzx`) were both
-:: introduced in Windows 10. Windows 8.1 and earlier have neither switch, so
-:: refuse cleanly rather than emit "invalid parameter" errors.
+:: Windows 10+ guard (CompactOS / LZX exist only on Windows 10+).
 :: ===========================================================================
 set "_maj=0"
 for /f "tokens=2 delims=[]" %%i in ('ver') do set "_v=%%i"
 for /f "tokens=2 delims=. " %%a in ("%_v%") do set "_maj=%%a"
 if %_maj% LSS 10 (
     echo.
-    echo   This script requires Windows 10 or later ^(CompactOS / LZX compression^).
+    echo   This script requires Windows 10 or later ^(CompactOS / LZX^).
     echo   Detected major version %_maj%. No changes have been made.
     echo.
     pause
@@ -43,26 +39,23 @@ if %_maj% LSS 10 (
 
 cls
 echo ============================================================================
-echo # Compressed Windows for smaller size
+echo # Uncompress Windows (revert compression applied by Compact Windows.bat)
 echo ============================================================================
 
-:: Enable system-wide CompactOS.
-Compact /CompactOS:always
+:: Turn off system-wide CompactOS.
+Compact /CompactOS:never
 
-:: Directories to compress. NOTE: use `set paths=...` WITHOUT wrapping quotes.
-:: `set "paths=..."` would strip the first path's opening quote, leaving
-:: C:\Program Files (x86)" unquoted so its "(x86)" parenthesis breaks the `for`
-:: (the original script's per-directory compression silently failed for this
-:: reason). Written this way, each path keeps its own quotes.
+:: Same directory set as Compact Windows.bat. `set paths=...` WITHOUT wrapping
+:: quotes so each path keeps its own quotes (see note in Compact Windows.bat).
 set paths="%programFiles(x86)%" "%programFiles%" "C:\ProgramData" "C:\Users" "%windir%\Assembly" "%windir%\InfusedApps" "%windir%\Panther" "%windir%\SoftwareDistribution" "%windir%\System32\Catroot2" "%windir%\System32\LogFiles"
 
-:: Compress recursively with LZX. /i ignores per-file sharing violations so
-:: in-use system files (SoftwareDistribution, Catroot2) do not abort the pass.
+:: Decompress recursively. /i ignores per-file sharing violations so in-use
+:: system files do not abort the pass.
 for %%p in (%paths%) do (
-    compact /c /s /a /i /exe:lzx "%%~p\*"
+    compact /u /s /a /i "%%~p\*"
 )
 
 echo.
-echo Compression pass complete. A restart is recommended.
+echo Decompression pass complete. A restart is recommended.
 pause
 exit /b

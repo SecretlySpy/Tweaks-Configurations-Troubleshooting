@@ -11,9 +11,9 @@
 
 - **Type:** Non-application repository. A curated personal knowledge base of system tweaks, application configuration exports, and troubleshooting guides. There is no build system, package manifest, test suite, or runtime entry point.
 - **Primary domains:** Windows tweaking/debloating, Linux (Debian-based) performance tuning, Android (Xiaomi) debloat, browser/extension configuration, router setup, Termux tooling.
-- **Languages / formats present:** Windows Batch (`.bat`/`.cmd`), PowerShell (`.ps1`), Windows Registry scripts (`.reg`, UTF-16 LE encoded), JSON/INI/CFG/CSV config exports, plain-text guides (`.txt`), and binary documents (`.docx`, `.pdf`, `.png`).
+- **Languages / formats present:** Windows Batch (`.bat`/`.cmd`), PowerShell (`.ps1`), Windows Registry scripts (`.reg`; some UTF-16 LE, some ASCII), JSON/INI/CFG/CSV config exports, plain-text guides (`.txt`), and binary documents (`.docx`, `.pdf`, `.png`).
 - **Execution model:** Files are applied **manually** by the operator on a target machine. There is no orchestration linking them. Most Windows scripts require an elevated (Administrator) context.
-- **Static QA summary (this pass):** Scripts were reviewed for logic, edge cases, and error handling — see [§6 QA & Risk Findings](#6-qa--risk-findings). No functional code was modified in this pass.
+- **Static QA summary (this pass):** Functional changes **were** made this pass — OS-compatibility guards, legacy fallbacks, standardized elevation, and three defect fixes across the Windows scripts, plus two new undo scripts. Every change was validated by dry-run execution (neutered mirrors across simulated Windows versions) and throwaway-hive registry imports. See [§6 QA & Risk Findings](#6-qa--risk-findings). Gate: **PASS**.
 
 ### 0.1 Directory Map
 
@@ -34,84 +34,123 @@
 
 These are the only files in the repository with control flow and side effects. Treat each as a **destructive, elevation-requiring** operation against a live OS.
 
-### 1.1 `Compact Windows.bat`
+### 1.0 Compatibility Matrix (min OS to *function*)
 
-- **Purpose:** Reduce on-disk footprint of Windows by enabling CompactOS and LZX-compressing key system/user directories.
-- **Inputs:** None (no arguments, no prompts). Implicitly reads environment variables `%programFiles(x86)%`, `%programFiles%`, `%windir%`.
-- **Outputs:** Side effects only — modifies NTFS compression state of files in-place. Console echo of progress. No return value contract; relies on caller running it elevated.
-- **Dependencies:** `compact.exe` (built-in). NTFS volume. Administrator rights (required for CompactOS and for compressing protected paths).
-- **Behavior:**
-  1. Sets `CompactOS` mode to `always` (`Compact /CompactOS:always`).
-  2. Defines a space-separated `paths` set: Program Files (x64/x86), `C:\ProgramData`, `C:\Users`, and several `%windir%` subfolders (`Assembly`, `InfusedApps`, `Panther`, `SoftwareDistribution`, `System32\Catroot2`, `System32\LogFiles`).
-  3. Iterates the set with `for`, applying `compact /c /s /a /i /exe:lzx "<path>\*"` (recursive, all attributes, ignore errors, LZX algorithm).
-- **Notes:** No admin self-check (unlike §1.2/§1.3). Compressing `SoftwareDistribution`/`Catroot2` while services hold those files can yield skip errors (suppressed by `/i`). `cd\` changes to drive root before running.
+> **Key finding:** the set is **not** "fully compatible XP → 11" as originally assumed. Most scripts depend on Windows-10/11-only features. This pass added **safe guards** (10/11-only scripts exit cleanly with a message on older Windows) and **legacy fallbacks** (Win 7/8 where the OS supports it). XP/Vista remain best-effort or unsupported for feature reasons, not for lack of guarding.
 
-### 1.2 `Restore Windows Services To Default Settings.bat`
+| Script | Min OS to function | Behavior on older OS | Reversible? |
+|---|---|---|---|
+| `Restore Windows Services To Default Settings.bat` | XP → 11 | Per-OS `sc config` blocks; `ver`-based routing | Yes — it *is* a restore-to-default |
+| `Basic Protection…bat` | Vista+ full; XP partial (firewall only) | Self-adapts: `netsh firewall`/registry-SMB1/skip-audit fallbacks | Partial (Security Off / Easy Access reverse parts) |
+| `Compact Windows.bat` | Windows 10 | Guard: clean exit below 10 | **Yes — `Uncompact Windows.bat` (new)** |
+| `Performance.bat` | Windows 10 (2004+ ideal) | Guard: clean exit below 10 | Partial (Restore services + TakeControl revert) |
+| `Security On.bat` + `Enable Windows Security.reg` | Windows 10 (1709+); DoH is 11 | Guard: clean exit below 10 | Yes — Security Off / Disable Windows Security.reg |
+| `Force HMB to use 64 MB.ps1`, `HMB Configuration Verification.ps1` | Windows 10 | No-op on older (NVMe HMB absent); guarded when run via `Performance.bat` | No dedicated undo |
+| `OfflineInsiderEnroll.cmd` | Win 10 1809+ | Self-gates (`build >= 17763`) | Yes — menu option 4 |
+| `TakeControl.reg` | Power GUIDs 10/11; telemetry/ownership/WU 7+ | Extra keys are inert on older | **Yes — `TakeControl (Revert).reg` (new)** |
+| `Registry Tweaks to Make Windows Faster.reg` | Mixed | Unused keys are inert | Manual only |
+| `Enable/Disable Windows Update.reg` | Win 7+ | policy inert on older | Yes — the pair reverse each other |
+| `Security Off.bat`, `Easy Access.bat`, `Disable Windows Security.reg` | Vista/8+ | **document-&-warn only, unmodified** | Security On reverses |
+| `Windows Activation.ps1`, `Internet Download Manager Activation.ps1`, `Tools of Tweaks.ps1` | 7+ | **document-&-warn only, unmodified** | n/a |
 
-- **Purpose:** Reset Windows service **startup types** (`Auto`/`demand`/`disabled`/`delayed-auto`) to Microsoft defaults for the detected OS, then reboot.
-- **Inputs:** Forwarded command-line args (`%*`) passed through the UAC self-elevation relaunch. No interactive menu.
-- **Outputs:** Side effects — hundreds of `sc config <service> start= <type>` mutations to the Service Control Manager. Triggers a system reboot (`shutdown /r`).
-- **Dependencies:** `reg.exe`, `sc.exe`, `find`, `systeminfo`, `shutdown`, `ping` (used as a sleep). A generated `%temp%\getadmin.vbs` for elevation. Administrator rights.
-- **Behavior:**
-  1. **Elevation gate:** queries `HKU\S-1-5-19\Environment`; on failure, writes and runs `getadmin.vbs` to relaunch elevated, then exits the non-elevated instance.
-  2. **OS detection:** chained `reg query`/`find` against `ProductName` (and `systeminfo` for Win 11) selects a label: `Win_XP`, `Win_Vista`, `Win_7`, `Win_8`, `Win_8_1`, `Win_10`, `Win_11`, else `NotSupported`.
-  3. **Per-OS block:** a long sequential list of `sc config` commands sets each service's `start=` value to that OS's default.
-  4. **`:Reboot`:** cosmetic console screens, `ping -n 5 localhost` delay, then `shutdown /r /t 5` after a keypress.
-  5. **`:IsAdmin` / `:NotSupported`:** helper labels for privilege failure and unsupported-OS exit.
-- **Attribution:** Header credits "FreeBooter" (third-party script).
-- **Defects fixed this pass:** the malformed `set params` elevation line (args were dropped) and the `AssignedAccessManagerSvc` line missing the `start` keyword are both corrected — see [§6](#6-qa--risk-findings) Q1/Q2. Q3 (locale-dependent Win 11 detection) remains an open advisory.
+**Shared primitive (batch):** OS is detected from `ver` — `for /f "tokens=2 delims=[]" ... ` isolates the bracketed `Version N.N.NNNN`, then `for /f "tokens=2-4 delims=. "` yields major/minor/build. Map: XP=5.1, Vista=6.0, 7=6.1, 8=6.2, 8.1=6.3, 10/11=10.0 (build ≥ 22000 ⇒ 11). This is locale-independent and replaces the old ProductName/`systeminfo` string matching.
 
-### 1.3 `OfflineInsiderEnroll.cmd`
+**Standardized elevation (batch, first-party scripts):** `net session` (0 ⇒ already elevated) → relaunch via `powershell … Start-Process -Verb RunAs`; VBS `Shell.Application` ShellExecute "runas" fallback when PowerShell is absent (XP). Third-party scripts (`OfflineInsiderEnroll.cmd`, the FreeBooter services script) keep their own elevation to stay upstream-mergeable.
 
-- **Purpose:** Enroll a device into a chosen Windows Insider channel (or unenroll) by writing registry state directly, bypassing the online MSA-based opt-in. `scriptver=2.6.4`.
-- **Inputs:** Optional args `-wow` / `-arm` (internal architecture re-launch markers). Interactive menu choice `0–5`.
-- **Outputs:** Side effects — bulk `reg add`/`reg delete` under `WindowsSelfHost`, `WindowsUpdate`, `Setup\LabConfig`, `DataCollection`; `bcdedit /set {current} flightsigning`; optional reboot.
-- **Dependencies:** `reg.exe`, `bcdedit.exe`, `findstr`, `ver`. Administrator rights. Windows 10 build ≥ 17763 (v1809).
-- **Behavior:**
-  1. **Arch relaunch:** re-invokes via `Sysnative`/`SysArm32` `cmd.exe` to run as native architecture.
-  2. **Guards:** rejects build `< 17763`; requires admin (`reg query HKU\S-1-5-19`).
-  3. **Flight-signing state:** reads `bcdedit` to set `FlightSigningEnabled`.
-  4. **Menu → channel vars:** each channel label (`Canary/Dev/Beta/ReleasePreview`) sets `Channel`, `Fancy`, `BRL` (BranchReadinessLevel), `Content`, `Ring`, `RID` then jumps to `:ENROLL`.
-  5. **`:RESET_INSIDER_CONFIG`:** deletes prior Insider/telemetry/TPM-bypass keys.
-  6. **`:ADD_INSIDER_CONFIG`:** writes the full enrollment key set, telemetry `AllowTelemetry=3` (required by program), TPM/SecureBoot/RAM/Storage bypass flags, and a Settings-UI "sticky" XAML notice. For builds ≥ 21990 it imports a generated `oie.reg` for the newer sticky message format.
-  7. **`:ENROLL`/`:STOP_INSIDER`:** apply add/reset, toggle `flightsigning`, then `:ASK_FOR_REBOOT`.
-- **Attribution:** abbodi1406 / `github.com/abbodi1406/offlineinsiderenroll` (third-party).
+### 1.1 `Compact Windows.bat` — *modified this pass*
 
-### 1.4 `Internet Download Manager Activation.ps1`
-
-- **Purpose:** One-liner that downloads and executes a remote IDM activation script (Microsoft Activation Scripts, `massgrave.dev`).
+- **Purpose:** Reduce on-disk footprint by enabling CompactOS and LZX-compressing key system/user directories.
 - **Inputs:** None.
-- **Outputs:** Side effects determined entirely by the remote payload (`https://massgrave.dev/ias`).
-- **Dependencies:** PowerShell, internet access, `Invoke-RestMethod` (`irm`) → `Invoke-Expression` (`iex`). Runs with `-ExecutionPolicy Bypass`.
-- **Behavior:** `irm <url> | iex` — fetches a script and runs it unsandboxed. **Remote-code-execution by design.** See [§6](#6-qa--risk-findings) for trust/security caveat.
+- **Outputs:** Side effects — NTFS compression state changes; console progress.
+- **Dependencies:** `compact.exe` (Win 10+ for `/CompactOS` and `/exe:lzx`), NTFS, Administrator.
+- **Behavior:**
+  1. **Standardized self-elevation** header (added).
+  2. **Windows 10+ guard** (added): exits with a message on 8.1/older instead of emitting "invalid parameter".
+  3. `Compact /CompactOS:always`.
+  4. Iterates the directory set with `compact /c /s /a /i /exe:lzx "<path>\*"`.
+- **Defect fixed (Q9):** the path list used `set "paths=%programFiles(x86)%" "…"`; the outer `set "…"` quotes stripped the first path's opening quote, leaving `C:\Program Files (x86)"` unquoted so its `(x86)` parenthesis broke the `for` — the per-directory pass **silently never ran**. Changed to `set paths="…"` (each path individually quoted). Verified: all 10 directories now iterate.
+- **Undo:** `Uncompact Windows.bat` (new).
 
-### 1.5 `Disable Windows Update.reg`
+### 1.2 `Uncompact Windows.bat` — *new this pass*
 
-- **Purpose:** Disable the Windows Update UX access via Group-Policy registry value.
-- **Inputs:** None (double-click import / `reg import`).
-- **Outputs:** Writes `HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate` → `SetDisableUXWUAccess = dword:00000001`.
-- **Dependencies:** Registry editor / `reg.exe`. Administrator rights. Encoding: UTF-16 LE with BOM (`Windows Registry Editor Version 5.00`).
-- **Behavior:** Single value set to `1` (disable). Reversed by §1.6.
-
-### 1.6 `Enable Windows Update.reg`
-
-- **Purpose:** Revert §1.5.
+- **Purpose:** Reverse `Compact Windows.bat`.
 - **Inputs:** None.
-- **Outputs:** Sets `SetDisableUXWUAccess = -` (the `=-` syntax **deletes** the value), restoring default UX access.
-- **Dependencies:** Same as §1.5.
-- **Behavior:** Value deletion via registry-script `-` operator.
+- **Outputs:** `Compact /CompactOS:never` + `compact /u /s /a /i "<path>\*"` over the same directory set.
+- **Dependencies:** `compact.exe`, Administrator, Windows 10+.
+- **Behavior:** Standardized elevation + Win 10+ guard, then decompress loop (same corrected `set paths=` idiom).
 
-### 1.7 `TakeControl.reg`
+### 1.3 `Restore Windows Services To Default Settings.bat` — *modified this pass*
 
-- **Purpose:** Multi-purpose power-user registry pack: unlock hidden Power Option settings, disable telemetry, add elevated-ownership context-menu entries, and re-arm Windows Update auto-install.
-- **Inputs:** None (registry import). Encoding: UTF-16 LE with BOM. ~653 lines.
-- **Outputs (grouped):**
-  - **Telemetry:** `Policies\Microsoft\Windows\DataCollection\AllowTelemetry = 0`.
-  - **"Acquire Admin Ownership" context menu:** adds `runas`/`runas2` verbs under `*`, `exefile`, `Directory` HKCR keys invoking `takeown` + `icacls ... /grant administrators:F`.
-  - **Windows Update AU:** recreates `...\WindowsUpdate\AU` with `NoAutoUpdate=0`, `AUOptions=2`, scheduled install day/time.
-  - **Power settings unlock (bulk):** for a large set of `Control\Power\PowerSettings\{GUID}` subkeys, sets `Attributes = dword:00000002` (show in UI) or `00000001` (hide), exposing normally-hidden settings (AHCI LPM, NVMe idle timeouts, core parking, processor performance thresholds, USB suspend, lid/button actions, idle resiliency, throttle states, etc.).
-- **Dependencies:** Registry editor / `reg.exe`. Administrator rights. Many keys are HKLM `SYSTEM\CurrentControlSet` — affect all power plans.
-- **Behavior:** Pure declarative key/value import. Entries are grouped by inline `;` comments numbering each power setting. `*`-marked comments denote heterogeneous-core (efficiency class 1) variants. **No revert script is provided.**
+- **Purpose:** Reset Windows service **startup types** to Microsoft defaults for the detected OS, then reboot.
+- **Inputs:** Forwarded args via the UAC self-elevation relaunch.
+- **Outputs:** ~1180 `sc config <service> start= <type>` mutations; system reboot.
+- **Dependencies:** `reg.exe`, `sc.exe`, `ver`, `shutdown`, `ping`. Administrator.
+- **Behavior:** Elevation gate (FreeBooter original, unchanged) → **`ver`-based OS routing (rewritten)** → per-OS `sc config` block → `:Reboot`.
+- **Defect fixed (Q10, supersedes old Q3):** the previous detection tested `find "Windows 8"` **before** `"Windows 8.1"`, so 8.1 wrongly took the Win 8 branch; Windows 11 also reports ProductName "Windows 10", forcing a slow, locale-dependent `systeminfo | find "Windows 11"`. Replaced with numeric `ver` routing. Verified across simulated XP/Vista/7/8/8.1/10/11 (and build-22000 split) — all route correctly; per-OS `sc config` blocks unchanged.
+- **Attribution:** "FreeBooter" (third-party).
+
+### 1.4 `Basic Protection Against to Unauthorized Access.bat` — *modified this pass*
+
+- **Purpose:** Enable the firewall, basic logon auditing, and disable SMBv1.
+- **Inputs:** None.
+- **Outputs:** `netsh` firewall config; `auditpol` policy; SMBv1 disable.
+- **Dependencies:** `netsh`, `auditpol`, `dism`/`reg`, Administrator.
+- **Behavior:** Standardized self-elevation → `ver` detection → **version-adaptive** sections:
+  - *Firewall:* `netsh advfirewall` on Vista+; `netsh firewall set opmode` fallback on XP.
+  - *Auditing:* granular `auditpol` on Vista+; skipped with a notice on XP.
+  - *SMBv1:* DISM `SMB1Protocol` on 8+; `LanmanServer\Parameters\SMB1=0` registry fallback on Vista/7; skipped on XP.
+- **Verified:** dry-run across XP→11 selects the correct branch each time; elevation block parses non-elevated.
+
+### 1.5 `Security On.bat` — *modified this pass*
+
+- **Purpose:** Apply core Defender/credential hardening, import `Enable Windows Security.reg`, and call `Basic Protection…bat`.
+- **Inputs:** None.
+- **Outputs:** `reg add` (LSA PPL, HVCI, cert padding, security services, Tamper Protection attempt); `regedit /s` import; `call` of the firewall script.
+- **Dependencies:** `reg`, `regedit`, Administrator, Windows 10+.
+- **Behavior:** **Standardized self-elevation** (was warn-only) + **Win 10+ guard** (added) → registry hardening → import hardening pack → call firewall script.
+- **Advisory (Q11):** `TamperProtection` set via the registry is frequently reverted/ignored — Defender enforces it. An inline note now points the user to Windows Security → Virus & threat protection if the value does not stick.
+
+### 1.6 `Performance.bat` — *modified this pass*
+
+- **Purpose:** Latency/throughput tuning: disable device power management, DPTF, telemetry; TCP tuning; import power plans; HPET/dynamic-tick, Modern Standby, AVX; import tweak `.reg` packs; apply HMB.
+- **Inputs:** None.
+- **Outputs:** CIM/WMI power-management disable; `pnputil /disable-device` (DPTF); `sc`, `netsh`, `powercfg`, `bcdedit`, `reg`, `regedit`; HMB PowerShell call.
+- **Dependencies:** PowerShell, `pnputil` (10 2004+), `powercfg`, `bcdedit`, Administrator, Windows 10+.
+- **Behavior:** **Standardized self-elevation** (replaces the fsutil/VBS getadmin trick) + **Win 10+ guard** (added) → tuning sections → `.reg` imports → HMB.
+- **Changes:**
+  - **D3 fixed:** removed the misleading `if %errorlevel% equ 0 (…succeeded) else (…failed)` blocks that reported only the last redirected command's status; replaced with honest `[*]` progress lines.
+  - **CIM→WMI fallback:** the `MSPower_DeviceEnable` call now tries `Get-CimInstance` and falls back to `Get-WmiObject`.
+  - HMB script now invoked directly (already elevated; no second RunAs prompt).
+  - Emoji in the final banner replaced with ASCII (they render as mojibake under the console code page).
+
+### 1.7 `Internet Download Manager Activation.ps1` / `Windows Activation.ps1` / `Tools of Tweaks.ps1` — *unmodified (document & warn)*
+
+- **Purpose:** One-liners that download and execute a remote script: `massgrave.dev/ias` (IDM activation), `get.activated.win` (Windows activation — Microsoft Activation Scripts), `christitus.com/win` (WinUtil).
+- **Behavior:** `irm <url> | iex` with `-ExecutionPolicy Bypass` — **remote code execution by design**, run as the current (often elevated) user.
+- **Risk (Q12):** integrity depends entirely on the remote host + TLS; a compromised endpoint runs arbitrary code as admin. The two activation scripts are also **license-circumvention** tools (legal/licensing exposure). Left unmodified per project decision; not optimized.
+
+### 1.8 `TakeControl.reg` — *modified this pass*
+
+- **Purpose:** Power-user pack: unlock hidden Power Option settings, disable telemetry, add elevated-ownership context-menu entries, re-arm Windows Update auto-install.
+- **Inputs:** None (registry import). Encoding: **UTF-16 LE with BOM** — do not re-encode. ~653 lines.
+- **Outputs (grouped):** telemetry `AllowTelemetry=0`; "Acquire Admin Ownership" `runas`/`runas2` verbs (`takeown` + `icacls /grant administrators:F`); Windows Update `AU` re-arm; ~104 `Control\Power\PowerSettings\{GUID}` `Attributes` unlock/hide values.
+- **Defect fixed (Q8):** line 24's `Directory\shell\runas\command` **`IsolatedCommand` value was truncated** (`… icacls \` with no closing quote). An unterminated string bleeds into the following `[-…WindowsUpdate\AU]` / `[…\AU]` keys, so the truncation could also break the Windows Update re-arm. Restored to the full command (mirrors the complete `@=` on line 23). Verified: throwaway-hive import now parses the value fully and the `AU` keys import intact.
+- **Undo:** `TakeControl (Revert).reg` (new).
+
+### 1.9 `TakeControl (Revert).reg` — *new this pass*
+
+- **Purpose:** Reverse the security/privacy-relevant parts of `TakeControl.reg` and re-hide the unlocked power settings.
+- **Inputs:** None. Encoding: **UTF-16 LE with BOM**.
+- **Outputs:** deletes the `runas`/`runas2` ownership verbs (`[-HKCR\*\shell\runas]`, `…\exefile\shell\runas2`, `…\Directory\shell\runas`, `…\Msi.Package\shell\runas`); deletes the telemetry policy value (`"AllowTelemetry"=-`); deletes the `WindowsUpdate\AU` policy key; deletes the `Attributes` value under each of the 104 unlocked power-setting keys (re-hiding them; other values untouched).
+- **Behavior:** Restores the default (policy-absent) state. Auto-generated from `TakeControl.reg`'s key list, so it stays complete. Verified via root-swapped throwaway import (deletions confirmed applied).
+
+### 1.10 `Disable Windows Update.reg` / `Enable Windows Update.reg` — *unchanged*
+
+- Sets / deletes `HKLM\…\WindowsUpdate\SetDisableUXWUAccess` (UTF-16 LE). Only hides the WU UX page; does not itself stop update installation.
+
+### 1.11 `OfflineInsiderEnroll.cmd` — *unchanged (third-party, correctly gated)*
+
+- abbodi1406 script (`scriptver=2.6.4`). Enrolls a device into a Windows Insider channel by writing registry state; self-gates to build ≥ 17763; includes its own reset/stop path.
 
 ---
 
@@ -119,79 +158,78 @@ These are the only files in the repository with control flow and side effects. T
 
 Declarative settings exports and enforcement recipes. **No executable logic** — consumed by importing into the respective application.
 
-| File | Purpose | Inputs / Import target | Format |
-|---|---|---|---|
-| `Adguard Extension Settings.json` | AdGuard browser-extension backup | Import via AdGuard settings | JSON |
-| `Improve Youtube Settings.json` | "Improve YouTube!" extension config | Import via extension | JSON |
-| `wastenotime-settings.json` | WasteNoTime extension config | Import via extension | JSON |
-| `UniGetUI Settings.json` | UniGetUI (package manager GUI) settings | App settings dir | JSON |
-| `ReVancedManager_settings.json` | ReVanced Manager (Android) settings | App import | JSON |
-| `UblockOriginConfig.txt` | uBlock Origin "My filters"/settings dump | Paste into uBO dashboard | text |
-| `Kaspersky Premium.cfg` / `Kaspersky Total Security.cfg` | Kaspersky exported configuration profiles | Import via Kaspersky settings | binary `.cfg` |
-| `ProcessLasso Settings.INI` | Process Lasso tuning profile | Process Lasso config | INI |
-| `Blocked Site.csv` | List of blocked sites (for a blocker import) | CSV consumer | CSV |
-| `Hardware Specification and Configuration.txt` | Reference: GPU overclock offsets (RTX 2060: core +220, mem +700) and notebook fan-control mapping | Human reference | text |
-| `Enforce Extension on Google Chrome.txt` | Recipe: prevent uninstall/force-install Chrome extensions via `HKLM\...\Policies\Google\Chrome` string values; lists Enhancer-for-YouTube and Improve-YouTube extension IDs + update URL | Human/regedit recipe | text |
-| `How to add Brave Search on other Browsers.txt` | Custom search-engine entry: keyword `search.brave.com`, query `https://search.brave.com/search?q=%s` | Browser search settings | text |
+| File | Purpose | Format |
+|---|---|---|
+| `Adguard Extension Settings.json`, `Improve Youtube Settings.json`, `wastenotime-settings.json`, `UniGetUI Settings.json`, `ReVancedManager_settings.json` | App/extension config backups | JSON |
+| `UblockOriginConfig.txt`, `UblockOriginLiteConfig.json` | uBO / uBO-Lite settings | text/JSON |
+| `Kaspersky Premium.cfg` / `Kaspersky Total Security.cfg` | Kaspersky exported profiles | binary `.cfg` |
+| `ProcessLasso Settings.INI` | Process Lasso tuning profile | INI |
+| `Blocked Site.csv` | Blocked-site list | CSV |
+| `Hardware Specification and Configuration.txt` | GPU overclock offsets + fan mapping reference | text |
+| `Enforce Extension on Google Chrome.txt` | Force-install Chrome extensions via `HKLM\…\Policies\Google\Chrome` | regedit recipe |
+| `How to add Brave Search on other Browsers.txt` | Custom search-engine entry | text |
 
-- **Dependencies:** Each file's owning application/extension and its import mechanism. Versions are not pinned; imports may drift as apps update.
-- **Behavior:** Static data. No side effects until imported by the user.
+- **Behavior:** Static data. No side effects until imported by the user. Versions are not pinned.
 
 ---
 
 ## 3. Module: Linux Guides (`Troubleshooting and Tweak Guides for Linux (Debian Based)/`)
 
-Plain-text command recipes. **Reference only** — commands are copy-pasted by the operator.
+Plain-text command recipes. **Reference only.**
 
-- **`Linux Tweaks.txt`** — Purpose: performance tuning recipes. Behavior/contents: CPU governor → `performance` (multiple methods: `tee scaling_governor`, `cpufrequtils`, `rc.local`, `cpupower`); `sysctl.conf` RAM/kernel tuning (`vm.swappiness=10`, `vfs_cache_pressure=50`, `watermark_scale_factor=200`, `dirty_ratio=3`); NVIDIA `GpuPowerMizerMode=1`; swap auto-mount via `/etc/fstab` UUID; disable CPU throttling (erpalma/throttled, blacklist `intel_rapl`/`intel_powerclamp`); install `preload`, `Ananicy`, `Nohang`. Dependencies: `sudo`, `apt`, target packages, root.
-- **`Troubleshooting.txt`** — Purpose: fix recipes. Contents: start `snapd.service`; add OS to GRUB (`os-prober`, `grub-update`); passwordless sudo via `visudo` (`NOPASSWD: ALL`); bypass unsigned-repo errors (`--allow-unauthenticated`, `[trusted=yes]`). Caution: weakens auth/repo trust by design.
-- **`Application Installation commands in Linux.txt`** — Purpose: install recipes for Wine, HardInfo, distro app-centers (Zorin/Kali/POP/Elementary), Flatpak, Snap, Synaptic, Slimbook Battery, GNOME extensions, qBittorrent, GDebi, default-JDK, gedit. Dependencies: `apt`/`add-apt-repository`, network.
-- **`How do you make a Bash script run automatically after login in Linux.txt`** — Purpose: pointer note. Contents: single external Quora URL. No commands.
+- **`Linux Tweaks.txt`** — CPU governor → `performance`; `sysctl` RAM/kernel tuning; NVIDIA PowerMizer; swap via `/etc/fstab`; disable throttling; install `preload`/`Ananicy`/`Nohang`.
+- **`Troubleshooting.txt`** — start `snapd`; GRUB `os-prober`; **passwordless sudo (`NOPASSWD: ALL`)** and **untrusted-repo** recipes — weaken auth/repo trust by design.
+- **`Application Installation commands in Linux.txt`** — install recipes (Wine, Flatpak/Snap, app-centers, etc.).
+- **`How do you make a Bash script run automatically after login in Linux.txt`** — single external URL.
 
 ---
 
 ## 4. Module: Other Platform Guides
 
-- **`Tweaks for Android/Xiaomi.txt`** — Purpose: MIUI ad/debloat list. Contents: packages safe to remove — `com.miui.systemadsolution`, `com.miui.msa.global`. Applied via ADB/uninstall tooling (not included).
-- **`Packages and Tools in Termux/*.txt`** — Purpose: Termux setup recipes: change default install dir; install Lazymux, Tool-X, Weeman. Reference text; these are pentest/recon frameworks — operator-authorized use assumed.
-- **`Xiaomi AX6000 Router Settings/`** — Purpose: router configuration walkthrough. Contents: `Xiaomi AX6000.docx`/`.pdf` narrative + `1.png`–`11.png` step screenshots. Binary; not statically parsed here.
-- **`Troubleshooting and Tweak Guides for Windows/`** — Binary reference docs: `Power Option Guides.pdf`, `Powershell and CMD Commands.docx`, `Stop Windows from installing drivers for specific devices.pdf`, `Ultimate Performance (Customized).pdf`. Complement the `Tweaks for Windows/` scripts.
-- **`Programming Related/`** — `Software Troubleshooting and Configurations.docx`/`.pdf`: consolidated reference superset of the text guides. Binary; not parsed.
+- **`Tweaks for Android/Xiaomi.txt`** — MIUI ad/debloat package list (ADB uninstall).
+- **`Packages and Tools in Termux/*.txt`** — Termux setup recipes (Lazymux, Tool-X, Weeman — pentest frameworks; operator-authorized use assumed).
+- **`Xiaomi AX6000 Router Settings/`** — router walkthrough (`.docx`/`.pdf` + screenshots).
+- **`Troubleshooting and Tweak Guides for Windows/`** — binary reference docs (power, drivers, commands).
+- **`Programming Related/`** — consolidated reference document.
 
 ---
 
 ## 5. Systemic Operational Mechanics
 
-- **Architecture:** Flat, category-foldered document store. No inter-file dependencies, no shared library, no configuration root. Each artifact is self-contained and independently applied.
-- **Control flow:** Exists only inside `Tweaks for Windows/` scripts (§1). Pattern across batch/cmd scripts: *elevation self-check → environment/OS detection → linear command application → optional reboot*. `.reg` files are purely declarative imports.
-- **Data flow:** One-directional, operator-mediated: repository file → (manual copy/import/execute) → target OS state (registry, services, filesystem, package set). No data returns to the repository. No telemetry, logging, or state file is produced by the repo itself.
-- **Dependency surface (external):** Windows built-ins (`reg`, `sc`, `compact`, `bcdedit`, `shutdown`, `takeown`, `icacls`, `systeminfo`, PowerShell); Linux userland (`apt`, `sysctl`, `cpupower`, `systemctl`); one network endpoint (`massgrave.dev`, §1.4). No vendored dependencies, no lockfiles.
-- **Privilege model:** The majority of Windows artifacts require Administrator; several Linux recipes require root and intentionally relax security (passwordless sudo, untrusted repos). Treat the whole `Tweaks for Windows/` set as high-impact.
-- **Idempotency / reversibility:** `.reg` and `sc config` operations are largely idempotent (re-applying yields the same state). Explicit reverts exist only for Windows Update (§1.5 ↔ §1.6). `Compact Windows.bat`, `TakeControl.reg`, and the Insider/services scripts have **no bundled undo**.
+- **Architecture:** Flat, category-foldered document store. No inter-file dependencies except the intentional `Security On.bat → Enable Windows Security.reg + Basic Protection…bat` and `Performance.bat → *.reg + Force HMB…ps1` call chains.
+- **Control flow:** Only inside `Tweaks for Windows/` scripts. Pattern: *standardized elevation → `ver` detection (guard or route) → linear command application → optional reboot*. `.reg` files are declarative imports.
+- **Data flow:** One-directional, operator-mediated: file → (manual import/execute) → OS state. No data returns to the repo.
+- **Dependency surface (external):** Windows built-ins (`reg`, `sc`, `compact`, `bcdedit`, `pnputil`, `netsh`, `auditpol`, `dism`, `powercfg`, `shutdown`, `takeown`, `icacls`, PowerShell); three network endpoints (`massgrave.dev`, `get.activated.win`, `christitus.com`, §1.7). No vendored deps, no lockfiles.
+- **Privilege model:** Most Windows artifacts require Administrator; the scripts self-elevate. Several Linux recipes require root and intentionally relax security.
+- **Idempotency / reversibility:** `.reg` and `sc config` operations are largely idempotent. Explicit reverts now exist for Windows Update (§1.10), **Compact (§1.2, new)**, **TakeControl (§1.9, new)**, and Security (On ↔ Off). `Performance.bat` and the Insider/HMB scripts still have no single bundled undo.
 
 ---
 
 ## 6. QA & Risk Findings
 
-Static QA of the executable scripts (logic, edge cases, error handling, integration). These are observations, not applied changes.
+Static QA of the executable scripts (logic, edge cases, error handling, integration).
 
-| ID | File / Line | Severity | Finding |
+| ID | File | Severity | Finding |
 |---|---|---|---|
-| Q1 | `Restore Windows Services...bat` (UACPrompt) | Bug — **FIXED** | `set params = "%*:"=""` was malformed: spaces around `=` created a variable literally named `params ` (trailing space) and the substitution syntax was wrong, so `%params%` expanded to nothing and args were dropped on relaunch. Replaced with `set "params=%*"` (args forwarded verbatim). |
-| Q2 | `Restore Windows Services...bat` (Win_11 block) | Bug — **FIXED** | `sc config AssignedAccessManagerSvc= Auto` omitted the `start` keyword and would fail with a usage error. Corrected to `sc config AssignedAccessManagerSvc start= Auto` (value preserved). |
-| Q3 | `Restore Windows Services...bat:51` | Edge case | Win 11 is detected via `systeminfo \| find "Windows 11"` which is slow and locale-dependent; on non-English systems the string may not match, falling through to the Win 10 block. |
-| Q4 | `Internet Download Manager Activation.ps1:1` | Security | `irm <url> \| iex` with `-ExecutionPolicy Bypass` runs unverified remote code as the current (often elevated) user. Integrity depends entirely on `massgrave.dev` and TLS. Pin/verify before use; understand it is an activation tool. |
-| Q5 | `TakeControl.reg` (whole) | Risk | No revert script. Bulk HKLM power/telemetry/ownership changes; the "Acquire Admin Ownership" verbs permanently alter HKCR shell menus. Back up the affected hives before import. |
-| Q6 | `Compact Windows.bat` | Edge case | No admin self-check; compressing in-use system folders (`SoftwareDistribution`, `Catroot2`) relies on `/i` to swallow sharing-violation errors — partial compression is silent. |
-| Q7 | Several `.reg` files | Integration | Files are UTF-16 LE with BOM (correct for `.reg`). Any tool that rewrites them as UTF-8 will break `reg import`. Preserve encoding on edit. |
+| Q1 | `Restore…bat` (UACPrompt) | Bug — **FIXED (prior pass)** | Malformed `set params` dropped forwarded args on relaunch. |
+| Q2 | `Restore…bat` (Win_11 block) | Bug — **FIXED (prior pass)** | `sc config AssignedAccessManagerSvc` missing the `start` keyword. |
+| Q8 | `TakeControl.reg:24` | Bug — **FIXED (this pass)** | `IsolatedCommand` value truncated (unterminated string); bled into the following `WindowsUpdate\AU` keys, risking a broken import. Restored to the full command; verified via throwaway-hive import. |
+| Q9 | `Compact Windows.bat` (paths) | Bug — **FIXED (this pass)** | `set "paths=%programFiles(x86)%" …` stripped the first path's opening quote; the `(x86)` parenthesis then broke the `for`, so per-directory compression **silently never ran**. Changed to `set paths="…"`; verified all 10 directories iterate. |
+| Q10 | `Restore…bat` (detection) | Bug — **FIXED (this pass; supersedes Q3)** | `find "Windows 8"` tested before `"Windows 8.1"` → 8.1 took the Win 8 path; Win 11 detection was locale-dependent (`systeminfo`). Replaced with numeric `ver` routing; verified across XP→11. |
+| Q11 | `Security On.bat` / `Enable Windows Security.reg` | Advisory | `TamperProtection` (and to a degree ASR) set via the registry is often reverted by Defender. Inline note added; toggle in the Windows Security app if it does not stick. |
+| Q12 | `Windows/IDM Activation.ps1`, `Tools of Tweaks.ps1` | Advisory (security + licensing) | `irm \| iex` runs unverified remote code as admin; the activation pair are license-circumvention tools. Documented; left unmodified. |
+| Q5 | `TakeControl.reg` (whole) | Advisory — **mitigated** | Bulk HKLM changes; a revert script now exists (§1.9). Still back up hives before import. |
+| Q6 | `Compact Windows.bat` | Edge case | Compressing in-use system folders relies on `/i` to swallow sharing violations — partial compression is silent by design. |
+| Q7 | `.reg` files | Integration | `TakeControl.reg`, `TakeControl (Revert).reg`, and the Windows Update `.reg` files are UTF-16 LE with BOM. Re-encoding to UTF-8 breaks `reg import`. Preserve encoding on edit. |
 
-**Gate status:** PASS. Q1 and Q2 were fixed in `Restore Windows Services To Default Settings.bat` and re-validated (no `sc config` line is missing `start=`; no malformed `set params` remains). Inline `REM` comments documenting the *why* were added alongside both edits. Q3–Q7 remain open as advisories (pre-existing, lower-risk, or external-trust issues) and were not changed this pass.
+**Gate status:** **PASS.** Q8/Q9/Q10 fixed and validated (dry-run mirrors across simulated Windows versions; throwaway-hive registry imports). Q5 mitigated by the new revert script. Q6/Q7/Q11/Q12 remain as advisories.
 
 ---
 
 ## 7. Maintenance Notes (for future AI agents)
 
-- **Scope of "code":** Only `Tweaks for Windows/` contains executable logic. Everything else is declarative config or human-readable reference. Apply the `AGENTS.md` QA/static-analysis workflow primarily to §1 when those files change.
-- **Inline comments not added:** Per `AGENTS.md` the inline-commenting step is tied to *changes you implement*. No functional changes were made this pass. Editing the existing scripts purely to add comments was deliberately skipped because (a) several are third-party (FreeBooter, abbodi1406, MAS) and (b) the `.reg` files are encoding-sensitive (UTF-16 LE) and the batch scripts use fragile escaping/delayed-expansion where comment insertion risks breakage. Add inline comments only alongside a genuine functional edit, preserving file encoding.
-- **When updating this file:** revise the affected §1–§4 entry, refresh §6 if logic changes, and keep the Purpose/Inputs/Outputs/Dependencies/Behavior field structure.
-- **Editing `.reg`/`.cmd`:** preserve UTF-16 LE BOM on `.reg`; preserve caret/`%%` escaping and `setlocal` modes on batch/cmd. Verify with a dry run (`reg import` on a throwaway hive, scripts in a VM) before committing.
+- **Scope of "code":** Only `Tweaks for Windows/` contains executable logic. Apply the `AGENTS.md` QA/static-analysis workflow primarily to §1 when those files change.
+- **Inline comments:** Added this pass **alongside functional edits only** (the *why* — e.g., why `set paths=` is unquoted, why detection uses `ver`, why the SMBv1 path branches). Do not add comments to encoding-sensitive `.reg` files or third-party scripts without a functional reason.
+- **Editing `.reg`/`.cmd`:** preserve **UTF-16 LE BOM** on `TakeControl.reg` / `TakeControl (Revert).reg` / the Windows Update `.reg` files (edit via `[System.IO.File]` with `UnicodeEncoding`, not tools that rewrite as UTF-8). Keep batch files **ASCII/UTF-8 without BOM and CRLF**. Verify with a throwaway-hive `reg import` and neutered dry-runs in a VM before committing.
+- **Compatibility contract:** 10/11-only scripts must **guard** (clean exit below their minimum OS); scripts with legacy paths must **branch** on the shared `ver` primitive. Never silently run a 10/11 command on an older OS.
+- **When updating this file:** revise the affected §1 entry and the §1.0 matrix, refresh §6, and keep the Purpose/Inputs/Outputs/Dependencies/Behavior structure.

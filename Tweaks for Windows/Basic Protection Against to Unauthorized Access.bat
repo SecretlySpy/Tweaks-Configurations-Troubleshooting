@@ -3,60 +3,101 @@ setlocal
 title SecretlySpy - Security Enhancement Script
 color 0b
 
-::--------------------------------------------------------------------------------
-:: Section 1: Administrator Elevation
-:: This section ensures the script is run with the necessary administrator rights.
-:: It's a safe and standard way to trigger the UAC prompt.
-::--------------------------------------------------------------------------------
+:: ===========================================================================
+:: Section 1: Administrator Elevation (standardized, XP -> 11)
+:: `net session` returns 0 only in an elevated context. On UAC systems
+:: (Vista+) we relaunch through PowerShell's RunAs verb; if PowerShell is not
+:: present (e.g. stock Windows XP) we fall back to a VBS Shell.Application
+:: ShellExecute "runas" so the script still self-elevates instead of failing.
+:: ===========================================================================
 echo Checking for administrator privileges...
 net session >nul 2>&1
-if %errorlevel% NEQ 0 (
-    echo Requesting administrator privileges...
-    powershell -Command "Start-Process '%~f0' -Verb RunAs"
-    exit /b
+if %errorlevel% equ 0 goto :gotAdmin
+echo Requesting administrator privileges...
+if exist "%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" (
+    powershell -NoProfile -Command "Start-Process -FilePath '%~f0' -Verb RunAs"
+) else (
+    > "%temp%\ssp_elevate.vbs" echo Set U = CreateObject^("Shell.Application"^)
+    >>"%temp%\ssp_elevate.vbs" echo U.ShellExecute "%~f0", "", "", "runas", 1
+    cscript //nologo "%temp%\ssp_elevate.vbs" >nul 2>&1
+    del "%temp%\ssp_elevate.vbs" >nul 2>&1
 )
+exit /b
+
+:gotAdmin
 echo Success: Running with administrator privileges.
 echo.
 
-::--------------------------------------------------------------------------------
-:: Section 2: Enable and Configure Windows Defender Firewall
-:: The firewall is your first line of defense against network threats.
-::--------------------------------------------------------------------------------
-echo [+] Enabling and configuring Windows Defender Firewall...
-:: Turn on the firewall for all profiles (Domain, Private, Public)
-netsh advfirewall set allprofiles state on
-:: Block all inbound connections by default, allow outbound
-netsh advfirewall set allprofiles firewallpolicy blockinbound,allowoutbound
-:: Enable logging for dropped packets (useful for troubleshooting)
-netsh advfirewall set allprofiles logging droppedconnections enable
-echo Firewall configured successfully.
+:: ===========================================================================
+:: Section 2: Detect the Windows version (drives the legacy fallbacks below)
+:: Parsed from `ver` so it is locale-independent: XP=5.1, Vista=6.0, 7=6.1,
+:: 8=6.2, 8.1=6.3, 10/11=10.0. Some hardening commands below only exist on
+:: newer releases, so each section adapts to what this OS actually supports.
+:: ===========================================================================
+set "_maj=0" & set "_min=0" & set "_bld=0"
+for /f "tokens=2 delims=[]" %%i in ('ver') do set "_v=%%i"
+for /f "tokens=2-4 delims=. " %%a in ("%_v%") do (set "_maj=%%a" & set "_min=%%b" & set "_bld=%%c")
+echo Detected Windows version %_maj%.%_min% (build %_bld%).
 echo.
 
-::--------------------------------------------------------------------------------
-:: Section 3: Basic System Auditing
-:: This logs important security events, like failed login attempts.
-:: This doesn't prevent attacks, but provides a crucial log for investigation.
-::--------------------------------------------------------------------------------
+:: ===========================================================================
+:: Section 3: Enable and Configure the Firewall
+:: `netsh advfirewall` exists on Vista+ (major >= 6). Windows XP predates it
+:: and uses the older `netsh firewall` context (no per-profile inbound policy).
+:: ===========================================================================
+echo [+] Enabling and configuring the Windows Firewall...
+if %_maj% GEQ 6 (
+    netsh advfirewall set allprofiles state on
+    netsh advfirewall set allprofiles firewallpolicy blockinbound,allowoutbound
+    netsh advfirewall set allprofiles logging droppedconnections enable
+    echo Firewall configured via advfirewall.
+) else (
+    netsh firewall set opmode mode=ENABLE
+    echo Firewall enabled via legacy netsh firewall ^(XP: limited options^).
+)
+echo.
+
+:: ===========================================================================
+:: Section 4: Basic Security Auditing
+:: Granular `auditpol` subcategories exist on Vista+ only. Windows XP has no
+:: built-in equivalent, so auditing is skipped there with a notice.
+:: ===========================================================================
 echo [+] Configuring basic security audit policies...
-:: Audit failed account logon attempts
-auditpol /set /category:"Account Logon" /subcategory:"Credential Validation" /failure:enable
-:: Audit successful and failed logon events (who is accessing the machine)
-auditpol /set /category:"Logon/Logoff" /subcategory:"Logon" /success:enable /failure:enable
-echo Audit policies configured successfully.
+if %_maj% GEQ 6 (
+    auditpol /set /category:"Account Logon" /subcategory:"Credential Validation" /failure:enable
+    auditpol /set /category:"Logon/Logoff" /subcategory:"Logon" /success:enable /failure:enable
+    echo Audit policies configured.
+) else (
+    echo Skipped: granular auditpol is unavailable on Windows XP.
+)
 echo.
 
-::--------------------------------------------------------------------------------
-:: Section 4: Disable Known Insecure Protocols (Optional but Recommended)
-:: SMBv1 is an outdated and insecure protocol exploited by ransomware like WannaCry.
-::--------------------------------------------------------------------------------
+:: ===========================================================================
+:: Section 5: Disable the Insecure SMBv1 Protocol
+:: SMBv1 (exploited by WannaCry) is removed as an optional feature via DISM on
+:: Windows 8+ (major 10, or major 6 with minor >= 2). On Vista/7 the feature
+:: cannot be removed, but SMBv1 server support is turned off via the
+:: LanmanServer\Parameters\SMB1 value (reboot required). XP cannot disable it.
+:: ===========================================================================
 echo [+] Disabling insecure SMBv1 protocol...
-dism /online /Disable-Feature /FeatureName:SMB1Protocol /NoRestart
-echo SMBv1 disabled successfully. You may need to restart for this to fully apply.
+set "_smbDism="
+if %_maj% GEQ 10 set "_smbDism=1"
+if "%_maj%"=="6" if %_min% GEQ 2 set "_smbDism=1"
+if defined _smbDism (
+    dism /online /Disable-Feature /FeatureName:SMB1Protocol /NoRestart
+    echo SMBv1 feature disabled via DISM. A restart may be required.
+) else (
+    if %_maj% GEQ 6 (
+        reg add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" /v SMB1 /t REG_DWORD /d 0 /f >nul
+        echo SMBv1 server disabled via registry ^(Vista/7^). A restart is required.
+    ) else (
+        echo Skipped: SMBv1 cannot be disabled on Windows XP.
+    )
+)
 echo.
-
 
 echo ---
-echo Security enhancements applied successfully.
+echo Security enhancements applied (as supported by this Windows version).
 echo It is recommended to restart your computer.
 pause
-exit
+exit /b
