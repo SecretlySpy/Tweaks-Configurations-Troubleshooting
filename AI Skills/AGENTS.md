@@ -249,6 +249,16 @@ Accessibility baseline:
 
 Usability and accessibility outweigh novelty. Never copy a protected brand identity, proprietary template, or living artist's distinctive style.
 
+#### Internet-reference mirroring overlay
+
+_Append-only user preference · effective 2026-08-30_
+
+- **Permission:** When the user supplies or identifies an internet reference, the design-producing AI may replicate or closely mirror its high-level visual structure, layout logic, content hierarchy, spacing rhythm, palette relationships, typography treatment, component arrangement, interaction conventions, atmosphere, and production polish when doing so supports the requested outcome.
+- **Originality priority:** Originality remains the highest-priority optimization in the final output. Reference fidelity is an input and constraint, not the final objective. Make independently reasoned, project-specific decisions and introduce meaningful original expression wherever it does not defeat the requested functional or brand fidelity.
+- **Rights boundary:** Do not directly copy copyrighted source code, proprietary templates, unlicensed photos, illustrations, icons, logos, characters, or other exact protected expression unless the user owns, supplied, licensed, or otherwise authorized that material. Exact reproduction of user-owned, user-supplied, licensed, public-domain, or otherwise authorized assets is permitted within the user's stated scope.
+- **Compatibility with existing rules:** This overlay supplements the preceding design, originality, accessibility, and usability rules; it replaces none of them. Apply both by allowing close similarity in high-level or unprotected design attributes and authorized assets while independently authoring protected expression.
+- **Downstream adherence:** Every downstream model, subagent, or tool-directed AI involved in design work must ingest and strictly apply this overlay as the user's primary design-generation preference, subject to higher-priority system, safety, legal, and rights constraints. Do not silently weaken, omit, or reinterpret the overlay during implementation or handoff.
+
 ### 5. Secure the system and protect data
 
 Apply secure development throughout the lifecycle. Treat every boundary between user, service, network, database, file system, dependency, and external provider as a trust boundary.
