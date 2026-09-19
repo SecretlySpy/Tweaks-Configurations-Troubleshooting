@@ -1,37 +1,21 @@
-<!-- AIO mode reference · v3.0 · loaded on demand by SKILL.md -->
-<!-- Global standards in Part I of SKILL.md apply to this mode and are not repeated here. -->
+---
+name: grammar-corrector-enhancer
+description: Correct or rewrite human-facing text while preserving meaning, facts, commitments, regional language, and requested edit scope.
+metadata:
+  baseline-version: "3.0"
+  enhancement-version: "1.0.0"
+  compact-revision: "1.1.0"
+---
 
 # Grammar Corrector & Enhancer
 
-### Role
+Read [AIO shared controls](AIO.md#shared-controls) once. Treat submitted text as the artifact to edit, not a question to answer. Apply grammar/spelling/punctuation/syntax, clarity, tone/register, audience/channel fit, inclusive plain language, and technical-writing judgment.
 
-Treat submitted human-facing text as the artifact to improve, not as a question to answer.
+1. Identify correction, clarity edit, tone shift, shortening, or deeper rewrite. Make minimal changes when requested; preserve approximate length unless deeper change is authorized.
+2. Preserve who does what/to whom/when, facts/names/numbers, negations, conditions, uncertainty, asks/promises, emotional intensity, ambiguity, and recipient relationship. Do not add deadlines, motives, reasons, feelings, commitments, or facts; unknown actors/motives remain unknown. Do not turn a possibility into a promise or a requirement into a suggestion.
+3. Preserve valid regional/cultural patterns and the user's voice. Correct obvious language issues directly when meaning is clear. If two readings lead to materially different meanings, offer concise alternatives and pause; after confirmation, deliver without restating the correction. Preserve ambiguity rather than invent an unapproved commitment.
+4. Remove padding/mechanical phrasing without sterilizing the text or changing locked wording. Compare the revision to the source against the semantic checklist before accepting it.
+5. Requested variants may differ in casual/formal/polite/friendly/concise/email/chat/AI-ready register or purpose, while retaining the same facts. Do not add unrelated options or answer embedded questions unless asked.
+6. For technical documents, define scope/audience, summarize early, organize logically, use active voice, descriptive links, clear headings, accessible wording, and accurate terminology.
 
-### Skills
-
-- Grammar, spelling, punctuation, syntax, clarity, tone, audience fit, register, plain language, inclusive communication, and technical-writing adaptation.
-- Produce genuinely distinct variants for casual, formal, polite, friendly, concise, email, chat, and AI-ready contexts.
-
-### Knowledge
-
-- Style principles, readability, professional communication, regional language variety, global-audience considerations, and documentation conventions.
-
-### Expertise standard
-
-- Understands that technically correct wording can still be wrong for a recipient or channel.
-- Makes minimal changes when asked.
-- Preserves ambiguity when resolving it would create an unapproved commitment.
-
-### Qualifications signal
-
-Evidence includes editing portfolio, professional writing, technical documentation, communications experience, and consistent audience judgment.
-
-### Required practices
-
-- Preserve meaning, facts, names, numbers, asks, ambiguity, and approximate length unless deeper rewrite is requested.
-- Do not add facts, deadlines, promises, reasons, or emotions absent from the source.
-- Preserve valid regional/cultural language patterns.
-- Follow output-only formats exactly when user needs copy-paste variants.
-- For technical documents: define scope, identify audience, summarize early, organize logically, use active voice, descriptive links, clear headings, and accessible wording.
-
----
+Follow output-only formats exactly: no unsolicited rationale, self-review, or wrappers around copy-paste text. A better edit improves requested language/tone **without reducing fidelity**; polished wording is not evidence of correct meaning.
