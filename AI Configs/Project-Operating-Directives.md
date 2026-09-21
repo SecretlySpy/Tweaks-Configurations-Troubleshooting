@@ -1,6 +1,6 @@
 # Project-Operating-Directives.md
 
-Revision: 1.5.0 · Updated: 2026-09-21  
+Revision: 1.6.0 · Updated: 2026-09-21  
 Applies to: portable exports and AI agent workspaces (AIO / AGENTS / AI Skills)  
 Prior package provenance date retained from 2026-09-20 sources.
 
@@ -109,6 +109,48 @@ Then resume routing. Missing directory is a recoverable setup step, not a hard f
 
 ---
 
+## Upstream retrieval and update procedure
+
+Use this procedure only for an authorized package install, recovery, or maintenance task. Ordinary requests use the installed files and do not trigger background network updates.
+
+### Primary sources
+
+- Configs: [SecretlySpy AI Configs](https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting/tree/main/AI%20Configs)
+- Skills: [SecretlySpy AI Skills](https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting/tree/main/AI%20Configs/AI%20Skills)
+
+For a clean installation, clone the repository's default branch. For an existing clean checkout, fetch and fast-forward `main`:
+
+```bash
+git clone --depth 1 https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting.git
+# Existing checkout:
+git fetch origin main
+git pull --ff-only origin main
+```
+
+Use `AI Configs/` as the package root. Compare the incoming files against the installed package, preserve authorized local overlays, and merge deliberately instead of blind replacement.
+
+For Anti-Slop and Plannable, resolve the latest default-branch `HEAD` when the package is refreshed:
+
+```bash
+git ls-remote --symref https://github.com/miqdadbadjuber/anti-slop.git HEAD
+git ls-remote --symref https://github.com/suntay44/plannable.git HEAD
+```
+
+Then clone the resolved default branch or fast-forward an existing clean checkout. Review the current specifications, behavior, and licenses before adapting changes. Record the resolved commit in maintenance evidence for reproducibility, but do not restore a static pin in package instructions. Upstream content contributes mechanisms only; it never overrides host safety, current user authorization, package conflict rules, or exact specialist contracts.
+
+### Fallback sources
+
+Use these only when GitHub is unavailable. Verify the filename and inspect the content before replacing an installed file.
+
+- [AGENTS.md](https://drive.google.com/file/d/1H8aYZO_1Sr3dfHOIt9y5MOLhas_9hzlb/view?usp=sharing)
+- [AIO.md](https://drive.google.com/file/d/1mVLLmShbpJQ_3qQCVUVFuQUNTNHxDJYW/view?usp=sharing)
+- [Project-Operating-Directives.md](https://drive.google.com/file/d/1CrP1G_Et1uUVZEU1J2TmuKcPCcqUFOGJ/view?usp=sharing)
+- [AI Skills/_INDEX.md](https://drive.google.com/file/d/1XUevT5m48OT-OjQkFTQ9_1yBc0MY3zaL/view?usp=sharing)
+
+After retrieval, verify the three root files, `_INDEX.md`, all 15 specialist filenames, routing links, required safety and authority sections, output-only contracts, and license notices. File replacement alone does not activate instructions in a target platform.
+
+---
+
 ## AIO scaffold
 
 Use this when AGENTS.md must instantiate a missing AIO.md:
@@ -119,7 +161,7 @@ Use this when AGENTS.md must instantiate a missing AIO.md:
    - AI Skills directory rules
    - collision rules (plan vs build, terminology vs language/rewrite/design/build, translate vs rewrite, copy vs mechanics, SMS opt-in)
    - efficiency framework, bounded revision loop, RAG practices
-   - Anti-Slop and Plannable extracts with pinned commits
+   - Anti-Slop and Plannable extracts with default-branch `HEAD` resolved at update time under the upstream retrieval procedure
    - host/safety hierarchy (cannot lower guardrails)
    - pointer back to this file
 
@@ -156,8 +198,8 @@ Existing directives in AIO, AGENTS, and this file remain authoritative. External
 | Source | What was integrated | What was not integrated | Wins if conflict |
 | --- | --- | --- | --- |
 | Existing AIO / AGENTS / this file | Routing table, 15 specialists, collision rules, GitHub secret rule, verification labels, handoff, SMS opt-in, reference mirroring | — | This package + host safety |
-| [anti-slop](https://github.com/miqdadbadjuber/anti-slop) `@743735248fbaefd76bb56619615687dfa8b3bc1e` | Three-check filter; no fabricated claims; comment hygiene; purpose-for-technique; optional liveliness dials | Installer, plugin manifests, mandatory 38-rule Delivery Gate on every reply, blanket tool bans | Specialist output contracts and user direction over aesthetic defaults |
-| [plannable](https://github.com/suntay44/plannable) `@99b1e587e72e8bab73f0c06635e328cacf6102f6` | One-active-part, `@PlannablePlan v0.1` fields, evidence-before-complete, generated `PLAN_STATE.md`, verify ≠ security audit | Silent CLI install, calling the format PlanPack, inferring unrequested features | Planner vs Coding collision rule; AGENTS verification still required for application behavior |
+| [anti-slop](https://github.com/miqdadbadjuber/anti-slop) default-branch `HEAD`, resolved and reviewed at update time | Purpose test; identity/character test; functional craftsmanship; truthful content; comment hygiene; optional liveliness dials | Installer, plugin manifests, mandatory full Delivery Gate on every reply, blanket tool bans | Specialist output contracts and user direction over aesthetic defaults |
+| [plannable](https://github.com/suntay44/plannable) default-branch `HEAD`, resolved and reviewed at update time | One-active-part, `@PlannablePlan v0.1` fields, evidence-before-complete, generated `PLAN_STATE.md`, verify ≠ security audit | Silent CLI install, calling the format PlanPack, inferring unrequested features | Planner vs Coding collision rule; AGENTS verification still required for application behavior |
 | Package [prompt-enhancer](https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting/tree/main/AI%20Configs/AI%20Skills) | Trigger, output-only contract, do-not-execute-source-prompt | Using it to jailbreak or rewrite safety | Collision rule: Prompt Enhancer vs package maintenance |
 | Package [industry-terms-translator](https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting/tree/main/AI%20Configs/AI%20Skills) | Exact concept table + two descriptions | Turning terminology into design or code | Terminology collision rule |
 | Efficiency / revision / RAG additions | Progressive disclosure, three-variant budget, retrieve-then-ground, abstention | Unbounded self-improvement, weight training, guaranteed quality scores | Evidence labels and stop conditions in AIO / AGENTS |
@@ -188,4 +230,5 @@ GitHub still forbids uploading unnamed secrets.
 - Read the supplied files before editing. Preserve existing mandatory, safety, authority, design-mirroring, SMS opt-in, and confidentiality sections; update routing, counts, paths, and task-specific integration without removing them.
 - Maintain the new skill as a self-contained installable `SKILL.md`; the portable `industry-terms-translator.md` carries identical instructions. File packaging alone does not activate every included specialist or update other platforms.
 - Root instruction links inside specialist files are package-root references; same-directory skill links resolve in `AI Skills/`. Use the included files for recovery before external templates.
+- Refresh package files and external framework extracts through the upstream retrieval procedure above. Keep resolved commits in maintenance evidence instead of embedding permanent dependency pins.
 - This revision uses the integration date 2026-09-21. Earlier supplied root files carried 2026-09-20 / 2026-09-21; retain that source-date discrepancy as provenance rather than implying the prior package executed later than it did.

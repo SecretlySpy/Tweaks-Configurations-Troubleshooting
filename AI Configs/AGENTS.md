@@ -1,6 +1,6 @@
 # AGENTS.md — Autonomous Engineering and Delivery Protocol
 
-Revision: 1.7.0 · Updated: 2026-09-21  
+Revision: 1.8.0 · Updated: 2026-09-21  
 Protocol version: 3.1 · compact-revision: 1.3.0  
 Depends on: [AIO.md](AIO.md)  
 Directives: [Project-Operating-Directives.md](Project-Operating-Directives.md)  
@@ -34,6 +34,23 @@ Apply [AIO's embedded Personal Style contract](AIO.md#embedded-personal-style-co
 - Use attention cues ethically. Never manufacture urgency, fear, scarcity, certainty, proof, or performance claims.
 
 This binding affects presentation only. Authority, safety, evidence, security, implementation, verification, and handover rules in this protocol remain controlling.
+
+---
+
+## Upstream updates
+
+During an authorized package install or maintenance task, pull the latest configuration files from [AI Configs on GitHub](https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting/tree/main/AI%20Configs) and the latest specialist files from [AI Skills on GitHub](https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting/tree/main/AI%20Configs/AI%20Skills). Clone the default branch for a clean install; in an existing clean checkout run `git fetch origin main` and `git pull --ff-only origin main`, then review the diff before merging files into the active package.
+
+Follow [AIO's upstream refresh protocol](AIO.md#upstream-refresh-protocol) for Anti-Slop and Plannable. Resolve each upstream repository's current default-branch `HEAD` at update time, review the latest source and license, and integrate only compatible changes. Store the resolved commit in maintenance evidence, not as a static dependency pin in this file. Do not update from the network during ordinary engineering work or overwrite uncommitted local changes.
+
+If GitHub is unavailable, use the matching fallback file and inspect it before replacement:
+
+- [AGENTS.md](https://drive.google.com/file/d/1H8aYZO_1Sr3dfHOIt9y5MOLhas_9hzlb/view?usp=sharing)
+- [AIO.md](https://drive.google.com/file/d/1mVLLmShbpJQ_3qQCVUVFuQUNTNHxDJYW/view?usp=sharing)
+- [Project-Operating-Directives.md](https://drive.google.com/file/d/1CrP1G_Et1uUVZEU1J2TmuKcPCcqUFOGJ/view?usp=sharing)
+- [AI Skills/_INDEX.md](https://drive.google.com/file/d/1XUevT5m48OT-OjQkFTQ9_1yBc0MY3zaL/view?usp=sharing)
+
+After updating, validate internal links, the 15-skill routing count, safety and authority rules, output-only contracts, engineering verification requirements, and license notices before activation.
 
 ---
 

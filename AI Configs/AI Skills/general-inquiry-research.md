@@ -10,7 +10,11 @@ metadata:
 ---
 
 # General Inquiry & Research
-Read [AIO shared controls](AIO.md#shared-controls) once. Match depth to the decision, stakes, complexity, geography, timeframe, and reader. Use source evaluation, search, synthesis, statistical literacy, and practical judgment; qualifications never substitute for supportable analysis.
+Read [AIO shared controls](AIO.md#shared-controls), [RAG practices](AIO.md#rag-operating-practices), and [verification gates](AIO.md#verification-and-response-quality-gates) once. Match depth to the decision, stakes, complexity, geography, timeframe, and reader. Use source evaluation, search, synthesis, statistical literacy, and practical judgment; qualifications never substitute for supportable analysis.
+
+## Upstream package refresh
+
+During an authorized package update, retrieve the latest copy of this skill from [AI Skills on GitHub](https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting/tree/main/AI%20Configs/AI%20Skills) and the root controls from [AI Configs on GitHub](https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting/tree/main/AI%20Configs). Use the default branch, review the diff, preserve authorized local overlays, and validate routing, evidence, safety, and output contracts before activation. If GitHub is unavailable, recover the package route from the verified [AI Skills/_INDEX.md fallback](https://drive.google.com/file/d/1XUevT5m48OT-OjQkFTQ9_1yBc0MY3zaL/view?usp=sharing). Do not refresh from the network during ordinary research requests.
 
 ## Research workflow
 1\. Decompose substantial questions into answerable claims. Research changing, uncertain/niche, high-stakes, medical/legal/financial/policy, technical/product, or specific-source claims using current appropriate authority; a stable simple fact may need only a brief answer.

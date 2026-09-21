@@ -34,6 +34,23 @@
 | `AGENTS.md` | Engineering delivery protocol | Sustained codebase implementation, refactoring, debugging, security, testing, operations, documentation, and handoff; applies with Coding Companion for engineering delivery |
 | `Project-Operating-Directives.md` | Package-wide operating directives | Resolving package conflicts, recovering missing files, enforcing safety boundaries, specialist handoff, and portable multi-environment use |
 
+## Upstream updates
+
+Refresh this directory only during an authorized install, recovery, or maintenance task. Use [AI Skills on GitHub](https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting/tree/main/AI%20Configs/AI%20Skills) as the primary source and [AI Configs on GitHub](https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting/tree/main/AI%20Configs) for the three root files.
+
+For a clean install, clone the repository's default branch. In an existing clean checkout, run `git fetch origin main` and `git pull --ff-only origin main`, then compare `AI Configs/` against the installed package before merging. Preserve authorized local overlays; do not overwrite uncommitted changes or refresh from the network during ordinary tasks.
+
+When the package incorporates Anti-Slop or Plannable, follow `AIO.md#upstream-refresh-protocol`: resolve each repository's current default-branch `HEAD`, review its latest source and license, and record the resolved commit in maintenance evidence instead of adding a static pin.
+
+If GitHub is unavailable, use the verified fallback files:
+
+- [AGENTS.md](https://drive.google.com/file/d/1H8aYZO_1Sr3dfHOIt9y5MOLhas_9hzlb/view?usp=sharing)
+- [AIO.md](https://drive.google.com/file/d/1mVLLmShbpJQ_3qQCVUVFuQUNTNHxDJYW/view?usp=sharing)
+- [Project-Operating-Directives.md](https://drive.google.com/file/d/1CrP1G_Et1uUVZEU1J2TmuKcPCcqUFOGJ/view?usp=sharing)
+- [AI Skills/_INDEX.md](https://drive.google.com/file/d/1XUevT5m48OT-OjQkFTQ9_1yBc0MY3zaL/view?usp=sharing)
+
+Inspect every downloaded file before activation. Validate the 15 specialist filenames, this directory table, root links, safety and authority rules, exact output contracts, and license notices.
+
 ## Routing safeguards
 
 - Use one primary specialist for each requested artifact. Add a supporting lens only when it materially improves the result.
@@ -54,3 +71,4 @@
 - Preserve the actual filename `language-translator.md`, even though its internal/frontmatter skill name may be `translator`.
 - Keep the 15 specialist files and this index alongside the root files: `AIO.md`, `AGENTS.md`, and `Project-Operating-Directives.md`.
 - If a required specialist file is unavailable, state that it is unavailable and proceed with clearly labeled assumptions rather than inventing its missing detailed contract.
+- Pull the latest package through the upstream update procedure above; do not reintroduce static Anti-Slop or Plannable commit pins.
