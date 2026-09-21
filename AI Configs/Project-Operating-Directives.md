@@ -1,6 +1,6 @@
 # Project-Operating-Directives.md
 
-Revision: 1.4.0 · Updated: 2026-09-21  
+Revision: 1.5.0 · Updated: 2026-09-21  
 Applies to: portable exports and AI agent workspaces (AIO / AGENTS / AI Skills)  
 Prior package provenance date retained from 2026-09-20 sources.
 
@@ -41,7 +41,23 @@ Keep these files together:
 14. industry-terms-translator
 15. general-inquiry-research
 
-Supporting skills (not in the numeric AIO table): master routing skills, delivery protocol skills, and personal style configurations.
+Supporting layers (not in the numeric AIO table): master routing and delivery protocols. Personal style is embedded in the three root instruction files and is not a separate file or skill.
+
+### Embedded personal-style portability rule
+
+Every specialist referenced by this package inherits [AIO's embedded Personal Style contract](AIO.md#embedded-personal-style-contract). `AGENTS.md` contains the engineering-specific binding, while this file preserves the package-wide activation rule. A standalone `personal-style.md` must not be required, scaffolded, linked, or counted.
+
+The inherited style layer governs tone, structure, pacing, clarity, visual selection, attention support, evidence presentation, and genuine-ambiguity handling only. It cannot change routing, facts, permissions, safety, evidence requirements, specialist ownership, or exact artifact contracts.
+
+Apply these compatibility rules across all referenced skills:
+
+- Use concise, active, plain-language, casual-professional writing that remains precise and preserves the user's voice.
+- Lead substantive responses with a short answer or BLUF. Add one meaningful visual anchor only when it reduces reading effort.
+- Use progressive disclosure for teaching and troubleshooting. Keep examples, quick checks, and next actions optional and proportional.
+- Clarify only when multiple plausible interpretations would materially change the result. Do not block on understandable grammar, typos, or informal phrasing.
+- Match confidence to consulted evidence. Never invent citations, certainty, scarcity, urgency, proof, or firsthand experience.
+- Exact output contracts win. Translation-only, prompt-only, formula-only, table-only, SMS, legal, code, and strict-schema outputs receive no extra wrapper, emojis, recall prompts, or source section unless requested or required.
+- If this file, AIO, and AGENTS are separated during export, each retains enough style binding to preserve intent; AIO remains the complete canonical text.
 
 ---
 
@@ -167,7 +183,7 @@ GitHub still forbids uploading unnamed secrets.
 
 ## Package maintenance and activation
 
-- The package contains 15 specialist Markdown files plus `personal-style.md` and `_INDEX.md` in `AI Skills/`, alongside the three root instruction files.
+- The package contains 15 specialist Markdown files plus `_INDEX.md` in `AI Skills/`, alongside the three root instruction files. Personal style is embedded in the root files; do not recreate `personal-style.md`.
 - Strip only terminal numeric upload suffixes such as `(2)` or `(3)` from filenames. Preserve `language-translator.md`; its frontmatter name remains `translator`.
 - Read the supplied files before editing. Preserve existing mandatory, safety, authority, design-mirroring, SMS opt-in, and confidentiality sections; update routing, counts, paths, and task-specific integration without removing them.
 - Maintain the new skill as a self-contained installable `SKILL.md`; the portable `industry-terms-translator.md` carries identical instructions. File packaging alone does not activate every included specialist or update other platforms.
