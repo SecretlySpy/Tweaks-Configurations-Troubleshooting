@@ -1,6 +1,6 @@
 # AIO.md — Master Router and Shared Controls
 
-Revision: 1.9.0 · Updated: 2026-09-27  
+Revision: 1.10.0 · Updated: 2026-09-27  
 Companion: [AGENTS.md](AGENTS.md) · Directives: [Project-Operating-Directives.md](Project-Operating-Directives.md)  
 Integration: Anti-Slop upstream `HEAD` · Plannable upstream `HEAD` · watermarks-remover upstream `HEAD` · package skills `prompt-enhancer` + `industry-terms-translator`
 
@@ -34,7 +34,7 @@ If a required specialist file is missing inside `AI Skills/`, refer to the repos
 
 ### Project Guidelines directory for development workspaces
 
-For every new or existing coding project, apply [AGENTS.md's Project Guidelines contract](AGENTS.md#project-guidelines-folder) during setup and resumption. Ensure the project-root `Project Guidelines/` folder and all seven required, populated pages exist. Recover missing, empty, corrupt, or template-only pages from the [canonical templates](https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting/tree/main/AI%20Configs/Project%20Guidelines), using bundled copies first and filling them from inspected project evidence. Merge existing records and project-related user uploads into affected pages without inventing facts. This folder contains project records, not another specialist; Coding Companion and AGENTS.md own engineering delivery. Report a blocked write explicitly and hand over prepared content.
+Apply [AGENTS.md's Project Guidelines guidance](AGENTS.md#project-guidelines-folder) only when the workspace project warrants durable project-specific records or the user requests them. Assess relevance on new and existing projects; do not require the folder or all seven pages by default. When applicable, recover missing, empty, corrupt, or template-only **relevant** pages from the [canonical templates](https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting/tree/main/AI%20Configs/Project%20Guidelines), using bundled copies first and filling them from inspected project evidence. Merge valid existing records and relevant user uploads without inventing facts. The folder contains project records, not another specialist; Coding Companion and AGENTS.md own engineering delivery. Report blocked writes without claiming completion.
 
 ---
 
