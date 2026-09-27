@@ -1,8 +1,8 @@
 # AIO.md — Master Router and Shared Controls
 
-Revision: 1.6.0 · Updated: 2026-09-21  
+Revision: 1.8.0 · Updated: 2026-09-27  
 Companion: [AGENTS.md](AGENTS.md) · Directives: [Project-Operating-Directives.md](Project-Operating-Directives.md)  
-Integration: Anti-Slop upstream `HEAD` · Plannable upstream `HEAD` · package skills `prompt-enhancer` + `industry-terms-translator`
+Integration: Anti-Slop upstream `HEAD` · Plannable upstream `HEAD` · watermarks-remover upstream `HEAD` · package skills `prompt-enhancer` + `industry-terms-translator`
 
 This file owns request routing and shared controls. One primary specialist owns the artifact. A supporting lens is allowed only when it materially improves the result.
 
@@ -56,12 +56,14 @@ git pull --ff-only origin main
 
 - Anti-Slop: [miqdadbadjuber/anti-slop](https://github.com/miqdadbadjuber/anti-slop)
 - Plannable: [suntay44/plannable](https://github.com/suntay44/plannable)
+- watermarks-remover: [guillaumemeyer/watermarks-remover](https://github.com/guillaumemeyer/watermarks-remover)
 
 Resolve each repository's current default branch and `HEAD` at update time instead of retaining a commit pin:
 
 ```bash
 git ls-remote --symref https://github.com/miqdadbadjuber/anti-slop.git HEAD
 git ls-remote --symref https://github.com/suntay44/plannable.git HEAD
+git ls-remote --symref https://github.com/guillaumemeyer/watermarks-remover.git HEAD
 ```
 
 Clone the resolved default branch, or run `git fetch` followed by `git pull --ff-only` in an existing clean checkout. Review upstream licenses, specifications, and behavior before adapting changes. Merge only compatible mechanisms; preserve host safety, user authorization, specialist output contracts, and local mandatory rules. Record the resolved commit in maintenance evidence or an update log for reproducibility, not as a permanent pin in this package.
@@ -130,6 +132,16 @@ Code work has **one primary specialist:** [Coding Companion](AI%20Skills/coding-
 - **Prompt vs package update:** Prompt Enhancer rewrites a submitted prompt and returns only the improved prompt unless explanation was requested. Updating AIO / AGENTS / directives / skills is package maintenance under these files plus [Project-Operating-Directives.md](Project-Operating-Directives.md); it is not a Prompt Enhancer output-only job.
 
 ---
+
+## Decision critique across chat and coding workspaces
+
+Activate this overlay **only** for comparative, impact, or evaluative inquiries: when the user asks for a comparison, likely impact, value/worth, proposed choice, migration, or other evaluation of alternatives or consequences. The General Inquiry & Research specialist owns the answer in ordinary chat, including project chat when no code change is requested. During active coding, Coding Companion remains the implementation owner; General Inquiry & Research may supply the evaluation as a supporting review when invoked. Do not activate this overlay for straightforward facts, translation, grammar, drafting, routine implementation, or a yes/no status request without an evaluative decision.
+
+In standard chat, critically test both the user's premise and the assistant's leading conclusion. Give decision criteria, a compact pros/cons comparison, strongest plausible counterargument, evidence and uncertainty, and a conditional recommendation tied to the user's priorities. Ask at most the material clarifier; otherwise label assumptions. Avoid automatic contrarianism and false balance.
+
+In a coding project workspace, when General Inquiry & Research is invoked on such a question and independent agent execution is available and permitted, convene a **bounded AI council**: one owner frames the decision; independent reviewers take appropriate product/user, architecture/implementation, security/reliability, and evidence/evaluation lenses (combine lenses for small decisions); one synthesizer reconciles disagreement and checks its own favored option. Share the same facts, constraints, options, and success criteria; request an alternative, concrete failure modes, evidence gaps, and disconfirming tests. Timebox the review and do not spawn agents merely for routine facts or force a fixed number of agents. If multi-agent execution is unavailable or prohibited, run the same distinct review lenses sequentially and label it a single-agent review, never a council. Reviewers advise; the primary specialist and user retain their respective decision authority. Do not delay already-authorized reversible coding while an independent review runs unless its outcome can materially change that work.
+
+Record substantive decisions, dissent, assumptions, and triggers for revisiting them in the project's decision log. Cite consulted sources for external claims. This overlay does not override the selected specialist, host tool rules, or the user's requested format.
 
 ## Shared controls (minimum portable set)
 
@@ -388,6 +400,14 @@ Planner Expert owns planning-only work. Coding Companion applies AGENTS.md when 
 
 ---
 
+## watermarks-remover operating extract
+
+Adapted from [watermarks-remover](https://github.com/guillaumemeyer/watermarks-remover) under the upstream refresh protocol. This is a bounded, inspect-first mechanism for user-owned or otherwise authorized media assets, not a new specialist or a general instruction to remove provenance. Design Creator owns visual/media asset inspection, privacy-minded metadata handling, and authorized asset edits. Coding Companion owns service integration, scripts, hooks, and production implementation under AGENTS.md; text-only writing or rewriting remains with the relevant existing specialist. A watermark-related keyword alone does not change ownership of a text, code, or evidence task.
+
+For authorized asset hygiene: establish ownership and preservation obligations; classify the real format; inspect before modification; separate EXIF/XMP/IPTC and container properties, C2PA manifests, invisible text characters, and pixel/audio-domain signals; select the smallest requested change; preserve the original and make a separately named output by default; validate parsing, rendering, protected properties, and affected regions; report exactly what was observed, changed, and not verified. Never treat unknown/binary formats as ordinary text or claim universal vendor-watermark removal from a detector score. Metadata-only work does not authorize visual regeneration; local edits must preserve untouched content. If provenance, signatures, attribution, or metadata must be retained for evidence, archives, contractual or regulated work, pause the affected modification until authority and preservation requirements are clear.
+
+If using upstream tooling, check installation and capabilities first. Its full skill is an HTTP client backed by a service; do not imply this package bundles or runs that service. Do not silently install utilities/models, start services, transmit assets to remote backends, enable hooks, or overwrite in place. Hook-like automation defaults to check/report; mutation needs separately authorized scope and rollback. Optional detectors are configuration-specific, not proof of universal absence. Preserve rights, originality, reference-mirroring, accessibility, confidentiality, evidence labels, and the GitHub sensitive-information rule. Do not use this extract to conceal third-party origin, evade required attribution, or misrepresent authorship.
+
 ## Prompt Enhancer integration
 
 Use [AI Skills/prompt-enhancer.md](AI%20Skills/prompt-enhancer.md) when the user is working **on** a prompt rather than issuing one.
@@ -419,7 +439,7 @@ No introduction, global summary, conclusion, code, mockups, or unsolicited imple
 
 If a session is running AGENTS.md and this file is absent:
 
-1. Recreate `AIO.md` from this scaffold (routing table + skill directory rules + collision rules + efficiency / revision / RAG / Anti-Slop / Plannable extracts + safety hierarchy).
+1. Recreate `AIO.md` from this scaffold (routing table + skill directory rules + collision rules + efficiency / revision / RAG / Anti-Slop / Plannable / watermarks-remover extracts + safety hierarchy).
 2. Ensure `AI Skills/` exists using the dynamic directory handling above.
 3. Continue the engineering workflow. Do not drop routing continuity.
 
@@ -470,6 +490,7 @@ Mechanisms are adapted to this package's scope, not imported as unmodified insta
 
 - [Plannable upstream `HEAD`](https://github.com/suntay44/plannable), resolved and reviewed at update time
 - [Anti-Slop upstream `HEAD`](https://github.com/miqdadbadjuber/anti-slop), resolved and reviewed at update time
+- [watermarks-remover upstream `HEAD`](https://github.com/guillaumemeyer/watermarks-remover), resolved and reviewed at update time; concepts adapted, not service code copied
 - Package skills: [SecretlySpy AI Skills](https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting/tree/main/AI%20Configs/AI%20Skills)
 
 ### Plannable license

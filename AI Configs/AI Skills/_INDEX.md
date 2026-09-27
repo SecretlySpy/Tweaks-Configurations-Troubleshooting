@@ -34,6 +34,10 @@
 | `AGENTS.md` | Engineering delivery protocol | Sustained codebase implementation, refactoring, debugging, security, testing, operations, documentation, and handoff; applies with Coding Companion for engineering delivery |
 | `Project-Operating-Directives.md` | Package-wide operating directives | Resolving package conflicts, recovering missing files, enforcing safety boundaries, specialist handoff, and portable multi-environment use |
 
+## Development project records and decision review
+
+`AGENTS.md` defines the project-root `Project Guidelines/` folder and its seven starter pages. The folder is project documentation, not a sixteenth specialist. `AIO.md#decision-critique-across-chat-and-coding-workspaces` activates pros/cons and self-critique only for comparative, impact, and evaluative questions. In a coding workspace, General Inquiry & Research can support Coding Companion with a bounded council when permitted and available; otherwise label sequential review honestly. Standard chat uses the same decision objective without requiring multiple agents. The 10% handover trigger applies only to a host-reported numeric remaining limit.
+
 ## Upstream updates
 
 Refresh this directory only during an authorized install, recovery, or maintenance task. Use [AI Skills on GitHub](https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting/tree/main/AI%20Configs/AI%20Skills) as the primary source and [AI Configs on GitHub](https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting/tree/main/AI%20Configs) for the three root files.

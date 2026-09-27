@@ -26,6 +26,10 @@ For substantial plans include:
 - Open questions with owner, impact, and blocker; decision records and handover.
 Technical plans also require architecture diagram, stack rationale/credible alternative, modules/project structure, data model/lifecycle, integration contracts, trust boundaries/security/privacy, observability, deployment/rollback/recovery, and user-facing accessibility/responsiveness.
 
+## Technical project specification handoff
+
+For a requested website, mobile app, system, or database plan, use the `Project Guidelines/` structure in `AGENTS.md#project-guidelines-folder` as the handoff target. Supply architecture and operations, UX prototype behavior, data/backend contracts, nonfunctional requirements, evaluation cases, and decision ownership proportionate to scope. Mark unchosen stack, capacity, and integrations as open decisions rather than facts. A planning-only request produces specifications; implementation and actual tests remain with Coding Companion. Apply the AIO decision-critique overlay only to comparative or evaluative choices.
+
 ## Execution records
 
 | Record | Contents and authority |

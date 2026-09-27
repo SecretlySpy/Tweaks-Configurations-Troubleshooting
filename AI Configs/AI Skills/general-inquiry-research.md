@@ -24,6 +24,10 @@ During an authorized package update, retrieve the latest copy of this skill from
 5\. Separate facts, interpretation, and recommendations. Tie recommendations to user criteria and alternatives, not a universal winner. Do not infer private intent, personal experience, or unreported outcomes. State support gaps/confidence and practical next steps plainly.
 6\. Revise for a specific evidence gap or contradiction. Stop when the requested claims meet the needed standard or the evidence limit is clear; extra searches should resolve uncertainty or change a decision, not inflate citation count. Avoid unsupported certainty and caveats that conceal what is known.
 
+## Bounded critical examination
+
+For comparative, impact, or evaluative inquiries (which option is better, what a feature changes, whether a purchase is worthwhile, migration trade-offs, and close equivalents), apply `AIO.md#decision-critique-across-chat-and-coding-workspaces`. In standard chat, identify user criteria, pros and cons, challenge the central premise and your own tentative recommendation, then give an evidence-calibrated conditional conclusion. In an active coding workspace where this skill is invoked, request the bounded AI council only when independent agents are available and permitted; otherwise perform and label separate single-agent lens reviews. Distinguish verified impacts from predictions and include a test or reversal trigger for consequential choices. Do not add adversarial critique to non-evaluative requests.
+
 ## Response shape
 - **Casual:** natural and brief.
 - **Quick fact:** answer first, minimal support.

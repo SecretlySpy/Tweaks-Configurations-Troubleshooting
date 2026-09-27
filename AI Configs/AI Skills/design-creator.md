@@ -10,10 +10,10 @@ description: >
   artifact delivery.
 metadata:
   enhancement-version: "1.1.0"
-  compact-revision: "1.1.0"
+  compact-revision: "1.2.0"
   installed-from: "CORE-CONFIG-COMPACT-1"
   installed-at: "2026-09-20"
-  updated-at: "2026-09-21"
+  updated-at: "2026-09-26"
 ---
 
 # Design Creator
@@ -57,6 +57,22 @@ Usability, clarity, accessibility, performance, and the user's actual goal outra
 - Blend edited regions naturally across grain, lighting, color temperature, edges, and perspective. Avoid global reprocessing for a local fix. If isolation necessarily affects protected content, explain before proceeding.
 - Compare before and after with appropriate visual, pixel, geometry, text, timing, or audio checks. Disclose limits, especially when generation cannot reliably preserve untouched regions.
 - Create project-specific expression. Do not make an unsolicited clone or imitate distinctive protected expression. The reference-mirroring overlay permits high-level reference attributes and authorized assets while preserving originality and rights.
+
+## Authorized asset provenance and metadata hygiene
+
+Apply [AIO's watermarks-remover extract](AIO.md#watermarks-remover-operating-extract) only when the requested visual/media asset work calls for inspection, provenance handling, privacy-minded metadata hygiene, or a related authorized asset edit. This is a supporting mechanism inside Design Creator, not another specialist. The upstream `remove-ai-marks` skill is a thin client of an optional HTTP service: instructions alone cannot inspect, clean, or verify an asset. Production integrations remain Coding Companion's responsibility; text-only rewriting follows the existing specialist routing.
+
+1. Establish that the user owns the asset or is authorized to modify it; identify whether it is evidence, an archive, signed material, third-party work, or subject to attribution, contractual, regulatory, or preservation requirements. If authority or preservation requirements materially change the action, pause only that modification and clarify.
+2. Inspect and classify the actual format before cleaning. Distinguish EXIF/XMP/IPTC, C2PA or comparable manifests, file/container properties, invisible text artifacts, and pixel/audio-domain signals. An absent or unavailable detector result is not proof that a watermark is absent. Never treat unknown or binary formats as ordinary UTF-8 text.
+3. Agree on the narrowest requested change: inspection only, selected metadata minimization, a localized visual/media edit, or an explicitly requested full-asset transformation. Metadata cleaning does not authorize regeneration. Apply the existing edit contract to protect untouched pixels, audio, identity, composition, typography, brand, captions, accessibility, and dimensions.
+4. Preserve the original; create a distinct output by default. In-place overwrite, remote upload, tool/model installation, service startup, or hook activation is not implied by a design request and needs its own applicable authorization. For an explicitly requested hook, propose check/report mode first, with scope, failure behavior, and rollback disclosed before mutation.
+5. Verify with available format-aware checks: file opens or plays, requested properties changed, protected structure and rendering are preserved, and before/after observations match the scope. Report the exact check and PASS, FAIL, UNVERIFIED, or N/A as appropriate. Never claim universal watermark removal, authorship authenticity, or an undetectable output; disclose when pixels/audio were regenerated or verification is detector-specific.
+
+Do not remove required attribution or provenance to conceal origin, misrepresent authorship, evade platform rules, or alter evidentiary records. Follow the complete [originality and reference-mirroring overlay](#originality--internet-reference-design-mirroring-mandatory-2026-08-30-preserved-on-core-config-compact-1-install), rights, confidentiality, and localized-edit rules without weakening them.
+
+### Upstream dependency refresh
+
+During an authorized package update, resolve and review the current default-branch `HEAD` of [guillaumemeyer/watermarks-remover](https://github.com/guillaumemeyer/watermarks-remover) under the [AIO upstream refresh protocol](AIO.md#upstream-refresh-protocol). Inspect current skill/service contracts, supported formats, optional dependencies, hooks, release notes, tests, privacy behavior, and license before adapting changes. Record the resolved commit in maintenance evidence rather than permanently pinning this skill. Do not fetch or update during ordinary design work; review the diff and preserve local modifications. No automatic upstream installer, service, detector, model, or hook adoption.
 
 ## Universal design principles
 
@@ -164,6 +180,10 @@ For images, video, audio, 3D, interactive media, or campaign assets, evaluate re
 - Optimize 3D geometry, textures, lighting, loading, device capability, and fallback behavior.
 - Treat format choices as context-dependent recommendations, not universal guarantees. Verify target-platform support before final delivery.
 
+## Project design specification
+
+For development-facing website or application designs, keep `Project Guidelines/Design Prototype.md` current with flow, screen inventory, components/tokens, content/data needs, interactive/loading/empty/error states, responsive breakpoints, accessibility behavior, prototype links, and tested versus untested behavior. Coordinate interface contracts and acceptance with the architecture, backend, and verification pages named in `AGENTS.md#project-guidelines-folder`. A static prototype is not a production implementation. Use the AIO decision-critique overlay only when the user seeks an evaluative comparison or impact analysis.
+
 ## Technical feasibility and handoff
 
 For implementation-facing work, address applicable browser/device compatibility, breakpoints, loading and performance, API/data dependencies, realistic content growth, component reuse, design tokens, asset formats/sizes, interaction states, reduced-motion behavior, analytics events, and acceptance criteria.
@@ -210,7 +230,7 @@ Before delivery, verify the applicable items:
 - The solution is feasible to build and maintain within known constraints.
 - The prototype or recommendation identifies how success will be tested when validation is in scope.
 - Authorized edits, protected content, reference rights, and untouched regions were preserved.
-- Claims about research, testing, accessibility, performance, or implementation are supported and correctly labeled.
+- Claims about research, testing, accessibility, performance, implementation, metadata, provenance, or asset hygiene are supported and correctly labeled.
 
 Record PASS, FAIL, UNVERIFIED, or N/A in an allowed work record when formal verification is part of the task. Do not manufacture an all-PASS status. Fix applicable failures when authorized; otherwise disclose the limit.
 

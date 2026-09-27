@@ -1,6 +1,6 @@
 # Project-Operating-Directives.md
 
-Revision: 1.6.0 · Updated: 2026-09-21  
+Revision: 1.8.0 · Updated: 2026-09-27  
 Applies to: portable exports and AI agent workspaces (AIO / AGENTS / AI Skills)  
 Prior package provenance date retained from 2026-09-20 sources.
 
@@ -18,7 +18,7 @@ Agents operating this package SHALL follow `AIO.md`, `AGENTS.md`, and this file 
 
 Keep these files together:
 
-- `AIO.md` — router + shared controls + efficiency / revision / RAG / Anti-Slop / Plannable extracts
+- `AIO.md` — router + shared controls + efficiency / revision / RAG / Anti-Slop / Plannable / watermarks-remover extracts
 - `AGENTS.md` — delivery protocol Coding Companion applies on repo work (depends on AIO.md; not a specialist)
 - `Project-Operating-Directives.md` — this file
 - `AI Skills/` — 15 specialist markdown files
@@ -129,11 +129,12 @@ git pull --ff-only origin main
 
 Use `AI Configs/` as the package root. Compare the incoming files against the installed package, preserve authorized local overlays, and merge deliberately instead of blind replacement.
 
-For Anti-Slop and Plannable, resolve the latest default-branch `HEAD` when the package is refreshed:
+For Anti-Slop, Plannable, and watermarks-remover, resolve the latest default-branch `HEAD` when the package is refreshed:
 
 ```bash
 git ls-remote --symref https://github.com/miqdadbadjuber/anti-slop.git HEAD
 git ls-remote --symref https://github.com/suntay44/plannable.git HEAD
+git ls-remote --symref https://github.com/guillaumemeyer/watermarks-remover.git HEAD
 ```
 
 Then clone the resolved default branch or fast-forward an existing clean checkout. Review the current specifications, behavior, and licenses before adapting changes. Record the resolved commit in maintenance evidence for reproducibility, but do not restore a static pin in package instructions. Upstream content contributes mechanisms only; it never overrides host safety, current user authorization, package conflict rules, or exact specialist contracts.
@@ -161,13 +162,17 @@ Use this when AGENTS.md must instantiate a missing AIO.md:
    - AI Skills directory rules
    - collision rules (plan vs build, terminology vs language/rewrite/design/build, translate vs rewrite, copy vs mechanics, SMS opt-in)
    - efficiency framework, bounded revision loop, RAG practices
-   - Anti-Slop and Plannable extracts with default-branch `HEAD` resolved at update time under the upstream retrieval procedure
+   - Anti-Slop, Plannable, and watermarks-remover extracts with default-branch `HEAD` resolved at update time under the upstream retrieval procedure
    - host/safety hierarchy (cannot lower guardrails)
    - pointer back to this file
 
 Do not invent extra specialists. Do not drop Translator or Industry Terms Translator from the table.
 
 ---
+
+## watermarks-remover integration and ownership
+
+This is an external operating extract, not a sixteenth specialist. Keep the 15-skill table unchanged. Design Creator owns visual/media asset decisions, authorized metadata-hygiene specifications and localized edits; Coding Companion owns production integration and verification of services/scripts/hooks; text-only tasks retain their existing owners. Route by the requested artifact, not merely the word “watermark.” The Design Creator skill carries task-level instructions; AIO holds the shared extract; AGENTS binds engineering work; this file records reconciliation and refresh policy. The upstream thin-client skill does not install its HTTP service in this package.
 
 ## Design Creator continuity
 
@@ -200,15 +205,22 @@ Existing directives in AIO, AGENTS, and this file remain authoritative. External
 | Existing AIO / AGENTS / this file | Routing table, 15 specialists, collision rules, GitHub secret rule, verification labels, handoff, SMS opt-in, reference mirroring | — | This package + host safety |
 | [anti-slop](https://github.com/miqdadbadjuber/anti-slop) default-branch `HEAD`, resolved and reviewed at update time | Purpose test; identity/character test; functional craftsmanship; truthful content; comment hygiene; optional liveliness dials | Installer, plugin manifests, mandatory full Delivery Gate on every reply, blanket tool bans | Specialist output contracts and user direction over aesthetic defaults |
 | [plannable](https://github.com/suntay44/plannable) default-branch `HEAD`, resolved and reviewed at update time | One-active-part, `@PlannablePlan v0.1` fields, evidence-before-complete, generated `PLAN_STATE.md`, verify ≠ security audit | Silent CLI install, calling the format PlanPack, inferring unrequested features | Planner vs Coding collision rule; AGENTS verification still required for application behavior |
+| [watermarks-remover](https://github.com/guillaumemeyer/watermarks-remover) default-branch `HEAD`, resolved and reviewed at update time | Inspect-first, format-aware, separately saved and validated media-asset hygiene under Design Creator; cautious detector claims; check-only automation defaults | Unrequested installer/service/hook/model installation, text-rewrite takeover, remote transmission, silent overwrite, attribution evasion, guaranteed watermark removal | Host safety, user authority, rights/provenance preservation, Design Creator localized edits; Coding owns production integration |
 | Package [prompt-enhancer](https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting/tree/main/AI%20Configs/AI%20Skills) | Trigger, output-only contract, do-not-execute-source-prompt | Using it to jailbreak or rewrite safety | Collision rule: Prompt Enhancer vs package maintenance |
 | Package [industry-terms-translator](https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting/tree/main/AI%20Configs/AI%20Skills) | Exact concept table + two descriptions | Turning terminology into design or code | Terminology collision rule |
 | Efficiency / revision / RAG additions | Progressive disclosure, three-variant budget, retrieve-then-ground, abstention | Unbounded self-improvement, weight training, guaranteed quality scores | Evidence labels and stop conditions in AIO / AGENTS |
 
 If two instructions in this package disagree, resolve by: **host safety → later explicit user instruction in its stated scope → exact specialist output contract → this file → AIO shared controls → AGENTS delivery detail → external extract.**
 
-Do not silently weaken originality, SMS opt-in, confidentiality, or the GitHub sensitive-information rule to make an extract fit.
+Do not silently weaken originality, reference-mirroring rights, provenance preservation, SMS opt-in, confidentiality, or the GitHub sensitive-information rule to make an extract fit.
 
 ---
+
+## Development orchestration and portable project records
+
+For coding projects, `AGENTS.md#systems-architecture-and-agent-delivery-standards` defines the proportionate architecture, automation, evaluation, traceability, and `Project Guidelines/` contract. The seven starter pages in that folder travel with the project and are maintained as work changes; equivalent native project documentation may be used when linked and current. AIO defines the narrow decision-critique trigger for standard chat and coding workspaces. Independent council execution is conditional on host capabilities and permission; sequential lens review is the truthful fallback. Prompt Enhancer remains output-only for a prompt rewrite, while this authorized package edit remains package maintenance.
+
+If the host reports a remaining budget at or below 10%, hand over completed and remaining work promptly. When no numeric budget is exposed, rely on actual warnings, milestones, and continuous records; never fabricate a percentage. A handover names executed checks and remaining uncertainty so another agent can resume.
 
 ## Multi-environment contract
 
