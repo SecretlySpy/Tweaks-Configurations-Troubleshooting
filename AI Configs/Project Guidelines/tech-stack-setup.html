@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tech Stack Setup | Project starter</title>
+  <style>
+    :root{color-scheme:light dark;--bg:#f5f7fb;--card:#fff;--text:#142238;--muted:#4b607a;--line:#cbd6e3;--accent:#075ca8;--soft:#eaf3fc;--warn:#744300;--warnbg:#fff4da}
+    [data-theme="dark"]{color-scheme:dark;--bg:#0d1828;--card:#17263a;--text:#edf4fc;--muted:#c2d0e2;--line:#526780;--accent:#7cc5ff;--soft:#193b58;--warn:#ffe4a0;--warnbg:#4a3518}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}
+    a{color:var(--accent)}button,input{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:.65rem;padding:.52rem .8rem;background:var(--card);color:var(--text)}
+    button:hover{border-color:var(--accent)}button:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+    button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}button:disabled{cursor:not-allowed;opacity:.6}
+    .wrap{max-width:1080px;margin:auto;padding:1.2rem}header{background:linear-gradient(120deg,#0b3159,#126aa4);color:#fff;padding:2rem 0}header a{color:#fff}
+    h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.12;margin:.3rem 0}h2{margin:0 0 .6rem;font-size:1.45rem}h3{margin:.2rem 0}
+    .eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:.8rem;font-weight:700}.lead{max-width:68ch}.toolbar,.tabs,.actions{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+    .toolbar{justify-content:space-between;margin:1.2rem 0}.card{background:var(--card);border:1px solid var(--line);border-radius:1rem;padding:1.2rem;margin:1rem 0;box-shadow:0 5px 24px #1029460d}
+    .notice{background:var(--warnbg);color:var(--warn);border-left:5px solid currentColor;padding:.8rem 1rem;border-radius:.4rem}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}.steps{display:grid;gap:1rem}
+    .step{border-left:5px solid var(--accent)}.step-top{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start}
+    .label{font-size:.82rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.07em}.muted{color:var(--muted)}
+    pre{overflow:auto;background:#10233b;color:#f5f8fc;border-radius:.65rem;padding:1rem;white-space:pre-wrap;overflow-wrap:anywhere}
+    code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}figure{margin:1rem 0;border:1px dashed var(--line);border-radius:.7rem;padding:1rem;background:var(--soft)}
+    figure img{max-width:100%;height:auto}figcaption{color:var(--muted);font-size:.9rem}progress{width:100%;height:1rem;accent-color:var(--accent)}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .search{width:min(100%,420px);padding:.65rem;border:1px solid var(--line);border-radius:.65rem;background:var(--card);color:var(--text)}
+    details{border-top:1px solid var(--line);padding:.7rem 0}summary{cursor:pointer;font-weight:650}footer{padding:2rem 0;color:var(--muted)}
+    @media print{header{background:none;color:#000}.toolbar,.tabs,.actions,.copy,.check,.notice{display:none!important}.card{box-shadow:none;break-inside:avoid}body{background:#fff;color:#000}}
+    @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <header><div class="wrap"><div class="eyebrow">Project Guidelines · local setup</div><h1>Set up the project</h1><p class="lead">Pick your operating system, follow each verified step, and use the checks to track your progress. This page works offline once downloaded.</p><a href="Tech%20Stack%20Setup%20Guide.md">Read the Markdown guide</a></div></header>
+  <main class="wrap">
+    <div class="notice" role="status"><strong>Starter template:</strong> Commands and screenshots are pending real project verification. Copy controls stay disabled until each command is populated and marked verified.</div>
+    <div class="toolbar"><div class="tabs" role="group" aria-label="Operating system"><button type="button" data-os="linux">Linux</button><button type="button" data-os="windows">Windows</button><button type="button" data-os="macos">macOS</button></div><div class="actions"><button type="button" id="theme">Toggle contrast</button><button type="button" id="print">Print guide</button><button type="button" id="reset">Reset progress</button></div></div>
+    <section class="card" aria-labelledby="progress-title"><h2 id="progress-title">Your progress</h2><progress id="progress" aria-labelledby="progress-title" value="0" max="5"></progress><p id="progress-text" aria-live="polite">0 of 5 steps complete</p><p class="muted">When browser storage is available, progress stays in this browser. It does not verify the project.</p></section>
+    <section aria-labelledby="steps-title"><h2 id="steps-title">Walkthrough</h2><div class="steps" id="steps"></div></section>
+    <section class="card" aria-labelledby="help-title"><h2 id="help-title">Troubleshooting</h2><label for="search">Find a symptom</label><input id="search" class="search" type="search" placeholder="Try command, port, database…" autocomplete="off"><div id="help"></div><p id="no-results" hidden>No matching guidance. See the Markdown guide or inspect the project logs.</p></section>
+    <section class="card" aria-labelledby="sources-title"><h2 id="sources-title">Related project docs</h2><div class="grid"><p><a href="Architecture%20and%20Operations.md">Architecture and Operations</a><br><span class="muted">System topology and deployment</span></p><p><a href="Verification%20and%20Evaluation.md">Verification and Evaluation</a><br><span class="muted">Observed test evidence</span></p><p><a href="AI%20Documentation%20Notes.md">AI Documentation Notes</a><br><span class="muted">Where to find project knowledge</span></p></div></section>
+  </main>
+  <footer class="wrap">Keep this page and the Markdown fallback synchronized. Redact personal information and secrets from real screenshots.</footer>
+  <script>
+    "use strict";
+    // Replace this starter data with project-tested commands, expected output, and real screenshot paths.
+    // A command becomes copyable only when verified is true and the placeholder has been replaced.
+    const setupData = {
+      linux: {label:"Linux",version:"[distribution and version]",steps:[
+        {title:"Check prerequisites",why:"Confirm the required runtime and package manager are available.",command:"[verified Linux version commands]",expected:"[observed versions]",shot:"screenshots/prerequisites-linux.png",verified:false},
+        {title:"Get project and dependencies",why:"Fetch the project and install its locked dependencies.",command:"[verified Linux install commands]",expected:"[observed install result]",shot:"screenshots/dependencies-linux.png",verified:false},
+        {title:"Configure environment",why:"Provide local configuration without exposing secret values.",command:"[verified Linux environment commands]",expected:"[configuration check without values]",verified:false},
+        {title:"Start services and app",why:"Launch only the services the project requires.",command:"[verified Linux start commands]",expected:"[observed local URL or response]",shot:"screenshots/running-linux.png",verified:false},
+        {title:"Confirm behavior",why:"Check the app and run relevant tests.",command:"[verified Linux health and test commands]",expected:"[observed response; evidence linked in Verification and Evaluation.md]",verified:false}
+      ]},
+      windows: {label:"Windows PowerShell",version:"[Windows and PowerShell versions]",steps:[
+        {title:"Check prerequisites",why:"Confirm the required runtime and package manager are available.",command:"[verified PowerShell version commands]",expected:"[observed versions]",shot:"screenshots/prerequisites-windows.png",verified:false},
+        {title:"Get project and dependencies",why:"Fetch the project and install its locked dependencies.",command:"[verified PowerShell install commands]",expected:"[observed install result]",shot:"screenshots/dependencies-windows.png",verified:false},
+        {title:"Configure environment",why:"Provide local configuration without exposing secret values.",command:"[verified PowerShell environment commands]",expected:"[configuration check without values]",verified:false},
+        {title:"Start services and app",why:"Launch only the services the project requires.",command:"[verified PowerShell start commands]",expected:"[observed local URL or response]",shot:"screenshots/running-windows.png",verified:false},
+        {title:"Confirm behavior",why:"Check the app and run relevant tests.",command:"[verified PowerShell health and test commands]",expected:"[observed response; evidence linked in Verification and Evaluation.md]",verified:false}
+      ]},
+      macos: {label:"macOS",version:"[macOS version and architecture]",steps:[
+        {title:"Check prerequisites",why:"Confirm the required runtime and package manager are available.",command:"[verified macOS version commands]",expected:"[observed versions]",shot:"screenshots/prerequisites-macos.png",verified:false},
+        {title:"Get project and dependencies",why:"Fetch the project and install its locked dependencies.",command:"[verified macOS install commands]",expected:"[observed install result]",shot:"screenshots/dependencies-macos.png",verified:false},
+        {title:"Configure environment",why:"Provide local configuration without exposing secret values.",command:"[verified macOS environment commands]",expected:"[configuration check without values]",verified:false},
+        {title:"Start services and app",why:"Launch only the services the project requires.",command:"[verified macOS start commands]",expected:"[observed local URL or response]",shot:"screenshots/running-macos.png",verified:false},
+        {title:"Confirm behavior",why:"Check the app and run relevant tests.",command:"[verified macOS health and test commands]",expected:"[observed response; evidence linked in Verification and Evaluation.md]",verified:false}
+      ]}
+    };
+    const problems = [
+      ["Command not found","Check the version command, official install location, PATH, and a new terminal session. Use the project's verified installation instructions."],
+      ["Port in use","Identify which process owns the port before stopping anything. Use the configured alternate port or the documented stop command."],
+      ["Database connection fails","Check service status, variable names, host and port, then local logs. Do not print credentials or paste them into a support request."],
+      ["Permission or path error","Check the current directory, file ownership, shell syntax, and OS-specific paths. Avoid broad permission changes."]
+    ];
+    const $ = id => document.getElementById(id);
+    const memory = new Map();
+    const storageGet = k => {try{return localStorage.getItem(k)}catch{return memory.get(k)||null}};
+    const storageSet = (k,v) => {try{localStorage.setItem(k,v)}catch{memory.set(k,v)}};
+    const storageRemove = k => {try{localStorage.removeItem(k)}catch{memory.delete(k)}};
+    let os = storageGet("setup-os") || "linux";
+    if (!setupData[os]) os = "linux";
+    function key(){return "setup-progress-"+os}
+    function completed(){try{return JSON.parse(storageGet(key()) || "[]")}catch{return []}}
+    function save(items){storageSet(key(),JSON.stringify(items))}
+    function render(){
+      document.querySelectorAll("[data-os]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.os===os)));
+      const root=$("steps"); root.replaceChildren();
+      setupData[os].steps.forEach((s,i)=>{
+        const box=document.createElement("article"); box.className="card step";
+        const top=document.createElement("div"); top.className="step-top";
+        const info=document.createElement("div"); const eyebrow=document.createElement("div");eyebrow.className="label";eyebrow.textContent="Step "+(i+1)+" · "+setupData[os].label+" · "+setupData[os].version;info.append(eyebrow);
+        const h=document.createElement("h3"); h.textContent=s.title; info.append(h); top.append(info);
+        const label=document.createElement("label"); label.className="check";
+        const check=document.createElement("input"); check.type="checkbox"; check.checked=completed().includes(i);
+        check.setAttribute("aria-label","Mark step "+(i+1)+" complete");
+        check.addEventListener("change",()=>{const set=new Set(completed());check.checked?set.add(i):set.delete(i);save([...set]);updateProgress()});
+        label.append(check,document.createTextNode(" Done")); top.append(label); box.append(top);
+        const p=document.createElement("p");p.textContent=s.why;box.append(p);
+        const pre=document.createElement("pre");const code=document.createElement("code");code.textContent=s.command;pre.append(code);box.append(pre);
+        const copy=document.createElement("button");copy.type="button";copy.className="copy";copy.textContent=s.verified?"Copy command":"Command pending verification";copy.disabled=!s.verified || s.command.includes("[");
+        copy.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(s.command);copy.textContent="Copied";setTimeout(()=>copy.textContent="Copy command",1700)}catch{copy.textContent="Copy unavailable; select the command above"}});
+        box.append(copy);
+        const expected=document.createElement("p");const strong=document.createElement("strong");strong.textContent="Expected: ";expected.append(strong,document.createTextNode(s.expected));box.append(expected);
+        if(s.shot){const fig=document.createElement("figure");const caption=document.createElement("figcaption");caption.textContent="Screenshot pending: "+s.shot+". Add a real redacted capture with descriptive alt text after verification.";fig.append(caption);if(s.verified){const img=document.createElement("img");img.src=s.shot;img.alt="Verified "+setupData[os].label+" result for "+s.title;img.loading="lazy";img.onerror=()=>img.remove();fig.prepend(img)}box.append(fig)}
+        root.append(box);
+      });
+      updateProgress();
+    }
+    function updateProgress(){const n=completed().filter(i=>i>=0&&i<setupData[os].steps.length).length;$("progress").max=setupData[os].steps.length;$("progress").value=n;$("progress-text").textContent=n+" of "+setupData[os].steps.length+" steps marked complete for "+setupData[os].label}
+    function renderHelp(){const q=$("search").value.trim().toLowerCase();const root=$("help");root.replaceChildren();let count=0;problems.forEach(([title,body])=>{if(q && !(title+" "+body).toLowerCase().includes(q))return;count++;const d=document.createElement("details");const s=document.createElement("summary");s.textContent=title;const p=document.createElement("p");p.textContent=body;d.append(s,p);root.append(d)});$("no-results").hidden=count>0}
+    document.querySelectorAll("[data-os]").forEach(b=>b.addEventListener("click",()=>{os=b.dataset.os;storageSet("setup-os",os);render()}));
+    $("search").addEventListener("input",renderHelp);
+    $("reset").addEventListener("click",()=>{storageRemove(key());render()});
+    $("theme").addEventListener("click",()=>{document.documentElement.dataset.theme=document.documentElement.dataset.theme==="dark"?"light":"dark"});
+    $("print").addEventListener("click",()=>window.print());
+    render();renderHelp();
+  </script>
+</body>
+</html>

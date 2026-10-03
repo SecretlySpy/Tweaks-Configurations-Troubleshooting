@@ -1,5 +1,6 @@
 # AI Skills Index
 
+Account revision: 1.0.0 · Updated: 2026-10-02 (America/New_York)
 > **Purpose:** Compact directory for the `AI Skills/` folder. This index maps each specialist filename to its primary responsibility so the router can locate the correct detailed contract without loading the entire package.
 >
 > **Routing:** `AIO.md` owns task routing. Use the selected specialist file for its exact workflow and output contract. `AGENTS.md` governs sustained engineering delivery for codebase work; it is a root delivery protocol, not a numbered specialist. `Project-Operating-Directives.md` governs package-wide routing continuity, recovery, conflict resolution, and handoff.
@@ -36,7 +37,11 @@
 
 ## Development project records and decision review
 
-`AGENTS.md` defines the project-root `Project Guidelines/` folder and its seven starter pages. The folder is project documentation, not a sixteenth specialist. `AIO.md#decision-critique-across-chat-and-coding-workspaces` activates pros/cons and self-critique only for comparative, impact, and evaluative questions. In a coding workspace, General Inquiry & Research can support Coding Companion with a bounded council when permitted and available; otherwise label sequential review honestly. Standard chat uses the same decision objective without requiring multiple agents. The 10% handover trigger applies only to a host-reported numeric remaining limit.
+`AGENTS.md` defines the optional, project-applicable `Project Guidelines/` folder: seven canonical topic pages, a small `AI Documentation Notes.md` retrieval index, and a `Tech Stack Setup Guide.md` with an interactive static companion for runnable projects. The folder is project documentation, not a sixteenth specialist. `AIO.md#decision-critique-across-chat-and-coding-workspaces` activates pros/cons and self-critique only for comparative, impact, and evaluative questions. In a coding workspace, General Inquiry & Research can support Coding Companion with a bounded council when permitted and available; otherwise label sequential review honestly. Standard chat uses the same decision objective without requiring multiple agents. The 10% handover trigger applies only to a host-reported numeric remaining limit.
+
+## Technical Intent Orchestration discovery
+
+AIO owns the T0–T11 pre-routing pipeline. Its supporting contributors are Language Translator, Grammar Corrector, Industry Terms Translator, Prompt Enhancer (Requirement Compiler and Execution Brief Compiler), proportional Planner Expert, and Spoon Feed Reviewer (Technical Explanation Layer). These are existing specialists acting as internal lenses, not six additional owners. Preserve every primary standalone format and stopping contract; final routing follows the requested artifact. The 15-row directory stays unchanged. Read only contributors needed for the current task.
 
 ## Upstream updates
 
@@ -44,7 +49,7 @@ Refresh this directory only during an authorized install, recovery, or maintenan
 
 For a clean install, clone the repository's default branch. In an existing clean checkout, run `git fetch origin main` and `git pull --ff-only origin main`, then compare `AI Configs/` against the installed package before merging. Preserve authorized local overlays; do not overwrite uncommitted changes or refresh from the network during ordinary tasks.
 
-When the package incorporates Anti-Slop or Plannable, follow `AIO.md#upstream-refresh-protocol`: resolve each repository's current default-branch `HEAD`, review its latest source and license, and record the resolved commit in maintenance evidence instead of adding a static pin.
+When the package incorporates Anti-Slop, Plannable, watermarks-remover, Graphify, or Ponytail, follow `AIO.md#upstream-refresh-protocol`: resolve each repository's current default-branch `HEAD`, review its latest source and license, and record the resolved commit in maintenance evidence instead of adding a static pin.
 
 If GitHub is unavailable, use the verified fallback files:
 
