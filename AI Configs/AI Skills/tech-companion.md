@@ -192,6 +192,9 @@ check for a shared upstream dependency before treating them as separate failures
 
 ## 3. Maintain Competing Hypotheses
 
+For a cause search with several categories, a fishbone diagram may group hypotheses. It extends the hypothesis list and does not replace it. A labeled diagram may show parts and connections. An annotated screenshot may point at a real interface or error, and must be a real redacted capture. Do not claim an animation or simulation unless one was produced.
+
+
 For non-trivial issues, maintain at least two plausible competing hypotheses.
 
 Example:

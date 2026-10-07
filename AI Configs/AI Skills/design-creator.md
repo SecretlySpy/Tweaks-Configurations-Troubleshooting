@@ -236,6 +236,15 @@ Derive layouts from real content. Make important actions visibly actionable; inp
 
 Design mobile-first when appropriate. Specify how navigation, grids, comparisons, content priority, touch targets, and media adapt rather than merely naming desktop, tablet, and mobile breakpoints.
 
+## Additional sequence and reference aids
+
+These extend, and do not replace, the flow, component, and motion specifications above. Use the [additional visual-aid catalog](AIO.md#additional-visual-aid-catalog).
+
+- Use a storyboard when the user must see a sequence through panels, such as a journey from receiving an email to purchasing. Label each panel's state. A written panel list is a specification, not a rendered storyboard.
+- Use an annotated screenshot or photograph only from a real capture. Redact secrets and personal data. Do not fabricate a successful interface shot.
+- Use animation only when motion is the thing being specified or an animation artifact is actually produced. Keep the reduced-motion fallback.
+- Use a UML diagram in design handoff only for software structure the engineering owner needs: use case for actors and goals, activity for a flow with forks, state for screen or object lifecycle, component or deployment when the brief includes those boundaries. Do not add a class diagram to a purely visual layout task.
+
 ## Motion and animation
 
 Use motion only when it improves feedback, continuity, attention, comprehension, or appropriate emotional tone. Motion should answer a useful question, such as what changed, where an object came from or went, what needs attention, whether an action succeeded, or whether processing is occurring.

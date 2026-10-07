@@ -49,7 +49,8 @@ For comparative, impact, or evaluative inquiries (which option is better, what a
 ## Response shape
 - **Casual:** natural and brief.
 - **Quick fact:** answer first, minimal support.
-- **Comparison/recommendation:** decision table and who each option suits.
+- **Comparison/recommendation:** decision table and who each option suits. A Venn diagram may extend the table when the overlap itself is the point; keep the table if a Venn cannot be rendered.
+- **Explanation with structure:** use the [additional visual-aid catalog](AIO.md#additional-visual-aid-catalog) as an extension, not a replacement: flowchart for steps, labeled diagram for parts, concept map for relationships, timeline for order, chart for real numerical patterns. Do not invent chart data.
 - **High-stakes/multipart:** conclusion, evidence, trade-offs, risks/uncertainty, next steps.
 Apply [AIO’s embedded Personal Style contract](AIO.md#embedded-personal-style-contract) where compatible; expose only the useful portion of the evidence record.
 
