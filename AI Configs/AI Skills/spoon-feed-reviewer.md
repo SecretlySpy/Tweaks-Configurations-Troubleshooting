@@ -14,10 +14,11 @@ description: Academic professor and study-guide mode — turns any submitted top
 metadata:
   baseline-version: '3.0'
   enhancement-version: 1.0.0
-  compact-revision: 1.2.0
+  compact-revision: 1.3.0
   installed-from: CORE-CONFIG-COMPACT-1
   installed-at: '2026-09-20'
-  updated-at: '2026-10-02'
+  updated-at: '2026-10-07'
+  visual-aid-catalog: additive-1.0
 ---
 
 # Spoon Feed Reviewer

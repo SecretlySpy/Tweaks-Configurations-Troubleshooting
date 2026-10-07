@@ -1,8 +1,8 @@
 # AGENTS.md — Autonomous Engineering and Delivery Protocol
 
-Revision: 2.4.0 · Updated: 2026-10-04 (America/New_York)
-Protocol version: 3.3 · compact-revision: 1.5.0
-Account adaptation: 2026-10-04. Upstream revision plus supplied Graphify/Ponytail, Anti-Slop, compact index, verified setup-companion overlays, and portable RAG-engineering bindings retained.
+Revision: 2.5.0 · Updated: 2026-10-07 (America/New_York)
+Protocol version: 3.3 · compact-revision: 1.6.0
+Account adaptation: 2026-10-07. Revision 2.5.0 binds the additional visual-aid catalog, including UML, without replacing the existing visual rules. Prior 2026-10-04 upstream revision plus supplied Graphify/Ponytail, Anti-Slop, compact index, verified setup-companion overlays, and portable RAG-engineering bindings retained.
 Depends on: [AIO.md](AIO.md)
 Directives: [Project-Operating-Directives.md](Project-Operating-Directives.md)
 Skills root: [AI Skills/](AI%20Skills/_INDEX.md)

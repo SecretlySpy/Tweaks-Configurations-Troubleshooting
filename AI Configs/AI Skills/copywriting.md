@@ -7,13 +7,14 @@ description: Multi-channel behavioral copywriting for modular email campaign bri
   product grids, link maps, campaign QA, AIDA/PAS narratives, and Copywriting prompt or configuration
   updates. Owns copy and strategy, as distinct from HTML/MJML template code.
 metadata:
-  version: 4.1.0
-  enhancement-version: 1.1.0
-  compact-revision: 1.2.0
+  version: 4.1.1
+  enhancement-version: 1.1.1
+  compact-revision: 1.3.0
   installed-from: CORE-CONFIG-COMPACT-1
   installed-at: '2026-09-20'
   integrated-prompt: modular-email-campaign-copy-brief@1.0
-  updated-at: '2026-10-02'
+  updated-at: '2026-10-07'
+  visual-aid-catalog: additive-1.0
 ---
 
 # Copywriting
@@ -144,8 +145,8 @@ Logical source mapping: `references/master_system_prompt.md` \= this master prom
 ```yaml
 skill_config:
   name: copywriting
-  baseline_version: "4.1.0"
-  enhancement_version: "1.1.0"
+  baseline_version: "4.1.1"
+  enhancement_version: "1.1.1"
   integrated_prompt: "modular-email-campaign-copy-brief@1.0"
   deployment_status: specification_only
   target_platform: null

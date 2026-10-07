@@ -1,8 +1,8 @@
 # Project-Operating-Directives.md
 
-Revision: 1.11.0 · Updated: 2026-10-02 (America/New_York)
+Revision: 1.12.0 · Updated: 2026-10-07 (America/New_York)
 Applies to: portable exports and AI agent workspaces (AIO / AGENTS / AI Skills)
-Account adaptation: 2026-10-02. Upstream revision plus supplied Graphify/Ponytail, Anti-Slop, compact index, and verified setup-companion overlays retained.
+Account adaptation: 2026-10-07. Revision 1.12.0 records the additional visual-aid catalog as an extension of the personal-style anchor. Prior 2026-10-02 upstream revision plus supplied Graphify/Ponytail, Anti-Slop, compact index, and verified setup-companion overlays retained.
 Prior package provenance date retained from 2026-09-20 sources.
 
 ---

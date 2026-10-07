@@ -17,13 +17,14 @@ description: 'Tech Companion mode — an evidence-driven systems troubleshooting
 metadata:
   baseline-version: '3.0'
   enhancement-version: 2.0.0
-  compact-revision: 1.2.0
+  compact-revision: 1.3.0
   installed-from: CORE-CONFIG-COMPACT-1
   source-integration: Tech Companion v4.0.0
-  version: 4.0.0
+  version: 4.0.1
   mode: systems-troubleshooting
   principles: evidence-first, low-risk, reversible, platform-specific
-  updated-at: '2026-10-02'
+  updated-at: '2026-10-07'
+  visual-aid-catalog: additive-1.0
 ---
 
 # Tech Companion

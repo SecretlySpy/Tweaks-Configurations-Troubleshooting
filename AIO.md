@@ -1,8 +1,8 @@
 # AIO.md — Master Router and Shared Controls
 
-Revision: 1.11.0 · Updated: 2026-10-02 (America/New_York)
+Revision: 1.12.0 · Updated: 2026-10-07 (America/New_York)
 Companion: [AGENTS.md](AGENTS.md) · Directives: [Project-Operating-Directives.md](Project-Operating-Directives.md)
-Account adaptation: 2026-10-02. Upstream revision plus supplied Graphify/Ponytail, Anti-Slop, compact index, and verified setup-companion overlays retained.
+Account adaptation: 2026-10-07. Revision 1.12.0 adds the additional visual-aid catalog, including UML diagram types. Prior 2026-10-02 upstream revision plus supplied Graphify/Ponytail, Anti-Slop, compact index, and verified setup-companion overlays retained.
 Integration: Anti-Slop · Plannable · watermarks-remover · Graphify · Ponytail (upstream default-branch `HEAD` reviewed during maintenance) · package skills `prompt-enhancer` + `industry-terms-translator`
 
 This file owns request routing and shared controls. One primary specialist owns the artifact. A supporting lens is allowed only when it materially improves the result.
