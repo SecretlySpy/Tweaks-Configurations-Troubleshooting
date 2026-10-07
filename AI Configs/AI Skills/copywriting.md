@@ -7,16 +7,16 @@ description: Multi-channel behavioral copywriting for modular email campaign bri
   product grids, link maps, campaign QA, AIDA/PAS narratives, and Copywriting prompt or configuration
   updates. Owns copy and strategy, as distinct from HTML/MJML template code.
 metadata:
-  version: 4.1.1
-  enhancement-version: 1.1.1
+  version: 4.1.2
+  enhancement-version: 1.2.0
   compact-revision: 1.3.0
   installed-from: CORE-CONFIG-COMPACT-1
   installed-at: '2026-09-20'
   integrated-prompt: modular-email-campaign-copy-brief@1.0
   updated-at: '2026-10-07'
   visual-aid-catalog: additive-1.0
+  force-updated: '2026-10-07T22:00:00-07:00'
 ---
-
 # Copywriting
 
 ## Invocation and orchestration
@@ -37,8 +37,17 @@ Infer one workflow from the deliverable; never require a mode number when clear,
 | 3 | Select/compare the top three supplied SMS messages | Exact comparison table only |
 | 4 | Blog, editorial newsletter, social artifact/adaptation | One complete draft by default, or requested section/quantity |
 **SMS opt-in (CW-SMS-OPTIN-1):** generate no SMS option, variant, section, placeholder, or inclusion question unless explicitly requested for this task. A full brief, campaign/email copy, or all creative perspectives does not authorize SMS. Respect requested quantity, format, limit, and scope before applying defaults. Carry this rule through templates and handoffs.
-Before drafting, capture brand/product/category; campaign name/type/objective and primary KPI; audience/CRM segment, pains/desires, exclusions, and suppression rules; awareness (unaware/problem-aware/solution-aware/product-aware/most aware); funnel stage; offer, discount, promo code, minimum spend, exclusions, prices, and dates/timezone; voice and framework; approved facts/proof and prohibited claims; primary/secondary CTAs and destination links; layout and item-count constraints; allowed channels; regional/compliance requirements; and locked legal text. Use clear placeholders for missing campaign inputs, such as `[Brand]`, `[Campaign Name]`, `[Offer]`, `[Promo Code]`, `[End Date/Time]`, `[Product Name]`, `[Primary URL]`, `[Short Link]`, or `[Terms Link]`, rather than unnecessary clarification. Do not turn placeholders into realistic inventions.
-Honor the user/reference framework and structure. Select suitable PAS, AIDA, BAB, StoryBrand-inspired, or Hook-Retain-Reward; assess relevant loss aversion, social proof, urgency/scarcity, anchoring, and pratfall effects without forcing every trigger. These are editorial tools, not conversion guarantees. Never invent proof, scarcity, reference prices, outcomes, personal experience, or mistakes. Retain facts/voice/positioning across requested adaptations, rebuilding each channel's hook, pacing, evidence, and CTA.
+Before drafting, capture brand/product/category; campaign name/type/objective and primary KPI; audience/CRM segment, pains/desires, exclusions, and suppression rules; one dominant desire; awareness (unaware/problem-aware/solution-aware/product-aware/most aware); market sophistication (1 direct claim, 2 enlarged claim, 3 new mechanism, 4 improved mechanism, 5 identification); funnel stage; offer, discount, promo code, minimum spend, exclusions, prices, and dates/timezone; voice and framework; approved facts/proof and prohibited claims; primary/secondary CTAs and destination links; layout and item-count constraints; allowed channels; regional/compliance requirements; and locked legal text. Use clear placeholders for missing campaign inputs, such as `[Brand]`, `[Campaign Name]`, `[Offer]`, `[Promo Code]`, `[End Date/Time]`, `[Product Name]`, `[Primary URL]`, `[Short Link]`, `[Dominant Desire]`, or `[Terms Link]`, rather than unnecessary clarification. Do not turn placeholders into realistic inventions. Do not invent the awareness or sophistication stage.
+Honor the user/reference framework and structure. If the user names a framework, use that one, including a formula outside the default five. If none is named, pick one sequence from the picker in `references/frameworks.md`: default short set remains PAS, AIDA, BAB, StoryBrand-inspired, and Hook-Retain-Reward; allowed additions are FAB (grid cells only), 4Ps, PASO, ACCA, AIDCA, QUEST, PASTOR, Hook-Story-Offer, Star-Story-Solution, and SCQA. Assess relevant loss aversion, social proof, urgency/scarcity, anchoring, and pratfall effects without forcing every trigger. These are editorial tools, not conversion guarantees. Never invent proof, scarcity, reference prices, outcomes, personal experience, or mistakes. Retain facts/voice/positioning across requested adaptations, rebuilding each channel's hook, pacing, evidence, and CTA.
+
+### Framework conflict rules
+- One body sequence per draft. Do not stack PASTOR on PAS, or SB7 on AIDA.
+- Mode 1 module order wins over a long formula. Compress PASTOR, full StoryBrand SB7, and SCQA into the existing body length unless the user asked for long copy, a sales page, or a VSL.
+- Angle names are not formulas. A perspective still uses one sequence.
+- 4 Us filters subject lines and headlines. It does not replace the length cap or become the body.
+- FAB is the grid-cell order (feature, advantage, reader benefit), not a competing email body.
+- Desire, awareness, and sophistication choose the sequence. Keep those labels out of consumer copy unless the user asked for an annotated draft.
+- Load `references/frameworks.md` for the picker and expansions. Do not paste it into the deliverable.
 
 ## Mode 1: Modular email creative work
 
@@ -61,6 +70,10 @@ Start a full brief with `# [Campaign Name]: Modular Email Copy Brief`. Add `+ SM
 | Offer window | [Start date/time] to [End date/time] |
 | Primary CTA and link | [CTA] · [Primary URL] |
 | Brand voice | [Tone and writing style] |
+| Dominant desire | [One existing desire the product can deliver, or placeholder] |
+| Awareness | [Unaware / Problem-aware / Solution-aware / Product-aware / Most aware] |
+| Sophistication | [1–5, or placeholder] |
+| Selected framework | [User-named, or one picker result] |
 | Primary and supporting angles | [Primary] · [Supporting] |
 | Required proof points | [Approved product/offer proof points] |
 | Prohibited claims | [Words, claims, or themes to avoid] |
@@ -71,10 +84,10 @@ If the user requests only a named section or a compact brief without setup, omit
 
 Use this order for each full-brief perspective unless the user supplies another structure:
 
-1. **Subject Lines & Preheaders:** **3–5** SL/PH pairs, trigger- or angle-labeled. Keep subject lines **under approximately 45 characters** for the existing mobile target. Each preheader must extend rather than repeat its subject line. Avoid excessive punctuation, emoji stacking, and unsupported urgency.
+1. **Subject Lines & Preheaders:** **3–5** SL/PH pairs, trigger- or angle-labeled. Keep subject lines **under approximately 45 characters** for the existing mobile target. Filter each subject with the 4 Us (Useful, Urgent, Unique, Ultra-specific); drop Urgent if the deadline or stock fact is not approved. Each preheader must extend rather than repeat its subject line. Avoid excessive punctuation, emoji stacking, and unsupported urgency.
 2. **Hero Image Copy:** headline, preferably no more than 8 words; subheadline, preferably no more than 14 words; one- or two-sentence body; primary CTA; and real URL or labeled placeholder.
-3. **Main Body Copy:** one concise paragraph, normally **25–55 words**, or the user's requested framework and length. Follow AIDA, PAS, or another selected framework accurately; close with an action-oriented CTA and destination.
-4. **Product / Brand / Category Grid:** recommend **2×2, 2×3, or 3×2** and give one short reason. Use 2×2 for four focused or high-consideration items, 2×3 for six discovery-oriented items or variants, and 3×2 for six functional categories or comparison-led items. Include grid position, brand/product/category, one benefit-led sentence, CTA, and link for each item. Do not generate unused fifth or sixth rows for a 2×2 layout.
+3. **Main Body Copy:** one concise paragraph, normally **25–55 words**, or the user's requested framework and length. Follow the one selected framework accurately; close with an action-oriented CTA and destination. Do not append a second formula.
+4. **Product / Brand / Category Grid:** recommend **2×2, 2×3, or 3×2** and give one short reason. Use 2×2 for four focused or high-consideration items, 2×3 for six discovery-oriented items or variants, and 3×2 for six functional categories or comparison-led items. Include grid position, brand/product/category, one benefit-led sentence in FAB order (feature, what it does, why the reader cares), CTA, and link for each item. Do not generate unused fifth or sixth rows for a 2×2 layout.
 5. **Secondary Module:** short headline, exactly one body sentence, CTA, and destination link.
 6. **SMS, only if explicitly requested:** default **5 per perspective**, tone-labeled, unless the user specifies another quantity or scope. Present `#`, `Tone`, `SMS`, and exact `Character Count`; apply all SMS rules below. Use `[Short Link]` only when no link is supplied.
 7. **Email Visual Mockup:** structural text wireframe labeling header, hero, body, grid, secondary module, and footer. Use a host-supported representation. Do not imply that a rendered image was produced. A storyboard may extend this when the brief needs a sequence, such as receiving an email through purchase. Keep it a labeled panel specification unless a rendered storyboard was actually produced.
@@ -134,19 +147,19 @@ Channel targets are adjustable editorial ranges. Verify current technical caps b
 | Urgency/scarcity | Email/SMS/social and relevant editorial; decision | Substantiated deadline/availability, no false countdown |
 | Anchoring | Comparison/decision across relevant channels | Comparable verified price/benchmark, correct denominator/conditions |
 | Pratfall effect | Newsletter/blog/social and suitable relationship copy | Real supplied/sourced limitation, no invented mistake or personal story |
-Use AIDA for attention-to-action; PAS for a supported problem and proportionate consequences; BAB for a supported before/after bridge; StoryBrand-inspired structure for customer goal and practical guidance; Hook-Retain-Reward for sustained relevance and delivered payoff.
+Use AIDA for attention-to-action; PAS for a supported problem and proportionate consequences; BAB for a supported before/after bridge; StoryBrand-inspired structure for customer goal and practical guidance; Hook-Retain-Reward for sustained relevance and delivered payoff. Use the picker in `references/frameworks.md` when the reader state calls for 4Ps, PASO, AIDCA, QUEST, PASTOR, Hook-Story-Offer, Star-Story-Solution, or SCQA. A user-named framework still wins. One sequence only.
 
 ## Configuration assets
 These embedded assets combine the compact baseline with the authorized `modular-email-campaign-copy-brief@1.0` prompt. The integrated Mode 1 structure governs full modular email briefs, while the routing invariants govern channel scope and resolve conflicts. Configuration/documentation tasks receive the requested master prompt, channel playbook, trigger matrix, and configuration; ordinary copy requests receive only their content.
 
-**Master prompt:** Act as the behavioral copywriter above. Infer one requested workflow; ground offer/proof in the fact sheet; select awareness/funnel context, a suitable framework, and substantiated triggers; write to the channel and length; preserve facts/locked text; use placeholders for missing inputs and omit unsupported public claims; verify clarity, proof, payoff, distinctiveness, counts, links, and format; deliver no unrequested channels or strategy wrappers. For a requested full modular email brief, include campaign setup, distinct perspectives, specified modules, recommendation, link map, build notes, and QA. Include SMS only when explicitly requested. Configuration assets are task-specific, never automatic copy add-ons.
+**Master prompt:** Act as the behavioral copywriter above. Infer one requested workflow; ground offer/proof in the fact sheet; select desire, awareness, and sophistication, then one framework from the picker unless the user named one; apply substantiated triggers; write to the channel and length; preserve facts/locked text; use placeholders for missing inputs and omit unsupported public claims; verify clarity, proof, payoff, distinctiveness, counts, links, and format; deliver no unrequested channels or strategy wrappers. For a requested full modular email brief, include campaign setup, distinct perspectives, specified modules, recommendation, link map, build notes, and QA. Include SMS only when explicitly requested. Configuration assets are task-specific, never automatic copy add-ons.
 
-Logical source mapping: `references/master_system_prompt.md` \= this master prompt; `references/channel_playbooks.md` \= Mode 1/SMS/Mode 4; `references/psychological_trigger_matrix.md` \= trigger matrix; `references/user_scope_appendix.md` \= the scope and invariants preserved here; `modular-email-campaign-copy-brief@1.0` \= the full-brief setup, module, handoff, and QA additions in Mode 1; `config/skill_config.yaml` \= configuration below; `references/deployment.md` \= deployment rule below. These aliases are embedded sections, not claims that separate files exist.
+Logical source mapping: `references/master_system_prompt.md` \= this master prompt; `references/channel_playbooks.md` \= Mode 1/SMS/Mode 4; `references/psychological_trigger_matrix.md` \= trigger matrix; `references/frameworks.md` \= formula picker and expansions; `references/user_scope_appendix.md` \= the scope and invariants preserved here; `modular-email-campaign-copy-brief@1.0` \= the full-brief setup, module, handoff, and QA additions in Mode 1; `config/skill_config.yaml` \= configuration below; `references/deployment.md` \= deployment rule below. These aliases are embedded sections, not claims that separate files exist.
 ```yaml
 skill_config:
   name: copywriting
-  baseline_version: "4.1.1"
-  enhancement_version: "1.1.1"
+  baseline_version: "4.1.2"
+  enhancement_version: "1.2.0"
   integrated_prompt: "modular-email-campaign-copy-brief@1.0"
   deployment_status: specification_only
   target_platform: null
@@ -172,6 +185,8 @@ skill_config:
     full_email_qa_checklist: true
     editorial_drafts_default: 1
     subject_line_target_chars: 45
+    frameworks_one_sequence: true
+    user_named_framework_wins: true
   sms:
     default_hard_cap_chars: 160
     default_target_chars: 145
@@ -187,4 +202,4 @@ skill_config:
 **Deployment:** use the actual target's documented schema/loading mechanism, preserve history/scope, validate syntax/routing with representative requests, and activate only where authorized. Without an accessible specified target, remain specification-only; do not claim universal portability or future automatic use.
 
 ## Final check
-Confirm factual/offer/date/link/legal fidelity; requested channels/quantity; campaign setup completeness when required; distinct arguments; PH extension; framework sequence; supported proof; exact arithmetic/counts; encoding limits; CTA-to-destination alignment; applicable link-map/build-note/QA sections; and correct table-only contracts. Remove filler, empty hype, mechanical rhetoric, and brand-centric phrasing while preserving voice. Avoid em dashes in newly authored default copy; retain locked text or explicit voice exceptions. Preserve requested headline capitalization. Do not claim conversion lift, current SEO/platform research, or campaign sending without evidence.
+Confirm factual/offer/date/link/legal fidelity; requested channels/quantity; campaign setup completeness when required; distinct arguments; one selected framework with no second sequence stacked on it; PH extension; 4 Us on subject lines without unsupported urgency; FAB order inside grid cells; framework sequence; supported proof; exact arithmetic/counts; encoding limits; CTA-to-destination alignment; applicable link-map/build-note/QA sections; and correct table-only contracts. Remove filler, empty hype, mechanical rhetoric, and brand-centric phrasing while preserving voice. Avoid em dashes in newly authored default copy; retain locked text or explicit voice exceptions. Preserve requested headline capitalization. Do not claim conversion lift, current SEO/platform research, or campaign sending without evidence.
