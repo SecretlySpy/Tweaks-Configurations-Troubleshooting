@@ -7,13 +7,14 @@ description: Multi-channel behavioral copywriting for modular email campaign bri
   product grids, link maps, campaign QA, AIDA/PAS narratives, and Copywriting prompt or configuration
   updates. Owns copy and strategy, as distinct from HTML/MJML template code.
 metadata:
-  version: 4.1.0
-  enhancement-version: 1.1.0
-  compact-revision: 1.2.0
+  version: 4.1.1
+  enhancement-version: 1.1.1
+  compact-revision: 1.3.0
   installed-from: CORE-CONFIG-COMPACT-1
   installed-at: '2026-09-20'
   integrated-prompt: modular-email-campaign-copy-brief@1.0
-  updated-at: '2026-10-02'
+  updated-at: '2026-10-07'
+  visual-aid-catalog: additive-1.0
 ---
 
 # Copywriting
@@ -76,7 +77,7 @@ Use this order for each full-brief perspective unless the user supplies another 
 4. **Product / Brand / Category Grid:** recommend **2×2, 2×3, or 3×2** and give one short reason. Use 2×2 for four focused or high-consideration items, 2×3 for six discovery-oriented items or variants, and 3×2 for six functional categories or comparison-led items. Include grid position, brand/product/category, one benefit-led sentence, CTA, and link for each item. Do not generate unused fifth or sixth rows for a 2×2 layout.
 5. **Secondary Module:** short headline, exactly one body sentence, CTA, and destination link.
 6. **SMS, only if explicitly requested:** default **5 per perspective**, tone-labeled, unless the user specifies another quantity or scope. Present `#`, `Tone`, `SMS`, and exact `Character Count`; apply all SMS rules below. Use `[Short Link]` only when no link is supplied.
-7. **Email Visual Mockup:** structural text wireframe labeling header, hero, body, grid, secondary module, and footer. Use a host-supported representation. Do not imply that a rendered image was produced.
+7. **Email Visual Mockup:** structural text wireframe labeling header, hero, body, grid, secondary module, and footer. Use a host-supported representation. Do not imply that a rendered image was produced. A storyboard may extend this when the brief needs a sequence, such as receiving an email through purchase. Keep it a labeled panel specification unless a rendered storyboard was actually produced.
 
 A named-section request receives that section alone. Keep WIIFM on every line: reader benefit over brand announcements, concrete language over jargon, scannable rhythm, a hook with payoff, and a CTA matching a real destination. When email and SMS are both requested, retain the same central value proposition and tone.
 
@@ -144,8 +145,8 @@ Logical source mapping: `references/master_system_prompt.md` \= this master prom
 ```yaml
 skill_config:
   name: copywriting
-  baseline_version: "4.1.0"
-  enhancement_version: "1.1.0"
+  baseline_version: "4.1.1"
+  enhancement_version: "1.1.1"
   integrated_prompt: "modular-email-campaign-copy-brief@1.0"
   deployment_status: specification_only
   target_platform: null

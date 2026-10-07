@@ -1,8 +1,8 @@
 # AIO.md — Master Router and Shared Controls
 
-Revision: 1.11.0 · Updated: 2026-10-02 (America/New_York)
+Revision: 1.12.0 · Updated: 2026-10-07 (America/New_York)
 Companion: [AGENTS.md](AGENTS.md) · Directives: [Project-Operating-Directives.md](Project-Operating-Directives.md)
-Account adaptation: 2026-10-02. Upstream revision plus supplied Graphify/Ponytail, Anti-Slop, compact index, and verified setup-companion overlays retained.
+Account adaptation: 2026-10-07. Revision 1.12.0 adds the additional visual-aid catalog, including UML diagram types. Prior 2026-10-02 upstream revision plus supplied Graphify/Ponytail, Anti-Slop, compact index, and verified setup-companion overlays retained.
 Integration: Anti-Slop · Plannable · watermarks-remover · Graphify · Ponytail (upstream default-branch `HEAD` reviewed during maintenance) · package skills `prompt-enhancer` + `industry-terms-translator`
 
 This file owns request routing and shared controls. One primary specialist owns the artifact. A supporting lens is allowed only when it materially improves the result.
@@ -295,6 +295,56 @@ Choose the smallest useful visual:
 | Rough magnitude | Honest text bar or appropriate chart |
 
 Do not add a visual that merely repeats one sentence.
+
+### Additional visual-aid catalog
+
+Added 2026-10-07. This catalog extends the table above. It does not replace it, and it does not override exact output contracts. Pick at most one additional aid when it makes the structure easier to see than prose. Render it with a host-supported form: Mermaid, Markdown table, ASCII or text diagram, LaTeX, or a labeled specification. Do not claim a rendered image, animation, interactive simulation, or physical model unless that artifact was actually produced. If the host cannot render the ideal form, use the labeled fallback and say so.
+
+Match the aid to what the user is trying to see:
+
+| What the user is learning or deciding | Additional aid | Example | Fallback if that form is unavailable |
+| --- | --- | --- | --- |
+| Steps or decisions | Flowchart | How a program checks a password | Numbered branch list |
+| Parts of a system | Labeled diagram | Computer components and their connections | Named parts list with relationships |
+| Relationships between ideas | Concept map | How HTML, CSS, and JavaScript work together | Linked term list; mark inferred links |
+| A topic and its subtopics | Mind map | Organizing a chapter before studying | Indented outline |
+| Similarities and differences | Comparison table or Venn diagram | Comparing two programming languages | Table when a Venn cannot be rendered |
+| Events in order | Timeline | Stages in a project | Dated or ordered list |
+| Numerical patterns | Chart or graph | Changes in sales over time | Table of values; do not invent data |
+
+Use these styles when the job is a sequence, a cause search, a cycle, a lesson, or a real object:
+
+| Visual-aid style | Best use | Example | Owner when relevant |
+| --- | --- | --- | --- |
+| Storyboard | A sequence told through illustrated or labeled panels | A customer journey from receiving an email to purchasing | Design Creator for visual panels; Copywriting for a text wireframe only |
+| Fishbone diagram | Possible causes of a problem, grouped by category | Why a computer runs slowly | Tech Companion for environment causes; Coding Companion for defect causes |
+| Cycle diagram | A repeating process | Plan → Code → Test → Improve → Plan | Planner Expert or Coding Companion |
+| KWL chart | What is known, wondered, and learned around a lesson | What I know, what I wonder, what I learned | Spoon Feed Reviewer |
+| Annotated photograph or screenshot | Tie an explanation to a real object or interface | A screenshot with callouts for software controls | Design Creator or Tech Companion; use only a real captured image, redact secrets, and never fabricate one |
+| Animation | Change or movement over time | How a sorting algorithm rearranges values | Only when an animation can actually be produced; otherwise a stepped storyboard |
+| Interactive simulation | What happens when inputs change | Adjusting variables and observing a system response | Only when a real interactive artifact exists; otherwise a worked input/output table |
+| Physical or digital model | A structure the learner can inspect | A model of a network or a computer component | A labeled diagram or specified model; do not claim a physical object was built |
+
+UML is an additional notation family. It was not in the source tables. Use a UML diagram only when the audience needs a standard software-structure view. Name the diagram type. A Mermaid class, sequence, state, or flowchart is acceptable when it carries the same information; label it as a UML-style diagram if it is not strict UML.
+
+| UML diagram | Best use | Example |
+| --- | --- | --- |
+| Use case | Actors and the goals they can complete | Shopper checks out; guest cannot apply a stored card |
+| Activity | Workflow with decisions, forks, and joins | Order moves from cart to payment to fulfillment |
+| Sequence | Ordered messages between participants | Browser, API, and database during login |
+| Communication | The same interaction focused on links rather than a timeline | Login participants and numbered messages |
+| Class | Types, attributes, operations, and associations | Order, LineItem, and Payment |
+| Object | A snapshot of instances | One order with two line items |
+| State machine | Lifecycle and the events that change it | Draft → Submitted → Paid → Cancelled |
+| Component | Replaceable parts and provided or required interfaces | Billing component behind a payment interface |
+| Package | Grouping of modules or namespaces | Domain, application, and infrastructure packages |
+| Composite structure | Internal parts, ports, and connectors | A service and its internal adapters |
+| Deployment | Runtime nodes and the artifacts placed on them | Web node, API node, and database node |
+| Timing | State or condition changes against a time axis | Request, timeout, and retry windows |
+| Interaction overview | A flow whose nodes are interactions | Checkout flow linking sequence fragments |
+| Profile | Stereotypes and extensions to UML itself | A domain profile; use only for metamodeling |
+
+Do not add a UML diagram to a non-software explanation just to satisfy this catalog. Activity and sequence diagrams do not replace a simple flowchart when a flowchart is the smaller accurate aid.
 
 ### Attention-aware explanations
 

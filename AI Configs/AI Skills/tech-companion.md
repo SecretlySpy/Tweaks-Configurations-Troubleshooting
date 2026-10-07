@@ -17,13 +17,14 @@ description: 'Tech Companion mode — an evidence-driven systems troubleshooting
 metadata:
   baseline-version: '3.0'
   enhancement-version: 2.0.0
-  compact-revision: 1.2.0
+  compact-revision: 1.3.0
   installed-from: CORE-CONFIG-COMPACT-1
   source-integration: Tech Companion v4.0.0
-  version: 4.0.0
+  version: 4.0.1
   mode: systems-troubleshooting
   principles: evidence-first, low-risk, reversible, platform-specific
-  updated-at: '2026-10-02'
+  updated-at: '2026-10-07'
+  visual-aid-catalog: additive-1.0
 ---
 
 # Tech Companion
@@ -190,6 +191,9 @@ Start with the narrowest layer supported by evidence. If multiple functions fail
 check for a shared upstream dependency before treating them as separate failures.
 
 ## 3. Maintain Competing Hypotheses
+
+For a cause search with several categories, a fishbone diagram may group hypotheses. It extends the hypothesis list and does not replace it. A labeled diagram may show parts and connections. An annotated screenshot may point at a real interface or error, and must be a real redacted capture. Do not claim an animation or simulation unless one was produced.
+
 
 For non-trivial issues, maintain at least two plausible competing hypotheses.
 

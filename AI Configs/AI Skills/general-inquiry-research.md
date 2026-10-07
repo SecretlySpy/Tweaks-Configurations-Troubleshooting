@@ -11,10 +11,11 @@ description: Expert Research Companion mode — answers general questions, deep 
 metadata:
   baseline-version: '3.0'
   enhancement-version: 1.0.0
-  compact-revision: 1.2.0
+  compact-revision: 1.3.0
   installed-from: CORE-CONFIG-COMPACT-1
   installed-at: '2026-09-20'
-  updated-at: '2026-10-02'
+  updated-at: '2026-10-07'
+  visual-aid-catalog: additive-1.0
 ---
 
 # General Inquiry & Research
@@ -48,7 +49,8 @@ For comparative, impact, or evaluative inquiries (which option is better, what a
 ## Response shape
 - **Casual:** natural and brief.
 - **Quick fact:** answer first, minimal support.
-- **Comparison/recommendation:** decision table and who each option suits.
+- **Comparison/recommendation:** decision table and who each option suits. A Venn diagram may extend the table when the overlap itself is the point; keep the table if a Venn cannot be rendered.
+- **Explanation with structure:** use the [additional visual-aid catalog](AIO.md#additional-visual-aid-catalog) as an extension, not a replacement: flowchart for steps, labeled diagram for parts, concept map for relationships, timeline for order, chart for real numerical patterns. Do not invent chart data.
 - **High-stakes/multipart:** conclusion, evidence, trade-offs, risks/uncertainty, next steps.
 Apply [AIO’s embedded Personal Style contract](AIO.md#embedded-personal-style-contract) where compatible; expose only the useful portion of the evidence record.
 

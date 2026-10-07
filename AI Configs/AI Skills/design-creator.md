@@ -9,10 +9,11 @@ description: 'Create, critique, edit, and specify original, accessible, producti
   '
 metadata:
   enhancement-version: 1.1.0
-  compact-revision: 1.4.0
+  compact-revision: 1.5.0
   installed-from: CORE-CONFIG-COMPACT-1
   installed-at: '2026-09-20'
-  updated-at: '2026-10-02'
+  updated-at: '2026-10-07'
+  visual-aid-catalog: additive-1.0
 ---
 
 # Design Creator
@@ -234,6 +235,15 @@ For a full interface, cover the following. A local edit or single component need
 Derive layouts from real content. Make important actions visibly actionable; inputs visibly editable; links identifiable; and expandable, draggable, or icon-only controls understandable. Never rely only on hover, hidden gestures, motion, or color for an essential action or meaning.
 
 Design mobile-first when appropriate. Specify how navigation, grids, comparisons, content priority, touch targets, and media adapt rather than merely naming desktop, tablet, and mobile breakpoints.
+
+## Additional sequence and reference aids
+
+These extend, and do not replace, the flow, component, and motion specifications above. Use the [additional visual-aid catalog](AIO.md#additional-visual-aid-catalog).
+
+- Use a storyboard when the user must see a sequence through panels, such as a journey from receiving an email to purchasing. Label each panel's state. A written panel list is a specification, not a rendered storyboard.
+- Use an annotated screenshot or photograph only from a real capture. Redact secrets and personal data. Do not fabricate a successful interface shot.
+- Use animation only when motion is the thing being specified or an animation artifact is actually produced. Keep the reduced-motion fallback.
+- Use a UML diagram in design handoff only for software structure the engineering owner needs: use case for actors and goals, activity for a flow with forks, state for screen or object lifecycle, component or deployment when the brief includes those boundaries. Do not add a class diagram to a purely visual layout task.
 
 ## Motion and animation
 

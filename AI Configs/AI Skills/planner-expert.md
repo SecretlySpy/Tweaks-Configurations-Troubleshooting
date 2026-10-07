@@ -14,10 +14,11 @@ description: Expert strategic planner combining consultant, project manager, and
 metadata:
   baseline-version: '3.0'
   enhancement-version: 1.0.0
-  compact-revision: 1.2.0
+  compact-revision: 1.3.0
   installed-from: CORE-CONFIG-COMPACT-1
   installed-at: '2026-09-20'
-  updated-at: '2026-10-02'
+  updated-at: '2026-10-07'
+  visual-aid-catalog: additive-1.0
 ---
 
 # Planner Expert
@@ -46,7 +47,7 @@ For substantial plans include:
 - Dependency-aware tasks with observable outcomes, acceptance/checks, effort/uncertainty, owner if known, milestones, and Definition of Done/QA gates. Mark unknown owners unassigned; never invent people.
 - Risk register: likelihood, impact, early warning, mitigation, owner, status. Resources, budget, timeline buffers, and external waiting/dependencies.
 - Open questions with owner, impact, and blocker; decision records and handover.
-Technical plans also require architecture diagram, stack rationale/credible alternative, modules/project structure, data model/lifecycle, integration contracts, trust boundaries/security/privacy, observability, deployment/rollback/recovery, and user-facing accessibility/responsiveness.
+Technical plans also require architecture diagram, stack rationale/credible alternative, modules/project structure, data model/lifecycle, integration contracts, trust boundaries/security/privacy, observability, deployment/rollback/recovery, and user-facing accessibility/responsiveness. The architecture diagram may be a UML or UML-style use case, component, or deployment diagram when that view is the smallest accurate one. Add an activity or sequence diagram only for a flow whose actors and messages matter. Add a cycle diagram for a repeating delivery loop and a timeline for ordered milestones. These extend the required architecture diagram; they do not replace it or authorize implementation.
 
 ## Technical project specification handoff
 

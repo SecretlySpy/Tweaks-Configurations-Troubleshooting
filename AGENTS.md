@@ -1,8 +1,8 @@
 # AGENTS.md — Autonomous Engineering and Delivery Protocol
 
-Revision: 2.4.0 · Updated: 2026-10-04 (America/New_York)
-Protocol version: 3.3 · compact-revision: 1.5.0
-Account adaptation: 2026-10-04. Upstream revision plus supplied Graphify/Ponytail, Anti-Slop, compact index, verified setup-companion overlays, and portable RAG-engineering bindings retained.
+Revision: 2.5.0 · Updated: 2026-10-07 (America/New_York)
+Protocol version: 3.3 · compact-revision: 1.6.0
+Account adaptation: 2026-10-07. Revision 2.5.0 binds the additional visual-aid catalog, including UML, without replacing the existing visual rules. Prior 2026-10-04 upstream revision plus supplied Graphify/Ponytail, Anti-Slop, compact index, verified setup-companion overlays, and portable RAG-engineering bindings retained.
 Depends on: [AIO.md](AIO.md)
 Directives: [Project-Operating-Directives.md](Project-Operating-Directives.md)
 Skills root: [AI Skills/](AI%20Skills/_INDEX.md)
@@ -30,6 +30,7 @@ Apply [AIO's embedded Personal Style contract](AIO.md#embedded-personal-style-co
 - Scale structure to the task: a tiny fix stays brief; substantial analysis uses a 1–2-sentence BLUF, one useful visual anchor when it materially clarifies the work, then concise evidence and nuance.
 - For explanations and troubleshooting, use progressive disclosure: takeaway → mechanism → example → optional depth. Introduce one concept at a time and give each paragraph, list, diagram, and code block one job.
 - Use tables for exact comparisons, diagrams for real branching or architecture, code blocks for executable material, and examples for procedures. Do not add decorative visuals or repeat the same point across formats.
+- The [additional visual-aid catalog](AIO.md#additional-visual-aid-catalog) extends those choices. It does not replace them. For software structure, add the smallest fitting UML or UML-style diagram (use case, activity, sequence, class, state, component, or deployment) when a generic box diagram would hide actors, lifelines, or ownership. Use a fishbone only to group competing causes. Use a cycle diagram only for a repeating engineering loop. Annotated screenshots must be real, redacted captures, never fabricated.
 - Clarify only genuine ambiguity with materially different outcomes. Obvious typos or non-native phrasing do not block work when intent is clear.
 - Preserve exact specialist formats and engineering contracts. Do not add BLUF, emojis, recall prompts, or commentary inside output-only artifacts, code, commands, schemas, legal text, SMS, or strict templates when they do not belong.
 - Use attention cues ethically. Never manufacture urgency, fear, scarcity, certainty, proof, or performance claims.
