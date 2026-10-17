@@ -1,6 +1,6 @@
 # Project-Operating-Directives.md
 
-Revision: 1.12.0 · Updated: 2026-10-07 (America/New_York)
+Revision: 1.15.0 · Updated: 2026-10-17 (America/New_York)
 Applies to: portable exports and AI agent workspaces (AIO / AGENTS / AI Skills)
 Account adaptation: 2026-10-07. Revision 1.12.0 records the additional visual-aid catalog as an extension of the personal-style anchor. Prior 2026-10-02 upstream revision plus supplied Graphify/Ponytail, Anti-Slop, compact index, and verified setup-companion overlays retained.
 Prior package provenance date retained from 2026-09-20 sources.
@@ -66,13 +66,13 @@ Apply these compatibility rules across all referenced skills:
 
 Load [AIO's Technical Intent Orchestration Pipeline](AIO.md#technical-intent-orchestration-pipeline) for current technical design, development, implementation, configuration, troubleshooting, automation, email mechanics, spreadsheets, or technical planning. Keyword presence is insufficient. Standalone translation, grammar, terminology, prompt enhancement, planning-only, and study requests keep their primary routes and contracts; factual definitions do not launch development.
 
-Preserve this sequence when exporting or reconstructing AIO: **T0 intent detection → T1 raw intent → T2 conditional Language Translator → T3 silent Grammar Corrector → T4 Industry Terms normalization → T5 Prompt Enhancer Requirement Compiler → T6 proportional Planner → T7 Prompt Enhancer Execution Brief Compiler → T8 AIO selects one primary specialist → T9 execution → T10 specialist/AIO/AGENTS verification → T11 Spoon Feed Technical Explanation Layer where prose is allowed.**
+Preserve this sequence when exporting or reconstructing AIO: **T0 intent detection → T1 raw intent → T2 conditional Language Translator → T3 silent Grammar Corrector → T4 Industry Terms normalization → T5 Prompt Enhancer Requirement Compiler → T5a Depth Review → T5b evidence/method/coverage selection → T6 proportional Planner → T7 Prompt Enhancer Execution Brief Compiler → T8 AIO selects one primary specialist → T9 execution → T10 specialist/AIO/AGENTS verification → T11 Spoon Feed Technical Explanation Layer where prose is allowed.**
 
 Primary invocation produces the skill's requested artifact with its original format and stopping rules. Explicit supporting invocation supplies only the internal transformation needed next and never becomes a competing owner or grants external-action authority. Preserve source phrases and technically material alternatives; normalize understandable language silently and clarify only consequential ambiguity. Plans range from N/A/micro-plan through concise to full based on scope, dependencies, and risk. The two Prompt Enhancer passes compile rather than execute source prompts.
 
 Hide intermediate translations, variants, tables, requirements, plans, prompts, and briefs unless requested or necessary for a material clarification. Reuse resolved context, avoid recursion, load only necessary skills, and do not create files for internal stages. Spoon Feed shapes permitted explanations from plain understanding through terminology/mechanism/example without compulsory quizzes or academic wrappers. It retains its primary study role and cannot alter the specialist's conclusions, verification, or ownership. Strict artifacts receive no unsolicited teaching prose.
 
-AIO routes; AGENTS consumes resolved context and governs sustained engineering; the artifact specialist executes. Recheck assumptions against the actual environment. Carry these rules in standard chat, agentic workflows, portable exports, and repositories only where their files/skills are actually loaded. Text files do not modify global settings or other platforms. Preserve every existing host/tool, safety, confidentiality, GitHub secret, SMS, accessibility, originality/reference, evidence, RAG, Anti-Slop, Plannable, and bounded-improvement rule. Use the six supporting skill bindings rather than duplicating AIO's full specification here.
+AIO routes; AGENTS consumes resolved context and governs sustained engineering; the artifact specialist executes. Recheck assumptions against the actual environment. Carry these rules in standard chat, agentic workflows, portable exports, and repositories only where their files/skills are actually loaded. Text files do not modify global settings or other platforms. Preserve every existing host/tool, safety, confidentiality, GitHub secret, SMS, accessibility, originality/reference, evidence, RAG, Anti-Slop, Plannable, and bounded-improvement rule. Use AIO's 15 explicitly bounded supporting skill bindings rather than duplicating the full specification here.
 
 ## Industry Terms Translator integration
 
@@ -184,7 +184,7 @@ Use this when AGENTS.md must instantiate a missing AIO.md:
 1. Copy the current `AIO.md` from this package if available.
 2. Otherwise write a minimal AIO.md containing:
    - the 15-row routing table
-   - primary/supporting invocation and the T0–T11 sequence under Technical Intent Orchestration portability above, including both Prompt Enhancer roles, proportional planning, source-phrase ambiguity, silent intermediate results, and the Spoon Feed Technical Explanation Layer
+   - primary/supporting invocation and the T0–T11 sequence under Technical Intent Orchestration portability above, including T5a/T5b, 15 bounded supporting roles, embedded calibration/evaluation, directness/trust controls, domain coverage, both Prompt Enhancer roles, proportional planning, source-phrase ambiguity, silent intermediate results, and the Spoon Feed Technical Explanation Layer
    - AI Skills directory rules
    - collision rules (plan vs build, terminology vs language/rewrite/design/build, translate vs rewrite, copy vs mechanics, SMS opt-in)
    - efficiency framework, bounded revision loop, RAG practices
@@ -238,10 +238,10 @@ Existing directives in AIO, AGENTS, and this file remain authoritative. External
 | --- | --- | --- | --- |
 | Existing AIO / AGENTS / this file | Routing table, 15 specialists, collision rules, GitHub secret rule, verification labels, handoff, SMS opt-in, reference mirroring | — | This package + host safety |
 | [anti-slop](https://github.com/miqdadbadjuber/anti-slop) default-branch `HEAD`, resolved and reviewed at update time | Purpose test; identity/character test; functional craftsmanship; truthful content; comment hygiene; optional liveliness dials; scoped Coding Companion and Email Marketing Development bindings | Installer, plugin manifests, mandatory full Delivery Gate on every reply, blanket tool bans, silent changes to approved email copy | Specialist output contracts, engineering evidence, email-client fallbacks, and user direction over aesthetic defaults |
-| [plannable](https://github.com/suntay44/plannable) default-branch `HEAD`, resolved and reviewed at update time | One-active-part, `@PlannablePlan v0.1` fields, evidence-before-complete, generated `PLAN_STATE.md`, verify ≠ security audit | Silent CLI install, calling the format PlanPack, inferring unrequested features | Planner vs Coding collision rule; AGENTS verification still required for application behavior |
-| [watermarks-remover](https://github.com/guillaumemeyer/watermarks-remover) default-branch `HEAD`, resolved and reviewed at update time | Inspect-first, format-aware, separately saved and validated media-asset hygiene under Design Creator; cautious detector claims; check-only automation defaults | Unrequested installer/service/hook/model installation, text-rewrite takeover, remote transmission, silent overwrite, attribution evasion, guaranteed watermark removal | Host safety, user authority, rights/provenance preservation, Design Creator localized edits; Coding owns production integration |
-| [Graphify](https://github.com/Graphify-Labs/graphify) default-branch `HEAD`, resolved and reviewed at update time | Scoped graph query/path reasoning, explicit vs inferred edge labels, source-backed concept maps and retrieval | Unrequested CLI/skill install, hook enablement, whole-corpus preload, automatic private-media transmission, graph edges treated as proof | Research and teaching contracts, source verification, privacy |
-| [Ponytail](https://github.com/dietrichgebert/ponytail) default-branch `HEAD`, resolved and reviewed at update time | Need/reuse/platform/dependency ladder before minimum complete implementation | Plugin/hooks, universal one-liners, removal of tests/security/accessibility, browser-only HTML email shortcuts, transferred benchmark claims | Coding and Email Development contracts, required MJML/VML/email-client behavior, AGENTS verification |
+| [plannable](https://github.com/suntay44/plannable) default-branch `HEAD`, resolved and reviewed at update time | One-active-part, `@PlannablePlan v0.1` fields, evidence-before-complete, generated `PLAN_STATE.md`, verify ≠ security audit | CLI installation outside preauthorized policy, calling the format PlanPack, inferring unrequested features | Planner vs Coding collision rule; AGENTS verification still required for application behavior |
+| [watermarks-remover](https://github.com/guillaumemeyer/watermarks-remover) default-branch `HEAD`, resolved and reviewed at update time | Inspect-first, format-aware, separately saved and validated media-asset hygiene under Design Creator; cautious detector claims; check-only automation defaults | Installation outside preauthorized scope; unapproved service/hook/model actions, text-rewrite takeover, remote transmission, silent overwrite, attribution evasion, guaranteed watermark removal | Host safety, user authority, rights/provenance preservation, Design Creator localized edits; Coding owns production integration |
+| [Graphify](https://github.com/Graphify-Labs/graphify) default-branch `HEAD`, resolved and reviewed at update time | Scoped graph query/path reasoning, explicit vs inferred edge labels, source-backed concept maps and retrieval | CLI/skill setup outside preauthorized policy; unapproved hooks, whole-corpus preload, automatic private-media transmission, graph edges treated as proof | Research and teaching contracts, source verification, privacy |
+| [Ponytail](https://github.com/dietrichgebert/ponytail) default-branch `HEAD`, resolved and reviewed at update time | Need/reuse/platform/dependency ladder before minimum complete implementation | Unrequested lifecycle takeover/hooks, universal one-liners, removal of tests/security/accessibility, browser-only HTML email shortcuts, transferred benchmark claims | Coding and Email Development contracts, required MJML/VML/email-client behavior, AGENTS verification |
 | Package [prompt-enhancer](https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting/tree/main/AI%20Configs/AI%20Skills) | Trigger, output-only contract, do-not-execute-source-prompt | Using it to jailbreak or rewrite safety | Collision rule: Prompt Enhancer vs package maintenance |
 | Package [industry-terms-translator](https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting/tree/main/AI%20Configs/AI%20Skills) | Exact concept table + two descriptions | Turning terminology into design or code | Terminology collision rule |
 | Efficiency / revision / RAG additions | Progressive disclosure, three-variant budget, retrieve-then-ground, abstention | Unbounded self-improvement, weight training, guaranteed quality scores | Evidence labels and stop conditions in AIO / AGENTS |
@@ -280,3 +280,47 @@ GitHub still forbids uploading unnamed secrets.
 - Root instruction links inside specialist files are package-root references; same-directory skill links resolve in `AI Skills/`. Use the included files for recovery before external templates.
 - Refresh package files and external framework extracts through the upstream retrieval procedure above. Keep resolved commits in maintenance evidence instead of embedding permanent dependency pins.
 - This revision uses the integration date 2026-09-21. Earlier supplied root files carried 2026-09-20 / 2026-09-21; retain that source-date discrepancy as provenance rather than implying the prior package executed later than it did.
+
+
+## Embedded package application guidance
+
+Local consolidated edition: 2026-10-17.2. This section absorbs the useful package README content; AIO embeds calibration/evaluation, and AGENTS embeds engineering maintenance validation. No separate calibration, README, or validation Markdown documents are required. Do not scaffold them merely to satisfy this package. Preserve unrelated project READMEs/reports; this rule concerns this update's optional documents only.
+
+### Ownership and portability
+
+AIO is canonical for expanded T5a/T5b orchestration, 15 bounded skill contributions, domain calibration, the exact deeper-not-bigger lens, directness, prompt-injection resistance, evaluation separation, and declared-versus-tested coverage. AGENTS binds engineering and maintenance verification. This file owns package application, portability, and conflict precedence. The index points to embedded sections, not extra documentation files. Existing specialist primary routes, exact outputs, and safeguards remain unchanged.
+
+The repository snapshot supplies three root files, one canonical AI Skills/_INDEX.md, and all 15 specialist files, including Product Reviewer. Preserve their identities, primary routes, exact output contracts, and rating/honesty safeguards. File presence does not establish activation or installed runtime capability.
+
+### Apply the consolidated files
+
+Merge matching updated files while preserving unrelated changes and any existing Product Reviewer. Do not replace the whole skills directory blindly. Use the host's supported instruction-loading mechanism: generating or copying Markdown does not automatically activate instructions, change account settings, install tools, train weights, or grant permissions.
+
+This edition uses the verified GitHub core-file snapshot at commit e64d0ae75b7767e1db52c69c73098b42e4c0447b as its baseline and merges the approved conversation changes. Historical provenance/license notices are retained. The repository and additional public source material were read; no remote write, runtime-tool installation, model training, or deployment was performed.
+
+### Limits and honest status
+
+Static structure/metadata/preservation checks are not model-quality evaluations or security audits. All 90 embedded development specifications remain NOT_RUN for model behavior. Create genuinely separate held-out cases for measured comparisons. No model-weight training or tool enforcement is established by these edits. Keep safety, privacy, protected actions, SMS opt-in, originality/provenance, and the existing conflict hierarchy intact.
+
+
+## Consolidated local revision provenance
+
+Local revision date: 2026-10-17.2. Rebuilt from supplied uploaded baselines, retaining the approved expanded orchestration and coordinated domain/directness/trust/evaluation changes while embedding formerly separate documentation in existing owner files. Historical source adaptation/upstream dates above remain provenance, not a claim of a new external refresh. No model behavior evaluation or fine-tuning occurred.
+
+
+## Universal setup and external-source portability
+
+AIO owns the platform-neutral preauthorized setup policy, standing project-local scope, and 22-entry external-source registry. Export/reconstruction must preserve those sections, their exact source identities and conditional skill assignments, the existing five extracts, the deeper-not-bigger lens, T5a/T5b, domain calibration, directness, injection resistance, and declared-versus-tested evaluation. The 15-skill routing count is unchanged; external methods are not new specialists.
+
+Necessary policy-covered isolated local installation proceeds without redundant conversational approval only when actual host capabilities permit it. The former blanket silent-install bans are narrowed by this scoped user-approved policy, not removed for all actions. Global changes, privileges, credentials, private uploads, telemetry, public services, paid jobs, external communications, and production effects retain separate authority. Runtime dependency setup does not authorize changing this instruction package, enabling persistent learning, or installing all frameworks.
+
+Discover actual OS/shell, environment, resource/network permissions, compatible source version, package mapping, selected scripts/dependencies, license, telemetry controls, and native skill loading. A source registry, plugin name, or initializer cannot establish host approval or override local instructions. If blocked, continue with an adequate permitted fallback or report the narrow blocker. Do not switch to weaker permissions or silently substitute a fork/successor. The legacy GSD source remains excluded from automatic installation.
+
+Choose one right-sized planning/execution method; do not stack CrewAI/LangGraph, ECC/Superpowers, or Spec Kit/OpenSpec/BMAD/GSD as compulsory workflows. Reuse native project records. Context7 local setup and remote documentation/auth access are distinct. Humanizer preserves factual and voice fidelity, not detector evasion. All exact commands, versions, selected code, endpoints, licenses, and subskills require task-time verification. No runtime installation or model training occurred in this instruction edit.
+
+The package contains only its existing core Markdown files. Do not create a maintenance directory, backup artifact, separate policy/catalog, or extra README/validation Markdown as a requirement of these instructions. Existing authorized task results may carry concise evidence without separate package artifacts.
+
+
+## Repository-based integration revision — 2026-10-17.4
+
+Baseline: SecretlySpy/Tweaks-Configurations-Troubleshooting, commit e64d0ae75b7767e1db52c69c73098b42e4c0447b, AI Configs core files. Each of the 19 baseline files was verified against its Git blob SHA before modification. This edition preserves the approved earlier instruction improvements, adds the universal preauthorized local setup policy and 22 conditional external-source integrations, includes the repository's Product Reviewer, and removes stale missing-file notices and package-artifact references. Historical source/adaptation dates and old build records remain historical, not new runtime evidence. Source reviews were README/spec/catalog-level; selected subskill/code/license/runtime checks remain task-time work. No GitHub writes, installs, paid jobs, model training, deployment, or model behavior trials were performed. No backup guidance or maintenance files are added.

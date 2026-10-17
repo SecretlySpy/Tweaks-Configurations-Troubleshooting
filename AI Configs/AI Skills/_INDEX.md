@@ -1,6 +1,6 @@
 # AI Skills Index
 
-Account revision: 1.1.1 · Updated: 2026-10-17 (America/New_York)
+Account revision: 1.3.0 · Updated: 2026-10-17 (America/New_York)
 > **Purpose:** Compact directory for the `AI Skills/` folder. This index maps each specialist filename to its primary responsibility so the router can locate the correct detailed contract without loading the entire package.
 >
 > **Routing:** `AIO.md` owns task routing. Use the selected specialist file for its exact workflow and output contract. `AGENTS.md` governs sustained engineering delivery for codebase work; it is a root delivery protocol, not a numbered specialist. `Project-Operating-Directives.md` governs package-wide routing continuity, recovery, conflict resolution, and handoff.
@@ -87,10 +87,20 @@ Inspect every downloaded file before activation. Validate the 15 specialist file
 
 Read the existing root files selectively:
 
-- [AIO: Technical Intent Orchestration Pipeline](../AIO.md#technical-intent-orchestration-pipeline) — T5a/T5b, the deeper-not-bigger review, 14 bounded contributors, and coverage checks.
+- [AIO: Technical Intent Orchestration Pipeline](../AIO.md#technical-intent-orchestration-pipeline) — T5a/T5b, the deeper-not-bigger review, 15 bounded contributors, and coverage checks.
 - [AIO: Domain calibration, directness, and trust boundaries](../AIO.md#domain-calibration-directness-and-trust-boundaries) — quality, user-intent fidelity, injection resistance, and training limits.
-- [AIO: Embedded calibration and evaluation](../AIO.md#embedded-calibration-and-evaluation) — six development classes × 14 domain examples, evaluation protocol, and NOT_RUN status.
-- [Directives: Embedded package application and rollback guidance](../Project-Operating-Directives.md#embedded-package-application-and-rollback-guidance) — apply/rollback, distribution limits, and portability.
+- [AIO: Embedded calibration and evaluation](../AIO.md#embedded-calibration-and-evaluation) — six development classes × 15 domain examples, evaluation protocol, and NOT_RUN status.
+- [Directives: Embedded package application guidance](../Project-Operating-Directives.md#embedded-package-application-guidance) — package application, distribution limits, and portability.
 - [AGENTS: Calibrated engineering lenses and embedded maintenance validation](../AGENTS.md#calibrated-engineering-lenses-and-embedded-maintenance-validation) — engineering binding, maintenance checks, and the build record.
 
-Each supplied specialist embeds its Domain calibration and bounded support section. These are references to existing files, not additional skills. No separate calibration, README, or validation Markdown file is required. Product Reviewer remains referenced but was not supplied or invented; preserve an existing legitimate copy if present. The 15-row routing table is unchanged. No model trial, training job, security guarantee, or installation is implied.
+Each supplied specialist embeds its Domain calibration and bounded support section. These are references to existing files, not additional skills. No separate calibration, README, or validation Markdown file is required. Product Reviewer is present in the repository snapshot; preserve its rating checkpoint and evidence/firsthand-experience boundaries. The 15-row routing table is unchanged. No model trial, training job, security guarantee, or installation is implied.
+
+
+## Portable setup and expanded external-source discovery
+
+- [AIO: Preauthorized tool installation and execution](../AIO.md#preauthorized-tool-installation-and-execution) — capability-based environment adaptation and bounded standing local setup scope.
+- [AIO: External source registry and conditional operating extracts](../AIO.md#external-source-registry-and-conditional-operating-extracts) — all 22 additional source mappings, triggers, methods, and exclusions.
+- [Directives: Universal setup and external-source portability](../Project-Operating-Directives.md#universal-setup-and-external-source-portability) — conflict, scope, source, and host compatibility reconciliation.
+- [AGENTS: Portable installation and engineering extract reconciliation](../AGENTS.md#portable-installation-and-engineering-extract-reconciliation) — implementation-specific execution and evidence boundaries.
+
+All 15 specialist files, including Product Reviewer, are present in this repository-based core package. The original directory/routing table remains unchanged. Native setup does not occur merely by loading these files. No separate policy/calibration/report Markdown, maintenance folder, backup artifact, or added specialist is required. Select references progressively; do not preload all upstream catalogs.
