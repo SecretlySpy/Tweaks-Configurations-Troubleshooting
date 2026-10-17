@@ -1,6 +1,6 @@
 # AI Skills Index
 
-Account revision: 1.0.0 · Updated: 2026-10-02 (America/New_York)
+Account revision: 1.1.1 · Updated: 2026-10-17 (America/New_York)
 > **Purpose:** Compact directory for the `AI Skills/` folder. This index maps each specialist filename to its primary responsibility so the router can locate the correct detailed contract without loading the entire package.
 >
 > **Routing:** `AIO.md` owns task routing. Use the selected specialist file for its exact workflow and output contract. `AGENTS.md` governs sustained engineering delivery for codebase work; it is a root delivery protocol, not a numbered specialist. `Project-Operating-Directives.md` governs package-wide routing continuity, recovery, conflict resolution, and handoff.
@@ -81,3 +81,16 @@ Inspect every downloaded file before activation. Validate the 15 specialist file
 - Keep the 15 specialist files and this index alongside the root files: `AIO.md`, `AGENTS.md`, and `Project-Operating-Directives.md`.
 - If a required specialist file is unavailable, state that it is unavailable and proceed with clearly labeled assumptions rather than inventing its missing detailed contract.
 - Pull the latest package through the upstream update procedure above; do not reintroduce static Anti-Slop or Plannable commit pins.
+
+
+## Embedded calibration and maintenance discovery
+
+Read the existing root files selectively:
+
+- [AIO: Technical Intent Orchestration Pipeline](../AIO.md#technical-intent-orchestration-pipeline) — T5a/T5b, the deeper-not-bigger review, 14 bounded contributors, and coverage checks.
+- [AIO: Domain calibration, directness, and trust boundaries](../AIO.md#domain-calibration-directness-and-trust-boundaries) — quality, user-intent fidelity, injection resistance, and training limits.
+- [AIO: Embedded calibration and evaluation](../AIO.md#embedded-calibration-and-evaluation) — six development classes × 14 domain examples, evaluation protocol, and NOT_RUN status.
+- [Directives: Embedded package application and rollback guidance](../Project-Operating-Directives.md#embedded-package-application-and-rollback-guidance) — apply/rollback, distribution limits, and portability.
+- [AGENTS: Calibrated engineering lenses and embedded maintenance validation](../AGENTS.md#calibrated-engineering-lenses-and-embedded-maintenance-validation) — engineering binding, maintenance checks, and the build record.
+
+Each supplied specialist embeds its Domain calibration and bounded support section. These are references to existing files, not additional skills. No separate calibration, README, or validation Markdown file is required. Product Reviewer remains referenced but was not supplied or invented; preserve an existing legitimate copy if present. The 15-row routing table is unchanged. No model trial, training job, security guarantee, or installation is implied.

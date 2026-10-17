@@ -1,6 +1,6 @@
 # Project-Operating-Directives.md
 
-Revision: 1.12.0 · Updated: 2026-10-07 (America/New_York)
+Revision: 1.13.2 · Updated: 2026-10-17 (America/New_York)
 Applies to: portable exports and AI agent workspaces (AIO / AGENTS / AI Skills)
 Account adaptation: 2026-10-07. Revision 1.12.0 records the additional visual-aid catalog as an extension of the personal-style anchor. Prior 2026-10-02 upstream revision plus supplied Graphify/Ponytail, Anti-Slop, compact index, and verified setup-companion overlays retained.
 Prior package provenance date retained from 2026-09-20 sources.
@@ -66,13 +66,13 @@ Apply these compatibility rules across all referenced skills:
 
 Load [AIO's Technical Intent Orchestration Pipeline](AIO.md#technical-intent-orchestration-pipeline) for current technical design, development, implementation, configuration, troubleshooting, automation, email mechanics, spreadsheets, or technical planning. Keyword presence is insufficient. Standalone translation, grammar, terminology, prompt enhancement, planning-only, and study requests keep their primary routes and contracts; factual definitions do not launch development.
 
-Preserve this sequence when exporting or reconstructing AIO: **T0 intent detection → T1 raw intent → T2 conditional Language Translator → T3 silent Grammar Corrector → T4 Industry Terms normalization → T5 Prompt Enhancer Requirement Compiler → T6 proportional Planner → T7 Prompt Enhancer Execution Brief Compiler → T8 AIO selects one primary specialist → T9 execution → T10 specialist/AIO/AGENTS verification → T11 Spoon Feed Technical Explanation Layer where prose is allowed.**
+Preserve this sequence when exporting or reconstructing AIO: **T0 intent detection → T1 raw intent → T2 conditional Language Translator → T3 silent Grammar Corrector → T4 Industry Terms normalization → T5 Prompt Enhancer Requirement Compiler → T5a Depth Review → T5b evidence/method/coverage selection → T6 proportional Planner → T7 Prompt Enhancer Execution Brief Compiler → T8 AIO selects one primary specialist → T9 execution → T10 specialist/AIO/AGENTS verification → T11 Spoon Feed Technical Explanation Layer where prose is allowed.**
 
 Primary invocation produces the skill's requested artifact with its original format and stopping rules. Explicit supporting invocation supplies only the internal transformation needed next and never becomes a competing owner or grants external-action authority. Preserve source phrases and technically material alternatives; normalize understandable language silently and clarify only consequential ambiguity. Plans range from N/A/micro-plan through concise to full based on scope, dependencies, and risk. The two Prompt Enhancer passes compile rather than execute source prompts.
 
 Hide intermediate translations, variants, tables, requirements, plans, prompts, and briefs unless requested or necessary for a material clarification. Reuse resolved context, avoid recursion, load only necessary skills, and do not create files for internal stages. Spoon Feed shapes permitted explanations from plain understanding through terminology/mechanism/example without compulsory quizzes or academic wrappers. It retains its primary study role and cannot alter the specialist's conclusions, verification, or ownership. Strict artifacts receive no unsolicited teaching prose.
 
-AIO routes; AGENTS consumes resolved context and governs sustained engineering; the artifact specialist executes. Recheck assumptions against the actual environment. Carry these rules in standard chat, agentic workflows, portable exports, and repositories only where their files/skills are actually loaded. Text files do not modify global settings or other platforms. Preserve every existing host/tool, safety, confidentiality, GitHub secret, SMS, accessibility, originality/reference, evidence, RAG, Anti-Slop, Plannable, and bounded-improvement rule. Use the six supporting skill bindings rather than duplicating AIO's full specification here.
+AIO routes; AGENTS consumes resolved context and governs sustained engineering; the artifact specialist executes. Recheck assumptions against the actual environment. Carry these rules in standard chat, agentic workflows, portable exports, and repositories only where their files/skills are actually loaded. Text files do not modify global settings or other platforms. Preserve every existing host/tool, safety, confidentiality, GitHub secret, SMS, accessibility, originality/reference, evidence, RAG, Anti-Slop, Plannable, and bounded-improvement rule. Use AIO's 14 explicitly bounded supporting skill bindings rather than duplicating the full specification here.
 
 ## Industry Terms Translator integration
 
@@ -184,7 +184,7 @@ Use this when AGENTS.md must instantiate a missing AIO.md:
 1. Copy the current `AIO.md` from this package if available.
 2. Otherwise write a minimal AIO.md containing:
    - the 15-row routing table
-   - primary/supporting invocation and the T0–T11 sequence under Technical Intent Orchestration portability above, including both Prompt Enhancer roles, proportional planning, source-phrase ambiguity, silent intermediate results, and the Spoon Feed Technical Explanation Layer
+   - primary/supporting invocation and the T0–T11 sequence under Technical Intent Orchestration portability above, including T5a/T5b, 14 bounded supporting roles, embedded calibration/evaluation, directness/trust controls, domain coverage, both Prompt Enhancer roles, proportional planning, source-phrase ambiguity, silent intermediate results, and the Spoon Feed Technical Explanation Layer
    - AI Skills directory rules
    - collision rules (plan vs build, terminology vs language/rewrite/design/build, translate vs rewrite, copy vs mechanics, SMS opt-in)
    - efficiency framework, bounded revision loop, RAG practices
@@ -280,3 +280,31 @@ GitHub still forbids uploading unnamed secrets.
 - Root instruction links inside specialist files are package-root references; same-directory skill links resolve in `AI Skills/`. Use the included files for recovery before external templates.
 - Refresh package files and external framework extracts through the upstream retrieval procedure above. Keep resolved commits in maintenance evidence instead of embedding permanent dependency pins.
 - This revision uses the integration date 2026-09-21. Earlier supplied root files carried 2026-09-20 / 2026-09-21; retain that source-date discrepancy as provenance rather than implying the prior package executed later than it did.
+
+
+<a id="embedded-package-application-and-rollback-guidance"></a>
+
+## Embedded package application guidance
+
+Local consolidated edition: 2026-10-17.2. This section absorbs the useful package README content; AIO embeds calibration/evaluation, and AGENTS embeds engineering maintenance validation. No separate calibration, README, or validation Markdown documents are required. Do not scaffold them merely to satisfy this package. Preserve unrelated project READMEs/reports; this rule concerns this update's optional documents only.
+
+### Ownership and portability
+
+AIO is canonical for expanded T5a/T5b orchestration, 14 bounded skill contributions, domain calibration, the exact deeper-not-bigger lens, directness, prompt-injection resistance, evaluation separation, and declared-versus-tested coverage. AGENTS binds engineering and maintenance verification. This file owns package application, portability, and conflict precedence. The index points to embedded sections, not extra documentation files. Existing specialist primary routes, exact outputs, and safeguards remain unchanged.
+
+The supplied package has three root files, one skill index, and 14 specialist files. Its original routing table references 15 specialists, but product-reviewer.md was not supplied. Do not invent its contents, fetch it silently, or claim the bundle is a complete 15-skill installation. Preserve the user's legitimate existing Product Reviewer file if present; otherwise report that route unavailable under the existing recovery rules. The uploaded INDEX.md is packaged as AI Skills/_INDEX.md to match existing canonical references.
+
+### Apply the consolidated files
+
+Merge matching updated files while preserving unrelated changes and any existing Product Reviewer. Do not replace the whole skills directory blindly. Use the host's supported instruction-loading mechanism: generating or copying Markdown does not automatically activate instructions, change account settings, install tools, train weights, or grant permissions.
+
+This archive is a consolidated replacement distribution, rebuilt from the supplied attachment baselines plus the approved changes; it is not a byte-for-byte edit of an earlier generated archive. Prior provenance/license notices are retained. No network refresh, remote write, model training, or deployment was performed.
+
+### Limits and honest status
+
+Static structure/metadata/preservation checks are not model-quality evaluations or security audits. All 84 embedded development specifications remain NOT_RUN for model behavior. Create genuinely separate held-out cases for measured comparisons. No model-weight training or tool enforcement is established by these edits. Keep safety, privacy, protected actions, SMS opt-in, originality/provenance, and the existing conflict hierarchy intact.
+
+
+## Consolidated local revision provenance
+
+Local revision date: 2026-10-17.2. Rebuilt from supplied uploaded baselines, retaining the approved expanded orchestration and coordinated domain/directness/trust/evaluation changes while embedding formerly separate documentation in existing owner files. Historical source adaptation/upstream dates above remain provenance, not a claim of a new external refresh. No model behavior evaluation or fine-tuning occurred.
