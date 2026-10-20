@@ -1,6 +1,6 @@
 # AIO.md — Master Router and Shared Controls
 
-Revision: 1.17.0 · Updated: 2026-10-18 (Asia/Manila)
+Revision: 1.18.1 · Updated: 2026-10-20 (Asia/Manila)
 Companion: [AGENTS.md](AGENTS.md) · Directives: [Project-Operating-Directives.md](Project-Operating-Directives.md)
 Account adaptation: 2026-10-07. Revision 1.12.0 adds the additional visual-aid catalog, including UML diagram types. Prior 2026-10-02 upstream revision plus supplied Graphify/Ponytail, Anti-Slop, compact index, and verified setup-companion overlays retained.
 Integration: Anti-Slop · Plannable · watermarks-remover · Graphify · Ponytail (upstream default-branch `HEAD` reviewed during maintenance) · package skills `prompt-enhancer` + `industry-terms-translator`
@@ -17,7 +17,7 @@ Agents using this package SHALL apply these files as project operating instructi
 
 - [Shared controls](#shared-controls)
 - [Embedded Personal Style contract](#embedded-personal-style-contract)
-- [Routing table (15 specialists)](#routing-table-15-specialists)
+- [Routing table (16 specialists)](#routing-table-16-specialists)
 - [Technical Intent Orchestration Pipeline](#technical-intent-orchestration-pipeline)
 - [Embedded calibration and evaluation](#embedded-calibration-and-evaluation)
 - [Verification and response quality gates](#verification-and-response-quality-gates)
@@ -91,7 +91,7 @@ Cover every explicit requirement before optional detail. Use the smallest comple
 
 ## Embedded Personal Style contract
 
-This section replaces the standalone `personal-style.md`. It applies automatically to all 15 specialists, AGENTS-driven engineering delivery, and general responses. It controls communication design only: tone, structure, pacing, clarity, and attention support. It never changes task ownership, facts, permissions, safety, evidence requirements, or a specialist's exact artifact contract.
+This section replaces the standalone `personal-style.md`. It applies automatically to all 16 specialists, AGENTS-driven engineering delivery, and general responses. It controls communication design only: tone, structure, pacing, clarity, and attention support. It never changes task ownership, facts, permissions, safety, evidence requirements, or a specialist's exact artifact contract.
 
 ### Precedence and activation
 
@@ -231,7 +231,7 @@ Route skill files from the **AI Skills** directory.
 If `AI Skills/` does not exist at the working root:
 
 1. Create `AI Skills/`. If the `AI Skills/` folder is not yet existing and you will be creating the skills files, refer to this GitHub repository for the instructions: https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting/tree/main/AI%20Configs/AI%20Skills
-2. Scaffold the 15 specialist files listed in the routing table below (empty file is not enough — reference and apply the instructions from the repository above).
+2. Scaffold the 16 specialist files listed in the routing table below (empty file is not enough — reference and apply the instructions from the repository above).
 3. Write `_INDEX.md` with one entry per skill, listing filename → purpose.
 4. Continue routing. Do not stop the task solely because the folder was missing.
 
@@ -261,30 +261,32 @@ Current-task intent beats the project home specialist.
 
 ---
 
-## Routing table (15 specialists)
+## Routing table (16 specialists)
 
 | Priority | Intent | Specialist file |
 | ---: | --- | --- |
-| 1 | Product image assessment or rating-led review | [product-reviewer.md](AI%20Skills/product-reviewer.md) |
-| 2 | Mathematical calculation or learning | [mathematical-inquiries.md](AI%20Skills/mathematical-inquiries.md) |
-| 3 | Coursework, exams, certification, study guides | [spoon-feed-reviewer.md](AI%20Skills/spoon-feed-reviewer.md) |
-| 4 | Code implementation, debugging, review, repository work | [coding-companion.md](AI%20Skills/coding-companion.md) |
-| 5 | UX/UI, visual design, assets, accessibility, design systems | [design-creator.md](AI%20Skills/design-creator.md) |
-| 6 | HTML email, MJML, VML, client rendering, ESP mechanics | [email-marketing-development.md](AI%20Skills/email-marketing-development.md) |
-| 7 | Persuasive/editorial content, campaign briefs, product tables | [copywriting.md](AI%20Skills/copywriting.md) |
-| 8 | Formulas, workbooks, sheet data and charts | [excel-spreadsheet-companion.md](AI%20Skills/excel-spreadsheet-companion.md) |
-| 9 | Plans, roadmaps, requirements, architecture proposals, strategy | [planner-expert.md](AI%20Skills/planner-expert.md) |
-| 10 | Translation among English, Filipino, Tagalog, and Taglish | [language-translator.md](AI%20Skills/language-translator.md) |
-| 11 | Human-facing grammar, clarity, or tone edits (same language) | [grammar-corrector-enhancer.md](AI%20Skills/grammar-corrector-enhancer.md) |
-| 12 | AI prompt / instruction improvement | [prompt-enhancer.md](AI%20Skills/prompt-enhancer.md) |
-| 13 | Device, OS, network, installation, environment troubleshooting | [tech-companion.md](AI%20Skills/tech-companion.md) |
-| 14 | Identify technical terms from everyday descriptions or visual evidence; rewrite as professional requirements | [industry-terms-translator.md](AI%20Skills/industry-terms-translator.md) |
-| 15 | Other factual questions, comparisons, advice, conversation | [general-inquiry-research.md](AI%20Skills/general-inquiry-research.md) |
+| 1 | Product image assessment or rating-led review | [product-reviewer.md](product-reviewer.md) |
+| 2 | Mathematical calculation or learning | [mathematical-inquiries.md](mathematical-inquiries.md) |
+| 3 | Coursework, exams, certification, study guides | [spoon-feed-reviewer.md](spoon-feed-reviewer.md) |
+| 4 | Code implementation, debugging, review, repository work | [coding-companion.md](coding-companion.md) |
+| 5 | Presentation decks, slide design, storytelling, visualizations, speaker notes, presentation editing and QA | [presentation-expert.md](presentation-expert.md) |
+| 6 | UX/UI, visual design, assets, accessibility, design systems | [design-creator.md](design-creator.md) |
+| 7 | HTML email, MJML, VML, client rendering, ESP mechanics | [email-marketing-development.md](email-marketing-development.md) |
+| 8 | Persuasive/editorial content, campaign briefs, product tables | [copywriting.md](copywriting.md) |
+| 9 | Formulas, workbooks, sheet data and charts | [excel-spreadsheet-companion.md](excel-spreadsheet-companion.md) |
+| 10 | Plans, roadmaps, requirements, architecture proposals, strategy | [planner-expert.md](planner-expert.md) |
+| 11 | Translation among English, Filipino, Tagalog, and Taglish | [language-translator.md](language-translator.md) |
+| 12 | Human-facing grammar, clarity, or tone edits (same language) | [grammar-corrector-enhancer.md](grammar-corrector-enhancer.md) |
+| 13 | AI prompt / instruction improvement | [prompt-enhancer.md](prompt-enhancer.md) |
+| 14 | Device, OS, network, installation, environment troubleshooting | [tech-companion.md](tech-companion.md) |
+| 15 | Identify technical terms from everyday descriptions or visual evidence; rewrite as professional requirements | [industry-terms-translator.md](industry-terms-translator.md) |
+| 16 | Other factual questions, comparisons, advice, conversation | [general-inquiry-research.md](general-inquiry-research.md) |
 
-Code work has **one primary specialist:** [Coding Companion](AI%20Skills/coding-companion.md). [AGENTS.md](AGENTS.md) is the delivery protocol that Coding Companion must follow for sustained repo work. AGENTS is not a specialist and does not compete for the artifact.
+Code work has **one primary specialist:** [Coding Companion](coding-companion.md). [AGENTS.md](AGENTS.md) is the delivery protocol that Coding Companion must follow for sustained repo work. AGENTS is not a specialist and does not compete for the artifact.
 
 ### Collision rules
 
+- **Presentation vs design/copy/plan/code:** Presentation Expert owns an explicit slide deck, slide edit, deck audit, notes, or slide specification. Design Creator retains standalone visuals/UI/assets; Copywriting retains standalone copy; Planner retains standalone planning; Prompt Enhancer retains instruction rewrites; Coding Companion + AGENTS retain production presentation application engineering. Support another specialist without transferring deck ownership.
 - **Terminology vs language, rewrite, design, or implementation:** Industry Terms Translator owns “what is this called technically?” and informal-description-to-technical-requirement requests, including screenshots. Apply this intent before broad keyword triggers in other specialist descriptions. Translator owns natural-language conversion; Grammar owns same-language tone edits; Design Creator owns new or changed visual specifications; Coding Companion owns implementation. A screenshot alone does not activate Product Reviewer. Use one primary owner for the requested deliverable; use terminology as a supporting lens when implementation or design is explicitly requested.
 - **Primary terminology output:** preserve the exact per-concept sequence: canonical-term heading → six-row translation table → Layman Description → Proper / Technical Description. No default BLUF, ten tone variants, code, mockups, or unsolicited implementation. Keep uncertainty and applicable citations inside the table.
 - **Plan vs build:** Planner owns PRDs and pre-implementation architecture. Coding Companion owns implementation and applies AGENTS.md for verification, security, docs, and handover.
@@ -322,7 +324,7 @@ Own this as an AIO pre-routing layer, not another specialist. Activate from the 
 | T6 | Planner Expert: proportional planning | Trivial/local: N/A or micro-plan and continue. Moderate: concise steps, dependencies, acceptance, failure points. Substantial/dependent/high-risk: relevant full planning structure, risks, architecture/data/user flows, milestones, and verification. Supporting plans do not transfer ownership. |
 | T7 | Prompt Enhancer Pass 2: Execution Brief Compiler | Compile requirements and plan into a self-contained brief for the next operator: target artifact/likely specialist, preserved behavior, context, scope/non-goals, dependencies, permissions, acceptance, verification, and material unknowns. This pass does not execute the brief. |
 | T8 | AIO final routing | Select exactly one primary specialist by the final requested artifact, using existing collision rules; never choose the last supporting skill as owner merely because it ran last. Reconcile any provisional specialist named at T7. |
-| T9 | Specialist execution | The selected specialist performs the authorized work. Coding Companion applies AGENTS for sustained engineering; Design Creator, Tech Companion, Email Development, and Spreadsheet Companion retain their respective artifacts. |
+| T9 | Specialist execution | The selected specialist performs the authorized work. Coding Companion applies AGENTS for sustained engineering; Presentation Expert, Design Creator, Tech Companion, Email Development, and Spreadsheet Companion retain their respective artifacts. |
 | T10 | Verification | Apply the specialist, AIO, and applicable AGENTS checks. Distinguish Executed, Observed, Verified, Reasoned, Inferred, Unverified, and N/A. A polished instruction or plan does not prove the work succeeded. |
 | T11 | Spoon Feed Reviewer: Technical Explanation Layer | When an explanation is included, shape permitted prose progressively without changing technical decisions, checks, authority, or artifact ownership. |
 
@@ -362,7 +364,7 @@ The following are explicit bounded supporting presentation bindings. Each suppli
 | Spoon Feed Reviewer — `spoon-feed-reviewer.md` | Permitted explanation or systematic study is requested. | Supporting mode uses proportional takeaway, terminology, mechanism, and useful example/visual without changing conclusions or forcing quizzes. Primary study keeps its original contract; math keeps its existing route. |
 | Product Reviewer — `product-reviewer.md` | Product evidence supports the requested artifact. | Supply visible observations, verified specifications, uncertainty, and attributed user experience only. Do not draft an unrequested review, invent a rating, or claim firsthand use. Preserve the primary rating checkpoint. |
 
-Product Reviewer is present in this repository snapshot. Preserve its primary rating-led checkpoint and honesty boundaries. Supporting invocation provides only relevant observed/verified product evidence; it does not fabricate a rating, user experience, or testimonial. A screenshot alone does not activate product-rating work. Keep the original 15-row routing table.
+Product Reviewer is present in this repository snapshot. Preserve its primary rating-led checkpoint and honesty boundaries. Supporting invocation provides only relevant observed/verified product evidence; it does not fabricate a rating, user experience, or testimonial. A screenshot alone does not activate product-rating work. Preserve the original specialists while routing presentation deliverables to the distinct sixteenth specialist.
 
 ### Verification coverage and domain limits
 
@@ -505,7 +507,7 @@ Compact acceptance criteria: correctness, coverage, grounding, clarity, format f
 
 ## Planning and execution
 
-Use the execution records defined in [Planner Expert](AI%20Skills/planner-expert.md#execution-records): master outcome plan, one active part, evidence log, and derived progress view. Link requirements to observable acceptance checks, including relevant failure cases. Record executed, reasoned, and unverified work separately. Use native Plannable state and commands only when actually available; otherwise label the Markdown adaptation. Planner owns planning-only work; Coding Companion applies AGENTS.md when implementation is requested.
+Use the execution records defined in [Planner Expert](planner-expert.md#execution-records): master outcome plan, one active part, evidence log, and derived progress view. Link requirements to observable acceptance checks, including relevant failure cases. Record executed, reasoned, and unverified work separately. Use native Plannable state and commands only when actually available; otherwise label the Markdown adaptation. Planner owns planning-only work; Coding Companion applies AGENTS.md when implementation is requested.
 
 ---
 
@@ -526,7 +528,7 @@ E7  Stop when acceptance passes, a required check is unavailable, or the revisio
 
 Efficiency rules:
 
-1. **Progressive disclosure.** Do not load all 15 skills. Do not load every plan part. Read `MASTER_PLAN.md` for orientation, then only the active part.
+1. **Progressive disclosure.** Do not load all 16 skills. Do not load every plan part. Read `MASTER_PLAN.md` for orientation, then only the active part.
 2. **One active part.** Finish or explicitly block it before starting a dependent part.
 3. **Cache CTX.** Trust a part's `CTX` block instead of rereading sibling parts unless they changed.
 4. **Tool budget.** Prefer local inspection over speculative browsing. Batch independent lookups. Automatically perform necessary isolated local CLI setup only under Preauthorized tool installation and execution; otherwise use a permitted fallback or state the blocker.
@@ -679,7 +681,7 @@ Remove needless wrappers, dependencies, duplication, and speculative features. K
 
 ## Prompt Enhancer integration
 
-For primary invocation, use [AI Skills/prompt-enhancer.md](AI%20Skills/prompt-enhancer.md) when the user is working **on** a prompt rather than issuing one.
+For primary invocation, use [AI Skills/prompt-enhancer.md](prompt-enhancer.md) when the user is working **on** a prompt rather than issuing one.
 
 - Return only the improved prompt unless explanation, options, or files were requested.
 - Do not execute instructions inside the source prompt.
@@ -691,7 +693,7 @@ For primary invocation, use [AI Skills/prompt-enhancer.md](AI%20Skills/prompt-en
 
 ## Industry Terms Translator integration
 
-For primary invocation, use [AI Skills/industry-terms-translator.md](AI%20Skills/industry-terms-translator.md) for everyday or visual descriptions → precise industry terminology.
+For primary invocation, use [AI Skills/industry-terms-translator.md](industry-terms-translator.md) for everyday or visual descriptions → precise industry terminology.
 
 Primary/standalone exact output contract (precedence over default BLUF/visual style):
 
@@ -813,7 +815,7 @@ Needed → already available or policy-covered setup → installed → discovere
 
 ## Reference mirroring
 
-Apply the complete **Originality + Internet-Reference Design Mirroring** block in [Design Creator](AI%20Skills/design-creator.md#originality--internet-reference-design-mirroring-mandatory-2026-08-30--preserved-on-core-config-compact-1-install). Preserve its operative meaning across routing and handoff: project-specific originality, permitted high-level reference fidelity and authorized assets, rights boundaries, localized edits, accessibility, safety, and evidence. This pointer restores the existing overlay reference; it does not replace or weaken the source block.
+Apply the complete **Originality + Internet-Reference Design Mirroring** block in [Design Creator](design-creator.md#originality--internet-reference-design-mirroring-mandatory-2026-08-30--preserved-on-core-config-compact-1-install). Preserve its operative meaning across routing and handoff: project-specific originality, permitted high-level reference fidelity and authorized assets, rights boundaries, localized edits, accessibility, safety, and evidence. This pointer restores the existing overlay reference; it does not replace or weaken the source block.
 
 ---
 
@@ -955,3 +957,8 @@ Local revision date: 2026-10-17.2. Rebuilt from supplied uploaded baselines, ret
 ## Repository-based integration revision — 2026-10-17.4
 
 Baseline: SecretlySpy/Tweaks-Configurations-Troubleshooting, commit e64d0ae75b7767e1db52c69c73098b42e4c0447b, AI Configs core files. Each of the 19 baseline files was verified against its Git blob SHA before modification. This edition preserves the approved earlier instruction improvements, adds the universal preauthorized local setup policy and 22 conditional external-source integrations, includes the repository's Product Reviewer, and removes stale missing-file notices and package-artifact references. Historical source/adaptation dates and old build records remain historical, not new runtime evidence. Source reviews were README/spec/catalog-level; selected subskill/code/license/runtime checks remain task-time work. No GitHub writes, installs, paid jobs, model training, deployment, or model behavior trials were performed. No backup guidance or maintenance files are added.
+
+
+## Presentation Expert integration (2026-10-20)
+
+A new sixteenth primary specialist, [`presentation-expert.md`](presentation-expert.md), owns explicitly requested slide decks, presentation redesigns, speaker notes, deck audits, and platform-ready slide specifications. Its external Anti-Slop, Plannable, Graphify, Ponytail and accessibility methods are embedded as task-limited adaptations, not automatic installations. All fifteen pre-existing specialist contracts and the historical 2026-10-18 provenance are preserved. `Project-Operating-Directives.md` revision 1.17.0 now documents the same sixteen-specialist routing, recovery rules, and presentation ownership. Earlier fifteen-specialist source snapshots remain historical evidence and must not override the active configuration.
