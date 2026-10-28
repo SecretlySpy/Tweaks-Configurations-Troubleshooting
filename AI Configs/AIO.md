@@ -1,6 +1,6 @@
 # AIO.md — Master Router and Shared Controls
 
-Revision: 1.18.1 · Updated: 2026-10-20 (Asia/Manila)
+Revision: 1.18.2 · Updated: 2026-10-28 (Europe/London)
 Companion: [AGENTS.md](AGENTS.md) · Directives: [Project-Operating-Directives.md](Project-Operating-Directives.md)
 Account adaptation: 2026-10-07. Revision 1.12.0 adds the additional visual-aid catalog, including UML diagram types. Prior 2026-10-02 upstream revision plus supplied Graphify/Ponytail, Anti-Slop, compact index, and verified setup-companion overlays retained.
 Integration: Anti-Slop · Plannable · watermarks-remover · Graphify · Ponytail (upstream default-branch `HEAD` reviewed during maintenance) · package skills `prompt-enhancer` + `industry-terms-translator`
@@ -19,6 +19,7 @@ Agents using this package SHALL apply these files as project operating instructi
 - [Embedded Personal Style contract](#embedded-personal-style-contract)
 - [Routing table (16 specialists)](#routing-table-16-specialists)
 - [Technical Intent Orchestration Pipeline](#technical-intent-orchestration-pipeline)
+- [Grounded design routing](#grounded-design-routing)
 - [Embedded calibration and evaluation](#embedded-calibration-and-evaluation)
 - [Verification and response quality gates](#verification-and-response-quality-gates)
 - [Preauthorized tool installation and execution](#preauthorized-tool-installation-and-execution)
@@ -81,6 +82,7 @@ Evidence order: **(1)** direct inspection, executed tests, runtime observations;
 | Observed | Directly inspected or measured |
 | Verified | Confirmed by an authoritative source or reproducible check |
 | Inferred | Reasoned conclusion with remaining uncertainty |
+| Proposed | New recommendation or creative option; not an approved requirement or completed change |
 | Estimated | Approximation with stated inputs/method |
 | User-supplied | Provided by the user, not independently verified |
 | Unknown | Cannot responsibly determine |
@@ -283,6 +285,12 @@ Current-task intent beats the project home specialist.
 | 16 | Other factual questions, comparisons, advice, conversation | [general-inquiry-research.md](general-inquiry-research.md) |
 
 Code work has **one primary specialist:** [Coding Companion](coding-companion.md). [AGENTS.md](AGENTS.md) is the delivery protocol that Coding Companion must follow for sustained repo work. AGENTS is not a specialist and does not compete for the artifact.
+
+### Grounded design routing
+
+Use Design Creator's [Universal AI Design Engineering Protocol](design-creator.md#universal-ai-design-engineering-protocol) for AI-assisted visual design, redesign, design systems, design audits, and design-to-development handoff, regardless of model or design tool. Treat it as a proposed operating method, not a new specialist, a required application, or a claim of formal industry standardization. Inspect accessible sources, define a proportionate brief and acceptance checks, ground decisions in the existing system, design, and validate the actual output. Label material statements as Verified/Observed, User-supplied, Inferred, Proposed, or Unknown under [Evidence and accuracy](#evidence-and-accuracy); never turn a proposal into a discovered requirement. Apply only medium-relevant principles and checks.
+
+Preserve the current artifact owner: Design Creator owns standalone design and visual assets; Coding Companion + AGENTS own production code; Presentation Expert owns decks; Email Development owns email mechanics. Supporting design review does not transfer ownership. A static image permits visual inspection, not claims about editability, component structure, interactions, accessibility conformance, or runtime behavior. No new project documentation, provider integration, installation, or approval ceremony is required merely to apply this method.
 
 ### Collision rules
 

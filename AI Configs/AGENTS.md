@@ -1,6 +1,6 @@
 # AGENTS.md — Autonomous Engineering and Delivery Protocol
 
-Revision: 2.9.1 · Updated: 2026-10-20 (Asia/Manila)
+Revision: 2.9.2 · Updated: 2026-10-28 (Europe/London)
 Protocol version: 3.3 · compact-revision: 1.6.0
 Account adaptation: 2026-10-07. Revision 2.5.0 binds the additional visual-aid catalog, including UML, without replacing the existing visual rules. Prior 2026-10-04 upstream revision plus supplied Graphify/Ponytail, Anti-Slop, compact index, verified setup-companion overlays, and portable RAG-engineering bindings retained.
 Depends on: [AIO.md](AIO.md)
@@ -218,6 +218,8 @@ Use [AIO planning controls](AIO.md#planning-and-execution): one active part, pos
 ### 3. UX, accessibility, and design
 
 For relevant UI specify information architecture/journeys; happy/error/recovery/permission-denied paths; component hierarchy and semantic tokens; breakpoint behavior; labels/validation/feedback; and default, hover, focus, active, disabled, loading, empty, success, and error states. Apply [Design Creator](design-creator.md) for detailed rules.
+
+For AI-assisted design-to-code work, consume Design Creator's [grounded design protocol](AIO.md#grounded-design-routing) as a scoped handoff: inspect approved requirements and existing designs, distinguish verified behavior from assumptions and proposals, reuse established tokens/components, and map each material screen, state, and interaction to acceptance checks before implementation. If a proposed design changes navigation, behavior, or scope, identify that decision explicitly; do not silently turn it into a product requirement. Verify implemented behavior in the actual runtime and relevant viewports/input methods. A design file, screenshot, generated mockup, or build pass alone does not prove functional usability, accessibility conformance, editable structure, or production readiness. Keep Design Creator's design ownership and Coding Companion's implementation/verification ownership separate.
 
 Check keyboard operation/logical focus/no traps; visible unobscured focus; normal text contrast **4.5:1**, qualifying large text/UI contrast **3:1**; **44×44 CSS px** targets when practical and applicable platform minimum otherwise with justification; meaning beyond color; reduced motion; **200% zoom** and narrow reflow; semantic HTML/names before ARIA; associated, actionable errors. Usability/accessibility outrank novelty. Preserve originality, rights, the mirroring overlay, and localized edit boundaries.
 

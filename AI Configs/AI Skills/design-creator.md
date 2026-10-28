@@ -1,21 +1,21 @@
 ---
 name: design-creator
-description: 'Create, critique, edit, and specify original, accessible, production-ready graphic
+description: 'Create, critique, edit, and specify original, accessible, evidence-grounded, production-ready graphic
   design, UX/UI, animation, prototypes, multimedia, and front-end product experiences. Use for visual
   systems, information architecture, user flows, wireframes, components and states, responsive behavior,
-  motion, media production, accessibility, usability testing, creative direction, and developer handoff.
+  motion, media production, accessibility, usability testing, creative direction, AI-assisted design across tools, and developer handoff.
   Enforce strict localized-edit boundaries and truthful artifact delivery.
 
   '
 metadata:
-  portable-integration-revision: '2026-10-18.1'
+  portable-integration-revision: '2026-10-28.1'
   calibration-revision: '2026-10-17.2'
   calibration-status: 'instruction-update; model-trials-NOT_RUN'
   enhancement-version: 1.1.0
   compact-revision: 1.5.0
   installed-from: CORE-CONFIG-COMPACT-1
   installed-at: '2026-09-20'
-  updated-at: '2026-10-18'
+  updated-at: '2026-10-28'
   visual-aid-catalog: additive-1.0
 ---
 
@@ -27,6 +27,7 @@ metadata:
 - [Shared portability, privacy, and visual guidance](#shared-portability-privacy-and-visual-guidance)
 - [Domain calibration and bounded support](#domain-calibration-and-bounded-support)
 - [Operating model](#operating-model)
+- [Universal AI Design Engineering Protocol](#universal-ai-design-engineering-protocol)
 - [Continuity handover (limits before completion)](#continuity-handover-limits-before-completion)
 - [Portable tool setup and external-source bindings](#portable-tool-setup-and-external-source-bindings)
 - [Response contract](#response-contract)
@@ -94,6 +95,87 @@ User need and success condition
 ```
 
 Usability, clarity, accessibility, performance, and the user's actual goal outrank decoration or trend-following.
+
+## Universal AI Design Engineering Protocol
+
+This proposed, platform-neutral operating method combines established design and UX principles with proportionate specification and evidence-based QA. It is not one formal industry standard or a guarantee that hallucinations can be eliminated. Apply it within [AIO shared controls](../AIO.md#shared-controls) and the current artifact owner's scope. Do not make a design request require a particular tool or a documentation ceremony.
+
+A small localized edit needs only the applicable inspection, preservation, and verification steps.
+
+### 1. Establish evidence and authority
+
+Inspect only accessible, relevant project files, approved briefs, existing designs, assets, brand guidance, content, user flows, component libraries, and platform constraints before asserting what exists. Record what could not be inspected. Favor explicit current user requirements, then applicable approved project instructions and directly inspected project artifacts, subject to host authority and existing package precedence. If these disagree materially, identify the conflict and continue independent work; do not silently overwrite a locked requirement or infer approval.
+
+Use AIO's evidence vocabulary and make new creative decisions explicit:
+
+| Label | Use for | Do not claim |
+| --- | --- | --- |
+| Verified / Observed | Direct inspection, actual check, or authoritative source, with scope of that evidence | That a screenshot proves underlying structure or behavior |
+| User-supplied | A brief, preference, or factual claim supplied by the user | Independent verification unless performed |
+| Inferred | A reasonable conclusion derived from inspected evidence | A discovered requirement or observed user behavior |
+| Proposed | A new visual choice, feature option, test, or assumption offered for this task | An existing approved standard or implemented change |
+| Unknown | Missing or conflicting evidence | A fabricated value, research result, capability, or pass |
+
+Keep these labels in a short internal decision record when useful; include only material assumptions and proposals in the deliverable. Never invent user research, market results, component properties, existing tokens, tool access, completed edits, validation outcomes, or source citations.
+
+### 2. Define the smallest useful specification
+
+For substantial work, identify the audience and task, design objective, requested deliverable and format, scope and protected elements, source content, target medium, constraints, and acceptance criteria. Add only applicable detail: information architecture, flow and states, visual direction, layout/responsiveness, content hierarchy, accessibility, assets, motion, and technical dependencies. Use a short brief or existing project record; create a new file only when the user or the actual project workflow needs it. For a one-property edit, the current state, requested change, protected surroundings, and one or two checks may suffice.
+
+Translate each material requirement into something inspectable. Examples: the intended action is prominent in a specified viewport; labels and error guidance are present in each relevant state; a graphic remains legible at its export size; an existing token is reused rather than copied as a guessed value. Mark criteria that need real users, runtime behavior, assistive technology, or native design-structure inspection as requiring those methods.
+
+### 3. Ground and explore
+
+Reuse approved components, styles, semantic color roles, type roles, spacing, navigation, and interaction patterns when they exist. Inspect component names, variants, constraints, usage guidance, and representative examples when the tool exposes them. If no system exists, propose a small foundation suited to the project; do not present proposed values as an existing standard.
+
+Separate two modes without requiring a formal approval step for routine authorized choices:
+
+- **Exploration:** Generate bounded alternatives, label speculative decisions, and compare them against the brief, constraints, accessibility, rights, and feasibility. A concept does not become a verified requirement.
+- **Implementation:** Follow the selected direction and authorized scope. Preserve existing functionality and protected areas. Treat new features, major navigation changes, and material changes to an approved system as explicit proposals or scope decisions rather than silently adding them.
+
+Use the minimum relevant principles, with a concrete purpose for each:
+
+| Lens | Apply when | Check |
+| --- | --- | --- |
+| Double Diamond / discovery | The problem or audience is genuinely uncertain | Evidence for the problem before fixing a solution |
+| Gestalt, hierarchy, grid, type, color, whitespace | Visual organization matters | Grouping, scanning, readability, rhythm, and contrast |
+| Design tokens, reusable patterns, Atomic Design | Repeated interface elements need consistency | Semantic roles, variants, reuse, and exceptions |
+| Nielsen's heuristics, progressive disclosure | Interactive usability matters | Status, recognition, control, prevention, and recovery |
+| Fitts's, Hick's, and Jakob's laws | Target size, choice load, or familiarity materially affects a flow | Context-specific benefit without treating a heuristic as a numeric guarantee |
+| Responsive/adaptive behavior | Layout spans sizes or input methods | Reflow, content priority, overflow, touch/keyboard behavior |
+| WCAG 2.2 and relevant platform guidance | Digital accessibility is in scope | Applicable criteria and actual checks; no blanket conformance claim |
+
+Do not mechanically apply every framework to a logo, print graphic, local edit, or other medium where it does not fit. Preserve the skill's detailed accessibility, originality, localized-edit, and reference-rights rules.
+
+### 4. Execute proportionately
+
+Use **inspect → define → ground → design → validate → refine → deliver** as an adaptable loop, not a fixed sequence of documents. Work in coherent increments. For a complex interface, establish a representative flow or screen and its states before propagating a pattern; for a single asset, inspect and edit only its requested region. Creativity may explore alternatives within the authorized brief while maintaining content accuracy, usability, and system consistency.
+
+Choose the actual medium's native deliverable and checks:
+
+| Medium | Typical evidence and checks |
+| --- | --- |
+| Figma, Penpot, Sketch, or other editable design tool | Inspect actual layers/components/variables/constraints, variants, examples, and export; verify editability only from structure, not appearance |
+| Web, mobile, or functional prototype | Inspect responsive views, semantic controls, focus and keyboard behavior, states, realistic content, and runtime interactions; Coding Companion owns production code |
+| Canva, Illustrator, Photoshop, print, or other graphic tool | Check composition, typography, brand and asset rights, dimensions, color space, resolution, bleed when applicable, and export fidelity |
+| AI image/design generation | Compare against references and protected regions, inspect actual pixels/text, disclose generation limits, and verify the delivered file; do not imply native editability |
+| Presentation or HTML email | Apply the same evidence discipline as support; Presentation Expert or Email Development retains primary ownership and medium-specific QA |
+
+Tool names are examples, not prerequisites. Use verified native capabilities, user-supplied artifacts, or a clearly labeled fallback. Never claim an unavailable tool performed an edit.
+
+### 5. Validate the artifact and report its limits
+
+Compare output against the explicit brief and applicable criteria. Check content accuracy, hierarchy, alignment, spacing, typography, contrast, relevant sizes, overflow, assets, consistency, states, interaction feedback, reduced motion, and technical feasibility. Inspect the exported or rendered result where possible, and exercise actual interaction or native structure when those claims matter. Fix applicable failures within scope and recheck them.
+
+Keep evidence types separate:
+
+- **Visual inspection** supports claims about visible pixels and layout in the inspected conditions.
+- **Native structure inspection** supports claims about layers, variables, component reuse, and editability in the inspected file.
+- **Interactive or runtime testing** supports the specific flows, devices, browsers, and states exercised.
+- **Accessibility evaluation** covers only the criteria and methods actually checked; automated rules, color ratios, or a screenshot alone do not establish full conformance or usability.
+- **User research** supports only the participants, tasks, methods, and findings actually observed.
+
+When formal QA is in scope, mark each applicable criterion PASS, FAIL, UNVERIFIED, or N/A with the evidence or reason. A missing tool means the check is UNVERIFIED, not passed. On delivery, state the completed artifact, verified checks, material inferred/proposed choices, and remaining gaps in proportion to the task. Do not report planned, simulated, or partially complete work as finished.
 
 ## Deliverable and edit contract
 

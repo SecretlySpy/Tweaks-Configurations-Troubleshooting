@@ -1,6 +1,6 @@
 # Project-Operating-Directives.md
 
-Revision: 1.17.0 · Updated: 2026-10-20 (Asia/Manila)
+Revision: 1.17.1 · Updated: 2026-10-28 (Europe/London)
 Applies to: portable exports and AI agent workspaces (AIO / AGENTS / AI Skills)
 Account adaptation: 2026-10-07. Revision 1.12.0 records the additional visual-aid catalog as an extension of the personal-style anchor. Prior 2026-10-02 upstream revision plus supplied Graphify/Ponytail, Anti-Slop, compact index, and verified setup-companion overlays retained.
 Prior package provenance date retained from 2026-09-20 sources.
@@ -16,6 +16,7 @@ Prior package provenance date retained from 2026-09-20 sources.
 - [Technical Intent Orchestration portability](#technical-intent-orchestration-portability)
 - [Reconciliation of integrated sources](#reconciliation-of-integrated-sources)
 - [Presentation Expert integration and ownership](#presentation-expert-integration-and-ownership)
+- [Universal AI design protocol integration](#universal-ai-design-protocol-integration)
 - [Package maintenance and activation](#package-maintenance-and-activation)
 - [Upstream retrieval and update procedure](#upstream-retrieval-and-update-procedure)
 
@@ -224,6 +225,12 @@ If Design Creator work is interrupted by execution limits, context limits, or ra
 1. Write structured handover notes (see design-creator.md).
 2. Keep those notes until the design is verified complete.
 3. Purge handover notes only after verification. Do not delete them at the first pause.
+
+## Universal AI design protocol integration
+
+The Design Creator skill owns the detailed, platform-neutral [Universal AI Design Engineering Protocol](design-creator.md#universal-ai-design-engineering-protocol). AIO routes design intent and holds shared evidence/scope controls; AGENTS applies the design handoff to sustained production engineering; this file preserves package portability and ownership. The protocol combines proportionate specification, existing design systems, relevant design/UX/accessibility principles, controlled exploration, and output-specific QA. It is a proposed workflow, not a seventeenth specialist, a Figma requirement, or a guarantee against hallucination.
+
+On export, keep the skill's protocol reference beside its installable `SKILL.md` (or carry the equivalent content in a portable specialist file), and preserve links to the shared root instructions. Apply it across the actual tool and medium: editable design documents, UI prototypes, code, graphics, generated imagery, and other authorized visual assets. Use only relevant checks and distinguish visual inspection from structural, interactive, and runtime evidence. Existing presentation, email, code, and design ownership remains as routed above; a design method does not authorize extra features, system rewrites, external actions, or duplicate documentation trees.
 
 ---
 
