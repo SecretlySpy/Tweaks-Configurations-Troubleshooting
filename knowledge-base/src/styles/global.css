@@ -3312,3 +3312,27 @@ p {
   }
 }
 
+
+/* Keep the longer public title readable without pushing search or menu off screen. */
+.brand-lockup { min-width: 0; gap: 0.55rem; padding-inline: 0.95rem; }
+.brand-copy { min-width: 0; }
+.brand-copy strong { font-size: 1rem; white-space: nowrap; letter-spacing: -0.02em; }
+.source-toolbar { flex-wrap: wrap; justify-content: flex-start; }
+.source-toolbar > span { flex: 1 1 100%; min-width: 0; overflow-wrap: anywhere; }
+.source-original-link { color: var(--fn-accent-bright); font-weight: 650; }
+.source-original-link:hover, .source-original-link:focus-visible { text-decoration: underline; }
+.source-extraction-warning {
+  margin: 0;
+  padding: 0.5rem 0.85rem;
+  color: var(--fn-text-secondary);
+  background: var(--fn-surface-glass);
+  font-size: 0.75rem;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 64rem) {
+  .brand-lockup { gap: 0.45rem; padding-inline: 0.8rem; }
+  .brand-copy strong { font-size: 0.9rem; }
+}
+@media (max-width: 26rem) {
+  .brand-copy strong { font-size: 0.8rem; }
+}
