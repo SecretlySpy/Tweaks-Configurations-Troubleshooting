@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideDirectory from '../../components/GuideDirectory.astro';
+import { guides } from '../../lib/guide-data';
+---
+
+<BaseLayout title="All Guides" activePath="/all-guides/" wide>
+  <header class="page-header">
+    <span class="eyebrow">Complete directory</span>
+    <h1>All Guides</h1>
+    <p class="lede">Search titles, categories, keywords, and extracted technical content across every canonical article and review record.</p>
+  </header>
+  <GuideDirectory guides={guides} />
+</BaseLayout>
+

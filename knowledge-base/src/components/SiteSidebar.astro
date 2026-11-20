@@ -1,0 +1,57 @@
+---
+import { osLabels, type OperatingSystem } from '../lib/guide-data';
+import { withBase } from '../lib/routes';
+import OsIcon from './OsIcon.astro';
+
+interface Props {
+  activePath?: string;
+}
+
+const { activePath = '/' } = Astro.props;
+const osItems: OperatingSystem[] = ['windows', 'linux', 'android'];
+const isActive = (path: string) => activePath === path || (path !== '/' && activePath.startsWith(path));
+---
+
+<div class="sidebar-backdrop" data-sidebar-backdrop hidden></div>
+<aside id="site-sidebar" class="site-sidebar" aria-label="Primary navigation" data-site-sidebar>
+  <nav>
+    <a class:list={['sidebar-link', { active: isActive('/') }]} href={withBase('/')}>
+      <svg viewBox="0 0 24 24" width="19" height="19" fill="none" aria-hidden="true">
+        <path d="M4.5 10.5 12 4l7.5 6.5V20h-15v-9.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path>
+        <path d="M9.5 20v-6h5v6" stroke="currentColor" stroke-width="1.7"></path>
+      </svg>
+      <span>Overview</span>
+    </a>
+
+    <p class="sidebar-eyebrow">Collections</p>
+    {osItems.map((os) => (
+      <a class:list={['sidebar-link', { active: isActive(`/${os}/`) }]} href={withBase(`/${os}/`)}>
+        <span class="sidebar-icon"><OsIcon os={os} size={18} /></span>
+        <span>{osLabels[os]}</span>
+      </a>
+    ))}
+
+    <div class="sidebar-separator"></div>
+    <a class:list={['sidebar-link', { active: isActive('/all-guides/') }]} href={withBase('/all-guides/')}>
+      <svg viewBox="0 0 24 24" width="19" height="19" fill="none" aria-hidden="true">
+        <path d="M5 5h14v14H5zM8.5 9h7M8.5 12h7M8.5 15h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path>
+      </svg>
+      <span>All Guides</span>
+    </a>
+    <a class:list={['sidebar-link', { active: isActive('/saved/') }]} href={withBase('/saved/')}>
+      <svg viewBox="0 0 24 24" width="19" height="19" fill="none" aria-hidden="true">
+        <path d="M6.5 4.5h11v15l-5.5-3-5.5 3v-15Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path>
+      </svg>
+      <span>Saved Guides</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-status">
+    <span class="status-orb" aria-hidden="true"></span>
+    <div>
+      <strong>Local-first</strong>
+      <span>Progress stays in this browser.</span>
+    </div>
+  </div>
+</aside>
+

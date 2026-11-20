@@ -1,0 +1,3 @@
+# Keep the default English Starlight strings while registering the optional
+# translation collection explicitly for warning-free static builds.
+{}

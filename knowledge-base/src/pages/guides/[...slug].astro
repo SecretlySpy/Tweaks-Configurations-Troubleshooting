@@ -1,0 +1,382 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import {
+  categoryLabels,
+  guides,
+  osLabels,
+  referenceAuditData,
+  referenceAuditForGuide,
+  type Guide,
+} from '../../lib/guide-data';
+import { withBase } from '../../lib/routes';
+
+export function getStaticPaths() {
+  return guides.map((guide) => ({
+    params: { slug: guide.slug },
+    props: { guide },
+  }));
+}
+
+interface Props {
+  guide: Guide;
+}
+
+const { guide } = Astro.props;
+const primaryPlacement = guide.placements[0];
+const relatedGuides = guides
+  .filter((candidate) => candidate.id !== guide.id)
+  .map((candidate) => ({
+    guide: candidate,
+    score: candidate.placements.filter((candidatePlacement) => guide.placements.some(
+      (placement) => placement.os === candidatePlacement.os || placement.category === candidatePlacement.category,
+    )).length + candidate.keywords.filter((keyword) => guide.keywords.includes(keyword)).length,
+  }))
+  .filter((candidate) => candidate.score > 0)
+  .sort((left, right) => right.score - left.score)
+  .slice(0, 3)
+  .map((candidate) => candidate.guide);
+const visibleDocuments = guide.sourceDocuments.filter((document) => document.sourceText.length > 0);
+const isOperational = guide.publicStatus === 'published';
+const referenceAudit = referenceAuditForGuide(guide.id);
+---
+
+<BaseLayout title={guide.title} description={guide.summary} activePath={`/${primaryPlacement.os}/`} wide>
+  <article
+    class="article-shell"
+    data-guide-article
+    data-guide-id={guide.id}
+    data-reading-version={guide.readingVersion}
+    data-pagefind-body
+  >
+    <aside class="article-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#overview">Overview</a>
+      <a href="#compatibility">Compatibility</a>
+      {(guide.risk === 'high' || guide.risk === 'critical' || guide.annotations.length > 0) && <a href="#warnings">Warnings</a>}
+      <a href={isOperational ? '#source-instructions' : '#migration-exception'}>{isOperational ? 'Instructions' : 'Exception'}</a>
+      <a href="#sources">Sources</a>
+      {relatedGuides.length > 0 && <a href="#related">Related guides</a>}
+      <div class="progress-track" aria-hidden="true"><span data-progress-bar></span></div>
+    </aside>
+    <div class="article-main">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href={withBase('/')}>Overview</a><span aria-hidden="true">/</span>
+        <a href={withBase(`/${primaryPlacement.os}/`)}>{osLabels[primaryPlacement.os]}</a><span aria-hidden="true">/</span>
+        <a href={withBase(`/${primaryPlacement.os}/${primaryPlacement.category}/`)}>{categoryLabels[primaryPlacement.category]}</a><span aria-hidden="true">/</span>
+        <span aria-current="page">{guide.title}</span>
+      </nav>
+
+      <header class="article-header">
+        <div class="tag-row">
+          <span class={`badge badge--${guide.risk}`}>{guide.risk} risk</span>
+          <span class={`badge badge--${guide.publicStatus}`}>{guide.publicStatus.replace('-', ' ')}</span>
+          {guide.placements.map((placement) => (
+            <span class="badge">{osLabels[placement.os]} · {categoryLabels[placement.category].replace(' Guides', '')}</span>
+          ))}
+        </div>
+        <h1>{guide.title}</h1>
+        <p class="lede">{guide.summary}</p>
+        <div class="article-actions">
+          <button class="bookmark-button" type="button" aria-pressed="false" data-bookmark-button>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
+              <path d="M6.5 4.5h11v15l-5.5-3-5.5 3v-15Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path>
+            </svg>
+            <span data-bookmark-label>Save guide</span>
+          </button>
+          {isOperational && guide.guidedSteps.length > 0 && (
+            <div class="mode-switch" aria-label="Reading mode">
+              <button type="button" aria-pressed="true" data-mode="full">Full article</button>
+              <button type="button" aria-pressed="false" data-mode="guided">Guided steps</button>
+            </div>
+          )}
+        </div>
+        <div>
+          <span class="sr-only" data-progress-label>Reading progress: 0%</span>
+          <div class="progress-track" aria-hidden="true"><span data-progress-bar></span></div>
+        </div>
+      </header>
+
+      <section id="overview" class="article-section">
+        <h2>Overview</h2>
+        <p>{guide.summary}</p>
+      </section>
+
+      <section id="compatibility" class="article-section">
+        <h2>Compatibility and requirements</h2>
+        <div class="notice notice--warning">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
+            <path d="M12 4 21 20H3L12 4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path>
+            <path d="M12 9v5M12 17.2v.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+          </svg>
+          <div>
+            <h3>Review before applying</h3>
+            <p>{guide.compatibility}</p>
+            <p>FIELDNOTES preserved these instructions but did not execute operating-system changes during website QA.</p>
+          </div>
+        </div>
+      </section>
+
+      {(guide.risk === 'high' || guide.risk === 'critical' || guide.annotations.length > 0) && (
+        <section id="warnings" class="article-section">
+          <h2>Important warnings</h2>
+          <div class:list={['notice', { 'notice--danger': guide.risk === 'critical', 'notice--warning': guide.risk !== 'critical' }]}>
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"></circle>
+              <path d="M12 7.5v6M12 16.7v.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+            </svg>
+            <div>
+              <h3>{guide.risk === 'critical' ? 'Critical-change boundary' : 'High-impact procedure'}</h3>
+              <ul>
+                <li>Use an isolated or recoverable environment and confirm the target version before applying source commands.</li>
+                <li>Keep the documented recovery companion available when one exists.</li>
+                {guide.annotations.map((annotation) => <li>{annotation}</li>)}
+              </ul>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {isOperational ? (
+        <>
+          <div class="full-panel" data-reading-panel="full">
+            <section id="source-instructions" class="article-section">
+              <h2>Source-preserved instructions</h2>
+              <p>Each block below is an extracted source transcription. Copy controls preserve its characters and line breaks.</p>
+              {visibleDocuments.map((document, index) => (
+                <details class="source-document" open={index === 0 && document.sourceText.length < 120000}>
+                  <summary>
+                    <span>{document.filename}</span>
+                    <span class="badge">{document.format.toUpperCase()}{document.pageCount ? ` · ${document.pageCount} pages` : ''}</span>
+                  </summary>
+                  <div class="source-toolbar">
+                    <span>{document.path}</span>
+                    <button class="copy-button" type="button" data-copy-source>Copy exact text</button>
+                  </div>
+                  <pre class="source-code" tabindex="0" data-source-text>{document.sourceText}</pre>
+                </details>
+              ))}
+              {visibleDocuments.length === 0 && (
+                <div class="empty-state"><p>No readable text was extracted from this source. Manual fidelity review remains required.</p></div>
+              )}
+            </section>
+          </div>
+
+          {guide.guidedSteps.length > 0 && (
+            <div class="guided-panel" data-reading-panel="guided" hidden>
+              <section id="guided-steps" class="article-section">
+                <h2>Guided reading</h2>
+                <p>Check off source chunks as you review them. Completion is stored only in this browser.</p>
+                {guide.guidedSteps.map((step, index) => (
+                  <label class="guided-step">
+                    <input type="checkbox" value={step.id} data-step-checkbox />
+                    <span>
+                      <h3>Step {index + 1}: {step.title}</h3>
+                      <pre>{step.content}</pre>
+                    </span>
+                  </label>
+                ))}
+              </section>
+            </div>
+          )}
+        </>
+      ) : (
+        <section id="migration-exception" class="article-section">
+          <h2>Migration exception</h2>
+          <div class="notice notice--danger">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
+              <path d="M7 11V8a5 5 0 0 1 10 0v3M5 11h14v9H5v-9Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path>
+            </svg>
+            <div>
+              <h3>Operational content withheld</h3>
+              <p>{guide.compatibility}</p>
+              {guide.annotations.map((annotation) => <p>{annotation}</p>)}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <section id="sources" class="article-section">
+        <h2>Sources and traceability</h2>
+        <div class="source-ledger" role="region" aria-label="Source document ledger" tabindex="0">
+          <table>
+            <thead><tr><th>Source</th><th>Extraction</th><th>SHA-256</th><th>Revision</th></tr></thead>
+            <tbody>
+              {guide.sourceDocuments.map((document) => (
+                <tr>
+                  <td>{document.path}</td>
+                  <td>{document.extractionStatus}</td>
+                  <td><code>{document.sha256}</code></td>
+                  <td><code>{document.gitRevision ?? 'untracked user input'}</code></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div class="reference-audit">
+          <div class="tag-row">
+            <h3>Supplementary reference audit</h3>
+            <span class="badge">{referenceAudit.status.replaceAll('-', ' ')}</span>
+          </div>
+          <p>{referenceAudit.scope}</p>
+          <p class="reference-limit">
+            Audited {referenceAuditData.auditedAt}. {referenceAuditData.policy.importantLimit}
+          </p>
+          {referenceAudit.references.length > 0 ? (
+            <ul>
+              {referenceAudit.references.map((reference) => (
+                <li>
+                  <a href={reference.url} rel="noreferrer">{reference.title}</a>
+                  {' '}— {reference.owner}. {reference.relation}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No sufficiently specific current primary reference was attached; the stated limitation above remains controlling.</p>
+          )}
+        </div>
+        {guide.originalReferences.length > 0 && (
+          <div class="original-references">
+            <h3>Source-authored links</h3>
+            <ul>
+              {guide.originalReferences.map((reference) => (
+                <li>
+                  <a href={reference.url} rel="noreferrer">{reference.title}</a>
+                  {' '}— source-authored; destination relevance and current compatibility remain {reference.verificationStatus}.
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </section>
+
+      {relatedGuides.length > 0 && (
+        <section id="related" class="article-section">
+          <h2>Related guides</h2>
+          <div class="guide-grid">
+            {relatedGuides.map((relatedGuide) => <GuideCard guide={relatedGuide} />)}
+          </div>
+        </section>
+      )}
+    </div>
+
+    <div class="toast" role="status" aria-live="polite" data-toast hidden></div>
+  </article>
+
+  <script>
+    import {
+      guideState,
+      readState,
+      updateGuideState,
+      writeState,
+    } from '../../lib/local-state.mjs';
+
+    const article = document.querySelector('[data-guide-article]');
+    if (article instanceof HTMLElement) {
+      const guideId = article.dataset.guideId;
+      const readingVersion = article.dataset.readingVersion;
+      const bookmarkButton = article.querySelector('[data-bookmark-button]');
+      const bookmarkLabel = article.querySelector('[data-bookmark-label]');
+      const checkboxes = [...article.querySelectorAll('[data-step-checkbox]')].filter((item) => item instanceof HTMLInputElement);
+      const progressBars = article.querySelectorAll('[data-progress-bar]');
+      const progressLabel = article.querySelector('[data-progress-label]');
+      const toast = article.querySelector('[data-toast]');
+      let toastTimer: number | undefined;
+
+      function showToast(message: string) {
+        if (!(toast instanceof HTMLElement)) return;
+        toast.textContent = message;
+        toast.hidden = false;
+        window.clearTimeout(toastTimer);
+        toastTimer = window.setTimeout(() => { toast.hidden = true; }, 3200);
+      }
+
+      function currentState() {
+        return guideState(readState(), guideId);
+      }
+
+      function setProgress(progress: number) {
+        const bounded = Math.max(0, Math.min(100, Math.round(progress)));
+        progressBars.forEach((bar) => {
+          if (bar instanceof HTMLElement) bar.style.width = `${bounded}%`;
+        });
+        if (progressLabel) progressLabel.textContent = `Reading progress: ${bounded}%`;
+      }
+
+      function renderState() {
+        const state = currentState();
+        if (bookmarkButton instanceof HTMLButtonElement) bookmarkButton.setAttribute('aria-pressed', String(Boolean(state.bookmarked)));
+        if (bookmarkLabel) bookmarkLabel.textContent = state.bookmarked ? 'Saved' : 'Save guide';
+        checkboxes.forEach((checkbox) => {
+          checkbox.checked = state.completedSteps.includes(checkbox.value);
+        });
+        setProgress(state.progress ?? 0);
+      }
+
+      function persist(patch: Record<string, unknown>) {
+        const nextState = updateGuideState(readState(), guideId, readingVersion, patch);
+        if (!writeState(nextState)) showToast('Browser storage is unavailable. Progress will last only for this page view.');
+        renderState();
+      }
+
+      bookmarkButton?.addEventListener('click', () => {
+        const bookmarked = !currentState().bookmarked;
+        persist({ bookmarked });
+        showToast(bookmarked ? 'Guide saved in this browser.' : 'Guide removed from saved guides.');
+      });
+
+      checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener('change', () => {
+          const completedSteps = checkboxes.filter((item) => item.checked).map((item) => item.value);
+          const progress = checkboxes.length === 0 ? 0 : (completedSteps.length / checkboxes.length) * 100;
+          persist({ completedSteps, progress });
+        });
+      });
+
+      article.querySelectorAll('[data-mode]').forEach((button) => {
+        button.addEventListener('click', () => {
+          if (!(button instanceof HTMLButtonElement)) return;
+          const mode = button.dataset.mode;
+          article.querySelectorAll('[data-mode]').forEach((candidate) => candidate.setAttribute('aria-pressed', String(candidate === button)));
+          article.querySelectorAll('[data-reading-panel]').forEach((panel) => {
+            if (panel instanceof HTMLElement) panel.hidden = panel.dataset.readingPanel !== mode;
+          });
+        });
+      });
+
+      article.querySelectorAll('[data-copy-source]').forEach((button) => {
+        button.addEventListener('click', async () => {
+          const sourceText = button.closest('.source-document')?.querySelector('[data-source-text]');
+          if (!(sourceText instanceof HTMLElement)) return;
+          const text = sourceText.textContent ?? '';
+          try {
+            await navigator.clipboard.writeText(text);
+            showToast('Exact source text copied.');
+          } catch {
+            const selection = window.getSelection();
+            const range = document.createRange();
+            range.selectNodeContents(sourceText);
+            selection?.removeAllRanges();
+            selection?.addRange(range);
+            showToast('Clipboard access was denied. The source text is selected; press Ctrl+C or Command+C.');
+          }
+        });
+      });
+
+      let scrollTimer: number | undefined;
+      window.addEventListener('scroll', () => {
+        window.clearTimeout(scrollTimer);
+        scrollTimer = window.setTimeout(() => {
+          if (checkboxes.some((checkbox) => checkbox.checked)) return;
+          const bounds = article.getBoundingClientRect();
+          const readableDistance = Math.max(1, article.scrollHeight - window.innerHeight);
+          const progress = Math.max(0, Math.min(100, (-bounds.top / readableDistance) * 100));
+          persist({ progress });
+        }, 180);
+      }, { passive: true });
+
+      renderState();
+    }
+  </script>
+</BaseLayout>
+

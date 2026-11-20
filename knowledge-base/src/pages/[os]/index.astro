@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideDirectory from '../../components/GuideDirectory.astro';
+import OsIcon from '../../components/OsIcon.astro';
+import {
+  categoryLabels,
+  guideCategories,
+  guidesForOs,
+  guidesForPlacement,
+  operatingSystems,
+  osLabels,
+  type OperatingSystem,
+} from '../../lib/guide-data';
+import { withBase } from '../../lib/routes';
+
+export function getStaticPaths() {
+  return operatingSystems.map((os) => ({ params: { os } }));
+}
+
+const os = Astro.params.os as OperatingSystem;
+const collectionGuides = guidesForOs(os);
+---
+
+<BaseLayout title={`${osLabels[os]} Guides`} activePath={`/${os}/`} wide>
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href={withBase('/')}>Overview</a><span aria-hidden="true">/</span><span aria-current="page">{osLabels[os]}</span>
+  </nav>
+  <section class="collection-hero page-header">
+    <div>
+      <span class="eyebrow">Operating-system collection</span>
+      <h1>{osLabels[os]}</h1>
+      <p class="lede">Browse source-traceable tweaks, application setup, and troubleshooting guides for {osLabels[os]}.</p>
+    </div>
+    <span class="os-card-icon"><OsIcon os={os} size={72} /></span>
+  </section>
+
+  <section class="section-block" aria-labelledby="categories-title">
+    <div class="section-heading">
+      <div><h2 id="categories-title">Guide categories</h2><p>Choose the path that matches the job at hand.</p></div>
+    </div>
+    <div class="category-grid">
+      {guideCategories.map((category) => {
+        const count = guidesForPlacement(os, category).length;
+        return (
+          <a class="category-card" href={withBase(`/${os}/${category}/`)}>
+            <span class="badge">{count} {count === 1 ? 'guide' : 'guides'}</span>
+            <h3>{categoryLabels[category]}</h3>
+            <p>{count > 0 ? 'Open the mapped articles and source review status.' : 'No source-backed guide is available yet; the empty state is intentional.'}</p>
+            <span class="card-footer"><span>View category</span><span aria-hidden="true">Open</span></span>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+
+  <section class="section-block" aria-labelledby="collection-guides-title">
+    <div class="section-heading">
+      <div><h2 id="collection-guides-title">All {osLabels[os]} fieldnotes</h2><p>{collectionGuides.length} canonical guides are currently cross-listed here.</p></div>
+    </div>
+    <GuideDirectory guides={collectionGuides} />
+  </section>
+</BaseLayout>
+

@@ -1,0 +1,7 @@
+/knowledge-base/node_modules/
+/knowledge-base/dist/
+/knowledge-base/.astro/
+/knowledge-base/.playwright-browsers/
+/knowledge-base/playwright-report/
+/knowledge-base/test-results/
+

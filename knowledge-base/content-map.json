@@ -1,0 +1,364 @@
+{
+  "schemaVersion": 1,
+  "guides": [
+    {
+      "id": "windows-default-install-directory",
+      "slug": "windows/default-install-directory",
+      "title": "Change the Default Installation Directory",
+      "summary": "Source-preserved Windows registry procedure discovered in the Android source tree and reclassified by its actual content.",
+      "placements": [{ "os": "windows", "category": "tweaks" }],
+      "compatibility": "Windows; registry behavior and application compatibility require review before use.",
+      "risk": "high",
+      "publicStatus": "published",
+      "sourcePaths": ["Setups/OS Environment/Android/Packages and Tools in Termux/How to change Default Installation Directory.txt"],
+      "keywords": ["registry", "ProgramFilesDir", "default installation directory"]
+    },
+    {
+      "id": "android-termux-lazymux",
+      "slug": "android/lazymux-in-termux",
+      "title": "Lazymux in Termux",
+      "summary": "Original Termux installation notes for Lazymux, presented with source provenance and command-copy controls.",
+      "placements": [{ "os": "android", "category": "application-setup" }],
+      "compatibility": "Android with Termux; package availability and upstream repository behavior are unverified.",
+      "risk": "medium",
+      "publicStatus": "published",
+      "sourcePaths": ["Setups/OS Environment/Android/Packages and Tools in Termux/Lazymux in Termux.txt"],
+      "keywords": ["Termux", "Lazymux", "Android"]
+    },
+    {
+      "id": "android-termux-tool-x",
+      "slug": "android/tool-x-in-termux",
+      "title": "Tool-X in Termux",
+      "summary": "Inventory record for a security-tool installer whose operational migration requires a dedicated safety and upstream review.",
+      "placements": [{ "os": "android", "category": "application-setup" }],
+      "compatibility": "Android with Termux; upstream contents and individual tools are not verified.",
+      "risk": "high",
+      "publicStatus": "review-only",
+      "sourcePaths": ["Setups/OS Environment/Android/Packages and Tools in Termux/Tool-X in Termux.txt"],
+      "annotations": ["Operational commands are withheld from the public article until the installer and bundled tools receive a scoped safety review."],
+      "keywords": ["Termux", "Tool-X", "security tools"]
+    },
+    {
+      "id": "android-termux-weeman",
+      "slug": "android/weeman-source-review",
+      "title": "Weeman Source Review",
+      "summary": "Non-operational inventory record for a phishing-tool procedure discovered in the source repository.",
+      "placements": [{ "os": "android", "category": "application-setup" }],
+      "compatibility": "Not published as an operational guide.",
+      "risk": "critical",
+      "publicStatus": "blocked",
+      "sourcePaths": ["Setups/OS Environment/Android/Packages and Tools in Termux/Weeman in Termux.txt"],
+      "annotations": ["The source describes credential-phishing operations. FIELDNOTES records its provenance without reproducing reusable attack instructions."],
+      "keywords": ["Termux", "Weeman", "safety review"]
+    },
+    {
+      "id": "android-xiaomi-tweaks",
+      "slug": "android/xiaomi-tweaks",
+      "title": "Xiaomi Android Tweaks",
+      "summary": "Source-preserved Xiaomi package-management notes with ADB privilege and recovery warnings.",
+      "placements": [{ "os": "android", "category": "tweaks" }],
+      "compatibility": "Xiaomi Android devices; package names and effects vary by model, region, and firmware.",
+      "risk": "high",
+      "publicStatus": "published",
+      "sourcePaths": ["Setups/OS Environment/Android/Tweaks for Android/Xiaomi.txt"],
+      "keywords": ["Xiaomi", "ADB", "packages", "debloat"]
+    },
+    {
+      "id": "linux-application-installation",
+      "slug": "linux/application-installation-commands",
+      "title": "Application Installation Commands",
+      "summary": "Debian-based application installation recipes retained from the original source.",
+      "placements": [{ "os": "linux", "category": "application-setup" }],
+      "compatibility": "Debian-based Linux distributions; package names and repositories may have changed.",
+      "risk": "medium",
+      "publicStatus": "published",
+      "sourcePaths": ["Setups/OS Environment/Linux/Troubleshooting and Tweak Guides for Linux (Debian Based)/Application Installation commands in Linux.txt"],
+      "keywords": ["Debian", "apt", "install", "packages"]
+    },
+    {
+      "id": "linux-login-autostart",
+      "slug": "linux/bash-script-after-login",
+      "title": "Run a Bash Script After Login",
+      "summary": "Short source note for login-time Bash execution, retained as a reviewable procedure.",
+      "placements": [{ "os": "linux", "category": "application-setup" }],
+      "compatibility": "Linux desktop/session behavior depends on the shell and display environment.",
+      "risk": "medium",
+      "publicStatus": "published",
+      "sourcePaths": ["Setups/OS Environment/Linux/Troubleshooting and Tweak Guides for Linux (Debian Based)/How do you make a Bash script run automatically after login in Linux.txt"],
+      "annotations": ["The original source is brief and requires environment-specific verification."],
+      "keywords": ["Bash", "autostart", "login"]
+    },
+    {
+      "id": "linux-tweaks",
+      "slug": "linux/debian-performance-tweaks",
+      "title": "Debian-Based Linux Tweaks",
+      "summary": "Performance and configuration commands from the original Linux tweaks collection.",
+      "placements": [{ "os": "linux", "category": "tweaks" }],
+      "compatibility": "Debian-based distributions; kernel, init system, and package-version differences apply.",
+      "risk": "high",
+      "publicStatus": "published",
+      "sourcePaths": ["Setups/OS Environment/Linux/Troubleshooting and Tweak Guides for Linux (Debian Based)/Linux Tweaks.txt"],
+      "keywords": ["Debian", "performance", "sysctl", "tweaks"]
+    },
+    {
+      "id": "linux-troubleshooting",
+      "slug": "linux/troubleshooting",
+      "title": "Linux Troubleshooting",
+      "summary": "Original Debian-based troubleshooting commands and recovery notes.",
+      "placements": [{ "os": "linux", "category": "troubleshooting" }],
+      "compatibility": "Debian-based distributions; diagnose the actual failure before applying a command.",
+      "risk": "high",
+      "publicStatus": "published",
+      "sourcePaths": ["Setups/OS Environment/Linux/Troubleshooting and Tweak Guides for Linux (Debian Based)/Troubleshooting.txt"],
+      "keywords": ["Debian", "repair", "troubleshooting", "recovery"]
+    },
+    {
+      "id": "n8n-local-docker-compose",
+      "slug": "shared/n8n-local-docker-compose",
+      "title": "n8n Local Docker Compose",
+      "summary": "Local n8n setup using Docker Compose on a Windows host through Ubuntu on WSL 2.",
+      "placements": [
+        { "os": "windows", "category": "application-setup" },
+        { "os": "linux", "category": "application-setup" }
+      ],
+      "compatibility": "Windows host with Ubuntu through WSL 2. This source does not establish an independently verified native-Linux installation.",
+      "risk": "high",
+      "publicStatus": "published",
+      "sourcePaths": ["Setups/Programming Related/n8n Local Docker Compose Reference Guide.pdf"],
+      "keywords": ["n8n", "Docker Compose", "WSL 2", "Ubuntu"]
+    },
+    {
+      "id": "software-troubleshooting-configurations",
+      "slug": "shared/software-troubleshooting-configurations",
+      "title": "Software Troubleshooting and Configurations",
+      "summary": "Canonical cross-platform article for the source compendium covering Kivy, Android Studio, WSL 2 with XFCE, and Eclipse JVM configuration.",
+      "placements": [
+        { "os": "windows", "category": "application-setup" },
+        { "os": "windows", "category": "troubleshooting" },
+        { "os": "linux", "category": "application-setup" },
+        { "os": "android", "category": "application-setup" }
+      ],
+      "compatibility": "Mixed Windows, Linux/WSL 2, and Android development tooling; follow only the section matching the target environment.",
+      "risk": "medium",
+      "publicStatus": "published",
+      "sourcePaths": [
+        "Setups/Programming Related/Software Troubleshooting and Configurations.docx",
+        "Setups/Programming Related/Software Troubleshooting and Configurations.pdf"
+      ],
+      "keywords": ["Kivy", "Android Studio", "WSL 2", "XFCE", "Eclipse", "JVM"]
+    },
+    {
+      "id": "windows-power-options",
+      "slug": "windows/power-option-guides",
+      "title": "Windows Power Option Guides",
+      "summary": "Power-plan configuration reference extracted from the original PDF.",
+      "placements": [{ "os": "windows", "category": "tweaks" }],
+      "compatibility": "Windows; available settings vary by edition, hardware, firmware, and power model.",
+      "risk": "high",
+      "publicStatus": "published",
+      "sourcePaths": ["Setups/OS Environment/Windows/Troubleshooting and Tweak Guides for Windows/Power Option Guides.pdf"],
+      "keywords": ["Windows", "power options", "power plan"]
+    },
+    {
+      "id": "windows-powershell-cmd",
+      "slug": "windows/powershell-and-cmd-commands",
+      "title": "PowerShell and Command Prompt Commands",
+      "summary": "Command reference from the original DOCX document.",
+      "placements": [{ "os": "windows", "category": "troubleshooting" }],
+      "compatibility": "Windows; commands may require an elevated terminal and version-specific review.",
+      "risk": "high",
+      "publicStatus": "published",
+      "sourcePaths": ["Setups/OS Environment/Windows/Troubleshooting and Tweak Guides for Windows/Powershell and CMD Commands.docx"],
+      "keywords": ["PowerShell", "CMD", "commands", "Windows"]
+    },
+    {
+      "id": "windows-block-driver-installation",
+      "slug": "windows/block-specific-driver-installation",
+      "title": "Stop Windows from Installing Drivers for Specific Devices",
+      "summary": "Original device-driver installation policy guide migrated from PDF.",
+      "placements": [{ "os": "windows", "category": "troubleshooting" }],
+      "compatibility": "Windows; policy-editor availability and device identifiers vary by edition and hardware.",
+      "risk": "high",
+      "publicStatus": "published",
+      "sourcePaths": ["Setups/OS Environment/Windows/Troubleshooting and Tweak Guides for Windows/Stop Windows from installing drivers for specific devices.pdf"],
+      "keywords": ["drivers", "device installation", "group policy", "Windows"]
+    },
+    {
+      "id": "windows-troubleshooting-compendium",
+      "slug": "windows/troubleshooting-and-tweaks",
+      "title": "Windows Troubleshooting and Tweak Guides",
+      "summary": "Canonical Windows troubleshooting compendium using the DOCX as the primary source and the PDF as an alternate rendering.",
+      "placements": [
+        { "os": "windows", "category": "troubleshooting" },
+        { "os": "windows", "category": "tweaks" }
+      ],
+      "compatibility": "Windows; individual procedures span different versions and privilege levels.",
+      "risk": "high",
+      "publicStatus": "published",
+      "sourcePaths": [
+        "Setups/OS Environment/Windows/Troubleshooting and Tweak Guides for Windows/Troubleshooting and Tweak Guides for Windows.docx",
+        "Setups/OS Environment/Windows/Troubleshooting and Tweak Guides for Windows/Troubleshooting and Tweak Guides for Windows.pdf"
+      ],
+      "keywords": ["Windows", "troubleshooting", "repair", "configuration"]
+    },
+    {
+      "id": "windows-performance-suite",
+      "slug": "windows/performance-suite",
+      "title": "Windows Performance Suite",
+      "summary": "Canonical collection for the repository's performance scripts, registry settings, HMB tuning, power-plan assets, and supporting PDFs.",
+      "placements": [{ "os": "windows", "category": "tweaks" }],
+      "compatibility": "Windows; hardware, edition, firmware, and security trade-offs require procedure-level review.",
+      "risk": "critical",
+      "publicStatus": "published",
+      "sourcePaths": [
+        "Setups/OS Environment/Windows/Tweaks for Windows/Performance.bat",
+        "Setups/OS Environment/Windows/Tweaks for Windows/Registry Tweaks to Make Windows Faster.reg",
+        "Setups/OS Environment/Windows/Tweaks for Windows/TakeControl.reg",
+        "Setups/OS Environment/Windows/Tweaks for Windows/TakeControl (Revert).reg",
+        "Setups/OS Environment/Windows/Tweaks for Windows/Force HMB to use 64 MB.ps1",
+        "Setups/OS Environment/Windows/Tweaks for Windows/HMB Configuration Verification.ps1",
+        "Setups/OS Environment/Windows/Tweaks for Windows/HPC.pow",
+        "Setups/OS Environment/Windows/Tweaks for Windows/UPC.pow",
+        "Setups/OS Environment/Windows/Tweaks for Windows/NOTE FOR PERFORMANCE AND SECURITY.txt",
+        "Setups/OS Environment/Windows/Tweaks for Windows/Highest Performance.pdf",
+        "Setups/OS Environment/Windows/Tweaks for Windows/Ultra Performance.pdf",
+        "Setups/OS Environment/Windows/Troubleshooting and Tweak Guides for Windows/Ultimate Performance (Customized).pdf"
+      ],
+      "annotations": ["Binary .pow files are retained as dependencies and are not interpreted as text."],
+      "keywords": ["performance", "registry", "HMB", "power plan", "Windows"]
+    },
+    {
+      "id": "windows-security-on",
+      "slug": "windows/security-on",
+      "title": "Windows Security-On Bundle",
+      "summary": "Canonical recovery-oriented bundle for restoring security settings and basic unauthorized-access protections.",
+      "placements": [
+        { "os": "windows", "category": "troubleshooting" },
+        { "os": "windows", "category": "tweaks" }
+      ],
+      "compatibility": "Windows; administrator privileges are required and policy state may differ by edition.",
+      "risk": "high",
+      "publicStatus": "published",
+      "sourcePaths": [
+        "Setups/OS Environment/Windows/Tweaks for Windows/Security On.bat",
+        "Setups/OS Environment/Windows/Tweaks for Windows/Enable Windows Security.reg",
+        "Setups/OS Environment/Windows/Tweaks for Windows/Basic Protection Against to Unauthorized Access.bat"
+      ],
+      "keywords": ["Windows Security", "Defender", "firewall", "recovery"]
+    },
+    {
+      "id": "windows-security-off",
+      "slug": "windows/security-off",
+      "title": "Windows Security-Off Bundle",
+      "summary": "High-risk source-preserved bundle that disables or weakens Windows security controls.",
+      "placements": [{ "os": "windows", "category": "tweaks" }],
+      "compatibility": "Windows; administrator privileges are required. Disabling protections materially increases exposure.",
+      "risk": "critical",
+      "publicStatus": "published",
+      "sourcePaths": [
+        "Setups/OS Environment/Windows/Tweaks for Windows/Security Off.bat",
+        "Setups/OS Environment/Windows/Tweaks for Windows/Disable Windows Security.reg",
+        "Setups/OS Environment/Windows/Tweaks for Windows/Easy Access.bat"
+      ],
+      "annotations": ["FIELDNOTES does not recommend applying this bundle on an internet-connected or production system. A tested rollback and isolated environment are prerequisites."],
+      "keywords": ["Windows Security", "Defender", "SMB1", "high risk"]
+    },
+    {
+      "id": "windows-compact-os",
+      "slug": "windows/compact-and-uncompact",
+      "title": "Compact and Uncompact Windows",
+      "summary": "Paired source scripts for applying and reverting Windows system-file compression.",
+      "placements": [{ "os": "windows", "category": "tweaks" }],
+      "compatibility": "Windows; storage savings and performance impact depend on hardware and system state.",
+      "risk": "high",
+      "publicStatus": "published",
+      "sourcePaths": [
+        "Setups/OS Environment/Windows/Tweaks for Windows/Compact Windows.bat",
+        "Setups/OS Environment/Windows/Tweaks for Windows/Uncompact Windows.bat"
+      ],
+      "keywords": ["CompactOS", "compression", "Windows"]
+    },
+    {
+      "id": "windows-update-controls",
+      "slug": "windows/update-controls",
+      "title": "Windows Update Enable and Disable Controls",
+      "summary": "Paired registry sources for changing Windows Update policy with an explicit recovery path.",
+      "placements": [
+        { "os": "windows", "category": "tweaks" },
+        { "os": "windows", "category": "troubleshooting" }
+      ],
+      "compatibility": "Windows; policy keys and management behavior vary by edition and organization control.",
+      "risk": "critical",
+      "publicStatus": "published",
+      "sourcePaths": [
+        "Setups/OS Environment/Windows/Tweaks for Windows/Disable Windows Update.reg",
+        "Setups/OS Environment/Windows/Tweaks for Windows/Enable Windows Update.reg"
+      ],
+      "keywords": ["Windows Update", "registry", "policy", "recovery"]
+    },
+    {
+      "id": "windows-restore-services",
+      "slug": "windows/restore-services-defaults",
+      "title": "Restore Windows Services to Default Settings",
+      "summary": "Large source batch file for restoring Windows service start modes.",
+      "placements": [{ "os": "windows", "category": "troubleshooting" }],
+      "compatibility": "Windows; service names and defaults vary by version, edition, and installed features.",
+      "risk": "critical",
+      "publicStatus": "published",
+      "sourcePaths": ["Setups/OS Environment/Windows/Tweaks for Windows/Restore Windows Services To Default Settings.bat"],
+      "keywords": ["Windows services", "defaults", "recovery"]
+    },
+    {
+      "id": "windows-offline-insider-enroll",
+      "slug": "windows/offline-insider-enroll",
+      "title": "Offline Insider Enroll",
+      "summary": "Source-preserved command script for Windows Insider enrollment without an online Microsoft account workflow.",
+      "placements": [{ "os": "windows", "category": "application-setup" }],
+      "compatibility": "Windows Insider behavior and supported channels may have changed since the source revision.",
+      "risk": "high",
+      "publicStatus": "published",
+      "sourcePaths": ["Setups/OS Environment/Windows/Tweaks for Windows/OfflineInsiderEnroll.cmd"],
+      "keywords": ["Windows Insider", "enrollment", "offline"]
+    },
+    {
+      "id": "windows-remote-tweak-bootstrap",
+      "slug": "windows/remote-tweak-bootstrap-review",
+      "title": "Remote Tweak Bootstrap Review",
+      "summary": "Inventory record for a short PowerShell bootstrap that downloads and executes remote code.",
+      "placements": [{ "os": "windows", "category": "tweaks" }],
+      "compatibility": "Not published operationally until the remote endpoint, immutable revision, and script contents are verified.",
+      "risk": "critical",
+      "publicStatus": "review-only",
+      "sourcePaths": ["Setups/OS Environment/Windows/Tweaks for Windows/Tools of Tweaks.ps1"],
+      "annotations": ["A network bootstrap changes over time and cannot be validated from the local one-line wrapper alone."],
+      "keywords": ["PowerShell", "remote code", "review"]
+    },
+    {
+      "id": "windows-activation-bootstrap",
+      "slug": "windows/windows-activation-source-review",
+      "title": "Windows Activation Source Review",
+      "summary": "Inventory and integrity record for a third-party activation bootstrap; operational instructions are not republished.",
+      "placements": [{ "os": "windows", "category": "application-setup" }],
+      "compatibility": "Blocked from operational migration pending licensing, provenance, and security review.",
+      "risk": "critical",
+      "publicStatus": "blocked",
+      "sourcePaths": ["Setups/OS Environment/Windows/Tweaks for Windows/Windows Activation.ps1"],
+      "annotations": ["The source invokes third-party activation tooling. FIELDNOTES records its presence without facilitating license circumvention."],
+      "keywords": ["Windows activation", "licensing review"]
+    },
+    {
+      "id": "idm-activation-bootstrap",
+      "slug": "windows/idm-activation-source-review",
+      "title": "Internet Download Manager Activation Source Review",
+      "summary": "Inventory and integrity record for a third-party IDM activation bootstrap; operational instructions are not republished.",
+      "placements": [{ "os": "windows", "category": "application-setup" }],
+      "compatibility": "Blocked from operational migration pending licensing, provenance, and security review.",
+      "risk": "critical",
+      "publicStatus": "blocked",
+      "sourcePaths": ["Setups/OS Environment/Windows/Tweaks for Windows/Internet Download Manager Activation.ps1"],
+      "annotations": ["The source invokes third-party activation tooling. FIELDNOTES records its presence without facilitating license circumvention."],
+      "keywords": ["IDM", "activation", "licensing review"]
+    }
+  ]
+}
+

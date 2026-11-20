@@ -1,0 +1,125 @@
+---
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/manrope/600.css';
+import '@fontsource/manrope/700.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '../styles/global.css';
+
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteSidebar from '../components/SiteSidebar.astro';
+import { withBase } from '../lib/routes';
+
+interface Props {
+  title?: string;
+  description?: string;
+  activePath?: string;
+  wide?: boolean;
+}
+
+const {
+  title = 'FIELDNOTES Knowledge Base',
+  description = 'Searchable operating-system setup, tuning, and troubleshooting field guides.',
+  activePath = '/',
+  wide = false,
+} = Astro.props;
+const pageTitle = title === 'FIELDNOTES Knowledge Base' ? title : `${title} · FIELDNOTES`;
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#050B09" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="aurora-field" aria-hidden="true"></div>
+    <SiteHeader />
+    <div class="app-shell">
+      <SiteSidebar activePath={activePath} />
+      <main id="main-content" class:list={['main-content', { 'main-content--wide': wide }]}>
+        <slot />
+      </main>
+    </div>
+    <footer class="site-footer">
+      <p>FIELDNOTES turns source-controlled technical notes into traceable web guides.</p>
+      <a href={withBase('/source-fidelity/')}>Source fidelity &amp; safety</a>
+    </footer>
+
+    <script>
+      const menuButton = document.querySelector('[data-menu-toggle]');
+      const sidebar = document.querySelector('[data-site-sidebar]');
+      const backdrop = document.querySelector('[data-sidebar-backdrop]');
+      const searchButton = document.querySelector('[data-search-toggle]');
+      const searchForm = document.querySelector('[data-header-search]');
+      const searchInput = document.querySelector('#global-search');
+      let returnFocus: Element | null = null;
+
+      function setMenu(open: boolean) {
+        if (!(menuButton instanceof HTMLButtonElement) || !(sidebar instanceof HTMLElement) || !(backdrop instanceof HTMLElement)) return;
+        const wasOpen = sidebar.classList.contains('open');
+        menuButton.setAttribute('aria-expanded', String(open));
+        sidebar.classList.toggle('open', open);
+        backdrop.hidden = !open;
+        document.body.classList.toggle('nav-open', open);
+        if (open) {
+          returnFocus = document.activeElement;
+          setSearch(false);
+          sidebar.querySelector('a')?.focus();
+        } else if (wasOpen && returnFocus instanceof HTMLElement) {
+          returnFocus.focus();
+          returnFocus = null;
+        }
+      }
+
+      function setSearch(open: boolean) {
+        if (!(searchButton instanceof HTMLButtonElement) || !(searchForm instanceof HTMLElement)) return;
+        searchButton.setAttribute('aria-expanded', String(open));
+        const label = searchButton.querySelector('.sr-only');
+        if (label) label.textContent = open ? 'Close search' : 'Open search';
+        searchForm.classList.toggle('open', open);
+        if (open && searchInput instanceof HTMLInputElement) {
+          setMenu(false);
+          searchInput.focus();
+        }
+      }
+
+      menuButton?.addEventListener('click', () => setMenu(menuButton.getAttribute('aria-expanded') !== 'true'));
+      searchButton?.addEventListener('click', () => setSearch(searchButton.getAttribute('aria-expanded') !== 'true'));
+      backdrop?.addEventListener('click', () => setMenu(false));
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          setMenu(false);
+          setSearch(false);
+        }
+        if (event.key === 'Tab' && sidebar instanceof HTMLElement && sidebar.classList.contains('open')) {
+          const focusable = [...sidebar.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])')]
+            .filter((element) => !element.hidden);
+          const first = focusable[0];
+          const last = focusable.at(-1);
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last?.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first?.focus();
+          }
+        }
+        if (event.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName ?? '')) {
+          event.preventDefault();
+          if (window.matchMedia('(max-width: 48rem)').matches) setSearch(true);
+          else if (searchInput instanceof HTMLInputElement) searchInput.focus();
+        }
+      });
+    </script>
+  </body>
+</html>
+

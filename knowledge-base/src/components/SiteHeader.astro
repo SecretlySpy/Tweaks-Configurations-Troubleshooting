@@ -1,0 +1,57 @@
+---
+import { withBase } from '../lib/routes';
+---
+
+<header class="site-header" data-site-header>
+  <a class="brand-lockup" href={withBase('/')}>
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 32 32" width="28" height="28" fill="none">
+        <path d="M8 5.5h12.5A3.5 3.5 0 0 1 24 9v17.5H11.5A3.5 3.5 0 0 1 8 23V5.5Z" stroke="currentColor" stroke-width="2"></path>
+        <path d="M12 10h8M12 15h8M12 20h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+        <path d="M24 9h-2.5A2.5 2.5 0 0 0 19 11.5V13l2-1 3 1.5V9Z" fill="currentColor"></path>
+      </svg>
+    </span>
+    <span>
+      <strong>FIELDNOTES</strong>
+      <small>Knowledge Base</small>
+    </span>
+  </a>
+
+  <form class="header-search" action={withBase('/all-guides/')} role="search" data-header-search>
+    <label class="sr-only" for="global-search">Search all guides</label>
+    <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none">
+      <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.8"></circle>
+      <path d="m16 16 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+    </svg>
+    <input id="global-search" name="q" type="search" placeholder="Search commands, tools, or guides…" autocomplete="off" />
+    <kbd aria-hidden="true">/</kbd>
+  </form>
+
+  <nav class="header-actions" aria-label="Utility navigation">
+    <button
+      class="icon-link search-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="global-search"
+      data-search-toggle
+    >
+      <span class="sr-only">Open search</span>
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none">
+        <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.8"></circle>
+        <path d="m16 16 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+      </svg>
+    </button>
+    <a class="icon-link" href={withBase('/saved/')} aria-label="Saved guides">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
+        <path d="M6.5 4.5h11v15l-5.5-3-5.5 3v-15Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path>
+      </svg>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-sidebar" data-menu-toggle>
+      <span class="sr-only">Open navigation</span>
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
+        <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+      </svg>
+    </button>
+  </nav>
+</header>
+
