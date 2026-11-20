@@ -174,7 +174,7 @@ test('Continue reveals the original n8n instructions and the source file is acce
   await expect(page.getByRole('heading', { name: 'Source-derived instructions' })).toBeVisible();
   const originalLinks = page.locator('.source-original-link');
   expect(await originalLinks.count()).toBeGreaterThan(0);
-  await expect(originalLinks.first()).toHaveAttribute('href', /github\\.com\\/SecretlySpy\\/Tweaks-Configurations-Troubleshooting\\/blob\\/main\\//u);
+  expect(await originalLinks.first().getAttribute('href')).toContain('https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting/blob/main/');
 });
 
 test('Host check command copying excludes the visual shell caption', async ({ page }) => {
@@ -187,7 +187,7 @@ test('Host check command copying excludes the visual shell caption', async ({ pa
   await page.goto(paths.n8n);
   await page.locator('.figma-command-footer [data-copy-source]').click();
   const copied = await page.evaluate(() => window.__lastCopied);
-  expect(copied).toBe('wsl --status\\nwsl --list --verbose\\ndocker version\\ndocker compose version'.replaceAll('\\n', '\n'));
+  expect(copied.split(String.fromCharCode(10))).toEqual(['wsl --status', 'wsl --list --verbose', 'docker version', 'docker compose version']);
   expect(copied).not.toContain('Windows PowerShell');
 });
 

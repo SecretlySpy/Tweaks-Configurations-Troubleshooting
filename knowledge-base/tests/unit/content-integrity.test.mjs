@@ -61,8 +61,8 @@ test('generated PDF pages retain line breaks and reading sections do not omit so
       if (!document.sourceText) continue;
       assert.ok(sectionPaths.has(document.path), document.path);
       if (document.format === 'pdf' && document.pageCount) {
-        assert.match(document.sourceText, /^Page 1\\n/u, document.path);
-        assert.ok(document.sourceText.split('\\n').length > document.pageCount, document.path);
+        assert.ok(document.sourceText.startsWith('Page 1' + String.fromCharCode(10)), document.path);
+        assert.ok(document.sourceText.split(String.fromCharCode(10)).length > document.pageCount, document.path);
       }
     }
   }
