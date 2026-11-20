@@ -117,7 +117,7 @@ async function checkLocalUrl(rawValue, sourceFile, sourceUrl) {
     return;
   }
   // Leave external HTTP(S) targets to the separately bounded reference-audit ledger.
-  if (resolvedUrl.origin !== 'https://fieldnotes.invalid') return;
+  if (resolvedUrl.origin !== 'https://technical-resources.invalid') return;
   // Require every root-local link to remain under the configured repository Pages subpath.
   if (resolvedUrl.pathname !== basePath && !resolvedUrl.pathname.startsWith(`${basePath}/`)) {
     findings.push({ path: reportPath(sourceFile), rule: 'outside-pages-base' });
@@ -165,7 +165,7 @@ for (const file of files.filter((candidate) => extname(candidate).toLowerCase() 
       ? `/${relativeHtml.slice(0, -'index.html'.length)}`
       : `/${relativeHtml}`;
   // Build a synthetic same-origin URL with the real Pages base for browser-accurate resolution.
-  const sourceUrl = new URL(`${basePath}${routePath}`, 'https://fieldnotes.invalid');
+  const sourceUrl = new URL(`${basePath}${routePath}`, 'https://technical-resources.invalid');
   // Extract generated href and src values; migrated source text is escaped and cannot match attributes.
   const attributePattern = /\b(?:href|src)\s*=\s*["']([^"']+)["']/giu;
   // Check every matched local target against the generated artifact.
@@ -179,7 +179,7 @@ for (const file of files.filter((candidate) => extname(candidate).toLowerCase() 
   // Read only emitted CSS files from dist.
   const css = await readFile(file, 'utf8');
   // Model the deployed stylesheet URL under the repository Pages base.
-  const sourceUrl = new URL(`${basePath}/${reportPath(file)}`, 'https://fieldnotes.invalid');
+  const sourceUrl = new URL(`${basePath}/${reportPath(file)}`, 'https://technical-resources.invalid');
   // Extract quoted and unquoted url() values without interpreting CSS as executable code.
   const cssUrlPattern = /url\(\s*["']?([^"')]+)["']?\s*\)/giu;
   // Check each emitted asset target using the same bounded resolver.

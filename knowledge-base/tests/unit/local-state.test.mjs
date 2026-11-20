@@ -4,6 +4,7 @@ import test from 'node:test';
 import {
   STATE_SCHEMA_VERSION,
   STORAGE_KEY,
+  LEGACY_STORAGE_KEY,
   emptyState,
   guideState,
   parseState,
@@ -68,3 +69,19 @@ test('a source-version change resets step completion but preserves the bookmark'
   assert.equal(state.progress, 0);
 });
 
+
+test('previous branding storage key migrates bookmarks without deleting the original', () => {
+  const storage = new MemoryStorage();
+  const previous = updateGuideState(emptyState(), 'guide-before-rename', 'version-1', {
+    bookmarked: true, completedSteps: ['one'], progress: 60,
+  });
+  storage.setItem(LEGACY_STORAGE_KEY, JSON.stringify(previous));
+  assert.equal(guideState(readState(storage), 'guide-before-rename').bookmarked, true);
+  assert.deepEqual(JSON.parse(storage.getItem(STORAGE_KEY)), previous);
+  assert.equal(storage.getItem(LEGACY_STORAGE_KEY), JSON.stringify(previous));
+});
+
+test('absence of accessible storage returns failure without claiming persistence', () => {
+  assert.deepEqual(readState(null), emptyState());
+  assert.equal(writeState(emptyState(), null), false);
+});

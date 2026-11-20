@@ -1,8 +1,8 @@
-# FIELDNOTES architecture and operations
+# Technical Resources architecture and operations
 
 ## System context
 
-FIELDNOTES is a build-time migration and static-reading system. There is no application server, database, account service, or command-execution service.
+Technical Resources is a build-time migration and static-reading system. There is no application server, database, account service, or command-execution service.
 
 ```mermaid
 flowchart LR
@@ -52,7 +52,7 @@ Generated files should be regenerated from source/map changes, not edited by han
 - Repository base path: `/Tweaks-Configurations-Troubleshooting`.
 - Static routes use trailing slashes.
 - `withBase()` prefixes custom links with `import.meta.env.BASE_URL`.
-- `.github/workflows/fieldnotes-pages.yml` is the single project workflow. It uses `actions/checkout@v7`, Node 24 with locked npm dependencies, project-local Chromium, `npm test`, `actions/upload-pages-artifact@v5` with hidden files enabled for `.nojekyll`, and `actions/deploy-pages@v5`.
+- `.github/workflows/technical-resources-pages.yml` is the single project workflow. It uses `actions/checkout@v7`, Node 24 with locked npm dependencies, project-local Chromium, `npm test`, `actions/upload-pages-artifact@v5` with hidden files enabled for `.nojekyll`, and `actions/deploy-pages@v5`.
 - The workflow uploads only the verified `knowledge-base/dist` tree and requires `dist/.nojekyll`; the former Jekyll and whole-repository static upload workflows were removed because they were incompatible with Astro and the public-artifact boundary.
 - GitHub Pages must use **Settings → Pages → Build and deployment → Source: GitHub Actions**. The local workflow is not proof that this setting, the remote run, or deployment is current; those external states remain **UNVERIFIED**.
 
@@ -67,7 +67,7 @@ Most runtime functionality is static HTML and CSS. Small client scripts provide:
 - Bookmark and guided-reading progress.
 - Copy-to-clipboard with a selection fallback.
 
-Local state uses key `fieldnotes:reading-state:v1`, schema version `1`, and per-guide reading versions. Storage failures return a safe empty state or a `false` write result; they do not hide guide content.
+Local state uses key `technical resources:reading-state:v1`, schema version `1`, and per-guide reading versions. Storage failures return a safe empty state or a `false` write result; they do not hide guide content.
 
 ## Security and privacy
 

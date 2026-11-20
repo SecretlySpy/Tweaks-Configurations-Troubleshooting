@@ -1,5 +1,5 @@
 # Build, verify, and publish the Astro knowledge base without invoking Jekyll.
-name: Verify and deploy FIELDNOTES
+name: Verify and deploy Technical Resources
 
 on:
   # Validate every relevant change before it can be merged.
@@ -9,7 +9,7 @@ on:
     paths:
       - "knowledge-base/**"
       - "Setups/**"
-      - ".github/workflows/fieldnotes-pages.yml"
+      - ".github/workflows/technical-resources-pages.yml"
 
   # Publish verified changes from the default branch.
   push:
@@ -18,7 +18,7 @@ on:
     paths:
       - "knowledge-base/**"
       - "Setups/**"
-      - ".github/workflows/fieldnotes-pages.yml"
+      - ".github/workflows/technical-resources-pages.yml"
 
   # Permit an intentional validation or deployment run from the Actions tab.
   workflow_dispatch:
@@ -29,12 +29,12 @@ permissions:
 
 # Serialize runs for the same ref so two releases cannot race each other.
 concurrency:
-  group: fieldnotes-${{ github.ref }}
+  group: technical-resources-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
   verify:
-    name: Build and test FIELDNOTES
+    name: Build and test Technical Resources
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
@@ -86,7 +86,7 @@ jobs:
           include-hidden-files: true
 
   deploy:
-    name: Deploy FIELDNOTES
+    name: Deploy Technical Resources
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     needs: verify
     runs-on: ubuntu-latest

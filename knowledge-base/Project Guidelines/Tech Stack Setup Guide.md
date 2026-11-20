@@ -1,4 +1,4 @@
-# FIELDNOTES tech stack setup guide
+# Technical Resources tech stack setup guide
 
 This guide documents the local Windows/PowerShell path actually used on 2026-11-19. Linux/macOS setup and a clean GitHub-hosted runner remain **UNVERIFIED** until executed.
 
@@ -99,14 +99,14 @@ Check the root plus direct collection, category, guide, saved, search, and unkno
 | Source file not found | Run from `knowledge-base/` inside the full repository; inspect the exact `content-map.json` path. | Correct the map/source path; do not fabricate generated content. |
 | PDF warning during extraction | Confirm the process completes and extraction status/hash are present. | Compare the generated transcription with the original; keep manual fidelity UNVERIFIED until checked. |
 | Guide missing from output | Check status, source extraction, canonical slug, and generated guide record. | Fix the authority file and regenerate; do not edit `dist`. |
-| Preview returns FIELDNOTES 404 | Compare Playwright/base URL with Astro `base`; leading-slash test routes escape a subpath base URL. | Keep the trailing-slash base URL and navigate with relative test routes; rerun the complete matrix. |
+| Preview returns Technical Resources 404 | Compare Playwright/base URL with Astro `base`; leading-slash test routes escape a subpath base URL. | Keep the trailing-slash base URL and navigate with relative test routes; rerun the complete matrix. |
 | Search index unavailable | Check `public/data/search-index.json`, built assets, and base-prefixed fetch URL. | Preserve the static directory and show the failure/empty state. |
-| Bookmark/progress does not persist | Inspect browser storage access and `fieldnotes:reading-state:v1`. | Reading must remain usable; do not add remote storage as an implicit fix. |
+| Bookmark/progress does not persist | Inspect browser storage access and `technical resources:reading-state:v1`. | Reading must remain usable; do not add remote storage as an implicit fix. |
 | Figma tools fail | Confirm connector authentication. | Reauthenticate; record parity as blocked rather than inferred. |
 
 ## Publication preparation
 
-The Pages workflow is prepared at `.github/workflows/fieldnotes-pages.yml` relative to the repository root. It is not a deployment instruction or authorization by itself.
+The Pages workflow is prepared at `.github/workflows/technical-resources-pages.yml` relative to the repository root. It is not a deployment instruction or authorization by itself.
 
 Before any push:
 

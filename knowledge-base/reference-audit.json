@@ -2,13 +2,13 @@
   "schemaVersion": 1,
   "auditedAt": "2026-11-19",
   "policy": {
-    "scope": "Every canonical FIELDNOTES guide is classified against current first-party or standards-owner documentation where a stable operational authority exists.",
+    "scope": "Every canonical Technical Resources guide is classified against current first-party or standards-owner documentation where a stable operational authority exists.",
     "statusDefinitions": {
       "verified-primary": "The guide's central mechanism has a current first-party or standards-owner reference. Source-specific values still require target-environment verification.",
       "partially-verified": "At least one central mechanism has a current primary reference, but the guide combines additional source-specific procedures that were not independently validated.",
       "source-only-unverified": "The source is preserved for provenance, but no sufficiently specific current primary reference was found for its operational claims.",
-      "non-operational-review": "FIELDNOTES withholds the operational procedure pending a dedicated safety, provenance, or immutable-upstream review.",
-      "non-operational-blocked": "FIELDNOTES intentionally withholds operational instructions because the source would facilitate phishing or license circumvention."
+      "non-operational-review": "Technical Resources withholds the operational procedure pending a dedicated safety, provenance, or immutable-upstream review.",
+      "non-operational-blocked": "Technical Resources intentionally withholds operational instructions because the source would facilitate phishing or license circumvention."
     },
     "importantLimit": "A verified reference validates documented platform behavior, not successful execution on a particular device, OS build, or third-party tool version."
   },

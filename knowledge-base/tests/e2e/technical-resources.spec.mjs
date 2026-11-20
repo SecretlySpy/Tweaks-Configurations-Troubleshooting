@@ -32,8 +32,8 @@ test('full-text directory search handles matches and empty results', async ({ pa
   await expect(page.locator('[data-guide-card]:visible')).toHaveCount(1);
   await expect(page.getByRole('link', { name: 'n8n Local Docker Compose' })).toBeVisible();
   const search = page.locator('[data-directory-search]');
-  await search.fill('definitely-not-a-real-fieldnote-query');
-  await expect(page.getByRole('heading', { name: 'No matching fieldnotes' })).toBeVisible();
+  await search.fill('definitely-not-a-real-technical-resource-query');
+  await expect(page.getByRole('heading', { name: 'No matching technical resources' })).toBeVisible();
 });
 
 test('directory search degrades to metadata when the full-text index is unavailable', async ({ page }) => {
@@ -94,9 +94,9 @@ test('clipboard denial selects source text for manual copying', async ({ page })
 });
 
 test('intentional empty states and mobile navigation remain usable', async ({ page }, testInfo) => {
-  const missingResponse = await page.goto('missing-fieldnote/');
+  const missingResponse = await page.goto('missing-technical resource/');
   expect(missingResponse?.status()).toBe(404);
-  await expect(page.getByRole('heading', { name: 'This fieldnote is off the map.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'This technical resource is off the map.' })).toBeVisible();
 
   await page.goto(paths.androidTroubleshooting);
   await expect(page.getByRole('heading', { name: 'No source-backed guides yet' })).toBeVisible();
@@ -152,3 +152,76 @@ test('reduced-motion preference removes meaningful transition duration', async (
   expect(Number.parseFloat(duration)).toBeLessThanOrEqual(0.00001);
 });
 
+
+test('Technical Resources branding and page anchors are consistent', async ({ page }) => {
+  for (const target of [paths.home, paths.allGuides, paths.n8n]) {
+    await page.goto(target);
+    await expect(page.locator('.brand-copy strong')).toHaveText('Technical Resources');
+    await expect(page).toHaveTitle(/Technical Resources/u);
+    const duplicates = await page.evaluate(() => {
+      const ids = [...document.querySelectorAll('[id]')].map((element) => element.id);
+      return ids.filter((id, index) => ids.indexOf(id) !== index);
+    });
+    expect(duplicates, target).toEqual([]);
+  }
+});
+
+test('Continue reveals the original n8n instructions and the source file is accessible as a link', async ({ page }) => {
+  await page.goto(paths.n8n);
+  await expect(page.locator('[data-reading-panel="full"]')).toBeHidden();
+  await page.locator('.figma-next-step').click();
+  await expect(page.locator('[data-reading-panel="full"]')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Source-derived instructions' })).toBeVisible();
+  const originalLinks = page.locator('.source-original-link');
+  expect(await originalLinks.count()).toBeGreaterThan(0);
+  expect(await originalLinks.first().getAttribute('href')).toContain('https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting/blob/main/');
+});
+
+test('Host check command copying excludes the visual shell caption', async ({ page }) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: { writeText: async (text) => { window.__lastCopied = text; } },
+    });
+  });
+  await page.goto(paths.n8n);
+  await expect(page.locator('.figma-command-footer [data-copy-source]')).toBeVisible();
+  await page.locator('.figma-command-footer [data-copy-source]').click();
+  const copied = await page.evaluate(() => window.__lastCopied);
+  expect(copied.split(String.fromCharCode(10))).toEqual(['wsl --status', 'wsl --list --verbose', 'docker version', 'docker compose version']);
+  expect(copied).not.toContain('Windows PowerShell');
+});
+
+test('Save controls still toggle when localStorage rejects writes', async ({ page }) => {
+  await page.addInitScript(() => {
+    Storage.prototype.setItem = () => { throw new DOMException('storage disabled', 'QuotaExceededError'); };
+  });
+  await page.goto(paths.n8n);
+  const button = page.locator('[data-bookmark-button]');
+  await button.click();
+  await expect(button).toHaveAttribute('aria-pressed', 'true');
+  await button.click();
+  await expect(button).toHaveAttribute('aria-pressed', 'false');
+});
+
+test('Directory filters show only cards matching the selected operating system and category', async ({ page }) => {
+  await page.goto(paths.allGuides);
+  await page.locator('[data-directory-os]').selectOption('linux');
+  await page.locator('[data-directory-category]').selectOption('application-setup');
+  const matching = page.locator('[data-guide-card]:visible');
+  expect(await matching.count()).toBeGreaterThan(0);
+  for (const card of await matching.all()) {
+    expect((await card.getAttribute('data-os')).split(',')).toContain('linux');
+    expect((await card.getAttribute('data-category')).split(',')).toContain('application-setup');
+  }
+});
+
+test('every original reference remains visible and clickable at each viewport', async ({ page }) => {
+  await page.goto(paths.n8n);
+  const links = page.locator('.figma-reference-row[href]');
+  await expect(links).toHaveCount(8);
+  await expect(links.last()).toBeVisible();
+  await expect(links.first()).toHaveAttribute('href', /github/u);
+  await expect(page.locator('.figma-command-footer [data-copy-source]')).toBeVisible();
+  await expect(page.locator('.architecture-node').last()).toBeVisible();
+});

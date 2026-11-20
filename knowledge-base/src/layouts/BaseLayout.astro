@@ -24,7 +24,7 @@ interface Props {
 }
 
 const {
-  title = 'FIELDNOTES Knowledge Base',
+  title = 'Technical Resources',
   description = 'Searchable operating-system setup, tuning, and troubleshooting field guides.',
   activePath = '/',
   wide = false,
@@ -32,7 +32,7 @@ const {
   showMobileNav = true,
   sidebarVariant = 'default',
 } = Astro.props;
-const pageTitle = title === 'FIELDNOTES Knowledge Base' ? title : `${title} · FIELDNOTES`;
+const pageTitle = title === 'Technical Resources' ? title : `${title} · Technical Resources`;
 ---
 
 <!doctype html>
@@ -59,7 +59,7 @@ const pageTitle = title === 'FIELDNOTES Knowledge Base' ? title : `${title} · F
     {showMobileNav && <MobileBottomNav activePath={activePath} />}
     {showFooter && (
       <footer class="site-footer">
-        <p>FIELDNOTES turns source-controlled technical notes into traceable web guides.</p>
+        <p>Technical Resources turns source-controlled technical notes into traceable web guides.</p>
         <a href={withBase('/source-fidelity/')}>Source fidelity &amp; safety</a>
       </footer>
     )}

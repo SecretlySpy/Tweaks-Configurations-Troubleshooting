@@ -7,7 +7,7 @@ import { resolve } from 'node:path';
 
 // Resolve the package root from npm's working directory.
 const packageRoot = resolve(process.cwd());
-// Parse the canonical guide map that controls generated FIELDNOTES routes.
+// Parse the canonical guide map that controls generated Technical Resources routes.
 const contentMap = JSON.parse(await readFile(resolve(packageRoot, 'content-map.json'), 'utf8'));
 // Parse the independent reference audit that records current verification scope.
 const referenceAudit = JSON.parse(await readFile(resolve(packageRoot, 'reference-audit.json'), 'utf8'));

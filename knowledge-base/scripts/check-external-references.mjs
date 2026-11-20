@@ -29,7 +29,7 @@ async function checkReference(reference) {
       const response = await fetch(reference.url, {
         redirect: 'follow',
         signal: controller.signal,
-        headers: { 'user-agent': 'FIELDNOTES-reference-audit/0.1' },
+        headers: { 'user-agent': 'Technical Resources-reference-audit/0.1' },
       });
       // Stop downloading once status and final destination establish resolution.
       await response.body?.cancel();

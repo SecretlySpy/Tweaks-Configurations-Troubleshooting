@@ -1,4 +1,4 @@
-# FIELDNOTES plan and goals
+# Technical Resources plan and goals
 
 Status date: 2026-11-20
 Delivery state: Figma-aligned local implementation and automated verification complete; manual fidelity/accessibility approval and protected release gates remain open.
@@ -24,7 +24,7 @@ Deliver a static GitHub Pages knowledge base that makes the repository's setup, 
 | FR-03 | Account for every primary source. | 44 of 44 primary sources map to a canonical guide; 100% primary accounting. |
 | FR-04 | Keep secondary configuration exports out of automatic publication. | 35 secondary sources are inventoried with `secondary-review` disposition. |
 | FR-05 | Preserve exact text, line breaks, source paths, hashes, and revisions. | Build-time extraction and SHA-256 provenance ledger per guide. |
-| FR-06 | Distinguish source material from FIELDNOTES annotations. | Article sections label source-preserved text, compatibility, warnings, and migration exceptions. |
+| FR-06 | Distinguish source material from Technical Resources annotations. | Article sections label source-preserved text, compatibility, warnings, and migration exceptions. |
 | FR-07 | Withhold unsafe unresolved operational procedures. | Two review-only and three blocked guides omit reusable operational source text. |
 | FR-08 | Support full-text discovery and useful empty/error states. | On-demand JSON directory search plus Starlight/Pagefind build indexing. |
 | FR-09 | Support exact copying with a denial fallback. | Clipboard action falls back to selected source text when direct write fails. |

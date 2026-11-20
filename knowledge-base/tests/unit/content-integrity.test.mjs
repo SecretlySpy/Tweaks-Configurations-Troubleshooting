@@ -53,3 +53,17 @@ test('the n8n guide remains one canonical article cross-listed for Windows and L
   assert.match(n8nGuide.compatibility, /Windows host.+WSL 2/u);
 });
 
+
+test('generated PDF pages retain line breaks and reading sections do not omit source files', () => {
+  for (const guide of guideData.guides.filter((item) => item.publicStatus === 'published')) {
+    const sectionPaths = new Set(guide.guidedSteps.map((section) => section.sourcePath));
+    for (const document of guide.sourceDocuments) {
+      if (!document.sourceText) continue;
+      assert.ok(sectionPaths.has(document.path), document.path);
+      if (document.format === 'pdf' && document.pageCount) {
+        assert.ok(document.sourceText.startsWith('Page 1' + String.fromCharCode(10)), document.path);
+        assert.ok(document.sourceText.split(String.fromCharCode(10)).length > document.pageCount, document.path);
+      }
+    }
+  }
+});

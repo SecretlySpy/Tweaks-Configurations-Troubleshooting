@@ -1,4 +1,6 @@
-export const STORAGE_KEY = 'fieldnotes:reading-state:v1';
+export const STORAGE_KEY = 'technical-resources:reading-state:v1';
+// Read-only fallback preserves bookmarks saved before the public branding change.
+export const LEGACY_STORAGE_KEY = 'fieldnotes:reading-state:v1';
 export const STATE_SCHEMA_VERSION = 1;
 
 export function emptyState() {
@@ -28,17 +30,32 @@ export function parseState(serializedState) {
   }
 }
 
-export function readState(storage = globalThis.localStorage) {
+export function readState(storage) {
   try {
-    return parseState(storage?.getItem(STORAGE_KEY));
+    // Resolve localStorage inside the try block: even reading its property can throw.
+    const targetStorage = storage === undefined ? globalThis.localStorage : storage;
+    const current = targetStorage?.getItem(STORAGE_KEY);
+    if (current) return parseState(current);
+    const legacy = targetStorage?.getItem(LEGACY_STORAGE_KEY);
+    if (!legacy) return emptyState();
+    const restored = parseState(legacy);
+    // Never delete the previous key; browser owners retain a recoverable copy.
+    try {
+      targetStorage?.setItem(STORAGE_KEY, JSON.stringify(restored));
+    } catch {
+      // A read-only session can still display saved bookmarks.
+    }
+    return restored;
   } catch {
     return emptyState();
   }
 }
 
-export function writeState(state, storage = globalThis.localStorage) {
+export function writeState(state, storage) {
   try {
-    storage?.setItem(STORAGE_KEY, JSON.stringify(normalizeState(state)));
+    const targetStorage = storage === undefined ? globalThis.localStorage : storage;
+    if (!targetStorage) return false;
+    targetStorage.setItem(STORAGE_KEY, JSON.stringify(normalizeState(state)));
     return true;
   } catch {
     return false;

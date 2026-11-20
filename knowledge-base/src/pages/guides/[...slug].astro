@@ -40,11 +40,16 @@ const visibleDocuments = guide.sourceDocuments.filter((document) => document.sou
 const isOperational = guide.publicStatus === 'published';
 const referenceAudit = referenceAuditForGuide(guide.id);
 const isN8nArticle = guide.id === 'n8n-local-docker-compose';
+const n8nHostCommands = ['wsl --status', 'wsl --list --verbose', 'docker version', 'docker compose version'].join('\n');
+const originalSourceUrl = (sourcePath: string) =>
+  'https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting/blob/main/'
+  + sourcePath.split('/').map(encodeURIComponent).join('/');
 const n8nReferenceRows = [
   {
     title: 'n8n + Docker Compose — Complete Setup Guide',
     meta: 'User-supplied PDF · 10 pages · Nov 19, 2026',
     type: 'Original guide',
+    href: originalSourceUrl('Setups/Programming Related/n8n Local Docker Compose Reference Guide.pdf'),
   },
   {
     title: 'Install using Docker Compose',
@@ -121,7 +126,7 @@ const n8nReferenceRows = [
           <a href="#overview">Overview</a>
           <a href="#compatibility">Compatibility</a>
           {(guide.risk === 'high' || guide.risk === 'critical' || guide.annotations.length > 0) && <a href="#warnings">Warnings</a>}
-          <a href={isOperational ? '#source-instructions' : '#migration-exception'}>{isOperational ? 'Instructions' : 'Exception'}</a>
+          <a href={isOperational ? '#source-instructions' : '#migration-exception'} data-switch-reading-mode={isOperational ? 'full' : undefined}>{isOperational ? 'Instructions' : 'Exception'}</a>
           <a href="#sources">Sources</a>
           {relatedGuides.length > 0 && <a href="#related">Related guides</a>}
           <div class="progress-track" aria-hidden="true"><span data-progress-bar></span></div>
@@ -161,7 +166,7 @@ const n8nReferenceRows = [
         {isOperational && guide.guidedSteps.length > 0 && (
           <div class:list={['mode-switch', { 'mode-switch--figma': isN8nArticle }]} aria-label="Reading mode">
             <button type="button" aria-pressed={isN8nArticle} data-mode="guided">
-              {isN8nArticle ? <><span class="mode-label-wide">Step-by-step guide</span><span class="mode-label-compact">Overview</span></> : 'Guided steps'}
+              {isN8nArticle ? <><span class="mode-label-wide">Source reading sections</span><span class="mode-label-compact">Overview</span></> : 'Source sections'}
             </button>
             <button type="button" aria-pressed={!isN8nArticle} data-mode="full">
               {isN8nArticle ? <><span class="mode-label-wide">All sections</span><span class="mode-label-compact">Setup</span></> : 'Full article'}
@@ -208,13 +213,13 @@ const n8nReferenceRows = [
               <pre class="figma-command-block" tabindex="0" data-source-text><span>PS   •   Windows PowerShell</span>{'\n\n'}wsl --status{'\n'}wsl --list --verbose{'\n'}docker version{'\n'}docker compose version</pre>
               <div class="figma-command-footer">
                 <strong>Verify before continuing</strong>
-                <button class="copy-button" type="button" data-copy-source>Copy commands</button>
+                <button class="copy-button" type="button" data-copy-source data-copy-text={n8nHostCommands}>Copy commands</button>
               </div>
             </div>
           </section>
 
-          <a id="next-steps" class="figma-next-step" href="#source-instructions">
-            <span><small>Up next</small><strong><span class="next-step-wide">02&nbsp; </span><span class="next-step-compact">Next: </span>Create the Ubuntu project directory</strong></span>
+          <a id="next-steps" class="figma-next-step" href="#source-instructions" data-switch-reading-mode="full">
+            <span><small>Up next</small><strong><span class="next-step-wide">02&nbsp; </span><span class="next-step-compact">Next: </span>Read the complete source instructions</strong></span>
             <b>Continue <span aria-hidden="true">→</span></b>
           </a>
 
@@ -257,7 +262,7 @@ const n8nReferenceRows = [
               <div>
                 <h3>Review before applying</h3>
                 <p>{guide.compatibility}</p>
-                <p>FIELDNOTES preserved these instructions but did not execute operating-system changes during website QA.</p>
+                <p>Technical Resources preserved these instructions but did not execute operating-system changes during website QA.</p>
               </div>
             </div>
           </section>
@@ -288,8 +293,8 @@ const n8nReferenceRows = [
         <>
           <div class:list={['full-panel', { 'article-deep-content': isN8nArticle }]} data-reading-panel="full" hidden={isN8nArticle}>
             <section id="source-instructions" class="article-section">
-              <h2>Source-preserved instructions</h2>
-              <p>Each block below is an extracted source transcription. Copy controls preserve its characters and line breaks.</p>
+              <h2>Source-derived instructions</h2>
+              <p>Instructions below are extracted from the original files. PDF and DOCX extraction can lose tables, diagrams, and formatting; use the original source links to verify exact instructions before applying them.</p>
               {visibleDocuments.map((document, index) => (
                 <details class="source-document" open={index === 0 && document.sourceText.length < 120000}>
                   <summary>
@@ -298,8 +303,10 @@ const n8nReferenceRows = [
                   </summary>
                   <div class="source-toolbar">
                     <span>{document.path}</span>
-                    <button class="copy-button" type="button" data-copy-source>Copy exact text</button>
+                    <a class="source-original-link" href={originalSourceUrl(document.path)} target="_blank" rel="noopener noreferrer">View original file</a>
+                    <button class="copy-button" type="button" data-copy-source>Copy extracted text</button>
                   </div>
+                  {document.extractionWarnings.map((warning) => <p class="source-extraction-warning">{warning}</p>)}
                   <pre class="source-code" tabindex="0" data-source-text>{document.sourceText}</pre>
                 </details>
               ))}
@@ -312,13 +319,13 @@ const n8nReferenceRows = [
           {guide.guidedSteps.length > 0 && (
             <div class:list={['guided-panel', { 'article-deep-content': isN8nArticle }]} data-reading-panel="guided" hidden={!isN8nArticle}>
               <section id="guided-steps" class="article-section">
-                <h2>Guided reading</h2>
-                <p>Check off source chunks as you review them. Completion is stored only in this browser.</p>
+                <h2>Source reading sections</h2>
+                <p>Sections preserve source order and text rather than inventing tutorial steps. Check them off as you read; progress stays in this browser.</p>
                 {guide.guidedSteps.map((step, index) => (
                   <label class="guided-step">
                     <input type="checkbox" value={step.id} data-step-checkbox />
                     <span>
-                      <h3>Step {index + 1}: {step.title}</h3>
+                      <h3>Section {index + 1}: {step.title}</h3>
                       <pre tabindex="0">{step.content}</pre>
                     </span>
                   </label>
@@ -351,7 +358,7 @@ const n8nReferenceRows = [
             <tbody>
               {guide.sourceDocuments.map((document) => (
                 <tr>
-                  <td>{document.path}</td>
+                  <td>{guide.publicStatus === 'published' ? <a href={originalSourceUrl(document.path)} target="_blank" rel="noopener noreferrer">{document.path}</a> : document.path}</td>
                   <td>{document.extractionStatus}</td>
                   <td><code>{document.sha256}</code></td>
                   <td><code>{document.gitRevision ?? 'untracked user input'}</code></td>
@@ -429,6 +436,8 @@ const n8nReferenceRows = [
       const progressLabel = article.querySelector('[data-progress-label]');
       const toast = article.querySelector('[data-toast]');
       let toastTimer: number | undefined;
+      // In-memory state keeps controls responsive when privacy settings disable localStorage.
+      let sessionState = readState();
 
       function showToast(message: string) {
         if (!(toast instanceof HTMLElement)) return;
@@ -439,7 +448,7 @@ const n8nReferenceRows = [
       }
 
       function currentState() {
-        return guideState(readState(), guideId);
+        return guideState(sessionState, guideId);
       }
 
       function setProgress(progress: number) {
@@ -461,8 +470,8 @@ const n8nReferenceRows = [
       }
 
       function persist(patch: Record<string, unknown>) {
-        const nextState = updateGuideState(readState(), guideId, readingVersion, patch);
-        if (!writeState(nextState)) showToast('Browser storage is unavailable. Progress will last only for this page view.');
+        sessionState = updateGuideState(sessionState, guideId, readingVersion, patch);
+        if (!writeState(sessionState)) showToast('Browser storage is unavailable. Progress will last only for this page view.');
         renderState();
       }
 
@@ -477,6 +486,15 @@ const n8nReferenceRows = [
           const completedSteps = checkboxes.filter((item) => item.checked).map((item) => item.value);
           const progress = checkboxes.length === 0 ? 0 : (completedSteps.length / checkboxes.length) * 100;
           persist({ completedSteps, progress });
+        });
+      });
+
+      // Contents links must reveal their target if the other reading panel is hidden.
+      article.querySelectorAll('[data-switch-reading-mode]').forEach((link) => {
+        link.addEventListener('click', () => {
+          const destinationMode = link.getAttribute('data-switch-reading-mode');
+          const modeButton = article.querySelector(`[data-mode="${destinationMode}"]`);
+          if (modeButton instanceof HTMLButtonElement) modeButton.click();
         });
       });
 
@@ -495,7 +513,7 @@ const n8nReferenceRows = [
         button.addEventListener('click', async () => {
           const sourceText = button.closest('.source-document')?.querySelector('[data-source-text]');
           if (!(sourceText instanceof HTMLElement)) return;
-          const text = sourceText.textContent ?? '';
+          const text = button.getAttribute('data-copy-text') ?? sourceText.textContent ?? '';
           try {
             await navigator.clipboard.writeText(text);
             showToast('Exact source text copied.');
@@ -522,6 +540,10 @@ const n8nReferenceRows = [
         }, 180);
       }, { passive: true });
 
+      window.addEventListener('storage', () => {
+        sessionState = readState();
+        renderState();
+      });
       renderState();
     }
   </script>

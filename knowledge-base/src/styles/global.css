@@ -2841,7 +2841,13 @@ p {
   }
 
   .figma-command-footer {
-    display: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .figma-command-footer .copy-button {
+    min-height: 2.5rem;
   }
 
   .figma-next-step {
@@ -2866,7 +2872,7 @@ p {
   }
 
   .figma-reference-row:nth-child(n + 4) {
-    display: none;
+    display: flex;
   }
 
   .figma-reference-row > b {
@@ -3312,3 +3318,48 @@ p {
   }
 }
 
+
+/* Keep the longer public title readable without pushing search or menu off screen. */
+.brand-lockup { min-width: 0; gap: 0.55rem; padding-inline: 0.95rem; }
+.brand-copy { min-width: 0; }
+.brand-copy strong { font-size: 1rem; white-space: nowrap; letter-spacing: -0.02em; }
+.source-toolbar { flex-wrap: wrap; justify-content: flex-start; }
+.source-toolbar > span { flex: 1 1 100%; min-width: 0; overflow-wrap: anywhere; }
+.source-original-link { color: var(--fn-accent-bright); font-weight: 650; }
+.source-original-link:hover, .source-original-link:focus-visible { text-decoration: underline; }
+.source-extraction-warning {
+  margin: 0;
+  padding: 0.5rem 0.85rem;
+  color: var(--fn-text-secondary);
+  background: var(--fn-surface-glass);
+  font-size: 0.75rem;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 64rem) {
+  .brand-lockup { gap: 0.45rem; padding-inline: 0.8rem; }
+  .brand-copy strong { font-size: 0.9rem; }
+}
+@media (max-width: 26rem) {
+  .brand-copy strong { font-size: 0.8rem; }
+}
+
+/* All source references and text remain available at narrow breakpoints. */
+@media (max-width: 64rem) {
+  .architecture-node span,
+  .architecture-panel > small {
+    display: block;
+    overflow-wrap: anywhere;
+    font-size: 0.64rem;
+  }
+  .figma-command-footer .copy-button { cursor: pointer; }
+}
+@media (max-width: 48rem) {
+  .architecture-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .architecture-node { padding: 0.6rem; }
+  .home-secondary-content { margin-top: 2.5rem; }
+}
+
+/* Keep the first guide collection within a normal scrolling distance of the OS cards. */
+@media (max-width: 64rem) {
+  .home-platforms + .home-secondary-content { margin-top: 2.5rem; }
+}

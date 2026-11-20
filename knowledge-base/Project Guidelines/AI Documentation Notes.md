@@ -1,4 +1,4 @@
-# FIELDNOTES documentation map
+# Technical Resources documentation map
 
 Use this page as the retrieval index. Prefer the narrowest authoritative record and treat generated files as outputs, not hand-edited requirements.
 

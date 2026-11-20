@@ -1,4 +1,4 @@
-# FIELDNOTES verification and evaluation
+# Technical Resources verification and evaluation
 
 Status date: 2026-11-20. Evidence labels are `PASS`, `FAIL`, `BLOCKED`, `UNVERIFIED`, or `N/A`.
 
@@ -54,3 +54,10 @@ The earlier empty-`i18n` notice was resolved by explicitly registering the colle
 - Extracted text plus matching SHA-256 does not prove visual or semantic fidelity to a binary document.
 - A prepared workflow does not prove repository Pages settings, protected environments, permissions, DNS, or public availability.
 - No source procedure is considered operationally verified unless tested in an authorized isolated target environment; no such tests were run here.
+
+## Technical Resources follow-up audit (2026-11-20)
+
+- The subsequent PR #5 updates the brand, PDF extraction line preservation, original-source links, reading sections, and responsive controls.
+- The initial PR run passed 14 unit tests, Astro checking, the 42-page build, and 40 browser cases; two tablet/mobile cases revealed that CSS had hidden the command-copy button. Those controls and several hidden source reference rows were restored in a follow-up commit.
+- The final PR and deployed Pages checks must be read from GitHub Actions; the historical baseline above refers to the earlier release and is not evidence of the new deployment.
+- Direct source/PDF/DOCX visual comparison, image extraction, and real-device testing are still unverified. Original-file links make manual checking possible without claiming exact binary-layout fidelity.

@@ -1,6 +1,6 @@
-# FIELDNOTES knowledge base
+# Technical Resources knowledge base
 
-FIELDNOTES is the static, searchable web edition of this repository's operating-system setup, tuning, and troubleshooting material. It preserves source provenance while keeping unsafe or unresolved operational content behind explicit review boundaries.
+Technical Resources is the static, searchable web edition of this repository's operating-system setup, tuning, and troubleshooting material. It preserves source provenance while keeping unsafe or unresolved operational content behind explicit review boundaries.
 
 ## Current baseline
 
@@ -9,8 +9,17 @@ FIELDNOTES is the static, searchable web edition of this repository's operating-
 - Public output contains extracted text and traceability metadata, not raw `.bat`, `.cmd`, `.ps1`, `.reg`, or `.pow` files.
 - Bookmarks and guided-reading progress stay in browser-local storage; there is no account, database, analytics service, or server API.
 - The Figma-aligned shell, homepage, OS collections, compact guide rows, and n8n article were implemented from authenticated desktop/tablet/mobile frame evidence.
-- The local automated baseline is green: 11 unit tests, zero Astro diagnostics across 30 files, 27 three-viewport browser tests, 42 static pages, 25 guide-level reference audits, and a 203-file artifact boundary scan.
+- The pull-request gate checks 14 unit cases, 45 browser cases across desktop/tablet/mobile, Astro diagnostics, 42 static pages, 25 guide-level reference audits, and a generated-artifact boundary scan. Review the GitHub Actions results before merging.
 - The single Pages workflow runs the project test gate, requires `.nojekyll`, and uploads only `dist`; Pages source configuration, remote deployment, final human Figma/device approval, and legacy-file relocation remain separately gated.
+
+## Technical Resources reading experience
+
+- The site name, page title, metadata, and interface references are **Technical Resources**.
+- Every published source transcript links to its original file. Extracted PDF text retains reconstructed visual line boundaries and source-page labels, while DOCX/PDF diagrams, screenshots, and tables still require comparison with originals.
+- Reading sections follow source pages or paragraph boundaries, not invented instructions. No published document is silently shortened to 24 sections.
+- Source command copying excludes decorative captions; an on-page Continue link reveals its hidden target before navigating.
+- Previously saved bookmarks and progress migrate from the old browser storage key. When storage is blocked, controls remain usable during the current page view.
+- Secondary configuration exports (including possible secrets and personal settings) remain in review until publication-safe filtering is approved.
 
 ## Local commands
 
