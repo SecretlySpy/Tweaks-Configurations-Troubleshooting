@@ -24,7 +24,7 @@ interface Props {
 }
 
 const {
-  title = 'Technical Resources Knowledge Base',
+  title = 'Technical Resources',
   description = 'Searchable operating-system setup, tuning, and troubleshooting field guides.',
   activePath = '/',
   wide = false,
@@ -32,7 +32,7 @@ const {
   showMobileNav = true,
   sidebarVariant = 'default',
 } = Astro.props;
-const pageTitle = title === 'Technical Resources Knowledge Base' ? title : `${title} · Technical Resources`;
+const pageTitle = title === 'Technical Resources' ? title : `${title} · Technical Resources`;
 ---
 
 <!doctype html>

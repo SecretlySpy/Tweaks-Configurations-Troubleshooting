@@ -2841,7 +2841,13 @@ p {
   }
 
   .figma-command-footer {
-    display: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .figma-command-footer .copy-button {
+    min-height: 2.5rem;
   }
 
   .figma-next-step {
@@ -2866,7 +2872,7 @@ p {
   }
 
   .figma-reference-row:nth-child(n + 4) {
-    display: none;
+    display: flex;
   }
 
   .figma-reference-row > b {
@@ -3335,4 +3341,20 @@ p {
 }
 @media (max-width: 26rem) {
   .brand-copy strong { font-size: 0.8rem; }
+}
+
+/* All source references and text remain available at narrow breakpoints. */
+@media (max-width: 64rem) {
+  .architecture-node span,
+  .architecture-panel > small {
+    display: block;
+    overflow-wrap: anywhere;
+    font-size: 0.64rem;
+  }
+  .figma-command-footer .copy-button { cursor: pointer; }
+}
+@media (max-width: 48rem) {
+  .architecture-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .architecture-node { padding: 0.6rem; }
+  .home-secondary-content { margin-top: 2.5rem; }
 }

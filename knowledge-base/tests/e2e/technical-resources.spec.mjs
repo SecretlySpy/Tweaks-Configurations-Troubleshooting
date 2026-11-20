@@ -185,6 +185,7 @@ test('Host check command copying excludes the visual shell caption', async ({ pa
     });
   });
   await page.goto(paths.n8n);
+  await expect(page.locator('.figma-command-footer [data-copy-source]')).toBeVisible();
   await page.locator('.figma-command-footer [data-copy-source]').click();
   const copied = await page.evaluate(() => window.__lastCopied);
   expect(copied.split(String.fromCharCode(10))).toEqual(['wsl --status', 'wsl --list --verbose', 'docker version', 'docker compose version']);
@@ -213,4 +214,14 @@ test('Directory filters show only cards matching the selected operating system a
     expect((await card.getAttribute('data-os')).split(',')).toContain('linux');
     expect((await card.getAttribute('data-category')).split(',')).toContain('application-setup');
   }
+});
+
+test('every original reference remains visible and clickable at each viewport', async ({ page }) => {
+  await page.goto(paths.n8n);
+  const links = page.locator('.figma-reference-row[href]');
+  await expect(links).toHaveCount(8);
+  await expect(links.last()).toBeVisible();
+  await expect(links.first()).toHaveAttribute('href', /github/u);
+  await expect(page.locator('.figma-command-footer [data-copy-source]')).toBeVisible();
+  await expect(page.locator('.architecture-node').last()).toBeVisible();
 });
