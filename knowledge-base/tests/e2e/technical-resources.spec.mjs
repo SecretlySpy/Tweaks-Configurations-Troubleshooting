@@ -32,8 +32,8 @@ test('full-text directory search handles matches and empty results', async ({ pa
   await expect(page.locator('[data-guide-card]:visible')).toHaveCount(1);
   await expect(page.getByRole('link', { name: 'n8n Local Docker Compose' })).toBeVisible();
   const search = page.locator('[data-directory-search]');
-  await search.fill('definitely-not-a-real-fieldnote-query');
-  await expect(page.getByRole('heading', { name: 'No matching fieldnotes' })).toBeVisible();
+  await search.fill('definitely-not-a-real-technical-resource-query');
+  await expect(page.getByRole('heading', { name: 'No matching technical resources' })).toBeVisible();
 });
 
 test('directory search degrades to metadata when the full-text index is unavailable', async ({ page }) => {
@@ -94,9 +94,9 @@ test('clipboard denial selects source text for manual copying', async ({ page })
 });
 
 test('intentional empty states and mobile navigation remain usable', async ({ page }, testInfo) => {
-  const missingResponse = await page.goto('missing-fieldnote/');
+  const missingResponse = await page.goto('missing-technical resource/');
   expect(missingResponse?.status()).toBe(404);
-  await expect(page.getByRole('heading', { name: 'This fieldnote is off the map.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'This technical resource is off the map.' })).toBeVisible();
 
   await page.goto(paths.androidTroubleshooting);
   await expect(page.getByRole('heading', { name: 'No source-backed guides yet' })).toBeVisible();

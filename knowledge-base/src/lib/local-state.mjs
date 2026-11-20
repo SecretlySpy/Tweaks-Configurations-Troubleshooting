@@ -1,4 +1,4 @@
-export const STORAGE_KEY = 'fieldnotes:reading-state:v1';
+export const STORAGE_KEY = 'technical-resources:reading-state:v1';
 export const STATE_SCHEMA_VERSION = 1;
 
 export function emptyState() {
