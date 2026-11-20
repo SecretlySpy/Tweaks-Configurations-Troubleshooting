@@ -1,0 +1,1117 @@
+[
+  {
+    "sourceId": "7d2cafa3e9c02f36",
+    "path": "Setups/OS Environment/Android/Packages and Tools in Termux/How to change Default Installation Directory.txt",
+    "filename": "How to change Default Installation Directory.txt",
+    "extension": ".txt",
+    "bytes": 545,
+    "sha256": "3b0115986bd66eed3fd7b5f6b2c56a51f9880d3eca3beebbbc17574a7d0f61e5",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-default-install-directory"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "23b580b1de0e755a",
+    "path": "Setups/OS Environment/Android/Packages and Tools in Termux/Lazymux in Termux.txt",
+    "filename": "Lazymux in Termux.txt",
+    "extension": ".txt",
+    "bytes": 187,
+    "sha256": "5e564ec163cc8ba14b255494f9aa7df378d624085cb35e82a9666be55bfbfb9e",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "android-termux-lazymux"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "60caaf8e127f3250",
+    "path": "Setups/OS Environment/Android/Packages and Tools in Termux/Tool-X in Termux.txt",
+    "filename": "Tool-X in Termux.txt",
+    "extension": ".txt",
+    "bytes": 423,
+    "sha256": "493756870c4e30c45c26fbc2b1611b05c59e437284e374191ced28d5f1f36d5f",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "android-termux-tool-x"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "a22516ae7b47e928",
+    "path": "Setups/OS Environment/Android/Packages and Tools in Termux/Weeman in Termux.txt",
+    "filename": "Weeman in Termux.txt",
+    "extension": ".txt",
+    "bytes": 2403,
+    "sha256": "6aa08c37b6bb5d8299e93a7ab2aa13d931cf873b83062e4e43b5c526da8f8daa",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "android-termux-weeman"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "c5f31fb6954fca14",
+    "path": "Setups/OS Environment/Android/Tweaks for Android/Xiaomi.txt",
+    "filename": "Xiaomi.txt",
+    "extension": ".txt",
+    "bytes": 89,
+    "sha256": "9190eafcde038b86ee1588df775e6e81004b113b4befcf8dc3d7a28c918be7ae",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "android-xiaomi-tweaks"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "8980b2f262ef28c7",
+    "path": "Setups/OS Environment/Linux/Troubleshooting and Tweak Guides for Linux (Debian Based)/Application Installation commands in Linux.txt",
+    "filename": "Application Installation commands in Linux.txt",
+    "extension": ".txt",
+    "bytes": 2664,
+    "sha256": "6c9b36562ed38b3cbd287b0a7159d63beedaef9fed1daca84265a0ddff2c05f7",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "linux-application-installation"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "a42c1fa06534aa6d",
+    "path": "Setups/OS Environment/Linux/Troubleshooting and Tweak Guides for Linux (Debian Based)/How do you make a Bash script run automatically after login in Linux.txt",
+    "filename": "How do you make a Bash script run automatically after login in Linux.txt",
+    "extension": ".txt",
+    "bytes": 166,
+    "sha256": "bfdcca5efed6b6f9f5353b164f15fe7d25e3ee70445008004fec6666828f8392",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "linux-login-autostart"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "9ccb3afd2fead858",
+    "path": "Setups/OS Environment/Linux/Troubleshooting and Tweak Guides for Linux (Debian Based)/Linux Tweaks.txt",
+    "filename": "Linux Tweaks.txt",
+    "extension": ".txt",
+    "bytes": 3789,
+    "sha256": "b487043ff43cc6c830c5a7847e3f48fa4dc88465cc1d99e148eb6f787d867242",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "linux-tweaks"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "7651251b705d2f7d",
+    "path": "Setups/OS Environment/Linux/Troubleshooting and Tweak Guides for Linux (Debian Based)/Troubleshooting.txt",
+    "filename": "Troubleshooting.txt",
+    "extension": ".txt",
+    "bytes": 1463,
+    "sha256": "3f4c9f32dd2ada3f729b22038b5510b97c65932ab4a7da2d6f2e9aaae68d58e0",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "linux-troubleshooting"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "b6f99bad8eb6c49c",
+    "path": "Setups/OS Environment/Windows/Troubleshooting and Tweak Guides for Windows/Power Option Guides.pdf",
+    "filename": "Power Option Guides.pdf",
+    "extension": ".pdf",
+    "bytes": 6940119,
+    "sha256": "4fb534d9259ad1361e78747e07c63a036ccab428970ad132b16f4d00d89a5379",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-power-options"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "43b2e225e41d8afb",
+    "path": "Setups/OS Environment/Windows/Troubleshooting and Tweak Guides for Windows/Powershell and CMD Commands.docx",
+    "filename": "Powershell and CMD Commands.docx",
+    "extension": ".docx",
+    "bytes": 14923,
+    "sha256": "2d0d2da92b248b8ed82ba0814c474b37168f9d265431d99ce237c4732e18da52",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-powershell-cmd"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "fb5f8f6aff21720d",
+    "path": "Setups/OS Environment/Windows/Troubleshooting and Tweak Guides for Windows/Stop Windows from installing drivers for specific devices.pdf",
+    "filename": "Stop Windows from installing drivers for specific devices.pdf",
+    "extension": ".pdf",
+    "bytes": 1090779,
+    "sha256": "945bde298cb952e116872f7df61a0e736f34eaa0c10aa34e864ba499a88f0b07",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-block-driver-installation"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "61b62d30c3d9d784",
+    "path": "Setups/OS Environment/Windows/Troubleshooting and Tweak Guides for Windows/Troubleshooting and Tweak Guides for Windows.docx",
+    "filename": "Troubleshooting and Tweak Guides for Windows.docx",
+    "extension": ".docx",
+    "bytes": 81607,
+    "sha256": "ef81e816d27a41afd8e185a78c175e37deba1e8248bffc5becca1288c40c1f16",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-troubleshooting-compendium"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "e3275f965c87ec3b",
+    "path": "Setups/OS Environment/Windows/Troubleshooting and Tweak Guides for Windows/Troubleshooting and Tweak Guides for Windows.pdf",
+    "filename": "Troubleshooting and Tweak Guides for Windows.pdf",
+    "extension": ".pdf",
+    "bytes": 519163,
+    "sha256": "132154652bbc81585caefd295bc80f17037fe41f383da6b5750cc3cde1b9fe33",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-troubleshooting-compendium"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "a2eb8fc43c3d9340",
+    "path": "Setups/OS Environment/Windows/Troubleshooting and Tweak Guides for Windows/Ultimate Performance (Customized).pdf",
+    "filename": "Ultimate Performance (Customized).pdf",
+    "extension": ".pdf",
+    "bytes": 113868,
+    "sha256": "51e79938a57e2841ec8d430365a884162b6d9b5b8521776d4c092fbaf01a4e9b",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-performance-suite"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "9c39ba1cdaee5974",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/Basic Protection Against to Unauthorized Access.bat",
+    "filename": "Basic Protection Against to Unauthorized Access.bat",
+    "extension": ".bat",
+    "bytes": 4918,
+    "sha256": "44a2a9c6bff7a9745632cfb80bdfd8fad37796c74653657f748d591389fd1ae0",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-security-on"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "b8d86904c873b474",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/Compact Windows.bat",
+    "filename": "Compact Windows.bat",
+    "extension": ".bat",
+    "bytes": 2996,
+    "sha256": "9956306157f72ed691e39a23de2b27467b00d06327c4c76e033e82fd8d2b0ccd",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-compact-os"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "5399c32fb0c57d6d",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/Disable Windows Security.reg",
+    "filename": "Disable Windows Security.reg",
+    "extension": ".reg",
+    "bytes": 3387,
+    "sha256": "cac32902a265bfe901caab12ec12adc54c7cfc321b7f409548ed08cb692345d0",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-security-off"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "3e17eeb17763064a",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/Disable Windows Update.reg",
+    "filename": "Disable Windows Update.reg",
+    "extension": ".reg",
+    "bytes": 308,
+    "sha256": "9030dfa912b04b5f2670f684a3224477da603cf551b919e63eacc1b6975d0d03",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-update-controls"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "858a2dd76a1e4caa",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/Easy Access.bat",
+    "filename": "Easy Access.bat",
+    "extension": ".bat",
+    "bytes": 2833,
+    "sha256": "0770c488a2a802d22e06008716de02260fd9be2e3093e4ee242c1f929842ff76",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-security-off"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "e255ee88c1b6d278",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/Enable Windows Security.reg",
+    "filename": "Enable Windows Security.reg",
+    "extension": ".reg",
+    "bytes": 5141,
+    "sha256": "78a2241a4ee2932e5ae0fb972c76d74164c89d506c55f6895184c400a6018c41",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-security-on"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "15b2febc8f7577fa",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/Enable Windows Update.reg",
+    "filename": "Enable Windows Update.reg",
+    "extension": ".reg",
+    "bytes": 282,
+    "sha256": "d83857f83f965dead85e2d8b63fc09979de13aaa43119917c7a81b9d173c679f",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-update-controls"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "a5f0baf0a8f63850",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/Force HMB to use 64 MB.ps1",
+    "filename": "Force HMB to use 64 MB.ps1",
+    "extension": ".ps1",
+    "bytes": 2424,
+    "sha256": "6f8198b90668f85901ed7ec648fe56a82f4d4dd983f00a3c24c83cc3f49706d4",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-performance-suite"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "4cc602b6bbce155a",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/Highest Performance.pdf",
+    "filename": "Highest Performance.pdf",
+    "extension": ".pdf",
+    "bytes": 109589,
+    "sha256": "7e532b6f7f4d007c7f63d904ac7e6906f60dbdd3d7003f47e9c89eecbe8f5fdf",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-performance-suite"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "55c21bfb0be1ca0d",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/HMB Configuration Verification.ps1",
+    "filename": "HMB Configuration Verification.ps1",
+    "extension": ".ps1",
+    "bytes": 1052,
+    "sha256": "0d62aa9690a9bbb7d308926b29aecfa3c08f3aae9e2b1b248aabd4fcbb1bb5a4",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-performance-suite"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "6243e79da6a95be0",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/HPC.pow",
+    "filename": "HPC.pow",
+    "extension": ".pow",
+    "bytes": 28672,
+    "sha256": "57d251172a8dfe844134095a994df84a126627c800760cb5f6efebcc56e2de5a",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-performance-suite"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "b7034ad23b681484",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/Internet Download Manager Activation.ps1",
+    "filename": "Internet Download Manager Activation.ps1",
+    "extension": ".ps1",
+    "bytes": 84,
+    "sha256": "57b87ec7e40a7545c3f805ba9f41a80601a75db49b773857e2eec829b78e69cb",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "idm-activation-bootstrap"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "c97dd79a487a6cbf",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/NOTE FOR PERFORMANCE AND SECURITY.txt",
+    "filename": "NOTE FOR PERFORMANCE AND SECURITY.txt",
+    "extension": ".txt",
+    "bytes": 409,
+    "sha256": "6ee4a61da4e61435c856fc1ef267cbc298613c1fb1bfc4eea2b9dd4aa77af736",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-performance-suite"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "a94cf7a601f7650f",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/OfflineInsiderEnroll.cmd",
+    "filename": "OfflineInsiderEnroll.cmd",
+    "extension": ".cmd",
+    "bytes": 16751,
+    "sha256": "02770e14cc02060449ebd929cf4bb5b90a9866566694cd7d3bdee9485e67d515",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-offline-insider-enroll"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "d5d6546b4f983f24",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/Performance.bat",
+    "filename": "Performance.bat",
+    "extension": ".bat",
+    "bytes": 8421,
+    "sha256": "5e4233ecd9325f910bb2f3380beab2a9dd8c411162372c2d92c8ca64598ad879",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-performance-suite"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "61af91435700bc5a",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/Registry Tweaks to Make Windows Faster.reg",
+    "filename": "Registry Tweaks to Make Windows Faster.reg",
+    "extension": ".reg",
+    "bytes": 8831,
+    "sha256": "3b750ece1f9a30828b0590b61e6a2f84c2222d830500c8c8d0a680c99ff942fb",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-performance-suite"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "344a7961fa53126e",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/Restore Windows Services To Default Settings.bat",
+    "filename": "Restore Windows Services To Default Settings.bat",
+    "extension": ".bat",
+    "bytes": 44055,
+    "sha256": "b77af0fbdcd3067076e507414d92bfebe5150c4089b7b247270b28e84cd73e01",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-restore-services"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "82abe6d1f300a797",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/Security Off.bat",
+    "filename": "Security Off.bat",
+    "extension": ".bat",
+    "bytes": 4021,
+    "sha256": "ffa5cd5a48932cd9139e6dc365041c9aee7decd6ee1a7874462042b46e7e50c8",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-security-off"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "f0bec239c91fb3e3",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/Security On.bat",
+    "filename": "Security On.bat",
+    "extension": ".bat",
+    "bytes": 4487,
+    "sha256": "e830572e7619552bb110f4f70f19e628523c96ff9bc0388d8e0c6d1b18bc532f",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-security-on"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "44efa60966d1fe86",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/TakeControl (Revert).reg",
+    "filename": "TakeControl (Revert).reg",
+    "extension": ".reg",
+    "bytes": 36476,
+    "sha256": "3319f5f1be94a9ce75a316766bb51e74675a8d270b7fc86d3c4dfceec2a6d3fc",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-performance-suite"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "f1904bb96e6f528a",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/TakeControl.reg",
+    "filename": "TakeControl.reg",
+    "extension": ".reg",
+    "bytes": 59746,
+    "sha256": "757160848ea85b975d237b63692e1f55a95702b6dbc8cdad4ec7bdc60911580d",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-performance-suite"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "3e2b33b947f9c131",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/Tools of Tweaks.ps1",
+    "filename": "Tools of Tweaks.ps1",
+    "extension": ".ps1",
+    "bytes": 88,
+    "sha256": "f7a5d0e8c97c327514e25bd1eb2378ab382a48f9305b020843c3d2dfcf201ee2",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-remote-tweak-bootstrap"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "e0e4ca81b26138fa",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/Ultra Performance.pdf",
+    "filename": "Ultra Performance.pdf",
+    "extension": ".pdf",
+    "bytes": 108430,
+    "sha256": "d738998c223bc1cb8b35a05bc9fbf4cdbe47ac99793d44d25d25cc5d748323c0",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-performance-suite"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "6ef598c514ecb77f",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/Uncompact Windows.bat",
+    "filename": "Uncompact Windows.bat",
+    "extension": ".bat",
+    "bytes": 2533,
+    "sha256": "14b4b10e1e290f5981eb6237f0bc456aa203154b1de1ed449145a735b712dcec",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-compact-os"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "29beea69bd9ac8f3",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/UPC.pow",
+    "filename": "UPC.pow",
+    "extension": ".pow",
+    "bytes": 32768,
+    "sha256": "588e017f63c547777e164facc972cf9f086233b6f3dbe9615c6a53a238ee1cff",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-performance-suite"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "9051e753f295e52f",
+    "path": "Setups/OS Environment/Windows/Tweaks for Windows/Windows Activation.ps1",
+    "filename": "Windows Activation.ps1",
+    "extension": ".ps1",
+    "bytes": 84,
+    "sha256": "75296726b8810feb57935388b657cc6d14ff9f4b7e9018554e87fb808dfa3051",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "windows-activation-bootstrap"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "5dbe4f8cd1949297",
+    "path": "Setups/Programming Related/n8n Local Docker Compose Reference Guide.pdf",
+    "filename": "n8n Local Docker Compose Reference Guide.pdf",
+    "extension": ".pdf",
+    "bytes": 342857,
+    "sha256": "e2d1b0ddf770723ce452b85d347afed1437810e4712417eb2599b2816e482cb6",
+    "tracked": false,
+    "gitRevision": null,
+    "scope": "primary",
+    "guideIds": [
+      "n8n-local-docker-compose"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "831b29aa5c04b40b",
+    "path": "Setups/Programming Related/Software Troubleshooting and Configurations.docx",
+    "filename": "Software Troubleshooting and Configurations.docx",
+    "extension": ".docx",
+    "bytes": 19468,
+    "sha256": "d9a27271234bcb48206247323e0c8134867b97efcd8072b4bf2687190e8894f4",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "software-troubleshooting-configurations"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "7f1ebf042de2535e",
+    "path": "Setups/Programming Related/Software Troubleshooting and Configurations.pdf",
+    "filename": "Software Troubleshooting and Configurations.pdf",
+    "extension": ".pdf",
+    "bytes": 197031,
+    "sha256": "2b2ed17ae6c5a1077322dce7557131b60a8ea5b28bdde8b3447be1dba01a044d",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "primary",
+    "guideIds": [
+      "software-troubleshooting-configurations"
+    ],
+    "migrationStatus": "mapped"
+  },
+  {
+    "sourceId": "8d2d61b7ced63a3f",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Adguard App Settings.adg",
+    "filename": "Adguard App Settings.adg",
+    "extension": ".adg",
+    "bytes": 35676727,
+    "sha256": "d9b7435573737d0087f6db633ab8003df2ada04db9721bb89c36fec23c0060e8",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "6681cf9c5697bce3",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Adguard Extension Settings.json",
+    "filename": "Adguard Extension Settings.json",
+    "extension": ".json",
+    "bytes": 1829,
+    "sha256": "edebee0e9e1b39c474d3a84e9da0f2ef995122802c588c7b4ed81f4664930054",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "b0914afd7861a72c",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Blocked Site.csv",
+    "filename": "Blocked Site.csv",
+    "extension": ".csv",
+    "bytes": 55,
+    "sha256": "d325335bf686d017238df1b2a6ba72d48d4b723d236d846921b92251e5b8e4b6",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "99dc151cd6d103aa",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Browsers Flags/Browser Flags-1.png",
+    "filename": "Browser Flags-1.png",
+    "extension": ".png",
+    "bytes": 168594,
+    "sha256": "c490f8951c98b5f2ef89c90270daf17d345b010415a73e08e5cdf9bf9fa67e41",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "936bc3de79e3210b",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Browsers Flags/Browser Flags-2.png",
+    "filename": "Browser Flags-2.png",
+    "extension": ".png",
+    "bytes": 203871,
+    "sha256": "120956ef5ff5e76504da1ff9f3ac118df7b69dc519e7dcf4acfa75c46eefacaf",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "6bae44a63371e461",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Custom-Adobe Acrobat_MS Word Settings.joboptions",
+    "filename": "Custom-Adobe Acrobat_MS Word Settings.joboptions",
+    "extension": ".joboptions",
+    "bytes": 30613,
+    "sha256": "924a289ff99e06600d4f5e80d6773a69bd00353647025d637bd4ffd645a70c1a",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "79edc2f3c9cb5c59",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Enforce Extension on Google Chrome.txt",
+    "filename": "Enforce Extension on Google Chrome.txt",
+    "extension": ".txt",
+    "bytes": 471,
+    "sha256": "228ab513d256e5cf3442cfb5d11c1943e1a48628a36c89fa35456b2526833da8",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "0f6ae3cb33b888bd",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Enhancer For Youtube Settings.txt",
+    "filename": "Enhancer For Youtube Settings.txt",
+    "extension": ".txt",
+    "bytes": 3693,
+    "sha256": "db4972412f55b49a7ae3f033afeba5da468a84f19f917f23bd80410c97d88345",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "9ad6f4af9ac85965",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Flameshot.conf",
+    "filename": "Flameshot.conf",
+    "extension": ".conf",
+    "bytes": 421,
+    "sha256": "2f696f1d3f807b845bb128ea87dd3d7569de632b06c611c455a3988781507ed0",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "b2db9bf7da3d2552",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Hardware Specification and Configuration.txt",
+    "filename": "Hardware Specification and Configuration.txt",
+    "extension": ".txt",
+    "bytes": 178,
+    "sha256": "58ce6362bb1566de426fa2a3649d9f4202607f474e91f1d77f0e2588190a7e84",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "afd865933abb3c59",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/How to add Brave Search on other Browsers.txt",
+    "filename": "How to add Brave Search on other Browsers.txt",
+    "extension": ".txt",
+    "bytes": 103,
+    "sha256": "72c2966b1c4182df312d20a2a498977b68df8797cdc79f2c267eb322503aa59a",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "3a0bb3d609ca0f06",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Improve Youtube Settings.json",
+    "filename": "Improve Youtube Settings.json",
+    "extension": ".json",
+    "bytes": 4205,
+    "sha256": "9715e61f2653c4e6ee31baa4ce0b19d9ac8a44c8f147687120406e1ea1f5f699",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "b76d5b9fe7c42304",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Kaspersky Premium.cfg",
+    "filename": "Kaspersky Premium.cfg",
+    "extension": ".cfg",
+    "bytes": 4054380,
+    "sha256": "ce12eba22aa6fda7ce1c1d9ff32510e9e87317321c2c316fd79fc8cd9ba17294",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "4dc44bf206d9e857",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Kaspersky Total Security.cfg",
+    "filename": "Kaspersky Total Security.cfg",
+    "extension": ".cfg",
+    "bytes": 3368267,
+    "sha256": "e772aa52c0d2eb7fbd2927f0ca6f2af69ccbf5c187508d77c187ae2505433bb1",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "31d0a94712b2d38c",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/ProcessLasso Settings.INI",
+    "filename": "ProcessLasso Settings.INI",
+    "extension": ".ini",
+    "bytes": 8426,
+    "sha256": "e8e80169c2c6b68aed7cb205602343fba056bea558e4465635f2fe430360d26f",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "64223a03feee0e72",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/ReVancedManager_settings.json",
+    "filename": "ReVancedManager_settings.json",
+    "extension": ".json",
+    "bytes": 82947,
+    "sha256": "995502fcecec59bf06ada7a106f9451ab4f30faffc562f85c1f957357c68b37e",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "c8615e8189584f13",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/RevoUninstallerPSettings.rupset",
+    "filename": "RevoUninstallerPSettings.rupset",
+    "extension": ".rupset",
+    "bytes": 6337,
+    "sha256": "fcb1dfd3de82bb6c05f7e00cccd25d0b440aade4cdc6efcaf2b383a20b3cffd9",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "707b8795fc69d1af",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/UblockOriginConfig.txt",
+    "filename": "UblockOriginConfig.txt",
+    "extension": ".txt",
+    "bytes": 4521,
+    "sha256": "d402564f20f626a0df41913d3b7d456f003ad9cdcf554ed5ffdca956fbb182f9",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "15bc8936e86cab6e",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/UblockOriginLiteConfig.json",
+    "filename": "UblockOriginLiteConfig.json",
+    "extension": ".json",
+    "bytes": 908,
+    "sha256": "a59a3daaadebbab7ce733ee365e9b3f3700e4138565037bb166d95f66c37aec4",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "1b1bf157e0ab8e1f",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/UniGetUI Settings.json",
+    "filename": "UniGetUI Settings.json",
+    "extension": ".json",
+    "bytes": 1523,
+    "sha256": "1d14b324204eff03c9eadadf27a3a4a6a5683e04b530ca005a5797752432f72e",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "8890ab5964e7843d",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/W10Privacy.ini",
+    "filename": "W10Privacy.ini",
+    "extension": ".ini",
+    "bytes": 11849,
+    "sha256": "ede5fa7c459ba878cf6ba7c960c16403d282bdf3e46d80ebb45a61d913a6e026",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "225ad8221f48a0f7",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/wastenotime-settings.json",
+    "filename": "wastenotime-settings.json",
+    "extension": ".json",
+    "bytes": 712,
+    "sha256": "6b170367a479a38ab5189e1b4524d016b6285d9e6946da4469244c7e6ba004a5",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "429eccaec3c0453a",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Xiaomi AX6000 Router Settings/1.png",
+    "filename": "1.png",
+    "extension": ".png",
+    "bytes": 122848,
+    "sha256": "c3534463df211a4c78fe3a72fb8b1634b13d8e88e9f1e906589e6b50f7ebdd3b",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "512b6df7024bcc71",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Xiaomi AX6000 Router Settings/10.png",
+    "filename": "10.png",
+    "extension": ".png",
+    "bytes": 114371,
+    "sha256": "c835babeedd3fd39cca111bf6364aa66af67fe9ba9e8b64fe5ab5ac3899b04e5",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "9e36ea6647072c79",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Xiaomi AX6000 Router Settings/11.png",
+    "filename": "11.png",
+    "extension": ".png",
+    "bytes": 104886,
+    "sha256": "f3dc8ae0336eba5dbec5c10a95b2651d42316ec21d2226f9b0a1361958f0183e",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "cf05d0b7ae1c1754",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Xiaomi AX6000 Router Settings/2.png",
+    "filename": "2.png",
+    "extension": ".png",
+    "bytes": 263040,
+    "sha256": "f02ad71d2761408249bf580c1353923188dc335ddd8f6f7d50776f90a59896d9",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "cb67fa24108471b1",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Xiaomi AX6000 Router Settings/3.png",
+    "filename": "3.png",
+    "extension": ".png",
+    "bytes": 211987,
+    "sha256": "09240f9d6accac708cb6c8bea31def06bb78a43199bcb5d6de5c6b9a7837c00c",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "23b68912c79e90f1",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Xiaomi AX6000 Router Settings/4.png",
+    "filename": "4.png",
+    "extension": ".png",
+    "bytes": 163996,
+    "sha256": "a5ab8254e5d733f3a47f62cf0d5aaad0302feb164b6fb1c88f2fc8adc91cdb20",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "e599fde4539048e0",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Xiaomi AX6000 Router Settings/5.png",
+    "filename": "5.png",
+    "extension": ".png",
+    "bytes": 148941,
+    "sha256": "6bd6965e0ce13d5cc359bc268edd8b25e160cdaea43cdb2b9d52d89de3db52bd",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "fadda05f9984a030",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Xiaomi AX6000 Router Settings/6.png",
+    "filename": "6.png",
+    "extension": ".png",
+    "bytes": 173577,
+    "sha256": "86e9d9325708d2f1313819a1885d9cf6a5f150d161d3d0ba8bd9114dc0c96d82",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "0477337fff08b4aa",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Xiaomi AX6000 Router Settings/7.png",
+    "filename": "7.png",
+    "extension": ".png",
+    "bytes": 116617,
+    "sha256": "216d79760c26c25071c8bffb2439ceb35014f4518413f2a2429b15d0e392d627",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "c701be65a09de3f7",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Xiaomi AX6000 Router Settings/8.png",
+    "filename": "8.png",
+    "extension": ".png",
+    "bytes": 106605,
+    "sha256": "3f746806f9237dd659f6cd70c80c572a0124666ecdc2b26300214c01a69a23a2",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "0e90592fae1a7c7d",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Xiaomi AX6000 Router Settings/9.png",
+    "filename": "9.png",
+    "extension": ".png",
+    "bytes": 128536,
+    "sha256": "7d0c96004398133dfa07df0287d5622e893f2d4d29c9186adcbdeffeb1b1bc89",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "951df87765bab78f",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Xiaomi AX6000 Router Settings/Xiaomi AX6000.docx",
+    "filename": "Xiaomi AX6000.docx",
+    "extension": ".docx",
+    "bytes": 1524042,
+    "sha256": "fe256aa81d45495d6d6697460632e51496679bf3241f694c2dc835b3b35179b9",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  },
+  {
+    "sourceId": "88248df0c0c4f57d",
+    "path": "Setups/Softwares_Apps_Extensions Configurations/Xiaomi AX6000 Router Settings/Xiaomi AX6000.pdf",
+    "filename": "Xiaomi AX6000.pdf",
+    "extension": ".pdf",
+    "bytes": 959978,
+    "sha256": "60c2825a5335a2f6903012dbe07f167cd7d33aca92703c1c27975b285d6a64f9",
+    "tracked": true,
+    "gitRevision": "196b450a2a4557c27dba6645b027f20aeb4e2a70",
+    "scope": "secondary-review",
+    "guideIds": [],
+    "migrationStatus": "secondary-review"
+  }
+]

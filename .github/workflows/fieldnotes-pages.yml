@@ -1,0 +1,53 @@
+# Give the workflow a clear name in the GitHub Actions interface.
+name: Deploy FIELDNOTES to GitHub Pages
+
+# Build on changes merged to the publication branch and allow a deliberate manual run.
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "knowledge-base/**"
+      - ".github/workflows/fieldnotes-pages.yml"
+  workflow_dispatch:
+
+# Grant only the permissions required to read the repository and publish a Pages artifact.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Prevent overlapping Pages releases while allowing an in-progress deployment to finish safely.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+# Separate reproducible build work from the protected deployment environment.
+jobs:
+  build:
+    name: Build FIELDNOTES
+    runs-on: ubuntu-latest
+    steps:
+      # Fetch the exact repository revision that triggered this run.
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      # Install from the lockfile, build Astro, and upload the generated Pages artifact.
+      - name: Build and upload Astro site
+        uses: withastro/action@v6
+        with:
+          path: ./knowledge-base
+          node-version: 24
+
+  deploy:
+    name: Deploy FIELDNOTES
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      # Publish only the artifact produced by the successful build job.
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

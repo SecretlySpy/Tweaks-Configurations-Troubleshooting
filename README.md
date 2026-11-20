@@ -1,6 +1,6 @@
 # Tweaks-Configurations-Troubleshooting
 
-A curated knowledge base and operational repository containing customized operating system optimizations (Windows, Linux, Android/Termux), application and extension configuration exports, hardware and router tuning walkthroughs, troubleshooting manuals, and an autonomous multi-model AI agent engineering framework.
+A curated operational repository containing customized operating system optimizations (Windows, Linux, Android/Termux), application and extension configuration exports, hardware and router tuning walkthroughs, troubleshooting manuals, the FIELDNOTES static knowledge-base application, and an autonomous multi-model AI agent engineering framework.
 
 > **Use at your own risk.** Many scripts and registry modifications directly alter operating system kernels, services, security boundaries, and filesystem states. Always back up system registries, export configurations, and create restore points prior to applying modifications.
 
@@ -20,6 +20,11 @@ Tweaks-Configurations-Troubleshooting/
 │   │   └── Windows/                               # Windows batch scripts, registry tweaks, and guides
 │   ├── Programming Related/                       # Developer tool troubleshooting & setups
 │   └── Softwares_Apps_Extensions Configurations/  # App profiles, adblock rules, browser flags, router setup
+├── knowledge-base/                                # FIELDNOTES Astro/Starlight static website
+│   ├── Project Guidelines/                        # FIELDNOTES architecture, QA & handover records
+│   ├── scripts/                                   # Read-only content ingestion & verification
+│   ├── src/                                       # Pages, components, styles & generated content data
+│   └── tests/                                     # Content, state, browser & accessibility checks
 ├── AGENTS.md                                      # Autonomous engineering & delivery protocol (v3.3)
 ├── AI Documentation Notes.md                      # Machine-readable static analysis & module index
 ├── AIO.md                                         # All-In-One router, skills index & operating kernel
@@ -44,8 +49,28 @@ Tweaks-Configurations-Troubleshooting/
 | [`Setups/OS Environment/Android/`](Setups/OS%20Environment/Android/) | Xiaomi/MIUI package debloat list via ADB, and Termux framework installation procedures | `.txt` | ADB User 0 / Termux CLI |
 | [`Setups/Softwares_Apps_Extensions Configurations/`](Setups/Softwares_Apps_Extensions%20Configurations/) | Browser extensions, system tools (Process Lasso, Revo, W10Privacy, UniGetUI), adblock filters, browser flags, and Xiaomi AX6000 Wi-Fi 6 router setup | `.json`, `.ini`, `.cfg`, `.adg`, `.rupset`, `.csv`, `.png`, `.docx`, `.pdf` | User / App Import |
 | [`Setups/Programming Related/`](Setups/Programming%20Related/) | Developer environment, toolchain troubleshooting, and runtime setup reference guide | `.docx`, `.pdf` | Reference only |
+| [`knowledge-base/`](knowledge-base/) | FIELDNOTES static website, source manifest, migration pipeline, UI, automated checks, and project-specific handover records | Astro, TypeScript, CSS, JSON, Playwright | Build-time read only; no source commands are executed |
 | [`AI Configs/`](AI%20Configs/) | Upstream package repository containing 15 specialized agent personas ([`AI Skills/`](AI%20Configs/AI%20Skills/)) and canonical guidelines ([`Project Guidelines/`](AI%20Configs/Project%20Guidelines/)) | `.md`, `.html` | AI Agent Framework |
 | Root Agent Protocol | Core multi-model orchestration contracts ([`AGENTS.md`](AGENTS.md), [`AIO.md`](AIO.md), [`Project-Operating-Directives.md`](Project-Operating-Directives.md), [`CLAUDE.md`](CLAUDE.md), [`GEMINI.md`](GEMINI.md)) | `.md` | AI Agent Framework |
+
+---
+
+## FIELDNOTES Knowledge Base
+
+FIELDNOTES converts reviewed repository sources into searchable, web-native articles while retaining source paths, SHA-256 hashes, Git revisions, compatibility notes, and migration status. Potentially harmful or licensing-circumvention material is not published as operational copy; it remains represented in the audit manifest so coverage is explicit.
+
+```powershell
+# Enter the isolated website workspace.
+Set-Location knowledge-base
+
+# Install exactly the dependency graph recorded in package-lock.json.
+npm ci
+
+# Run content, type, production-build, browser, and accessibility checks.
+npm test
+```
+
+See the [FIELDNOTES README](knowledge-base/README.md) and [project records](knowledge-base/Project%20Guidelines/) for architecture, source migration, local development, verification evidence, deployment preparation, known limitations, and rollback guidance. GitHub Pages publication and original-source relocation are separately gated operations; the website build never executes the documented operating-system commands.
 
 ---
 

@@ -9,11 +9,11 @@
 
 ## 0. Repository Overview
 
-- **Type:** Non-application repository. A curated personal knowledge base and operational library of system optimizations, debloating scripts, application configuration exports, troubleshooting manuals, and an autonomous multi-model AI agent framework.
+- **Type:** Operational source repository plus a separate static web application. The original system-configuration library remains authoritative; `knowledge-base/` builds the FIELDNOTES public reading experience without executing source commands.
 - **Primary domains:** Windows system debloating and performance tuning, Linux (Debian-based) kernel/sysctl optimization, Android (Xiaomi) ADB debloating, Termux CLI tools, browser and security application configuration profiles, network hardware tuning, and multi-model AI agent orchestration.
 - **Languages / formats present:** Windows Batch (`.bat`/`.cmd`), PowerShell (`.ps1`), Windows Registry scripts (`.reg`; UTF-16 LE and ASCII), Windows Power Schemes (`.pow`), Bash command recipes (`.txt`), JSON, INI, CFG, ADG, RUPSET, CSV, JobOptions, Markdown (`.md`), HTML, and binary reference documents (`.docx`, `.pdf`, `.png`).
 - **Execution model:** System modification files are executed or imported manually by the operator on target machines. Most Windows scripts include standardized self-elevation logic requiring Administrator context. AI agent instructions govern automated IDE agents.
-- **Static QA summary:** All executable scripts incorporate OS-compatibility guards (Windows 10/11 version enforcement), standardized UAC self-elevation, numeric `ver`-based detection, legacy fallbacks where supported, and verified undo scripts (`Uncompact Windows.bat`, `TakeControl (Revert).reg`). Gate: **PASS**.
+- **Static QA summary:** Compatibility guards, elevation, and recovery coverage vary by source; they are not universal guarantees. FIELDNOTES records per-guide risk, compatibility, provenance, and known recovery companions, while remote bootstraps and blocked/review-only procedures remain non-operational. Website QA did not execute any source command. Gate: **REVIEW PER GUIDE**.
 
 ### 0.1 Directory Map
 
@@ -26,8 +26,22 @@
 | [`Setups/OS Environment/Android/Packages and Tools in Termux/`](Setups/OS%20Environment/Android/Packages%20and%20Tools%20in%20Termux/) | Termux setup instructions, directory relocation, and security utility setup | `.txt` |
 | [`Setups/Softwares_Apps_Extensions Configurations/`](Setups/Softwares_Apps_Extensions%20Configurations/) | App configs (Process Lasso, Revo, W10Privacy, UniGetUI, Kaspersky), adblock rules, browser flags, and Xiaomi AX6000 router setup | `.json`, `.ini`, `.cfg`, `.adg`, `.rupset`, `.csv`, `.png`, `.docx`, `.pdf` |
 | [`Setups/Programming Related/`](Setups/Programming%20Related/) | Developer tooling setup, configuration references, and environment troubleshooting | `.docx`, `.pdf` |
+| [`knowledge-base/`](knowledge-base/) | FIELDNOTES Astro/Starlight application, generated source inventory, migration mapping, local-state features, automated verification, and project handover records | `.astro`, `.ts`, `.mjs`, `.css`, `.json`, `.md` |
 | [`AI Configs/`](AI%20Configs/) | Upstream package repository containing 15 modular agent specialists (`AI Skills/`) and canonical project templates (`Project Guidelines/`) | `.md`, `.html` |
 | Root Agent Protocol & Documentation | Core orchestration engine (`AGENTS.md`, `AIO.md`, `Project-Operating-Directives.md`, `CLAUDE.md`, `GEMINI.md`, `CLI`, `README.md`, `Tech Stack Setup Guide.md`) | `.md`, `.txt` |
+
+---
+
+### 0.2 FIELDNOTES Application Boundary (`knowledge-base/`)
+
+- **Purpose:** Generate a GitHub Pages-compatible, web-native documentation site for reviewed Windows, Linux, Android, Programming Related, and n8n material.
+- **Inputs:** Read-only source files under `Setups/`, plus the structured guide map in `knowledge-base/content-map.json`.
+- **Outputs:** Static HTML, CSS, JavaScript, Pagefind data, sitemap data, and a reduced client-side search index under the ignored `knowledge-base/dist/` build directory.
+- **Dependencies:** Node.js `>=22.23.4`, Astro, Starlight, PDF.js, Mammoth, Playwright, and axe-core; exact versions are locked in `knowledge-base/package-lock.json`.
+- **Behaviour:** Build-time extraction records source hashes and revisions, creates canonical cross-listed articles, withholds blocked operational material from public text/search, and never runs `.bat`, `.cmd`, `.ps1`, `.reg`, `.pow`, or source shell commands.
+- **Local browser state:** Versioned bookmarks and guided-step progress are stored only in the visitor's browser; no accounts, backend, telemetry, or cloud synchronization are introduced.
+- **Authoritative records:** Start with [`knowledge-base/README.md`](knowledge-base/README.md) and [`knowledge-base/Project Guidelines/AI Documentation Notes.md`](knowledge-base/Project%20Guidelines/AI%20Documentation%20Notes.md).
+- **Publication boundary:** The GitHub Pages workflow is release preparation. Publication, deployed-site acceptance, and relocation into `Legacy Guide Files` require their separate gates.
 
 ---
 

@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/routes';
+---
+
+<BaseLayout title="Guide not found" activePath="/">
+  <section class="hero">
+    <div class="hero-content">
+      <span class="eyebrow">404 · route not found</span>
+      <h1>This fieldnote is off the map.</h1>
+      <p class="lede">The guide may have moved, or the link may not include the GitHub Pages repository base path.</p>
+      <div class="article-actions">
+        <a class="primary-button" href={withBase('/all-guides/')}>Search all guides</a>
+        <a class="secondary-button" href={withBase('/')}>Return to overview</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+

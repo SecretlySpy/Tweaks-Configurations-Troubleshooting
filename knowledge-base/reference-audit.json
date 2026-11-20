@@ -1,0 +1,315 @@
+{
+  "schemaVersion": 1,
+  "auditedAt": "2026-11-19",
+  "policy": {
+    "scope": "Every canonical FIELDNOTES guide is classified against current first-party or standards-owner documentation where a stable operational authority exists.",
+    "statusDefinitions": {
+      "verified-primary": "The guide's central mechanism has a current first-party or standards-owner reference. Source-specific values still require target-environment verification.",
+      "partially-verified": "At least one central mechanism has a current primary reference, but the guide combines additional source-specific procedures that were not independently validated.",
+      "source-only-unverified": "The source is preserved for provenance, but no sufficiently specific current primary reference was found for its operational claims.",
+      "non-operational-review": "FIELDNOTES withholds the operational procedure pending a dedicated safety, provenance, or immutable-upstream review.",
+      "non-operational-blocked": "FIELDNOTES intentionally withholds operational instructions because the source would facilitate phishing or license circumvention."
+    },
+    "importantLimit": "A verified reference validates documented platform behavior, not successful execution on a particular device, OS build, or third-party tool version."
+  },
+  "guides": [
+    {
+      "guideId": "windows-default-install-directory",
+      "status": "source-only-unverified",
+      "scope": "The registry transcription is preserved, but changing ProgramFilesDir is not represented as a currently supported Microsoft deployment method.",
+      "references": []
+    },
+    {
+      "guideId": "android-termux-lazymux",
+      "status": "source-only-unverified",
+      "scope": "The third-party installer and its legacy Python dependencies require an immutable upstream and current Termux compatibility review.",
+      "references": []
+    },
+    {
+      "guideId": "android-termux-tool-x",
+      "status": "non-operational-review",
+      "scope": "Operational commands remain withheld while the mutable installer and bundled security tools await a scoped safety review.",
+      "references": []
+    },
+    {
+      "guideId": "android-termux-weeman",
+      "status": "non-operational-blocked",
+      "scope": "The source describes credential-phishing operations, so only provenance is published.",
+      "references": []
+    },
+    {
+      "guideId": "android-xiaomi-tweaks",
+      "status": "partially-verified",
+      "scope": "Android documents adb package-manager behavior; the Xiaomi package identifiers and device-specific effects remain unverified.",
+      "references": [
+        {
+          "title": "Android Debug Bridge (adb)",
+          "url": "https://developer.android.com/tools/adb",
+          "owner": "Android Developers",
+          "relation": "Documents adb shell and package-manager commands."
+        }
+      ]
+    },
+    {
+      "guideId": "linux-application-installation",
+      "status": "partially-verified",
+      "scope": "Debian documents APT package installation and repository trust; each third-party repository and package recipe remains version-sensitive.",
+      "references": [
+        {
+          "title": "Debian Administrator's Handbook: The APT Tools",
+          "url": "https://www.debian.org/doc/manuals/debian-handbook/apt.html",
+          "owner": "Debian Project",
+          "relation": "Documents APT repositories, installation, removal, upgrades, and authenticity checks."
+        }
+      ]
+    },
+    {
+      "guideId": "linux-login-autostart",
+      "status": "partially-verified",
+      "scope": "The desktop autostart mechanism is standardized, while the original source is only a short external link and does not establish a complete shell/session procedure.",
+      "references": [
+        {
+          "title": "Desktop Application Autostart Specification",
+          "url": "https://specifications.freedesktop.org/autostart/latest/",
+          "owner": "freedesktop.org",
+          "relation": "Defines desktop-session autostart directories and precedence."
+        }
+      ]
+    },
+    {
+      "guideId": "linux-tweaks",
+      "status": "source-only-unverified",
+      "scope": "The collection combines kernel, thermal, filesystem, and package changes; no single primary reference validates the complete workload-specific prescription.",
+      "references": []
+    },
+    {
+      "guideId": "linux-troubleshooting",
+      "status": "partially-verified",
+      "scope": "Debian documents the underlying administration and package mechanisms; risky repository and sudo changes remain source-specific and require diagnosis first.",
+      "references": [
+        {
+          "title": "The Debian Administrator's Handbook",
+          "url": "https://www.debian.org/doc/manuals/debian-handbook/",
+          "owner": "Debian Project",
+          "relation": "Primary Debian administration and recovery context."
+        }
+      ]
+    },
+    {
+      "guideId": "n8n-local-docker-compose",
+      "status": "verified-primary",
+      "scope": "First-party n8n, Docker, and Microsoft documentation validates the installation model; the source's exact image versions, secrets, ports, and host paths still require local review.",
+      "references": [
+        {
+          "title": "n8n Docker Compose server setup",
+          "url": "https://docs.n8n.io/hosting/installation/server-setups/docker-compose/",
+          "owner": "n8n",
+          "relation": "First-party Docker Compose deployment guidance."
+        },
+        {
+          "title": "Overview of installing Docker Compose",
+          "url": "https://docs.docker.com/compose/install/",
+          "owner": "Docker",
+          "relation": "First-party Compose installation options and prerequisites."
+        },
+        {
+          "title": "Install WSL",
+          "url": "https://learn.microsoft.com/en-us/windows/wsl/install",
+          "owner": "Microsoft",
+          "relation": "First-party WSL 2 host prerequisites and installation."
+        },
+        {
+          "title": "n8n security audit",
+          "url": "https://docs.n8n.io/hosting/securing/security-audit/",
+          "owner": "n8n",
+          "relation": "First-party post-install security review."
+        }
+      ]
+    },
+    {
+      "guideId": "software-troubleshooting-configurations",
+      "status": "partially-verified",
+      "scope": "Current primary setup pages exist for Kivy, Android Studio, and WSL; the mixed source compendium's exact legacy IDE and JVM fixes remain version-sensitive.",
+      "references": [
+        {
+          "title": "Installing Kivy",
+          "url": "https://kivy.org/doc/stable/gettingstarted/installation.html",
+          "owner": "Kivy Project",
+          "relation": "Current first-party Kivy installation guidance."
+        },
+        {
+          "title": "Install Android Studio",
+          "url": "https://developer.android.com/studio/install",
+          "owner": "Android Developers",
+          "relation": "Current first-party Android Studio requirements and setup."
+        },
+        {
+          "title": "Set up a WSL development environment",
+          "url": "https://learn.microsoft.com/en-us/windows/wsl/setup/environment",
+          "owner": "Microsoft",
+          "relation": "Current WSL development-environment guidance."
+        }
+      ]
+    },
+    {
+      "guideId": "windows-power-options",
+      "status": "partially-verified",
+      "scope": "Microsoft documents powercfg and power schemes; the 1,195-page source's hardware-specific settings were not executed or independently validated.",
+      "references": [
+        {
+          "title": "Powercfg command-line options",
+          "url": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options",
+          "owner": "Microsoft",
+          "relation": "Documents power-scheme query, modification, import, export, and analysis commands."
+        }
+      ]
+    },
+    {
+      "guideId": "windows-powershell-cmd",
+      "status": "partially-verified",
+      "scope": "Microsoft documents both shells and their supported command references; each source command still needs command-specific review and appropriate elevation.",
+      "references": [
+        {
+          "title": "What is PowerShell?",
+          "url": "https://learn.microsoft.com/en-us/powershell/scripting/overview",
+          "owner": "Microsoft",
+          "relation": "First-party PowerShell model and documentation entry point."
+        },
+        {
+          "title": "Windows commands",
+          "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands",
+          "owner": "Microsoft",
+          "relation": "First-party Command Prompt reference index and safety context."
+        }
+      ]
+    },
+    {
+      "guideId": "windows-block-driver-installation",
+      "status": "verified-primary",
+      "scope": "Microsoft documents the Group Policy mechanism and identifier precedence; policy availability and target hardware IDs remain device- and edition-specific.",
+      "references": [
+        {
+          "title": "Manage Device Installation with Group Policy",
+          "url": "https://learn.microsoft.com/en-us/windows/client-management/manage-device-installation-with-group-policy",
+          "owner": "Microsoft",
+          "relation": "Documents allow/prevent policies, hardware identifiers, precedence, and testing."
+        }
+      ]
+    },
+    {
+      "guideId": "windows-troubleshooting-compendium",
+      "status": "partially-verified",
+      "scope": "The compendium spans many unrelated Windows mechanisms. Microsoft command documentation provides context, but no blanket verification applies to every procedure.",
+      "references": [
+        {
+          "title": "Windows commands",
+          "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands",
+          "owner": "Microsoft",
+          "relation": "First-party command reference and registry safety warning."
+        }
+      ]
+    },
+    {
+      "guideId": "windows-performance-suite",
+      "status": "partially-verified",
+      "scope": "Power-scheme tooling is documented, but HMB, registry, ownership, and binary .pow choices are source-specific and hardware-sensitive.",
+      "references": [
+        {
+          "title": "Powercfg command-line options",
+          "url": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options",
+          "owner": "Microsoft",
+          "relation": "First-party power-scheme command semantics."
+        }
+      ]
+    },
+    {
+      "guideId": "windows-security-on",
+      "status": "partially-verified",
+      "scope": "Microsoft documents enabling and verifying Defender protections; the bundle's complete registry, firewall, and account-policy effects remain source-specific.",
+      "references": [
+        {
+          "title": "Configure Microsoft Defender Antivirus always-on protection",
+          "url": "https://learn.microsoft.com/en-us/defender-endpoint/configure-real-time-protection-microsoft-defender-antivirus",
+          "owner": "Microsoft",
+          "relation": "First-party Defender enablement and verification guidance."
+        }
+      ]
+    },
+    {
+      "guideId": "windows-security-off",
+      "status": "partially-verified",
+      "scope": "The primary reference establishes the protection being weakened; it does not endorse disabling it. Exact bundle behavior remains high-risk and target-specific.",
+      "references": [
+        {
+          "title": "Microsoft Defender Antivirus in the Windows Security app",
+          "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-security-center-antivirus",
+          "owner": "Microsoft",
+          "relation": "First-party protection behavior and enabled-state verification; cautionary context only."
+        }
+      ]
+    },
+    {
+      "guideId": "windows-compact-os",
+      "status": "verified-primary",
+      "scope": "Microsoft documents querying, enabling, and disabling Compact OS; actual storage and performance effects remain hardware-dependent.",
+      "references": [
+        {
+          "title": "Compact OS, single-instancing, and image optimization",
+          "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/compact-os?view=windows-11",
+          "owner": "Microsoft",
+          "relation": "First-party Compact OS command behavior."
+        }
+      ]
+    },
+    {
+      "guideId": "windows-update-controls",
+      "status": "verified-primary",
+      "scope": "Microsoft documents the policy registry keys and warns that incorrect registry edits can cause serious problems; organization policy can override local values.",
+      "references": [
+        {
+          "title": "Manage additional Windows Update settings",
+          "url": "https://learn.microsoft.com/en-us/windows/deployment/update/waas-wu-settings",
+          "owner": "Microsoft",
+          "relation": "First-party Windows Update Group Policy and registry mapping."
+        }
+      ]
+    },
+    {
+      "guideId": "windows-restore-services",
+      "status": "partially-verified",
+      "scope": "Microsoft documents sc.exe start-mode semantics; the source's large default matrix varies across Windows versions, editions, and installed features and was not executed.",
+      "references": [
+        {
+          "title": "sc.exe config",
+          "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sc-config",
+          "owner": "Microsoft",
+          "relation": "First-party service configuration syntax and start modes."
+        }
+      ]
+    },
+    {
+      "guideId": "windows-offline-insider-enroll",
+      "status": "source-only-unverified",
+      "scope": "The third-party script modifies Insider enrollment state outside the normal online workflow; no primary source validates its exact implementation or current channel behavior.",
+      "references": []
+    },
+    {
+      "guideId": "windows-remote-tweak-bootstrap",
+      "status": "non-operational-review",
+      "scope": "A mutable download-and-execute bootstrap cannot be validated from its local wrapper; operational text stays withheld until an immutable revision is reviewed.",
+      "references": []
+    },
+    {
+      "guideId": "windows-activation-bootstrap",
+      "status": "non-operational-blocked",
+      "scope": "Operational instructions are withheld because the source invokes third-party license-circumvention tooling.",
+      "references": []
+    },
+    {
+      "guideId": "idm-activation-bootstrap",
+      "status": "non-operational-blocked",
+      "scope": "Operational instructions are withheld because the source invokes third-party license-circumvention tooling.",
+      "references": []
+    }
+  ]
+}

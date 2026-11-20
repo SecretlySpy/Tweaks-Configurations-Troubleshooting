@@ -1,0 +1,37 @@
+---
+import { siAndroid, siLinux } from 'simple-icons';
+import type { OperatingSystem } from '../lib/guide-data';
+
+interface Props {
+  os: OperatingSystem;
+  size?: number;
+  decorative?: boolean;
+}
+
+const { os, size = 32, decorative = false } = Astro.props;
+const icons = {
+  windows: {
+    title: 'Windows',
+    path: 'M2.5 4.4 11 3.2v8.1H2.5V4.4Zm9.7-1.4 9.3-1.3v9.6h-9.3V3ZM2.5 12.7H11v8.1l-8.5-1.2v-6.9Zm9.7 0h9.3v9.6L12.2 21v-8.3Z',
+  },
+  linux: siLinux,
+  android: siAndroid,
+};
+const icon = icons[os];
+const title = icon.title;
+const iconPath = icon.path;
+---
+
+<svg
+  class={`os-icon os-icon--${os}`}
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  role={decorative ? undefined : 'img'}
+  aria-hidden={decorative ? 'true' : undefined}
+  aria-label={decorative ? undefined : `${title} logo`}
+  fill="currentColor"
+>
+  <path d={iconPath}></path>
+</svg>
+

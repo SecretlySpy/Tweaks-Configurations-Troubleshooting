@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideDirectory from '../../components/GuideDirectory.astro';
+import { guides } from '../../lib/guide-data';
+---
+
+<BaseLayout title="Saved Guides" activePath="/saved/" wide>
+  <header class="page-header">
+    <span class="eyebrow">Browser-local library</span>
+    <h1>Saved Guides</h1>
+    <p class="lede">Bookmarks live only in this browser. No account, cloud sync, or analytics profile is created.</p>
+  </header>
+  <GuideDirectory guides={guides} savedOnly emptyMessage="Save a guide from its article page, then return here." />
+</BaseLayout>
+

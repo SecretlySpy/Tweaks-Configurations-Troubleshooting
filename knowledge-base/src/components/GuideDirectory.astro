@@ -1,0 +1,144 @@
+---
+import type { Guide } from '../lib/guide-data';
+import { withBase } from '../lib/routes';
+import GuideCard from './GuideCard.astro';
+
+interface Props {
+  guides: Guide[];
+  showFilters?: boolean;
+  savedOnly?: boolean;
+  emptyMessage?: string;
+}
+
+const {
+  guides,
+  showFilters = true,
+  savedOnly = false,
+  emptyMessage = 'No guides match these filters.',
+} = Astro.props;
+---
+
+<section
+  class="guide-directory"
+  data-guide-directory
+  data-index-url={withBase('/data/search-index.json')}
+  data-saved-only={String(savedOnly)}
+>
+  {showFilters && (
+    <div class="directory-toolbar">
+      <label>
+        <span class="sr-only">Search guide content</span>
+        <input class="directory-input" type="search" placeholder="Search full guide content…" data-directory-search />
+      </label>
+      <label>
+        <span class="sr-only">Filter by operating system</span>
+        <select class="directory-select" data-directory-os>
+          <option value="">All operating systems</option>
+          <option value="windows">Windows</option>
+          <option value="linux">Linux</option>
+          <option value="android">Android</option>
+        </select>
+      </label>
+      <label>
+        <span class="sr-only">Filter by guide type</span>
+        <select class="directory-select" data-directory-category>
+          <option value="">All guide types</option>
+          <option value="tweaks">Tweaks</option>
+          <option value="application-setup">Application setup</option>
+          <option value="troubleshooting">Troubleshooting</option>
+        </select>
+      </label>
+    </div>
+  )}
+  <p class="directory-status" aria-live="polite" data-directory-status></p>
+  <div class="guide-grid" data-directory-grid>
+    {guides.map((guide) => <GuideCard guide={guide} />)}
+    <div class="empty-state" data-directory-empty hidden>
+      <h3>No matching fieldnotes</h3>
+      <p>{emptyMessage}</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { guideState, readState } from '../lib/local-state.mjs';
+
+  interface SearchIndexEntry {
+    id: string;
+    searchText: string;
+  }
+
+  const directories = document.querySelectorAll<HTMLElement>('[data-guide-directory]');
+  for (const directory of directories) {
+    if (!(directory instanceof HTMLElement) || directory.dataset.enhanced === 'true') continue;
+    directory.dataset.enhanced = 'true';
+    const cards = [...directory.querySelectorAll<HTMLElement>('[data-guide-card]')];
+    const searchInput = directory.querySelector('[data-directory-search]');
+    const osSelect = directory.querySelector('[data-directory-os]');
+    const categorySelect = directory.querySelector('[data-directory-category]');
+    const status = directory.querySelector('[data-directory-status]');
+    const empty = directory.querySelector('[data-directory-empty]');
+    const savedOnly = directory.dataset.savedOnly === 'true';
+    let fullTextById = new Map<string, string>();
+    let indexLoading: Promise<void> | null = null;
+    let indexUnavailable = false;
+
+    async function loadIndex() {
+      if (fullTextById.size > 0) return;
+      if (!indexLoading) {
+        indexLoading = fetch(directory.dataset.indexUrl ?? '')
+          .then((response) => {
+            if (!response.ok) throw new Error(`Search index returned ${response.status}.`);
+            return response.json();
+          })
+          .then((entries: SearchIndexEntry[]) => {
+            fullTextById = new Map(entries.map((entry) => [entry.id, String(entry.searchText).toLocaleLowerCase()]));
+          })
+          .catch(() => {
+            indexUnavailable = true;
+          });
+      }
+      await indexLoading;
+    }
+
+    function applyFilters() {
+      const query = searchInput instanceof HTMLInputElement ? searchInput.value.trim().toLocaleLowerCase() : '';
+      const os = osSelect instanceof HTMLSelectElement ? osSelect.value : '';
+      const category = categorySelect instanceof HTMLSelectElement ? categorySelect.value : '';
+      const state = readState();
+      let visible = 0;
+      for (const card of cards) {
+        const text = `${card.dataset.search ?? ''} ${fullTextById.get(card.dataset.guideId ?? '') ?? ''}`;
+        const matchesQuery = query.length === 0 || text.includes(query);
+        const matchesOs = os.length === 0 || (card.dataset.os ?? '').split(',').includes(os);
+        const matchesCategory = category.length === 0 || (card.dataset.category ?? '').split(',').includes(category);
+        const matchesSaved = !savedOnly || guideState(state, card.dataset.guideId).bookmarked;
+        card.hidden = !(matchesQuery && matchesOs && matchesCategory && matchesSaved);
+        if (!card.hidden) visible += 1;
+      }
+      if (empty instanceof HTMLElement) empty.hidden = visible !== 0;
+      if (status) {
+        const resultCount = `${visible} ${visible === 1 ? 'guide' : 'guides'} shown.`;
+        status.textContent = indexUnavailable
+          ? `Full-text index is unavailable; title and summary search is still active. ${resultCount}`
+          : resultCount;
+      }
+    }
+
+    const initialQuery = new URLSearchParams(window.location.search).get('q') ?? '';
+    if (searchInput instanceof HTMLInputElement) {
+      searchInput.value = initialQuery;
+      searchInput.addEventListener('focus', loadIndex, { once: true });
+      searchInput.addEventListener('input', async () => {
+        if (searchInput.value.trim().length >= 2) await loadIndex();
+        applyFilters();
+      });
+    }
+    osSelect?.addEventListener('change', applyFilters);
+    categorySelect?.addEventListener('change', applyFilters);
+    window.addEventListener('storage', applyFilters);
+    if (initialQuery) await loadIndex();
+    applyFilters();
+  }
+</script>
+

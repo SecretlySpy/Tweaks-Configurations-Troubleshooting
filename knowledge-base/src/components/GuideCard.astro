@@ -1,0 +1,45 @@
+---
+import {
+  categoryLabels,
+  guideHref,
+  osLabels,
+  type Guide,
+} from '../lib/guide-data';
+import { withBase } from '../lib/routes';
+
+interface Props {
+  guide: Guide;
+}
+
+const { guide } = Astro.props;
+const osValues = [...new Set(guide.placements.map((placement) => placement.os))];
+const categoryValues = [...new Set(guide.placements.map((placement) => placement.category))];
+const compactSearchText = [guide.title, guide.summary, guide.compatibility, ...guide.keywords]
+  .join(' ')
+  .toLocaleLowerCase();
+---
+
+<article
+  class="guide-card"
+  data-guide-card
+  data-guide-id={guide.id}
+  data-os={osValues.join(',')}
+  data-category={categoryValues.join(',')}
+  data-risk={guide.risk}
+  data-status={guide.publicStatus}
+  data-search={compactSearchText}
+>
+  <div class="guide-card-topline">
+    <span class={`badge badge--${guide.risk}`}>{guide.risk} risk</span>
+    {guide.publicStatus !== 'published' && (
+      <span class={`badge badge--${guide.publicStatus}`}>{guide.publicStatus.replace('-', ' ')}</span>
+    )}
+  </div>
+  <h3><a href={withBase(guideHref(guide))}>{guide.title}</a></h3>
+  <p>{guide.summary}</p>
+  <footer class="guide-card-footer">
+    <span>{osValues.map((os) => osLabels[os]).join(' + ')}</span>
+    <span>{categoryValues.map((category) => categoryLabels[category].replace(' Guides', '')).join(' · ')}</span>
+  </footer>
+</article>
+
