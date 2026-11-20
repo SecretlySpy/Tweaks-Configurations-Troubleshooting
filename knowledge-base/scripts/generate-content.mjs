@@ -15,7 +15,7 @@ const setupRoot = path.join(repositoryRoot, 'Setups');
 const generatedDataRoot = path.join(knowledgeBaseRoot, 'src', 'data');
 const publicDataRoot = path.join(knowledgeBaseRoot, 'public', 'data');
 const contentMapPath = path.join(knowledgeBaseRoot, 'content-map.json');
-const generatorVersion = 3;
+const generatorVersion = 4;
 
 const placementSchema = z.object({
   os: z.enum(['windows', 'linux', 'android']),
@@ -121,11 +121,38 @@ async function extractPdf(buffer) {
   for (let pageNumber = 1; pageNumber <= document.numPages; pageNumber += 1) {
     const page = await document.getPage(pageNumber);
     const textContent = await page.getTextContent();
-    const pageText = textContent.items
-      .map((item) => ('str' in item ? item.str : ''))
-      .join(' ')
-      .replace(/[ \t]+/g, ' ')
-      .trim();
+    // Preserve visual line breaks and spacing instead of flattening every PDF page
+    // into a single run-on line. PDF glyph positions remain best-effort; the original
+    // source document is linked from its article for tables and image verification.
+    const lines = [];
+    let currentLine = null;
+    const flushLine = () => {
+      if (currentLine) lines.push(currentLine.text.replace(/[ \\t]+$/u, ''));
+      currentLine = null;
+    };
+    for (const item of textContent.items) {
+      if (!('str' in item)) continue;
+      const value = item.str;
+      const x = Number(item.transform?.[4] ?? 0);
+      const y = Number(item.transform?.[5] ?? 0);
+      const height = Math.max(1, Number(item.height || 0));
+      const width = Number(item.width || 0);
+      if (currentLine && (
+        Math.abs(y - currentLine.y) > Math.max(2, height * 0.4)
+        || x < currentLine.right - height
+      )) flushLine();
+      if (!currentLine) currentLine = { text: '', y, right: x };
+      const gap = x - currentLine.right;
+      if (currentLine.text && gap > Math.max(1, height * 0.2)
+        && !currentLine.text.endsWith(' ') && !value.startsWith(' ')) {
+        currentLine.text += gap > height * 2 ? '  ' : ' ';
+      }
+      currentLine.text += value;
+      currentLine.right = Math.max(currentLine.right, x + width);
+      if (item.hasEOL) flushLine();
+    }
+    flushLine();
+    const pageText = lines.join('\\n').trim();
     pages.push(`Page ${pageNumber}\n${pageText}`);
     page.cleanup();
   }
@@ -133,7 +160,7 @@ async function extractPdf(buffer) {
   return {
     text: pages.join('\n\n'),
     pageCount: pages.length,
-    warnings: [],
+    warnings: ['PDF text is reconstructed from glyph positions; verify diagrams, tables, screenshots, and exact formatting against the linked original.'],
   };
 }
 
@@ -192,24 +219,28 @@ function extractUrls(text) {
 }
 
 function chunkGuidedSteps(documents) {
-  const steps = [];
+  const sections = [];
   for (const document of documents) {
     if (!document.sourceText) continue;
-    const paragraphs = document.sourceText
-      .split(/\r?\n\s*\r?\n/gu)
-      .map((paragraph) => paragraph.trim())
-      .filter(Boolean);
-    const chunkSize = Math.max(1, Math.ceil(paragraphs.length / 8));
-    for (let index = 0; index < paragraphs.length; index += chunkSize) {
-      steps.push({
-        id: `${document.sha256.slice(0, 8)}-${index / chunkSize + 1}`,
-        title: `${document.filename} · part ${index / chunkSize + 1}`,
+    // A section is a reading checkpoint, never a generated or rewritten command.
+    // PDFs retain their source page boundaries; text sources retain paragraph order.
+    const parts = document.format === 'pdf'
+      ? document.sourceText.split(/(?=^Page \\d+\\n)/gmu).filter(Boolean)
+      : document.sourceText.split(/\\r?\\n\\s*\\r?\\n/gu).filter(Boolean);
+    const chunkSize = document.format === 'pdf' ? 1 : Math.max(1, Math.ceil(parts.length / 12));
+    for (let index = 0; index < parts.length; index += chunkSize) {
+      const partNumber = Math.floor(index / chunkSize) + 1;
+      const content = parts.slice(index, index + chunkSize).join('\\n\\n');
+      sections.push({
+        id: `${document.sha256.slice(0, 8)}-${partNumber}`,
+        title: `${document.filename} · ${document.format === 'pdf' ? 'page' : 'section'} ${partNumber}`,
         sourcePath: document.path,
-        content: paragraphs.slice(index, index + chunkSize).join('\n\n'),
+        content,
       });
     }
   }
-  return steps.slice(0, 24);
+  // Do not silently truncate multi-document guides after the first 24 sections.
+  return sections;
 }
 
 async function main() {
