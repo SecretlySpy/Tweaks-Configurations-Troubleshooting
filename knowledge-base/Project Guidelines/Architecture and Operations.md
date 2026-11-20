@@ -52,10 +52,11 @@ Generated files should be regenerated from source/map changes, not edited by han
 - Repository base path: `/Tweaks-Configurations-Troubleshooting`.
 - Static routes use trailing slashes.
 - `withBase()` prefixes custom links with `import.meta.env.BASE_URL`.
-- `.github/workflows/fieldnotes-pages.yml` is prepared with `actions/checkout@v7`, `withastro/action@v6`, and `actions/deploy-pages@v5`.
-- The workflow is not proof that Pages is enabled, configured, or deployed. Those are external states and remain **UNVERIFIED**.
+- `.github/workflows/fieldnotes-pages.yml` is the single project workflow. It uses `actions/checkout@v7`, Node 24 with locked npm dependencies, project-local Chromium, `npm test`, `actions/upload-pages-artifact@v5` with hidden files enabled for `.nojekyll`, and `actions/deploy-pages@v5`.
+- The workflow uploads only the verified `knowledge-base/dist` tree and requires `dist/.nojekyll`; the former Jekyll and whole-repository static upload workflows were removed because they were incompatible with Astro and the public-artifact boundary.
+- GitHub Pages must use **Settings → Pages → Build and deployment → Source: GitHub Actions**. The local workflow is not proof that this setting, the remote run, or deployment is current; those external states remain **UNVERIFIED**.
 
-The initial local Playwright attempt on 2026-11-19 exposed a test-harness/base-path 404: leading-slash test routes escaped the repository subpath. The harness now uses a trailing-slash base URL plus relative routes. The final 24-case Chromium matrix passed at desktop, tablet, and mobile widths, including unknown-route status, index-outage fallback, clipboard denial, and direct deep links. The public Pages deployment remains unverified.
+The initial local Playwright attempt on 2026-11-19 exposed a test-harness/base-path 404: leading-slash test routes escaped the repository subpath. The harness uses a trailing-slash base URL plus relative routes. On 2026-11-20 the suite expanded to 27 cases for the Figma-aligned collection and tablet shell; the final matrix passed at desktop, tablet, and mobile widths after repairing bookmark visibility and scrollable-code-region accessibility. The public Pages deployment remains unverified until observed.
 
 ## Runtime behavior
 

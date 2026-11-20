@@ -8,6 +8,7 @@ import '@fontsource/ibm-plex-mono/400.css';
 import '@fontsource/ibm-plex-mono/500.css';
 import '../styles/global.css';
 
+import MobileBottomNav from '../components/MobileBottomNav.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteSidebar from '../components/SiteSidebar.astro';
 import { withBase } from '../lib/routes';
@@ -17,6 +18,9 @@ interface Props {
   description?: string;
   activePath?: string;
   wide?: boolean;
+  showFooter?: boolean;
+  showMobileNav?: boolean;
+  sidebarVariant?: 'default' | 'collection';
 }
 
 const {
@@ -24,6 +28,9 @@ const {
   description = 'Searchable operating-system setup, tuning, and troubleshooting field guides.',
   activePath = '/',
   wide = false,
+  showFooter = true,
+  showMobileNav = true,
+  sidebarVariant = 'default',
 } = Astro.props;
 const pageTitle = title === 'FIELDNOTES Knowledge Base' ? title : `${title} · FIELDNOTES`;
 ---
@@ -44,15 +51,18 @@ const pageTitle = title === 'FIELDNOTES Knowledge Base' ? title : `${title} · F
     <div class="aurora-field" aria-hidden="true"></div>
     <SiteHeader />
     <div class="app-shell">
-      <SiteSidebar activePath={activePath} />
+      <SiteSidebar activePath={activePath} variant={sidebarVariant} />
       <main id="main-content" class:list={['main-content', { 'main-content--wide': wide }]}>
         <slot />
       </main>
     </div>
-    <footer class="site-footer">
-      <p>FIELDNOTES turns source-controlled technical notes into traceable web guides.</p>
-      <a href={withBase('/source-fidelity/')}>Source fidelity &amp; safety</a>
-    </footer>
+    {showMobileNav && <MobileBottomNav activePath={activePath} />}
+    {showFooter && (
+      <footer class="site-footer">
+        <p>FIELDNOTES turns source-controlled technical notes into traceable web guides.</p>
+        <a href={withBase('/source-fidelity/')}>Source fidelity &amp; safety</a>
+      </footer>
+    )}
 
     <script>
       const menuButton = document.querySelector('[data-menu-toggle]');
@@ -67,6 +77,8 @@ const pageTitle = title === 'FIELDNOTES Knowledge Base' ? title : `${title} · F
         if (!(menuButton instanceof HTMLButtonElement) || !(sidebar instanceof HTMLElement) || !(backdrop instanceof HTMLElement)) return;
         const wasOpen = sidebar.classList.contains('open');
         menuButton.setAttribute('aria-expanded', String(open));
+        const menuLabel = menuButton.querySelector('.sr-only');
+        if (menuLabel) menuLabel.textContent = open ? 'Close navigation' : 'Open navigation';
         sidebar.classList.toggle('open', open);
         backdrop.hidden = !open;
         document.body.classList.toggle('nav-open', open);
@@ -115,9 +127,14 @@ const pageTitle = title === 'FIELDNOTES Knowledge Base' ? title : `${title} · F
         }
         if (event.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName ?? '')) {
           event.preventDefault();
-          if (window.matchMedia('(max-width: 48rem)').matches) setSearch(true);
+          if (window.matchMedia('(max-width: 64rem)').matches) setSearch(true);
           else if (searchInput instanceof HTMLInputElement) searchInput.focus();
         }
+      });
+
+      // A drawer left open during rotation must not remain modal after the desktop shell returns.
+      window.matchMedia('(min-width: 64.001rem)').addEventListener('change', (event) => {
+        if (event.matches) setMenu(false);
       });
     </script>
   </body>

@@ -9,18 +9,23 @@ import { withBase } from '../lib/routes';
 
 interface Props {
   guide: Guide;
+  variant?: 'cards' | 'rows';
 }
 
-const { guide } = Astro.props;
+const { guide, variant = 'cards' } = Astro.props;
 const osValues = [...new Set(guide.placements.map((placement) => placement.os))];
 const categoryValues = [...new Set(guide.placements.map((placement) => placement.category))];
 const compactSearchText = [guide.title, guide.summary, guide.compatibility, ...guide.keywords]
   .join(' ')
   .toLocaleLowerCase();
+const guideUrl = withBase(guideHref(guide));
+const categorySummary = categoryValues
+  .map((category) => categoryLabels[category].replace(' Guides', ''))
+  .join(' · ');
 ---
 
 <article
-  class="guide-card"
+  class:list={['guide-card', variant === 'rows' && 'guide-card--row']}
   data-guide-card
   data-guide-id={guide.id}
   data-os={osValues.join(',')}
@@ -29,17 +34,32 @@ const compactSearchText = [guide.title, guide.summary, guide.compatibility, ...g
   data-status={guide.publicStatus}
   data-search={compactSearchText}
 >
-  <div class="guide-card-topline">
-    <span class={`badge badge--${guide.risk}`}>{guide.risk} risk</span>
-    {guide.publicStatus !== 'published' && (
-      <span class={`badge badge--${guide.publicStatus}`}>{guide.publicStatus.replace('-', ' ')}</span>
-    )}
-  </div>
-  <h3><a href={withBase(guideHref(guide))}>{guide.title}</a></h3>
-  <p>{guide.summary}</p>
-  <footer class="guide-card-footer">
-    <span>{osValues.map((os) => osLabels[os]).join(' + ')}</span>
-    <span>{categoryValues.map((category) => categoryLabels[category].replace(' Guides', '')).join(' · ')}</span>
-  </footer>
+  {variant === 'rows' ? (
+    <>
+      <span class="guide-row-icon" aria-hidden="true">↗</span>
+      <div class="guide-row-copy">
+        <h3><a href={guideUrl}>{guide.title}</a></h3>
+        <div class="guide-row-meta"><span>{categorySummary}</span></div>
+      </div>
+      <a class="guide-row-action" href={guideUrl} aria-label={`Read ${guide.title}`}>
+        <span>Read guide</span><span aria-hidden="true">›</span>
+      </a>
+    </>
+  ) : (
+    <>
+      <div class="guide-card-topline">
+        <span class={`badge badge--${guide.risk}`}>{guide.risk} risk</span>
+        {guide.publicStatus !== 'published' && (
+          <span class={`badge badge--${guide.publicStatus}`}>{guide.publicStatus.replace('-', ' ')}</span>
+        )}
+      </div>
+      <h3><a href={guideUrl}>{guide.title}</a></h3>
+      <p>{guide.summary}</p>
+      <footer class="guide-card-footer">
+        <span>{osValues.map((os) => osLabels[os]).join(' + ')}</span>
+        <span>{categorySummary}</span>
+      </footer>
+    </>
+  )}
 </article>
 

@@ -39,11 +39,61 @@ const relatedGuides = guides
 const visibleDocuments = guide.sourceDocuments.filter((document) => document.sourceText.length > 0);
 const isOperational = guide.publicStatus === 'published';
 const referenceAudit = referenceAuditForGuide(guide.id);
+const isN8nArticle = guide.id === 'n8n-local-docker-compose';
+const n8nReferenceRows = [
+  {
+    title: 'n8n + Docker Compose — Complete Setup Guide',
+    meta: 'User-supplied PDF · 10 pages · Nov 19, 2026',
+    type: 'Original guide',
+  },
+  {
+    title: 'Install using Docker Compose',
+    meta: 'docs.n8n.io · installation',
+    type: 'Official n8n',
+    href: 'https://docs.n8n.io/hosting/installation/server-setups/docker-compose/',
+  },
+  {
+    title: 'Docker Desktop — WSL 2 backend',
+    meta: 'docs.docker.com · Windows/Ubuntu integration',
+    type: 'Official Docker',
+    href: 'https://docs.docker.com/desktop/features/wsl/',
+  },
+  {
+    title: 'Basic commands for WSL',
+    meta: 'learn.microsoft.com · WSL host checks',
+    type: 'Official Microsoft',
+    href: 'https://learn.microsoft.com/en-us/windows/wsl/basic-commands',
+  },
+  {
+    title: 'Back up and restore',
+    meta: 'docs.n8n.io · data preservation',
+    type: 'Official n8n',
+    href: 'https://docs.n8n.io/hosting/cli-commands/#backup-and-restore',
+  },
+  {
+    title: 'Set up n8n Assistant',
+    meta: 'docs.n8n.io · Assistant configuration',
+    type: 'Official n8n',
+    href: 'https://docs.n8n.io/advanced-ai/intro-tutorial/',
+  },
+  {
+    title: 'Use the command line',
+    meta: 'docs.n8n.io · administrative CLI',
+    type: 'Official n8n',
+    href: 'https://docs.n8n.io/hosting/cli-commands/',
+  },
+  {
+    title: 'Version-pinned Compose definition · n8n 2.48.5',
+    meta: 'github.com/n8n-io/n8n · original guide reference',
+    type: 'Pinned source',
+    href: 'https://github.com/n8n-io/n8n/blob/n8n%402.48.5/docker/get-n8n-compose.yml',
+  },
+];
 ---
 
 <BaseLayout title={guide.title} description={guide.summary} activePath={`/${primaryPlacement.os}/`} wide>
   <article
-    class="article-shell"
+    class:list={['article-shell', { 'article-shell--figma': isN8nArticle }]}
     data-guide-article
     data-guide-id={guide.id}
     data-reading-version={guide.readingVersion}
@@ -51,95 +101,192 @@ const referenceAudit = referenceAuditForGuide(guide.id);
   >
     <aside class="article-toc" aria-label="On this page">
       <strong>On this page</strong>
-      <a href="#overview">Overview</a>
-      <a href="#compatibility">Compatibility</a>
-      {(guide.risk === 'high' || guide.risk === 'critical' || guide.annotations.length > 0) && <a href="#warnings">Warnings</a>}
-      <a href={isOperational ? '#source-instructions' : '#migration-exception'}>{isOperational ? 'Instructions' : 'Exception'}</a>
-      <a href="#sources">Sources</a>
-      {relatedGuides.length > 0 && <a href="#related">Related guides</a>}
-      <div class="progress-track" aria-hidden="true"><span data-progress-bar></span></div>
+      {isN8nArticle ? (
+        <>
+          <a href="#overview">Overview</a>
+          <a href="#security-note">Security note</a>
+          <a href="#architecture">Architecture</a>
+          <a class="active" href="#prerequisites">Prerequisites</a>
+          <a href="#next-steps">Next steps</a>
+          <a class="active" href="#sources">References</a>
+          <div class="article-status">
+            <strong>Documented status</strong>
+            <span class="status-success">Local stack verified</span>
+            <span class="status-warning">AI provider not configured</span>
+            <small>Status as recorded in Nov 2026.</small>
+          </div>
+        </>
+      ) : (
+        <>
+          <a href="#overview">Overview</a>
+          <a href="#compatibility">Compatibility</a>
+          {(guide.risk === 'high' || guide.risk === 'critical' || guide.annotations.length > 0) && <a href="#warnings">Warnings</a>}
+          <a href={isOperational ? '#source-instructions' : '#migration-exception'}>{isOperational ? 'Instructions' : 'Exception'}</a>
+          <a href="#sources">Sources</a>
+          {relatedGuides.length > 0 && <a href="#related">Related guides</a>}
+          <div class="progress-track" aria-hidden="true"><span data-progress-bar></span></div>
+        </>
+      )}
     </aside>
     <div class="article-main">
-      <nav class="breadcrumbs" aria-label="Breadcrumb">
-        <a href={withBase('/')}>Overview</a><span aria-hidden="true">/</span>
+      <nav class:list={['breadcrumbs', { 'article-kicker': isN8nArticle }]} aria-label="Breadcrumb">
+        {!isN8nArticle && <><a href={withBase('/')}>Overview</a><span aria-hidden="true">/</span></>}
         <a href={withBase(`/${primaryPlacement.os}/`)}>{osLabels[primaryPlacement.os]}</a><span aria-hidden="true">/</span>
-        <a href={withBase(`/${primaryPlacement.os}/${primaryPlacement.category}/`)}>{categoryLabels[primaryPlacement.category]}</a><span aria-hidden="true">/</span>
-        <span aria-current="page">{guide.title}</span>
+        <a href={withBase(`/${primaryPlacement.os}/${primaryPlacement.category}/`)}>{isN8nArticle ? 'App Setup' : categoryLabels[primaryPlacement.category]}</a><span aria-hidden="true">/</span>
+        <span aria-current="page">{isN8nArticle ? 'n8n' : guide.title}</span>
       </nav>
 
-      <header class="article-header">
-        <div class="tag-row">
-          <span class={`badge badge--${guide.risk}`}>{guide.risk} risk</span>
-          <span class={`badge badge--${guide.publicStatus}`}>{guide.publicStatus.replace('-', ' ')}</span>
-          {guide.placements.map((placement) => (
-            <span class="badge">{osLabels[placement.os]} · {categoryLabels[placement.category].replace(' Guides', '')}</span>
-          ))}
-        </div>
-        <h1>{guide.title}</h1>
-        <p class="lede">{guide.summary}</p>
-        <div class="article-actions">
-          <button class="bookmark-button" type="button" aria-pressed="false" data-bookmark-button>
+      <header class:list={['article-header', { 'article-header--figma': isN8nArticle }]}>
+        {!isN8nArticle && (
+          <div class="tag-row">
+            <span class={`badge badge--${guide.risk}`}>{guide.risk} risk</span>
+            <span class={`badge badge--${guide.publicStatus}`}>{guide.publicStatus.replace('-', ' ')}</span>
+            {guide.placements.map((placement) => (
+              <span class="badge">{osLabels[placement.os]} · {categoryLabels[placement.category].replace(' Guides', '')}</span>
+            ))}
+          </div>
+        )}
+        <div class="article-title-row">
+          <div>
+            <h1>{isN8nArticle ? 'n8n + Docker Compose' : guide.title}</h1>
+            <p class="lede">{isN8nArticle ? 'Windows 10/11 · Docker Desktop · Ubuntu WSL 2' : guide.summary}</p>
+          </div>
+          <button class:list={['bookmark-button', { 'bookmark-button--compact': isN8nArticle }]} type="button" aria-pressed="false" data-bookmark-button>
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
               <path d="M6.5 4.5h11v15l-5.5-3-5.5 3v-15Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path>
             </svg>
             <span data-bookmark-label>Save guide</span>
           </button>
-          {isOperational && guide.guidedSteps.length > 0 && (
-            <div class="mode-switch" aria-label="Reading mode">
-              <button type="button" aria-pressed="true" data-mode="full">Full article</button>
-              <button type="button" aria-pressed="false" data-mode="guided">Guided steps</button>
-            </div>
-          )}
         </div>
-        <div>
+        {isOperational && guide.guidedSteps.length > 0 && (
+          <div class:list={['mode-switch', { 'mode-switch--figma': isN8nArticle }]} aria-label="Reading mode">
+            <button type="button" aria-pressed={isN8nArticle} data-mode="guided">
+              {isN8nArticle ? <><span class="mode-label-wide">Step-by-step guide</span><span class="mode-label-compact">Overview</span></> : 'Guided steps'}
+            </button>
+            <button type="button" aria-pressed={!isN8nArticle} data-mode="full">
+              {isN8nArticle ? <><span class="mode-label-wide">All sections</span><span class="mode-label-compact">Setup</span></> : 'Full article'}
+            </button>
+            {isN8nArticle && <a href={withBase('/windows/troubleshooting/')}><span class="mode-label-wide">Troubleshooting&nbsp; →</span><span class="mode-label-compact">Troubleshooting&nbsp; · &nbsp;References</span></a>}
+          </div>
+        )}
+        <div class:list={{ 'article-progress--quiet': isN8nArticle }}>
           <span class="sr-only" data-progress-label>Reading progress: 0%</span>
           <div class="progress-track" aria-hidden="true"><span data-progress-bar></span></div>
         </div>
       </header>
 
-      <section id="overview" class="article-section">
-        <h2>Overview</h2>
-        <p>{guide.summary}</p>
-      </section>
+      {isN8nArticle && (
+        <div class="figma-article-overview" id="overview">
+          <section id="security-note" class="figma-security-note">
+            <strong>Security note</strong>
+            <p>This stack includes a privileged Docker-in-Docker sandbox for trusted local testing. Do not expose its services publicly.</p>
+          </section>
 
-      <section id="compatibility" class="article-section">
-        <h2>Compatibility and requirements</h2>
-        <div class="notice notice--warning">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
-            <path d="M12 4 21 20H3L12 4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path>
-            <path d="M12 9v5M12 17.2v.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
-          </svg>
-          <div>
-            <h3>Review before applying</h3>
-            <p>{guide.compatibility}</p>
-            <p>FIELDNOTES preserved these instructions but did not execute operating-system changes during website QA.</p>
-          </div>
-        </div>
-      </section>
-
-      {(guide.risk === 'high' || guide.risk === 'critical' || guide.annotations.length > 0) && (
-        <section id="warnings" class="article-section">
-          <h2>Important warnings</h2>
-          <div class:list={['notice', { 'notice--danger': guide.risk === 'critical', 'notice--warning': guide.risk !== 'critical' }]}>
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
-              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"></circle>
-              <path d="M12 7.5v6M12 16.7v.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
-            </svg>
-            <div>
-              <h3>{guide.risk === 'critical' ? 'Critical-change boundary' : 'High-impact procedure'}</h3>
-              <ul>
-                <li>Use an isolated or recoverable environment and confirm the target version before applying source commands.</li>
-                <li>Keep the documented recovery companion available when one exists.</li>
-                {guide.annotations.map((annotation) => <li>{annotation}</li>)}
-              </ul>
+          <section id="architecture" class="architecture-panel" aria-labelledby="architecture-title">
+            <strong id="architecture-title">Local service architecture</strong>
+            <div class="architecture-flow">
+              <div class="architecture-node"><b>n8n</b><span>localhost:5678</span></div>
+              <span class="architecture-connector" aria-hidden="true">→</span>
+              <div class="architecture-node"><b>PostgreSQL 18</b><span>Persistent data</span></div>
+              <span class="architecture-connector" aria-hidden="true">•</span>
+              <div class="architecture-node"><b>SearXNG</b><span>JSON search</span></div>
+              <span class="architecture-connector" aria-hidden="true">•</span>
+              <div class="architecture-node"><b>AI sandbox</b><span>Local testing</span></div>
             </div>
-          </div>
-        </section>
+            <small>Related services; not a step-by-step execution chain.</small>
+          </section>
+
+          <section id="prerequisites" class="figma-step-card">
+            <div class="figma-step-heading">
+              <span class="step-number">01</span>
+              <div>
+                <h2>Prerequisites and host checks</h2>
+                <p><span class="step-copy-wide">Run these read-only checks in Windows PowerShell before continuing.</span><span class="step-copy-compact">Windows PowerShell&nbsp; · &nbsp;Read-only checks</span></p>
+              </div>
+            </div>
+            <div class="source-document figma-command-source">
+              <pre class="figma-command-block" tabindex="0" data-source-text><span>PS   •   Windows PowerShell</span>{'\n\n'}wsl --status{'\n'}wsl --list --verbose{'\n'}docker version{'\n'}docker compose version</pre>
+              <div class="figma-command-footer">
+                <strong>Verify before continuing</strong>
+                <button class="copy-button" type="button" data-copy-source>Copy commands</button>
+              </div>
+            </div>
+          </section>
+
+          <a id="next-steps" class="figma-next-step" href="#source-instructions">
+            <span><small>Up next</small><strong><span class="next-step-wide">02&nbsp; </span><span class="next-step-compact">Next: </span>Create the Ubuntu project directory</strong></span>
+            <b>Continue <span aria-hidden="true">→</span></b>
+          </a>
+
+          <section id="sources" class="figma-references">
+            <h2>Sources &amp; references</h2>
+            <p>Original material and topic-matched official documentation.</p>
+            <div class="figma-reference-list">
+              {n8nReferenceRows.map((reference) => (
+                reference.href ? (
+                  <a class="figma-reference-row" href={reference.href} rel="noreferrer">
+                    <span><strong>{reference.title}</strong><small>{reference.meta}</small></span>
+                    <b>{reference.type}</b>
+                  </a>
+                ) : (
+                  <div class="figma-reference-row">
+                    <span><strong>{reference.title}</strong><small>{reference.meta}</small></span>
+                    <b>{reference.type}</b>
+                  </div>
+                )
+              ))}
+            </div>
+          </section>
+        </div>
+      )}
+
+      {!isN8nArticle && (
+        <>
+          <section id="overview" class="article-section">
+            <h2>Overview</h2>
+            <p>{guide.summary}</p>
+          </section>
+
+          <section id="compatibility" class="article-section">
+            <h2>Compatibility and requirements</h2>
+            <div class="notice notice--warning">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
+                <path d="M12 4 21 20H3L12 4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path>
+                <path d="M12 9v5M12 17.2v.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+              </svg>
+              <div>
+                <h3>Review before applying</h3>
+                <p>{guide.compatibility}</p>
+                <p>FIELDNOTES preserved these instructions but did not execute operating-system changes during website QA.</p>
+              </div>
+            </div>
+          </section>
+
+          {(guide.risk === 'high' || guide.risk === 'critical' || guide.annotations.length > 0) && (
+            <section id="warnings" class="article-section">
+              <h2>Important warnings</h2>
+              <div class:list={['notice', { 'notice--danger': guide.risk === 'critical', 'notice--warning': guide.risk !== 'critical' }]}>
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"></circle>
+                  <path d="M12 7.5v6M12 16.7v.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                </svg>
+                <div>
+                  <h3>{guide.risk === 'critical' ? 'Critical-change boundary' : 'High-impact procedure'}</h3>
+                  <ul>
+                    <li>Use an isolated or recoverable environment and confirm the target version before applying source commands.</li>
+                    <li>Keep the documented recovery companion available when one exists.</li>
+                    {guide.annotations.map((annotation) => <li>{annotation}</li>)}
+                  </ul>
+                </div>
+              </div>
+            </section>
+          )}
+        </>
       )}
 
       {isOperational ? (
         <>
-          <div class="full-panel" data-reading-panel="full">
+          <div class:list={['full-panel', { 'article-deep-content': isN8nArticle }]} data-reading-panel="full" hidden={isN8nArticle}>
             <section id="source-instructions" class="article-section">
               <h2>Source-preserved instructions</h2>
               <p>Each block below is an extracted source transcription. Copy controls preserve its characters and line breaks.</p>
@@ -163,7 +310,7 @@ const referenceAudit = referenceAuditForGuide(guide.id);
           </div>
 
           {guide.guidedSteps.length > 0 && (
-            <div class="guided-panel" data-reading-panel="guided" hidden>
+            <div class:list={['guided-panel', { 'article-deep-content': isN8nArticle }]} data-reading-panel="guided" hidden={!isN8nArticle}>
               <section id="guided-steps" class="article-section">
                 <h2>Guided reading</h2>
                 <p>Check off source chunks as you review them. Completion is stored only in this browser.</p>
@@ -172,7 +319,7 @@ const referenceAudit = referenceAuditForGuide(guide.id);
                     <input type="checkbox" value={step.id} data-step-checkbox />
                     <span>
                       <h3>Step {index + 1}: {step.title}</h3>
-                      <pre>{step.content}</pre>
+                      <pre tabindex="0">{step.content}</pre>
                     </span>
                   </label>
                 ))}
@@ -196,7 +343,7 @@ const referenceAudit = referenceAuditForGuide(guide.id);
         </section>
       )}
 
-      <section id="sources" class="article-section">
+      <section id={isN8nArticle ? 'traceability' : 'sources'} class:list={['article-section', { 'article-traceability--deep': isN8nArticle }]}>
         <h2>Sources and traceability</h2>
         <div class="source-ledger" role="region" aria-label="Source document ledger" tabindex="0">
           <table>

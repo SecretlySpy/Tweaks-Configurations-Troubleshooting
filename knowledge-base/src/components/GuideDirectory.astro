@@ -8,6 +8,7 @@ interface Props {
   showFilters?: boolean;
   savedOnly?: boolean;
   emptyMessage?: string;
+  variant?: 'cards' | 'rows';
 }
 
 const {
@@ -15,14 +16,16 @@ const {
   showFilters = true,
   savedOnly = false,
   emptyMessage = 'No guides match these filters.',
+  variant = 'cards',
 } = Astro.props;
 ---
 
 <section
-  class="guide-directory"
+  class:list={['guide-directory', variant === 'rows' && 'guide-directory--rows']}
   data-guide-directory
   data-index-url={withBase('/data/search-index.json')}
   data-saved-only={String(savedOnly)}
+  data-variant={variant}
 >
   {showFilters && (
     <div class="directory-toolbar">
@@ -51,8 +54,8 @@ const {
     </div>
   )}
   <p class="directory-status" aria-live="polite" data-directory-status></p>
-  <div class="guide-grid" data-directory-grid>
-    {guides.map((guide) => <GuideCard guide={guide} />)}
+  <div class:list={['guide-grid', variant === 'rows' && 'guide-grid--rows']} data-directory-grid>
+    {guides.map((guide) => <GuideCard guide={guide} variant={variant} />)}
     <div class="empty-state" data-directory-empty hidden>
       <h3>No matching fieldnotes</h3>
       <p>{emptyMessage}</p>

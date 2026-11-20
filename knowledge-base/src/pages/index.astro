@@ -5,7 +5,6 @@ import OsIcon from '../components/OsIcon.astro';
 import {
   guideData,
   guides,
-  guidesForOs,
   osLabels,
   operatingSystems,
 } from '../lib/guide-data';
@@ -17,52 +16,62 @@ const featuredGuides = guides
 ---
 
 <BaseLayout activePath="/" wide>
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-content">
-      <span class="eyebrow">Traceable technical field guides</span>
-      <h1 id="hero-title">Solve the system.<span>Keep the source.</span></h1>
-      <p class="lede">
-        Search operating-system setup, tuning, and troubleshooting notes without losing the commands,
-        warnings, provenance, or recovery context in the original files.
-      </p>
-      <form class="hero-search" action={withBase('/all-guides/')} role="search">
-        <label class="sr-only" for="hero-search">Search FIELDNOTES</label>
-        <input id="hero-search" name="q" type="search" placeholder="Try “Docker Compose”, “registry”, or “ADB”…" />
-        <button type="submit">Search guides</button>
-      </form>
-      <div class="hero-meta" aria-label="Knowledge base summary">
-        <span>{guideData.coverage.guideCount} canonical guides</span>
-        <span>{guideData.coverage.primaryCoveragePercent}% primary sources mapped</span>
-        <span>No automatic command execution</span>
-      </div>
+  <section class="home-intro" aria-labelledby="hero-title">
+    <div class="home-intro-copy">
+      <span class="home-kicker home-kicker--desktop">Library&nbsp; / &nbsp;Overview</span>
+      <span class="home-kicker home-kicker--tablet">Home&nbsp; / &nbsp;Overview</span>
+      <span class="home-kicker home-kicker--mobile">Technical library</span>
+      <h1 id="hero-title">
+        <span class="home-title-wide">Your technical library,<br />{' '}made easier to navigate.</span>
+        <span class="home-title-mobile">A clearer way to<br />{' '}find the fix.</span>
+      </h1>
     </div>
+
+    <form class="home-search" action={withBase('/all-guides/')} role="search">
+      <label class="sr-only" for="home-search">Search FIELDNOTES</label>
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="19" height="19" fill="none">
+        <circle cx="10.5" cy="10.5" r="6.25" stroke="currentColor" stroke-width="1.7"></circle>
+        <path d="m15.2 15.2 4.3 4.3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path>
+      </svg>
+      <input id="home-search" name="q" type="search" placeholder="Search docs and commands…" autocomplete="off" />
+      <button class="sr-only" type="submit">Search</button>
+    </form>
+
+    <aside class="discovery-callout" aria-labelledby="discovery-title">
+      <h2 id="discovery-title">Start with a platform or search.</h2>
+      <a class="discovery-link" href={withBase('/all-guides/')}>Browse guides <span aria-hidden="true">›</span></a>
+    </aside>
   </section>
 
-  <section class="section-block" aria-labelledby="collections-title">
-    <div class="section-heading">
-      <div>
-        <span class="eyebrow">Browse by platform</span>
-        <h2 id="collections-title">Operating-system collections</h2>
-        <p>Each collection keeps tweaks, application setup, and troubleshooting paths predictable.</p>
-      </div>
-      <a class="text-link" href={withBase('/all-guides/')}>Browse all guides</a>
+  <section class="home-platforms" aria-labelledby="collections-title">
+    <div class="home-section-heading">
+      <h2 id="collections-title">
+        <span class="home-os-heading-wide">Choose your operating system</span>
+        <span class="home-os-heading-mobile">Choose your OS</span>
+      </h2>
     </div>
-    <div class="os-grid">
+    <div class="os-grid home-os-grid">
       {operatingSystems.map((os) => (
-        <a class="os-card" href={withBase(`/${os}/`)}>
-          <span class="os-card-icon"><OsIcon os={os} size={32} /></span>
-          <h3>{osLabels[os]}</h3>
-          <p>Open the {osLabels[os]} collection and filter by the task you need to finish.</p>
-          <span class="card-footer">
-            <span>{guidesForOs(os).length} mapped guides</span>
-            <span aria-hidden="true">Explore</span>
+        <a class={`os-card os-card--${os}`} href={withBase(`/${os}/`)}>
+          <span class="os-card-icon"><OsIcon os={os} size={36} /></span>
+          <span class="os-card-copy">
+            <h3>{osLabels[os]}</h3>
+            <p>
+              {os === 'windows' && 'Performance and recovery'}
+              {os === 'linux' && 'System tuning and setup'}
+              {os === 'android' && 'ADB and Termux'}
+            </p>
+          </span>
+          <span class="os-card-action">
+            <span class="os-card-categories">Tweaks&nbsp; · &nbsp;App setup&nbsp; · &nbsp;Troubleshooting</span>
+            <span class="os-card-explore"><span>Explore&nbsp;</span><span aria-hidden="true">›</span></span>
           </span>
         </a>
       ))}
     </div>
   </section>
 
-  <section class="section-block" aria-labelledby="featured-title">
+  <section class="section-block home-secondary-content" aria-labelledby="featured-title">
     <div class="section-heading">
       <div>
         <span class="eyebrow">Start here</span>
@@ -73,7 +82,7 @@ const featuredGuides = guides
     <GuideDirectory guides={featuredGuides} showFilters={false} />
   </section>
 
-  <section class="section-block" aria-labelledby="integrity-title">
+  <section class="section-block home-secondary-content" aria-labelledby="integrity-title">
     <div class="section-heading">
       <div>
         <span class="eyebrow">Migration integrity</span>

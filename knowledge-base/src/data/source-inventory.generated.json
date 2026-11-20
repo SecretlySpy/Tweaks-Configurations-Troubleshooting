@@ -621,8 +621,8 @@
     "extension": ".pdf",
     "bytes": 342857,
     "sha256": "e2d1b0ddf770723ce452b85d347afed1437810e4712417eb2599b2816e482cb6",
-    "tracked": false,
-    "gitRevision": null,
+    "tracked": true,
+    "gitRevision": "03fc1b58be74979a05a13d431c4f8a690ccafa80",
     "scope": "primary",
     "guideIds": [
       "n8n-local-docker-compose"

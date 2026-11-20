@@ -1,53 +1,106 @@
-# Give the workflow a clear name in the GitHub Actions interface.
-name: Deploy FIELDNOTES to GitHub Pages
+# Build, verify, and publish the Astro knowledge base without invoking Jekyll.
+name: Verify and deploy FIELDNOTES
 
-# Build on changes merged to the publication branch and allow a deliberate manual run.
 on:
+  # Validate every relevant change before it can be merged.
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "knowledge-base/**"
+      - "Setups/**"
+      - ".github/workflows/fieldnotes-pages.yml"
+
+  # Publish verified changes from the default branch.
   push:
     branches:
       - main
     paths:
       - "knowledge-base/**"
+      - "Setups/**"
       - ".github/workflows/fieldnotes-pages.yml"
+
+  # Permit an intentional validation or deployment run from the Actions tab.
   workflow_dispatch:
 
-# Grant only the permissions required to read the repository and publish a Pages artifact.
+# Read-only is the safe default; the deployment job receives its extra rights below.
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
-# Prevent overlapping Pages releases while allowing an in-progress deployment to finish safely.
+# Serialize runs for the same ref so two releases cannot race each other.
 concurrency:
-  group: pages
+  group: fieldnotes-${{ github.ref }}
   cancel-in-progress: false
 
-# Separate reproducible build work from the protected deployment environment.
 jobs:
-  build:
-    name: Build FIELDNOTES
+  verify:
+    name: Build and test FIELDNOTES
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      # Keep CI deterministic and store the browser beside the project dependencies.
+      ASTRO_TELEMETRY_DISABLED: "1"
+      PLAYWRIGHT_BROWSERS_PATH: .playwright-browsers
+
     steps:
-      # Fetch the exact repository revision that triggered this run.
+      # Fetch the exact revision under review without persisting a write credential.
       - name: Check out repository
         uses: actions/checkout@v7
-
-      # Install from the lockfile, build Astro, and upload the generated Pages artifact.
-      - name: Build and upload Astro site
-        uses: withastro/action@v6
         with:
-          path: ./knowledge-base
+          persist-credentials: false
+
+      # Match the supported runtime used by the official Astro Pages action.
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
           node-version: 24
+          cache: npm
+          cache-dependency-path: knowledge-base/package-lock.json
+
+      # Reproduce the dependency graph recorded in the lockfile.
+      - name: Install dependencies
+        working-directory: knowledge-base
+        run: npm ci
+
+      # Install only the browser exercised by this project's Playwright matrix.
+      - name: Install Chromium
+        working-directory: knowledge-base
+        run: npx playwright install --with-deps chromium
+
+      # Run unit, type, content, reference, artifact, accessibility, and browser checks.
+      - name: Verify application
+        working-directory: knowledge-base
+        run: npm test
+
+      # Ensure the tested artifact explicitly opts out of Jekyll processing.
+      - name: Verify Pages artifact
+        working-directory: knowledge-base
+        run: test -f dist/.nojekyll
+
+      # Package only Astro's generated static output, never the repository source tree.
+      - name: Upload Pages artifact
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: knowledge-base/dist
+          include-hidden-files: true
 
   deploy:
     name: Deploy FIELDNOTES
-    needs: build
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: verify
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      # These are the only write-capable permissions required by GitHub Pages.
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
-      # Publish only the artifact produced by the successful build job.
+      # Publish the exact artifact that passed the verification job.
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5

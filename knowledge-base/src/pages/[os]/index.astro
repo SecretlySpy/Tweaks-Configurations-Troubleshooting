@@ -19,45 +19,65 @@ export function getStaticPaths() {
 
 const os = Astro.params.os as OperatingSystem;
 const collectionGuides = guidesForOs(os);
+const categoryDescriptions = {
+  tweaks: 'Optimization & configuration',
+  'application-setup': 'Installations & tools',
+  troubleshooting: 'Diagnostics & recovery',
+};
+const platformVersion = {
+  windows: 'Windows 10 / 11',
+  linux: 'Linux',
+  android: 'Android',
+};
 ---
 
-<BaseLayout title={`${osLabels[os]} Guides`} activePath={`/${os}/`} wide>
+<BaseLayout title={`${osLabels[os]} Guides`} activePath={`/${os}/`} sidebarVariant="collection" wide>
   <nav class="breadcrumbs" aria-label="Breadcrumb">
-    <a href={withBase('/')}>Overview</a><span aria-hidden="true">/</span><span aria-current="page">{osLabels[os]}</span>
+    <a href={withBase('/')}>Explore</a><span aria-hidden="true">/</span><span aria-current="page">{osLabels[os]}</span>
   </nav>
-  <section class="collection-hero page-header">
-    <div>
-      <span class="eyebrow">Operating-system collection</span>
-      <h1>{osLabels[os]}</h1>
-      <p class="lede">Browse source-traceable tweaks, application setup, and troubleshooting guides for {osLabels[os]}.</p>
+  <section class="collection-hero collection-hero--compact page-header" aria-labelledby="collection-title">
+    <span class={`collection-os-icon collection-os-icon--${os}`}><OsIcon os={os} size={56} /></span>
+    <div class="collection-hero-copy">
+      <div class="collection-title-row">
+        <h1 id="collection-title">{osLabels[os]} guides</h1>
+      </div>
     </div>
-    <span class="os-card-icon"><OsIcon os={os} size={72} /></span>
+    <span class="platform-pill">{platformVersion[os]}</span>
   </section>
 
-  <section class="section-block" aria-labelledby="categories-title">
-    <div class="section-heading">
-      <div><h2 id="categories-title">Guide categories</h2><p>Choose the path that matches the job at hand.</p></div>
+  <section class="section-block collection-categories" aria-labelledby="categories-title">
+    <div class="section-heading section-heading--compact">
+      <h2 id="categories-title"><span class="collection-heading-wide">Guide categories</span><span class="collection-heading-mobile">Categories</span></h2>
     </div>
-    <div class="category-grid">
-      {guideCategories.map((category) => {
+    <div class="category-grid category-grid--numbered">
+      {guideCategories.map((category, index) => {
         const count = guidesForPlacement(os, category).length;
         return (
-          <a class="category-card" href={withBase(`/${os}/${category}/`)}>
-            <span class="badge">{count} {count === 1 ? 'guide' : 'guides'}</span>
-            <h3>{categoryLabels[category]}</h3>
-            <p>{count > 0 ? 'Open the mapped articles and source review status.' : 'No source-backed guide is available yet; the empty state is intentional.'}</p>
-            <span class="card-footer"><span>View category</span><span aria-hidden="true">Open</span></span>
+          <a class="category-card category-card--numbered" href={withBase(`/${os}/${category}/`)}>
+            <span class="category-card-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+            <span class="category-card-copy">
+              <span class="category-card-heading"><h3>{categoryLabels[category]}</h3></span>
+              <span class="category-card-description">
+                {count > 0 ? categoryDescriptions[category] : 'No source-backed guide is available yet.'}
+              </span>
+              <span class="category-card-action"><span class="category-card-action-wide">Read web guides</span><span class="category-card-action-mobile">Explore</span>&nbsp;›</span>
+            </span>
           </a>
         );
       })}
     </div>
   </section>
 
-  <section class="section-block" aria-labelledby="collection-guides-title">
-    <div class="section-heading">
-      <div><h2 id="collection-guides-title">All {osLabels[os]} fieldnotes</h2><p>{collectionGuides.length} canonical guides are currently cross-listed here.</p></div>
+  <section class="section-block collection-guide-list" aria-labelledby="collection-guides-title">
+    <div class="section-heading section-heading--compact">
+      <h2 id="collection-guides-title">Guides</h2>
     </div>
-    <GuideDirectory guides={collectionGuides} />
+    <GuideDirectory
+      guides={collectionGuides}
+      showFilters={false}
+      variant="rows"
+      emptyMessage={`No ${osLabels[os]} fieldnotes are available yet.`}
+    />
   </section>
 </BaseLayout>
 

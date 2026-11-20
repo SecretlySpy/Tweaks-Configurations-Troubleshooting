@@ -4,16 +4,10 @@ import { withBase } from '../lib/routes';
 
 <header class="site-header" data-site-header>
   <a class="brand-lockup" href={withBase('/')}>
-    <span class="brand-mark" aria-hidden="true">
-      <svg viewBox="0 0 32 32" width="28" height="28" fill="none">
-        <path d="M8 5.5h12.5A3.5 3.5 0 0 1 24 9v17.5H11.5A3.5 3.5 0 0 1 8 23V5.5Z" stroke="currentColor" stroke-width="2"></path>
-        <path d="M12 10h8M12 15h8M12 20h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
-        <path d="M24 9h-2.5A2.5 2.5 0 0 0 19 11.5V13l2-1 3 1.5V9Z" fill="currentColor"></path>
-      </svg>
-    </span>
-    <span>
+    <span class="brand-mark" aria-hidden="true">KB</span>
+    <span class="brand-copy">
       <strong>FIELDNOTES</strong>
-      <small>Knowledge Base</small>
+      <small>Your technical knowledge base</small>
     </span>
   </a>
 
@@ -23,11 +17,21 @@ import { withBase } from '../lib/routes';
       <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.8"></circle>
       <path d="m16 16 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
     </svg>
-    <input id="global-search" name="q" type="search" placeholder="Search commands, tools, or guides…" autocomplete="off" />
+    <input id="global-search" name="q" type="search" placeholder="Search guides and commands…" autocomplete="off" />
     <kbd aria-hidden="true">/</kbd>
   </form>
 
   <nav class="header-actions" aria-label="Utility navigation">
+    <a
+      class="github-link"
+      href="https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting"
+      aria-label="View FIELDNOTES source on GitHub"
+    >
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="19" height="19" fill="currentColor">
+        <path d="M12 .7A11.5 11.5 0 0 0 8.36 23.1c.58.1.79-.25.79-.56v-2.24c-3.22.7-3.9-1.37-3.9-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.78 1.2 1.78 1.2 1.04 1.77 2.72 1.26 3.38.96.1-.75.4-1.26.74-1.55-2.57-.3-5.27-1.28-5.27-5.7 0-1.26.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.16 1.18a10.95 10.95 0 0 1 5.75 0c2.19-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.82 1.19 3.08 0 4.43-2.71 5.4-5.29 5.69.42.36.79 1.06.79 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .7Z"></path>
+      </svg>
+      <span>GitHub</span>
+    </a>
     <button
       class="icon-link search-toggle"
       type="button"
@@ -41,13 +45,9 @@ import { withBase } from '../lib/routes';
         <path d="m16 16 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
       </svg>
     </button>
-    <a class="icon-link" href={withBase('/saved/')} aria-label="Saved guides">
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
-        <path d="M6.5 4.5h11v15l-5.5-3-5.5 3v-15Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path>
-      </svg>
-    </a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-sidebar" data-menu-toggle>
       <span class="sr-only">Open navigation</span>
+      <span class="menu-toggle-label" aria-hidden="true">Menu</span>
       <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
         <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
       </svg>

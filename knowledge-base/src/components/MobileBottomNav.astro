@@ -1,0 +1,41 @@
+---
+import { withBase } from '../lib/routes';
+
+interface Props {
+  activePath?: string;
+}
+
+const { activePath = '/' } = Astro.props;
+const exploreActive = activePath === '/' || /^\/(windows|linux|android)(\/|$)/u.test(activePath);
+---
+
+<nav class="mobile-bottom-nav" aria-label="Mobile navigation" data-mobile-bottom-nav>
+  <a class:list={['mobile-nav-link', { active: exploreActive }]} href={withBase('/')} aria-current={exploreActive ? 'page' : undefined}>
+    <svg viewBox="0 0 24 24" width="21" height="21" fill="none" aria-hidden="true">
+      <path d="m4.5 10.5 7.5-6.3 7.5 6.3V20h-15v-9.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path>
+      <path d="M9.5 20v-6h5v6" stroke="currentColor" stroke-width="1.7"></path>
+    </svg>
+    <span>Explore</span>
+  </a>
+  <a
+    class:list={['mobile-nav-link', { active: activePath.startsWith('/all-guides/') }]}
+    href={withBase('/all-guides/')}
+    aria-current={activePath.startsWith('/all-guides/') ? 'page' : undefined}
+  >
+    <svg viewBox="0 0 24 24" width="21" height="21" fill="none" aria-hidden="true">
+      <circle cx="10.5" cy="10.5" r="6.25" stroke="currentColor" stroke-width="1.7"></circle>
+      <path d="m15.2 15.2 4.3 4.3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path>
+    </svg>
+    <span>Search</span>
+  </a>
+  <a
+    class:list={['mobile-nav-link', { active: activePath.startsWith('/saved/') }]}
+    href={withBase('/saved/')}
+    aria-current={activePath.startsWith('/saved/') ? 'page' : undefined}
+  >
+    <svg viewBox="0 0 24 24" width="21" height="21" fill="none" aria-hidden="true">
+      <path d="M6.5 4.5h11v15l-5.5-3-5.5 3v-15Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path>
+    </svg>
+    <span>Saved</span>
+  </a>
+</nav>

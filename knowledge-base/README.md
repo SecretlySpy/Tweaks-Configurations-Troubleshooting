@@ -8,8 +8,9 @@ FIELDNOTES is the static, searchable web edition of this repository's operating-
 - The migration inventory covers 79 discovered files: 44 primary sources are mapped to 25 canonical guides, and 35 secondary configuration sources remain in review.
 - Public output contains extracted text and traceability metadata, not raw `.bat`, `.cmd`, `.ps1`, `.reg`, or `.pow` files.
 - Bookmarks and guided-reading progress stay in browser-local storage; there is no account, database, analytics service, or server API.
-- The local automated baseline is green: 11 unit tests, 24 three-viewport browser tests, 42 static pages, 25 guide-level reference audits, and a 202-file artifact boundary scan.
-- Publication, Figma parity approval, and legacy-file relocation are not complete and remain separately gated.
+- The Figma-aligned shell, homepage, OS collections, compact guide rows, and n8n article were implemented from authenticated desktop/tablet/mobile frame evidence.
+- The local automated baseline is green: 11 unit tests, zero Astro diagnostics across 30 files, 27 three-viewport browser tests, 42 static pages, 25 guide-level reference audits, and a 203-file artifact boundary scan.
+- The single Pages workflow runs the project test gate, requires `.nojekyll`, and uploads only `dist`; Pages source configuration, remote deployment, final human Figma/device approval, and legacy-file relocation remain separately gated.
 
 ## Local commands
 

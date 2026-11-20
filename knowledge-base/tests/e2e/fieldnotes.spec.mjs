@@ -6,13 +6,17 @@ const paths = {
   home: './',
   allGuides: 'all-guides/',
   saved: 'saved/',
+  windows: 'windows/',
   n8n: 'guides/shared/n8n-local-docker-compose/',
   androidTroubleshooting: 'android/troubleshooting/',
 };
 
 test('homepage renders the approved information architecture without horizontal overflow', async ({ page }, testInfo) => {
   await page.goto(paths.home);
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('Solve the system');
+  const approvedHeading = testInfo.project.name === 'mobile-chromium'
+    ? 'A clearer way to find the fix'
+    : 'Your technical library, made easier to navigate';
+  await expect(page.getByRole('heading', { level: 1 })).toContainText(approvedHeading);
   const osCards = page.locator('main .os-card');
   await expect(osCards).toHaveCount(3);
   await expect(osCards.filter({ hasText: 'Windows' })).toBeVisible();
@@ -57,11 +61,11 @@ test('bookmark, guided progress, refresh persistence, and source copy work local
   await expect(page.locator('[data-step-checkbox]').first()).toBeChecked();
 
   await page.locator('[data-mode="full"]').click();
-  const sourceDocument = page.locator('.source-document').first();
+  const sourceDocument = page.locator('details.source-document').first();
   if (await sourceDocument.getAttribute('open') === null) {
     await sourceDocument.locator('summary').click();
   }
-  await page.locator('[data-copy-source]').first().click();
+  await sourceDocument.locator('[data-copy-source]').click();
   await expect(page.locator('[data-toast]')).toContainText('copied');
 
   await page.goto(paths.saved);
@@ -78,11 +82,12 @@ test('clipboard denial selects source text for manual copying', async ({ page })
     });
   });
   await page.goto(paths.n8n);
-  const sourceDocument = page.locator('.source-document').first();
+  await page.locator('[data-mode="full"]').click();
+  const sourceDocument = page.locator('details.source-document').first();
   if (await sourceDocument.getAttribute('open') === null) {
     await sourceDocument.locator('summary').click();
   }
-  await page.locator('[data-copy-source]').first().click();
+  await sourceDocument.locator('[data-copy-source]').click();
   await expect(page.locator('[data-toast]')).toContainText('Clipboard access was denied');
   const selectedLength = await page.evaluate(() => window.getSelection()?.toString().length ?? 0);
   expect(selectedLength).toBeGreaterThan(0);
@@ -98,12 +103,8 @@ test('intentional empty states and mobile navigation remain usable', async ({ pa
 
   if (testInfo.project.name === 'mobile-chromium') {
     await page.goto(paths.home);
-    const searchToggle = page.locator('[data-search-toggle]');
-    await searchToggle.click();
-    await expect(searchToggle).toHaveAttribute('aria-expanded', 'true');
-    await expect(page.locator('#global-search')).toBeFocused();
-    await page.keyboard.press('Escape');
-    await expect(searchToggle).toHaveAttribute('aria-expanded', 'false');
+    await expect(page.locator('.home-search')).toBeVisible();
+    await expect(page.locator('[data-mobile-bottom-nav]').getByRole('link', { name: 'Search' })).toBeVisible();
 
     const menu = page.locator('[data-menu-toggle]');
     await menu.click();
@@ -118,6 +119,20 @@ test('intentional empty states and mobile navigation remain usable', async ({ pa
     await expect(menu).toHaveAttribute('aria-expanded', 'false');
     await expect(menu).toBeFocused();
   }
+});
+
+test('collection rows and tablet shell follow the approved responsive hierarchy', async ({ page }, testInfo) => {
+  await page.goto(paths.windows);
+  await expect(page.getByRole('heading', { level: 1, name: 'Windows' })).toBeVisible();
+  await expect(page.locator('.category-card--numbered')).toHaveCount(3);
+  await expect(page.locator('[data-guide-card]').first()).toHaveClass(/guide-card--row/u);
+
+  if (testInfo.project.name === 'tablet-chromium') {
+    await expect(page.locator('[data-site-sidebar]')).not.toBeInViewport();
+    await expect(page.locator('[data-menu-toggle]')).toBeVisible();
+  }
+
+  await page.screenshot({ path: `test-results/windows-${testInfo.project.name}.png`, fullPage: true });
 });
 
 test('representative pages have no serious or critical automated accessibility violations', async ({ page }) => {

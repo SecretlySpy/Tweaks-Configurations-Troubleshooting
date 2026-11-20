@@ -5,16 +5,41 @@ import OsIcon from './OsIcon.astro';
 
 interface Props {
   activePath?: string;
+  variant?: 'default' | 'collection';
 }
 
-const { activePath = '/' } = Astro.props;
+const { activePath = '/', variant = 'default' } = Astro.props;
 const osItems: OperatingSystem[] = ['windows', 'linux', 'android'];
+const categoryItems = [
+  { slug: 'tweaks', label: 'Tweaks' },
+  { slug: 'application-setup', label: 'Application Setup' },
+  { slug: 'troubleshooting', label: 'Troubleshooting' },
+] as const;
 const isActive = (path: string) => activePath === path || (path !== '/' && activePath.startsWith(path));
+const activeOs = osItems.find((os) => activePath.startsWith(`/${os}/`)) ?? 'windows';
 ---
 
 <div class="sidebar-backdrop" data-sidebar-backdrop hidden></div>
-<aside id="site-sidebar" class="site-sidebar" aria-label="Primary navigation" data-site-sidebar>
+<aside id="site-sidebar" class:list={['site-sidebar', `site-sidebar--${variant}`]} aria-label="Primary navigation" data-site-sidebar>
+  {variant === 'collection' ? (
+    <nav class="collection-sidebar-nav">
+      <p class="sidebar-eyebrow sidebar-eyebrow--first">Operating systems</p>
+      {osItems.map((os) => (
+        <a class:list={['sidebar-link', { active: isActive(`/${os}/`) }]} href={withBase(`/${os}/`)}>{osLabels[os]}</a>
+      ))}
+      <p class="sidebar-eyebrow">Subcategories</p>
+      {categoryItems.map((category) => {
+        const categoryPath = `/${activeOs}/${category.slug}/`;
+        return (
+          <a class:list={['sidebar-link', 'collection-sidebar-category', { active: activePath === categoryPath }]} href={withBase(categoryPath)}>
+            {category.label} Guides
+          </a>
+        );
+      })}
+    </nav>
+  ) : (
   <nav>
+    <p class="sidebar-eyebrow sidebar-eyebrow--first">Explore</p>
     <a class:list={['sidebar-link', { active: isActive('/') }]} href={withBase('/')}>
       <svg viewBox="0 0 24 24" width="19" height="19" fill="none" aria-hidden="true">
         <path d="M4.5 10.5 12 4l7.5 6.5V20h-15v-9.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path>
@@ -23,15 +48,30 @@ const isActive = (path: string) => activePath === path || (path !== '/' && activ
       <span>Overview</span>
     </a>
 
-    <p class="sidebar-eyebrow">Collections</p>
+    <p class="sidebar-eyebrow">Platforms</p>
     {osItems.map((os) => (
-      <a class:list={['sidebar-link', { active: isActive(`/${os}/`) }]} href={withBase(`/${os}/`)}>
-        <span class="sidebar-icon"><OsIcon os={os} size={18} /></span>
-        <span>{osLabels[os]}</span>
-      </a>
+      <div class="sidebar-platform">
+        <a class:list={['sidebar-link', 'sidebar-platform-link', { active: isActive(`/${os}/`) }]} href={withBase(`/${os}/`)}>
+          <span class="sidebar-icon"><OsIcon os={os} size={18} /></span>
+          <span>{osLabels[os]}</span>
+          <svg class="sidebar-chevron" viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true">
+            <path d="m6 3.5 4.5 4.5L6 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </a>
+        <div class="sidebar-subnav">
+          {categoryItems.map((category) => {
+            const categoryPath = `/${os}/${category.slug}/`;
+            return (
+              <a class:list={['sidebar-sublink', { active: activePath === categoryPath }]} href={withBase(categoryPath)}>
+                {category.label}
+              </a>
+            );
+          })}
+        </div>
+      </div>
     ))}
 
-    <div class="sidebar-separator"></div>
+    <p class="sidebar-eyebrow">Resources</p>
     <a class:list={['sidebar-link', { active: isActive('/all-guides/') }]} href={withBase('/all-guides/')}>
       <svg viewBox="0 0 24 24" width="19" height="19" fill="none" aria-hidden="true">
         <path d="M5 5h14v14H5zM8.5 9h7M8.5 12h7M8.5 15h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path>
@@ -44,14 +84,22 @@ const isActive = (path: string) => activePath === path || (path !== '/' && activ
       </svg>
       <span>Saved Guides</span>
     </a>
+    <a class:list={['sidebar-link', { active: isActive('/source-fidelity/') }]} href={withBase('/source-fidelity/')}>
+      <svg viewBox="0 0 24 24" width="19" height="19" fill="none" aria-hidden="true">
+        <path d="M12 3.5 19 6v5.1c0 4.4-2.7 7.7-7 9.4-4.3-1.7-7-5-7-9.4V6l7-2.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path>
+        <path d="m8.8 12 2 2 4.4-4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+      <span>Source Fidelity</span>
+    </a>
   </nav>
+  )}
 
-  <div class="sidebar-status">
+  {variant === 'default' && <div class="sidebar-status">
     <span class="status-orb" aria-hidden="true"></span>
     <div>
       <strong>Local-first</strong>
       <span>Progress stays in this browser.</span>
     </div>
-  </div>
+  </div>}
 </aside>
 

@@ -1,7 +1,7 @@
 # FIELDNOTES decisions and handover
 
-Status date: 2026-11-19  
-Working branch: `feat/fieldnotes-knowledge-base`  
+Status date: 2026-11-20
+Working branch: `main`
 External side effects: no commit, push, Pages deployment, or legacy relocation performed.
 
 ## Decision log
@@ -16,8 +16,9 @@ External side effects: no commit, push, Pages deployment, or legacy relocation p
 | ADR-006 | Inventory secondary configuration exports without publishing them. | Some are large, binary, machine-specific, credential-like, or visually sensitive. | Review/redact individual sources before adding any derivative to a guide. |
 | ADR-007 | Store reading state locally with a versioned schema. | Meets static/privacy constraints without introducing accounts or backend data. | Cross-device sync would require a new architecture, privacy analysis, and user authorization. |
 | ADR-008 | Prepare GitHub Pages Actions, but keep publication separate. | The requested destination is Pages, while push/deploy and repository settings are protected external actions. | Run only after exact staged/outgoing review and explicit authorization. |
-| ADR-009 | Preserve the user-owned untracked n8n PDF in place. | It is source input without a Git revision and must not be overwritten, moved, or implicitly published. | Any tracking/relocation needs exact-path approval and disclosure review. |
-| ADR-010 | Record Figma fidelity as blocked rather than infer parity. | The connector required reauthentication, so live frame evidence was unavailable. | Resume with the connector and actual browser captures; do not treat the handover description as a visual pass. |
+| ADR-009 | Preserve the n8n PDF in place and record its actual tracked provenance. | It is canonical source input and the generator now records its Git-backed revision instead of labeling it untracked. | Relocation or raw public-asset publication still requires separate review and approval. |
+| ADR-010 | Implement from live Figma frame evidence without claiming pixel perfection. | The authenticated connector exposed the named desktop/tablet/mobile home, collection, and n8n article frames, enabling measured implementation and local comparison. | Record the inspected node IDs and captures; keep human/device/deployed approval explicitly unverified. |
+| ADR-011 | Use one Astro-native Pages workflow and opt out of Jekyll. | The legacy Jekyll job parsed `.astro` frontmatter as YAML, while the old static job uploaded the repository rather than verified output. | Run `npm test`, require `.nojekyll`, upload only `dist`, and keep the remote Pages source/deployment gate separate. |
 
 ## Current implementation map
 
@@ -37,32 +38,33 @@ External side effects: no commit, push, Pages deployment, or legacy relocation p
 
 ## Verified progress
 
-- The final combined `npm test` gate completed successfully from unit tests through the 24-case browser matrix.
+- The final post-design `npm test` gate passed from all 11 unit tests through Astro diagnostics, production build/verifiers, and the 27-case browser matrix.
 - 79 discovered sources are inventoried: 44 primary and 35 secondary-review.
 - All 44 primary sources map to 25 canonical guides: 20 published, two review-only, and three blocked.
-- `npm run check` completed with zero issues across 29 files.
+- `npm run check` completed with zero issues across 30 files.
 - `npm run test:unit` passed all 11 tests.
 - `npm run build` produced and verified 42 static HTML pages; Pagefind indexed 42 pages.
 - Reference coverage is explicit for all 25 guides: 22 supplementary entries point to 20 unique live HTTPS destinations checked on 2026-11-19.
-- The 202-file build artifact passed internal-link/asset, prohibited-source, malformed URL, and high-confidence secret-signature checks.
+- The 203-file build artifact passed internal-link/asset, prohibited-source, malformed URL, and high-confidence secret-signature checks.
 - `npm audit` reported zero known vulnerabilities in all-dependency and production-only scopes.
-- The final Playwright matrix passed 24/24 at desktop, tablet, and mobile widths. It covers full-text and degraded search, local state, exact copy and clipboard denial, 404/empty states, mobile search/drawer focus, axe, and reduced motion.
-- Six local homepage/article screenshots were inspected for responsive sanity. Live Figma comparison remains blocked, so they are not parity evidence.
+- The final Playwright matrix passed 27/27 at desktop, tablet, and mobile widths after repairing bookmark visibility and scrollable-code-region accessibility.
+- Nine local homepage/Windows collection/n8n article screenshots were inspected across desktop, tablet, and mobile. They were compared with live Figma nodes `15:26`, `25:75`, `16:38`, `16:158`, `58:297`, `59:310`, and `28:197`; final human/device/deployed approval remains unverified.
+- The single Pages workflow passed local YAML/build checks, requires `.nojekyll`, and uploads only `knowledge-base/dist`; no remote run was observed.
 
 ## Open work, in order
 
 1. Perform manual representative PDF/DOCX fidelity, screen-reader, 200% zoom, contrast, and focus-obscuration review.
-2. Reauthenticate Figma and complete reference-frame comparisons.
+2. Complete final human Figma/zoom/device review.
 3. Inspect the exact staged set, diff, and outgoing history without printing sensitive values.
-4. Ask for publication authorization; enable/verify Pages and observe the workflow.
+4. Ensure Pages uses GitHub Actions, ask for publication authorization, and observe the workflow.
 5. Smoke-test the deployed URL and record rollback evidence.
 6. Only then prepare an exact legacy relocation proposal for separate approval.
 
 ## Protected gates and blockers
 
-- **Figma:** connector reauthentication required; visual parity is UNVERIFIED.
-- **Publication:** workflow is local only; no push or deployed-site evidence exists.
-- **Legacy files:** no move/delete is authorized. The untracked n8n PDF remains at `Setups/Programming Related/n8n Local Docker Compose Reference Guide.pdf`.
+- **Figma:** named frames were inspected and implemented locally; pixel-perfect human approval, physical-device/browser review, and deployed parity are UNVERIFIED.
+- **Publication:** the Astro-native workflow is local only; Pages source configuration, push, remote run, and deployed-site evidence remain UNVERIFIED.
+- **Legacy files:** no move/delete is authorized. The tracked n8n PDF remains at `Setups/Programming Related/n8n Local Docker Compose Reference Guide.pdf`.
 - **Sensitive material:** Kaspersky exports and original Xiaomi router captures require specific review; original screenshots are not public assets.
 - **Operational source behavior:** OS commands were not executed; compatibility/effect claims remain source-derived or review annotations.
 

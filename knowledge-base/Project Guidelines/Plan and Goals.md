@@ -1,7 +1,7 @@
 # FIELDNOTES plan and goals
 
-Status date: 2026-11-19  
-Delivery state: local implementation and automated verification complete; manual fidelity/design review and protected release gates remain open.
+Status date: 2026-11-20
+Delivery state: Figma-aligned local implementation and automated verification complete; manual fidelity/accessibility approval and protected release gates remain open.
 
 ## Outcome
 
@@ -29,8 +29,8 @@ Deliver a static GitHub Pages knowledge base that makes the repository's setup, 
 | FR-08 | Support full-text discovery and useful empty/error states. | On-demand JSON directory search plus Starlight/Pagefind build indexing. |
 | FR-09 | Support exact copying with a denial fallback. | Clipboard action falls back to selected source text when direct write fails. |
 | FR-10 | Store bookmarks and progress without an account. | Versioned browser-local schema; corrupt, denied, and changed-reading-version cases are covered by unit tests. |
-| FR-11 | Work at desktop, tablet, and mobile widths with reduced motion. | Responsive CSS plus a 24-case Playwright matrix passed at 1440 × 900, 900 × 1100, and 390 × 844. |
-| FR-12 | Produce a static artifact for the repository's GitHub Pages subpath. | Astro `site`, `base`, and trailing-slash settings plus a prepared Pages workflow. |
+| FR-11 | Work at desktop, tablet, and mobile widths with reduced motion. | Figma-aligned responsive CSS plus a 27/27 passing Playwright matrix at 1440 × 900, 900 × 1100, and 390 × 844. |
+| FR-12 | Produce a static artifact for the repository's GitHub Pages subpath. | Astro `site`, `base`, trailing-slash settings, `.nojekyll`, and one Astro-native workflow that tests and uploads only `dist`. |
 | NFR-01 | Never execute migrated OS-modification content during web generation or QA. | Extractors read files; the application provides no execution endpoint. |
 | NFR-02 | Publish no raw executable, registry, or power-plan source assets. | Artifact verification rejects `.bat`, `.cmd`, `.ps1`, `.reg`, and `.pow` output. |
 | NFR-03 | Remain usable without JavaScript for core reading and navigation. | Static HTML contains navigation, article text, warnings, and provenance; enhancement scripts add search/state/copy behavior. |
@@ -49,9 +49,9 @@ Excluded or separately gated:
 - Executing or validating the effect of source commands on Windows, Linux, Android, firmware, or hardware.
 - Publishing raw scripts/configuration exports or unredacted router screenshots.
 - Accounts, cloud sync, databases, comments, analytics, or a server API.
-- Live Figma fidelity approval while the connector requires reauthentication.
+- Pixel-perfect human Figma approval, physical-device/browser review, and deployed-site parity.
 - Git commit, push, GitHub Pages enablement/deployment, or production smoke testing.
-- Moving or deleting legacy source files, including the untracked n8n PDF.
+- Moving or deleting legacy source files, including the tracked n8n PDF.
 
 ## Assumptions
 
@@ -61,7 +61,7 @@ Excluded or separately gated:
 | A-02 | GitHub Pages will deploy from GitHub Actions on `main`. | The prepared workflow follows the repository-action model. | Publication workflow and branch trigger must change. | Assumed; protected gate |
 | A-03 | Original files remain the authority for commands and values. | Summary documents contain known overstatements or mismatches. | Migration fidelity could be evaluated against the wrong record. | Verified by source audit |
 | A-04 | Browser-local state is acceptable and intentionally device-specific. | The requested static architecture has no identity/backend layer. | Cross-device bookmarks/progress would need a new privacy and backend design. | Assumed |
-| A-05 | The user-owned untracked n8n PDF remains in place and outside version control unless explicitly approved. | It predates the implementation and has no Git revision. | Accidental publication or relocation would violate ownership and disclosure boundaries. | Verified and preserved |
+| A-05 | The tracked n8n PDF remains canonical source input in its current path. | Generated provenance now records its repository revision. | Relocation or raw asset publication could break provenance or expand disclosure. | Verified and preserved |
 
 ## Milestones and acceptance
 
@@ -70,8 +70,8 @@ Excluded or separately gated:
 | M1 — inventory | Source counts reconcile; every primary source has a guide or exception; sensitive items are identified. | Complete locally |
 | M2 — application | Static routes, responsive UI, source reader, search, local state, safety annotations, and provenance are implemented. | Complete locally |
 | M3 — verification | Type/static, unit, build, artifact, responsive browser, accessibility, link, and security checks pass with recorded evidence. | Automated local gate complete; manual binary fidelity, screen-reader, and 200% zoom review remain open |
-| M4 — design review | Live implementation is compared with the named Figma frames at reference viewports. | Blocked: Figma connector requires reauthentication |
-| M5 — publication | Exact staged/outgoing files pass sensitive-data review; Pages is enabled and deployed; deep links and production flows pass. | Not authorized or executed |
+| M4 — design review | Live implementation is compared with the named Figma frames at reference viewports. | Figma-aligned implementation and local comparison complete; final human/device/deployed approval UNVERIFIED |
+| M5 — publication | Exact staged/outgoing files pass sensitive-data review; Pages source is GitHub Actions; the single workflow deploys; deep links and production flows pass. | Workflow repaired locally; repository setting, push, remote run, and deployment not executed |
 | M6 — consolidation | Migration mapping, public deployment, dependencies, links, and rollback are verified before any legacy relocation. | Protected gate; not started |
 
 ## Delivery risks
@@ -82,5 +82,5 @@ Excluded or separately gated:
 | R-02 | Binary extraction changes commands, ordering, or formatting. | Med | High | Extracted output differs from page/image inspection. | Keep hashes and extraction status; require manual source fidelity review before claiming content acceptance. | Maintainer | Open |
 | R-03 | GitHub Pages base-path handling breaks routes or assets. | Med | High | Local preview returns 404 under the repository subpath. | Use relative Playwright routes beneath the exact base path and verify local targets/deep links. | Maintainer | Mitigated locally; deployed state unverified |
 | R-04 | Configuration exports or screenshots expose credentials or identifiers. | Med | High | Secret scan or visual review flags values. | Keep secondary sources out of the public artifact; reject prohibited assets and high-confidence signatures; create only reviewed/redacted derivatives. | Maintainer/security reviewer | Public artifact mitigated; source review remains open |
-| R-05 | Visual implementation drifts from Figma. | Med | Med | Reference-frame comparison shows spacing, type, state, or breakpoint differences. | Reauthenticate Figma, capture reference frames, and record viewport-by-viewport differences. | Design reviewer | Blocked |
+| R-05 | Visual implementation drifts from Figma. | Med | Med | Reference-frame comparison shows spacing, type, state, or breakpoint differences. | Keep node IDs and local captures in the evidence record; repeat exact-size human and deployed comparisons before claiming parity. | Design reviewer | Mitigated locally; final approval open |
 | R-06 | Legacy relocation loses dependencies or recoverability. | Low before approval | High | A source is moved before deployed-route and hash verification. | Require explicit target mapping, backup/rollback, and separate approval after publication. | Repository owner | Gated |

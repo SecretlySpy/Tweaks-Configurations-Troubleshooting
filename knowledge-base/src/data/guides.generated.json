@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "generatorVersion": 3,
-  "inputFingerprint": "b1b4410c22516275355b7e98374d2da56b39674cd7a9f878dba92fdbc9b92cad",
-  "generatedAt": "2026-10-28T11:19:21Z",
-  "repositoryRevision": "62fb0a3fbf75c14e4a6312e9a3b98e8b7310283c",
+  "inputFingerprint": "93c1bc2db250aeddc87e9ecbbffb83d2a85a409106741aae36280a55ed6f1973",
+  "generatedAt": "2026-11-20T04:06:55Z",
+  "repositoryRevision": "15e0f244c041a2eb1621f26227064c9b3d5f30e2",
   "coverage": {
     "discoveredSourceCount": 79,
     "primarySourceCount": 44,
@@ -958,8 +958,8 @@
           "format": "pdf",
           "bytes": 342857,
           "sha256": "e2d1b0ddf770723ce452b85d347afed1437810e4712417eb2599b2816e482cb6",
-          "tracked": false,
-          "gitRevision": null,
+          "tracked": true,
+          "gitRevision": "03fc1b58be74979a05a13d431c4f8a690ccafa80",
           "canonicalRole": "primary",
           "extractionStatus": "extracted",
           "extractionWarnings": [],
