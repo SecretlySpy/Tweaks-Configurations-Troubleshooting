@@ -127,7 +127,7 @@ async function extractPdf(buffer) {
     const lines = [];
     let currentLine = null;
     const flushLine = () => {
-      if (currentLine) lines.push(currentLine.text.replace(/[ \\t]+$/u, ''));
+      if (currentLine) lines.push(currentLine.text.replace(/[ \t]+$/u, ''));
       currentLine = null;
     };
     for (const item of textContent.items) {
@@ -152,7 +152,7 @@ async function extractPdf(buffer) {
       if (item.hasEOL) flushLine();
     }
     flushLine();
-    const pageText = lines.join('\\n').trim();
+    const pageText = lines.join('\n').trim();
     pages.push(`Page ${pageNumber}\n${pageText}`);
     page.cleanup();
   }
@@ -225,12 +225,12 @@ function chunkGuidedSteps(documents) {
     // A section is a reading checkpoint, never a generated or rewritten command.
     // PDFs retain their source page boundaries; text sources retain paragraph order.
     const parts = document.format === 'pdf'
-      ? document.sourceText.split(/(?=^Page \\d+\\n)/gmu).filter(Boolean)
-      : document.sourceText.split(/\\r?\\n\\s*\\r?\\n/gu).filter(Boolean);
+      ? document.sourceText.split(/(?=^Page \d+\n)/gmu).filter(Boolean)
+      : document.sourceText.split(/\r?\n\s*\r?\n/gu).filter(Boolean);
     const chunkSize = document.format === 'pdf' ? 1 : Math.max(1, Math.ceil(parts.length / 12));
     for (let index = 0; index < parts.length; index += chunkSize) {
       const partNumber = Math.floor(index / chunkSize) + 1;
-      const content = parts.slice(index, index + chunkSize).join('\\n\\n');
+      const content = parts.slice(index, index + chunkSize).join('\n\n');
       sections.push({
         id: `${document.sha256.slice(0, 8)}-${partNumber}`,
         title: `${document.filename} · ${document.format === 'pdf' ? 'page' : 'section'} ${partNumber}`,
