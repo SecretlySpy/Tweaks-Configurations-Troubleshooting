@@ -48,7 +48,7 @@
       "risk": "critical",
       "publicStatus": "blocked",
       "sourcePaths": ["Setups/OS Environment/Android/Packages and Tools in Termux/Weeman in Termux.txt"],
-      "annotations": ["The source describes credential-phishing operations. FIELDNOTES records its provenance without reproducing reusable attack instructions."],
+      "annotations": ["The source describes credential-phishing operations. Technical Resources records its provenance without reproducing reusable attack instructions."],
       "keywords": ["Termux", "Weeman", "safety review"]
     },
     {
@@ -260,7 +260,7 @@
         "Setups/OS Environment/Windows/Tweaks for Windows/Disable Windows Security.reg",
         "Setups/OS Environment/Windows/Tweaks for Windows/Easy Access.bat"
       ],
-      "annotations": ["FIELDNOTES does not recommend applying this bundle on an internet-connected or production system. A tested rollback and isolated environment are prerequisites."],
+      "annotations": ["Technical Resources does not recommend applying this bundle on an internet-connected or production system. A tested rollback and isolated environment are prerequisites."],
       "keywords": ["Windows Security", "Defender", "SMB1", "high risk"]
     },
     {
@@ -343,7 +343,7 @@
       "risk": "critical",
       "publicStatus": "blocked",
       "sourcePaths": ["Setups/OS Environment/Windows/Tweaks for Windows/Windows Activation.ps1"],
-      "annotations": ["The source invokes third-party activation tooling. FIELDNOTES records its presence without facilitating license circumvention."],
+      "annotations": ["The source invokes third-party activation tooling. Technical Resources records its presence without facilitating license circumvention."],
       "keywords": ["Windows activation", "licensing review"]
     },
     {
@@ -356,7 +356,7 @@
       "risk": "critical",
       "publicStatus": "blocked",
       "sourcePaths": ["Setups/OS Environment/Windows/Tweaks for Windows/Internet Download Manager Activation.ps1"],
-      "annotations": ["The source invokes third-party activation tooling. FIELDNOTES records its presence without facilitating license circumvention."],
+      "annotations": ["The source invokes third-party activation tooling. Technical Resources records its presence without facilitating license circumvention."],
       "keywords": ["IDM", "activation", "licensing review"]
     }
   ]
