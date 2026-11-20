@@ -1,4 +1,4 @@
-# FIELDNOTES decisions and handover
+# Technical Resources decisions and handover
 
 Status date: 2026-11-20
 Working branch: `main`
@@ -33,7 +33,7 @@ External side effects: no commit, push, Pages deployment, or legacy relocation p
 | Navigation and UI | `src/components/`, `src/layouts/`, `src/pages/`, `src/styles/global.css` |
 | Local state | `src/lib/local-state.mjs` |
 | Unit/browser evaluation | `tests/unit/`, `tests/e2e/`, `playwright.config.mjs` |
-| Deployment preparation | `../../.github/workflows/fieldnotes-pages.yml` |
+| Deployment preparation | `../../.github/workflows/technical-resources-pages.yml` |
 | Project records | `Project Guidelines/` |
 
 ## Verified progress

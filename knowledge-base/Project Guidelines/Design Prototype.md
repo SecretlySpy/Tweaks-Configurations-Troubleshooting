@@ -1,4 +1,4 @@
-# FIELDNOTES design prototype
+# Technical Resources design prototype
 
 Status: Figma-aligned implementation completed from live design context on 2026-11-20. Named frames were inspected and compared with local browser captures; pixel-perfect human approval, physical-device review, and deployed-site parity remain **UNVERIFIED**.
 
@@ -52,7 +52,7 @@ Fonts are self-hosted through pinned Fontsource packages; the site does not depe
 
 | Component | Default and interaction states | Recovery/failure state |
 | --- | --- | --- |
-| Global header | `KB` mark, FIELDNOTES lockup, centred search, GitHub link, tablet/mobile menu | Search remains a standard form; navigation remains in static HTML |
+| Global header | `KB` mark, Technical Resources lockup, centred search, GitHub link, tablet/mobile menu | Search remains a standard form; navigation remains in static HTML |
 | Sidebar | Explore, platform/category hierarchy, resources, desktop sticky layout, tablet/mobile drawer | Escape/backdrop closure, contained focus loop, focus return, and restored body scroll |
 | Mobile bottom navigation | Explore, Search, and Saved destinations at mobile widths | Static links remain usable without client-side state |
 | OS card | Platform icon, mapped count, hover/focus elevation | Counts come from generated coverage rather than hard-coded copy |
@@ -92,7 +92,7 @@ The final 27-case matrix passed across desktop, tablet, and mobile. It covers re
 
 The implementation must not be described as Figma-perfect until all of these are recorded:
 
-1. Inspect the named FIELDNOTES file and exact frame/node references from the handover. **Complete.**
+1. Inspect the named Technical Resources file and exact frame/node references from the handover. **Complete.**
 2. Compare real browser captures at the reference desktop, tablet, and mobile widths. **Complete locally for the named home, collection, and article views.**
 3. Log and repair material differences in typography, spacing, colour, icons, responsive reflow, empty/error states, and interactions. **Implemented for the inspected frames.**
 4. Complete a final human review at exact frame dimensions and representative browser zoom/device settings. **UNVERIFIED.**

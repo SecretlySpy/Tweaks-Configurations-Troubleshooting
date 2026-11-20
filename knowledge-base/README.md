@@ -1,6 +1,6 @@
-# FIELDNOTES knowledge base
+# Technical Resources knowledge base
 
-FIELDNOTES is the static, searchable web edition of this repository's operating-system setup, tuning, and troubleshooting material. It preserves source provenance while keeping unsafe or unresolved operational content behind explicit review boundaries.
+Technical Resources is the static, searchable web edition of this repository's operating-system setup, tuning, and troubleshooting material. It preserves source provenance while keeping unsafe or unresolved operational content behind explicit review boundaries.
 
 ## Current baseline
 

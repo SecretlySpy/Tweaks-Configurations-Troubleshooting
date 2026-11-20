@@ -19,17 +19,17 @@ This repository is a curated operational library of system optimizations, config
 | **Linux Kernel Utilities** | Modifying kernel parameters & daemons | Linux kernel 5.4+ (`sysctl`, `systemctl`) | Built into system distributions | `sysctl --version` |
 | **Android Platform Tools** | Executing debloat commands via ADB | ADB version 1.0.41+ | [Android Developer Tools](https://developer.android.com/tools/releases/platform-tools) | `adb version` |
 | **Termux** | Local terminal environment on Android | Android 7.0+ (F-Droid release) | [Termux on F-Droid](https://f-droid.org/packages/com.termux/) | `pkg --version` |
-| **Node.js + npm** | Build and verify the FIELDNOTES static website | Node.js `>=22.23.4`; exact packages locked by npm | [Node.js downloads](https://nodejs.org/en/download) | `node --version; npm --version` |
+| **Node.js + npm** | Build and verify the Technical Resources static website | Node.js `>=22.23.4`; exact packages locked by npm | [Node.js downloads](https://nodejs.org/en/download) | `node --version; npm --version` |
 | **AI Agent IDE** | Executing autonomous protocols | Antigravity, Claude Code, Gemini CLI, Cursor | Respective official distributions | Check IDE agent status |
 
 ---
 
-### FIELDNOTES local development
+### Technical Resources local development
 
 The website workspace is isolated under [`knowledge-base/`](knowledge-base/). Content generation reads original guide files and produces derived JSON; it does not run any operating-system modification script.
 
 ```powershell
-# Enter the FIELDNOTES website workspace.
+# Enter the Technical Resources website workspace.
 Set-Location knowledge-base
 
 # Recreate the exact dependency tree from the committed lockfile.
@@ -42,7 +42,7 @@ npm run dev
 Use a second terminal for the complete local quality gate:
 
 ```powershell
-# Enter the FIELDNOTES website workspace in this terminal too.
+# Enter the Technical Resources website workspace in this terminal too.
 Set-Location knowledge-base
 
 # Run source-integrity, type, build, browser, responsive, and axe checks.

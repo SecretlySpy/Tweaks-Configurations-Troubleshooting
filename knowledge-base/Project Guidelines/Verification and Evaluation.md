@@ -1,4 +1,4 @@
-# FIELDNOTES verification and evaluation
+# Technical Resources verification and evaluation
 
 Status date: 2026-11-20. Evidence labels are `PASS`, `FAIL`, `BLOCKED`, `UNVERIFIED`, or `N/A`.
 
