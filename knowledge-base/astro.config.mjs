@@ -9,7 +9,7 @@ export default defineConfig({
   trailingSlash: 'always',
   integrations: [
     starlight({
-      title: 'FIELDNOTES',
+      title: 'Technical Resources',
       description: 'A searchable field guide to operating-system setup, tuning, and troubleshooting.',
       disable404Route: true,
       customCss: ['./src/styles/global.css'],
