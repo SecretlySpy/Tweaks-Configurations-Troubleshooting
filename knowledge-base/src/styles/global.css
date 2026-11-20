@@ -3358,3 +3358,8 @@ p {
   .architecture-node { padding: 0.6rem; }
   .home-secondary-content { margin-top: 2.5rem; }
 }
+
+/* Keep the first guide collection within a normal scrolling distance of the OS cards. */
+@media (max-width: 64rem) {
+  .home-platforms + .home-secondary-content { margin-top: 2.5rem; }
+}
