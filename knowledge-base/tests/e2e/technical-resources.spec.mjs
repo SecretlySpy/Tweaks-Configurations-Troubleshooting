@@ -152,3 +152,65 @@ test('reduced-motion preference removes meaningful transition duration', async (
   expect(Number.parseFloat(duration)).toBeLessThanOrEqual(0.00001);
 });
 
+
+test('Technical Resources branding and page anchors are consistent', async ({ page }) => {
+  for (const target of [paths.home, paths.allGuides, paths.n8n]) {
+    await page.goto(target);
+    await expect(page.locator('.brand-copy strong')).toHaveText('Technical Resources');
+    await expect(page).toHaveTitle(/Technical Resources/u);
+    const duplicates = await page.evaluate(() => {
+      const ids = [...document.querySelectorAll('[id]')].map((element) => element.id);
+      return ids.filter((id, index) => ids.indexOf(id) !== index);
+    });
+    expect(duplicates, target).toEqual([]);
+  }
+});
+
+test('Continue reveals the original n8n instructions and the source file is accessible as a link', async ({ page }) => {
+  await page.goto(paths.n8n);
+  await expect(page.locator('[data-reading-panel="full"]')).toBeHidden();
+  await page.locator('.figma-next-step').click();
+  await expect(page.locator('[data-reading-panel="full"]')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Source-derived instructions' })).toBeVisible();
+  const originalLinks = page.locator('.source-original-link');
+  expect(await originalLinks.count()).toBeGreaterThan(0);
+  await expect(originalLinks.first()).toHaveAttribute('href', /github\\.com\\/SecretlySpy\\/Tweaks-Configurations-Troubleshooting\\/blob\\/main\\//u);
+});
+
+test('Host check command copying excludes the visual shell caption', async ({ page }) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: { writeText: async (text) => { window.__lastCopied = text; } },
+    });
+  });
+  await page.goto(paths.n8n);
+  await page.locator('.figma-command-footer [data-copy-source]').click();
+  const copied = await page.evaluate(() => window.__lastCopied);
+  expect(copied).toBe('wsl --status\\nwsl --list --verbose\\ndocker version\\ndocker compose version'.replaceAll('\\n', '\n'));
+  expect(copied).not.toContain('Windows PowerShell');
+});
+
+test('Save controls still toggle when localStorage rejects writes', async ({ page }) => {
+  await page.addInitScript(() => {
+    Storage.prototype.setItem = () => { throw new DOMException('storage disabled', 'QuotaExceededError'); };
+  });
+  await page.goto(paths.n8n);
+  const button = page.locator('[data-bookmark-button]');
+  await button.click();
+  await expect(button).toHaveAttribute('aria-pressed', 'true');
+  await button.click();
+  await expect(button).toHaveAttribute('aria-pressed', 'false');
+});
+
+test('Directory filters show only cards matching the selected operating system and category', async ({ page }) => {
+  await page.goto(paths.allGuides);
+  await page.locator('[data-directory-os]').selectOption('linux');
+  await page.locator('[data-directory-category]').selectOption('application-setup');
+  const matching = page.locator('[data-guide-card]:visible');
+  expect(await matching.count()).toBeGreaterThan(0);
+  for (const card of await matching.all()) {
+    expect((await card.getAttribute('data-os')).split(',')).toContain('linux');
+    expect((await card.getAttribute('data-category')).split(',')).toContain('application-setup');
+  }
+});
