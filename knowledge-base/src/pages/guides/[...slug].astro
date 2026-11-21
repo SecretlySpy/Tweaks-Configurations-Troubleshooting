@@ -126,6 +126,9 @@ const n8nReferenceRows = [
           <a href="#overview">Overview</a>
           <a href="#compatibility">Compatibility</a>
           {(guide.risk === 'high' || guide.risk === 'critical' || guide.annotations.length > 0) && <a href="#warnings">Warnings</a>}
+          {isOperational && ((guide.media && guide.media.length > 0) || (guide.tables && guide.tables.length > 0)) && (
+            <a href="#visuals-and-tables" data-switch-reading-mode="full">Visuals &amp; Tables</a>
+          )}
           <a href={isOperational ? '#source-instructions' : '#migration-exception'} data-switch-reading-mode={isOperational ? 'full' : undefined}>{isOperational ? 'Instructions' : 'Exception'}</a>
           <a href="#sources">Sources</a>
           {relatedGuides.length > 0 && <a href="#related">Related guides</a>}
@@ -292,6 +295,51 @@ const n8nReferenceRows = [
       {isOperational ? (
         <>
           <div class:list={['full-panel', { 'article-deep-content': isN8nArticle }]} data-reading-panel="full" hidden={isN8nArticle}>
+            {((guide.media && guide.media.length > 0) || (guide.tables && guide.tables.length > 0)) && (
+              <section id="visuals-and-tables" class="article-section">
+                <h2>Restored document visuals and tables</h2>
+                <p>These diagrams, screenshots, and structured reference tables were extracted from the original PDF/DOCX files to restore source fidelity lost in plain-text extraction.</p>
+                {guide.media && guide.media.length > 0 && (
+                  <div class="fidelity-media-grid">
+                    {guide.media.map((item) => (
+                      <figure class="guide-figure">
+                        <img
+                          src={withBase(item.src)}
+                          alt={item.alt}
+                          width={item.width}
+                          height={item.height}
+                          class="guide-image"
+                        />
+                        <figcaption class="guide-caption">{item.caption}</figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                )}
+                {guide.tables && guide.tables.length > 0 && (
+                  <div class="fidelity-tables-grid">
+                    {guide.tables.map((tbl) => (
+                      <div class="guide-table-wrapper" tabindex="0" role="region" aria-label={tbl.title}>
+                        <h3 class="guide-table-title">{tbl.title}</h3>
+                        <table class="guide-table">
+                          <thead>
+                            <tr>
+                              {tbl.headers.map((h) => <th scope="col">{h}</th>)}
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {tbl.rows.map((row) => (
+                              <tr>
+                                {row.map((cell) => <td>{cell}</td>)}
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </section>
+            )}
             <section id="source-instructions" class="article-section">
               <h2>Source-derived instructions</h2>
               <p>Instructions below are extracted from the original files. PDF and DOCX extraction can lose tables, diagrams, and formatting; use the original source links to verify exact instructions before applying them.</p>
@@ -327,6 +375,51 @@ const n8nReferenceRows = [
                     <span>
                       <h3>Section {index + 1}: {step.title}</h3>
                       <pre tabindex="0">{step.content}</pre>
+                      {step.mediaIds && step.mediaIds.length > 0 && (
+                        <div class="step-media-gallery">
+                          {step.mediaIds.map((mediaId) => {
+                            const item = (guide.media ?? []).find((m) => m.id === mediaId);
+                            return item ? (
+                              <figure class="guide-figure">
+                                <img
+                                  src={withBase(item.src)}
+                                  alt={item.alt}
+                                  width={item.width}
+                                  height={item.height}
+                                  class="guide-image"
+                                />
+                                <figcaption class="guide-caption">{item.caption}</figcaption>
+                              </figure>
+                            ) : null;
+                          })}
+                        </div>
+                      )}
+                      {step.tableIds && step.tableIds.length > 0 && (
+                        <div class="step-tables-gallery">
+                          {step.tableIds.map((tableId) => {
+                            const tbl = (guide.tables ?? []).find((t) => t.id === tableId);
+                            return tbl ? (
+                              <div class="guide-table-wrapper" tabindex="0" role="region" aria-label={tbl.title}>
+                                <h4 class="guide-table-title">{tbl.title}</h4>
+                                <table class="guide-table">
+                                  <thead>
+                                    <tr>
+                                      {tbl.headers.map((h) => <th scope="col">{h}</th>)}
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    {tbl.rows.map((row) => (
+                                      <tr>
+                                        {row.map((cell) => <td>{cell}</td>)}
+                                      </tr>
+                                    ))}
+                                  </tbody>
+                                </table>
+                              </div>
+                            ) : null;
+                          })}
+                        </div>
+                      )}
                     </span>
                   </label>
                 ))}

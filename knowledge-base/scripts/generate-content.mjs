@@ -8,6 +8,9 @@ import mammoth from 'mammoth';
 import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs';
 import { z } from 'zod';
 
+import { extractAllGuideAssets } from './extract-guide-assets.mjs';
+import { getGuideFidelityData } from './guide-fidelity-data.mjs';
+
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const knowledgeBaseRoot = path.resolve(scriptDirectory, '..');
 const repositoryRoot = path.resolve(knowledgeBaseRoot, '..');
@@ -313,6 +316,7 @@ async function main() {
       // A missing or incompatible cache is expected on the first generation pass.
     }
   }
+  await extractAllGuideAssets();
   const guides = [];
   for (const guide of contentMap.guides) {
     const includeOperationalContent = guide.publicStatus === 'published';
@@ -345,11 +349,28 @@ async function main() {
     }
     const readingVersion = sha256(Buffer.from(documents.map((document) => document.sha256).join(':'))).slice(0, 16);
     const guideText = documents.map((document) => document.sourceText).filter(Boolean).join('\n\n');
+    const fidelity = includeOperationalContent ? getGuideFidelityData(guide.id) : { media: [], tables: [] };
+    let guidedSteps = [];
+    if (includeOperationalContent) {
+      if (fidelity.guidedSteps && fidelity.guidedSteps.length > 0) {
+        guidedSteps.push(...fidelity.guidedSteps);
+        const coveredPaths = new Set(guidedSteps.map((s) => s.sourcePath));
+        for (const doc of documents) {
+          if (!doc.sourceText || coveredPaths.has(doc.path)) continue;
+          guidedSteps.push(...chunkGuidedSteps([doc]));
+        }
+      } else {
+        guidedSteps = chunkGuidedSteps(documents);
+      }
+    }
+
     guides.push({
       ...guide,
       readingVersion,
       sourceDocuments: documents,
-      guidedSteps: chunkGuidedSteps(documents),
+      media: fidelity.media ?? [],
+      tables: fidelity.tables ?? [],
+      guidedSteps,
       originalReferences: [...new Map(
         documents.flatMap((document) => document.originalReferences).map((reference) => [reference.url, reference]),
       ).values()],

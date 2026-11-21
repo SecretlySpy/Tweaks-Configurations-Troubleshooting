@@ -67,3 +67,52 @@ test('generated PDF pages retain line breaks and reading sections do not omit so
     }
   }
 });
+
+test('guides with extracted media have all referenced image assets present on disk', async () => {
+  const guidesWithMedia = guideData.guides.filter((guide) => guide.media && guide.media.length > 0);
+  assert.ok(guidesWithMedia.length >= 3, 'Expected at least 3 guides with extracted media assets');
+
+  for (const guide of guidesWithMedia) {
+    for (const media of guide.media) {
+      assert.ok(media.id && media.filename && media.src && media.alt && media.caption, `Media missing required fields in ${guide.id}`);
+      const assetDiskPath = path.join(knowledgeBaseRoot, 'public', ...media.src.split('/').filter(Boolean));
+      const stats = await fs.stat(assetDiskPath);
+      assert.ok(stats.isFile(), `Asset not found on disk: ${assetDiskPath}`);
+      assert.ok(stats.size > 500, `Asset file is unexpectedly small: ${assetDiskPath}`);
+    }
+  }
+});
+
+test('guides with structured tables retain column headers and non-empty rows', () => {
+  const guidesWithTables = guideData.guides.filter((guide) => guide.tables && guide.tables.length > 0);
+  assert.ok(guidesWithTables.length >= 4, 'Expected at least 4 guides with structured tables');
+
+  for (const guide of guidesWithTables) {
+    for (const table of guide.tables) {
+      assert.ok(table.id && table.title, `Table missing id/title in ${guide.id}`);
+      assert.ok(table.headers.length >= 2, `Table headers missing in ${guide.id}/${table.id}`);
+      assert.ok(table.rows.length >= 1, `Table rows empty in ${guide.id}/${table.id}`);
+      for (const row of table.rows) {
+        assert.equal(row.length, table.headers.length, `Row column count mismatch in ${guide.id}/${table.id}`);
+      }
+    }
+  }
+});
+
+test('key guides have their verified media and table fidelity quotas', () => {
+  const driverGuide = guideData.guides.find((g) => g.id === 'windows-block-driver-installation');
+  assert.equal(driverGuide.media.length, 6, 'Driver blocking guide must have 6 screenshots');
+
+  const compendium = guideData.guides.find((g) => g.id === 'windows-troubleshooting-compendium');
+  assert.equal(compendium.media.length, 2, 'Compendium must have 2 screenshots');
+  assert.equal(compendium.tables.length, 2, 'Compendium must have 2 tables (DNS + Admin/Powercfg)');
+
+  const n8n = guideData.guides.find((g) => g.id === 'n8n-local-docker-compose');
+  assert.equal(n8n.media.length, 6, 'n8n guide must have 6 diagrams/visuals');
+  assert.equal(n8n.tables.length, 2, 'n8n guide must have 2 tables (Quick reference + Port options)');
+  assert.equal(n8n.guidedSteps.length, 10, 'n8n guide must cover all 10 reference sections');
+
+  const psCmd = guideData.guides.find((g) => g.id === 'windows-powershell-cmd');
+  assert.equal(psCmd.tables.length, 2, 'PowerShell guide must have 2 tables');
+});
+

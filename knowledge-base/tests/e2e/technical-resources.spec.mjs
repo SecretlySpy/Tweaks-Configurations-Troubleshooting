@@ -9,6 +9,9 @@ const paths = {
   windows: 'windows/',
   n8n: 'guides/shared/n8n-local-docker-compose/',
   androidTroubleshooting: 'android/troubleshooting/',
+  blockDriver: 'guides/windows/block-specific-driver-installation/',
+  powershellCmd: 'guides/windows/powershell-and-cmd-commands/',
+  troubleshootingTweaks: 'guides/windows/troubleshooting-and-tweaks/',
 };
 
 test('homepage renders the approved information architecture without horizontal overflow', async ({ page }, testInfo) => {
@@ -225,3 +228,58 @@ test('every original reference remains visible and clickable at each viewport', 
   await expect(page.locator('.figma-command-footer [data-copy-source]')).toBeVisible();
   await expect(page.locator('.architecture-node').last()).toBeVisible();
 });
+
+test('restored images load with positive dimensions across remediated guides', async ({ page }) => {
+  // Check driver blocking guide screenshots in full and guided panels
+  await page.goto(paths.blockDriver);
+  const fullDriverImages = page.locator('[data-reading-panel="full"] .guide-image');
+  await expect(fullDriverImages).toHaveCount(6);
+  for (const img of await fullDriverImages.all()) {
+    await img.scrollIntoViewIfNeeded();
+    await expect(img).toBeVisible();
+    const naturalWidth = await img.evaluate((el) => el.naturalWidth);
+    expect(naturalWidth).toBeGreaterThan(0);
+  }
+
+  // Check troubleshooting compendium screenshots
+  await page.goto(paths.troubleshootingTweaks);
+  const fullCompImages = page.locator('[data-reading-panel="full"] .guide-image');
+  await expect(fullCompImages).toHaveCount(2);
+  for (const img of await fullCompImages.all()) {
+    await img.scrollIntoViewIfNeeded();
+    await expect(img).toBeVisible();
+    const naturalWidth = await img.evaluate((el) => el.naturalWidth);
+    expect(naturalWidth).toBeGreaterThan(0);
+  }
+
+  // Check n8n diagrams
+  await page.goto(paths.n8n);
+  const n8nImages = page.locator('[data-reading-panel="guided"] .guide-image');
+  await expect(n8nImages).toHaveCount(6);
+  for (const img of await n8nImages.all()) {
+    await img.scrollIntoViewIfNeeded();
+    await expect(img).toBeVisible();
+    const naturalWidth = await img.evaluate((el) => el.naturalWidth);
+    expect(naturalWidth).toBeGreaterThan(0);
+  }
+});
+
+test('structured tables render with headers and rows without layout overflow', async ({ page }) => {
+  await page.goto(paths.powershellCmd);
+  const fullTables = page.locator('[data-reading-panel="full"] .guide-table');
+  await expect(fullTables).toHaveCount(2);
+  const guidedTables = page.locator('[data-reading-panel="guided"] .guide-table');
+  await expect(guidedTables).toHaveCount(2);
+
+  // Check no horizontal overflow
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  expect(overflow).toBeLessThanOrEqual(1);
+
+  // Check compendium tables
+  await page.goto(paths.troubleshootingTweaks);
+  const compTables = page.locator('[data-reading-panel="full"] .guide-table');
+  await expect(compTables).toHaveCount(2);
+  await expect(compTables.first().getByRole('cell', { name: 'Cisco OpenDNS' })).toBeVisible();
+  await expect(compTables.last().getByRole('cell', { name: 'powercfg -list' })).toBeVisible();
+});
+

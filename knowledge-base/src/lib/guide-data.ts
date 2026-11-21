@@ -55,11 +55,30 @@ export interface SourceDocument {
   originalReferences: SourceReference[];
 }
 
+export interface GuideMedia {
+  id: string;
+  filename: string;
+  src: string;
+  alt: string;
+  caption: string;
+  width?: number;
+  height?: number;
+}
+
+export interface GuideTable {
+  id: string;
+  title: string;
+  headers: string[];
+  rows: string[][];
+}
+
 export interface GuidedStep {
   id: string;
   title: string;
   sourcePath: string;
   content: string;
+  mediaIds?: string[];
+  tableIds?: string[];
 }
 
 export interface Guide {
@@ -76,6 +95,8 @@ export interface Guide {
   keywords: string[];
   readingVersion: string;
   sourceDocuments: SourceDocument[];
+  media?: GuideMedia[];
+  tables?: GuideTable[];
   guidedSteps: GuidedStep[];
   originalReferences: SourceReference[];
   searchText: string;
