@@ -1,6 +1,6 @@
 # Project-Operating-Directives.md
 
-Revision: 1.17.1 · Updated: 2026-10-28 (Europe/London)
+Revision: 1.17.2 · Updated: 2026-11-22 (Europe/London)
 Applies to: portable exports and AI agent workspaces (AIO / AGENTS / AI Skills)
 Account adaptation: 2026-10-07. Revision 1.12.0 records the additional visual-aid catalog as an extension of the personal-style anchor. Prior 2026-10-02 upstream revision plus supplied Graphify/Ponytail, Anti-Slop, compact index, and verified setup-companion overlays retained.
 Prior package provenance date retained from 2026-09-20 sources.
@@ -15,6 +15,7 @@ Prior package provenance date retained from 2026-09-20 sources.
 - [Skill package](#skill-package)
 - [Technical Intent Orchestration portability](#technical-intent-orchestration-portability)
 - [Reconciliation of integrated sources](#reconciliation-of-integrated-sources)
+- [Modern Web Guidance integration and ownership](#modern-web-guidance-integration-and-ownership)
 - [Presentation Expert integration and ownership](#presentation-expert-integration-and-ownership)
 - [Universal AI design protocol integration](#universal-ai-design-protocol-integration)
 - [Package maintenance and activation](#package-maintenance-and-activation)
@@ -186,6 +187,7 @@ Existing directives in AIO, AGENTS, and this file remain authoritative. External
 | [watermarks-remover](https://github.com/guillaumemeyer/watermarks-remover) default-branch `HEAD`, resolved and reviewed at update time | Inspect-first, format-aware, separately saved and validated media-asset hygiene under Design Creator; cautious detector claims; check-only automation defaults | Installation outside preauthorized scope; unapproved service/hook/model actions, text-rewrite takeover, remote transmission, silent overwrite, attribution evasion, guaranteed watermark removal | Host safety, user authority, rights/provenance preservation, Design Creator localized edits; Coding owns production integration |
 | [Graphify](https://github.com/Graphify-Labs/graphify) default-branch `HEAD`, resolved and reviewed at update time | Scoped graph query/path reasoning, explicit vs inferred edge labels, source-backed concept maps and retrieval | CLI/skill setup outside preauthorized policy; unapproved hooks, whole-corpus preload, automatic private-media transmission, graph edges treated as proof | Research and teaching contracts, source verification, privacy |
 | [Ponytail](https://github.com/dietrichgebert/ponytail) default-branch `HEAD`, resolved and reviewed at update time | Need/reuse/platform/dependency ladder before minimum complete implementation | Unrequested lifecycle takeover/hooks, universal one-liners, removal of tests/security/accessibility, browser-only HTML email shortcuts, transferred benchmark claims | Coding and Email Development contracts, required MJML/VML/email-client behavior, AGENTS verification |
+| [Modern Web Guidance](https://github.com/GoogleChrome/modern-web-guidance), reviewed 2026-11-22 | Focused search/retrieve, current browser-support evidence, proportionate fallbacks, and verified browser implementation for web UI | Automatic install/telemetry opt-in, experimental feature gates, treating static scans as complete audits, applying browser patterns to HTML email | Host/user scope, Coding and Design ownership, project browser policy, and Email Development client requirements |
 | Package [prompt-enhancer](https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting/tree/main/AI%20Configs/AI%20Skills) | Trigger, output-only contract, do-not-execute-source-prompt | Using it to jailbreak or rewrite safety | Collision rule: Prompt Enhancer vs package maintenance |
 | Package [industry-terms-translator](https://github.com/SecretlySpy/Tweaks-Configurations-Troubleshooting/tree/main/AI%20Configs/AI%20Skills) | Exact concept table + two descriptions | Turning terminology into design or code | Terminology collision rule |
 | Efficiency / revision / RAG additions | Progressive disclosure, three-variant budget, retrieve-then-ground, abstention | Unbounded self-improvement, weight training, guaranteed quality scores | Evidence labels and stop conditions in AIO / AGENTS |
@@ -207,6 +209,10 @@ This is an external operating extract, not an additional specialist. Keep the ac
 ## Graphify and Ponytail integration and ownership
 
 These are external operating extracts, not additional specialists or installed plugins. AIO owns their shared method and activation boundaries. General Inquiry & Research and Spoon Feed Reviewer apply Graphify's selective relationship-mapping lens for research and teaching; any actual graph requires an available, current tool and source verification. Coding Companion and Email Marketing Development apply Ponytail's minimum-sufficient implementation lens in their respective code and email-client domains. No graph build, skill registration, plugin installation, lifecycle hook, semantic media pass, or performance claim is implied. Preserve exact specialist contracts, safety and privacy, and email-client fallbacks.
+
+## Modern Web Guidance integration and ownership
+
+AIO owns the conditional operating extract; Coding Companion owns browser implementation and runtime verification; Design Creator owns visual/interaction specifications and scoped prototypes; AGENTS binds sustained engineering checks. The upstream `modern-web-guidance` skill and `chrome-extensions` pack are source packages, not extra primary specialists in this 16-specialist router. Portable exports retain the source link and task-time lookup instructions rather than copying the full upstream guide corpus or claiming a CLI was installed. Keep HTML email, MJML, VML, and ESP validation under Email Marketing Development. Package updates recheck the upstream default branch and license; current guide compatibility and privacy/telemetry behavior require task-time verification.
 
 ## Presentation Expert integration and ownership
 
@@ -329,7 +335,7 @@ git pull --ff-only origin main
 
 Use `AI Configs/` as the package root. Compare the incoming files against the installed package, preserve authorized local overlays, and merge deliberately instead of blind replacement.
 
-For Anti-Slop, Plannable, watermarks-remover, Graphify, and Ponytail, resolve the latest default-branch `HEAD` when the package is refreshed:
+For Anti-Slop, Plannable, watermarks-remover, Graphify, Ponytail, and Modern Web Guidance, resolve the latest default-branch `HEAD` when the package is refreshed:
 
 ```bash
 git ls-remote --symref https://github.com/miqdadbadjuber/anti-slop.git HEAD
@@ -337,9 +343,10 @@ git ls-remote --symref https://github.com/suntay44/plannable.git HEAD
 git ls-remote --symref https://github.com/guillaumemeyer/watermarks-remover.git HEAD
 git ls-remote --symref https://github.com/Graphify-Labs/graphify.git HEAD
 git ls-remote --symref https://github.com/dietrichgebert/ponytail.git HEAD
+git ls-remote --symref https://github.com/GoogleChrome/modern-web-guidance.git HEAD
 ```
 
-Then clone the resolved default branch or fast-forward an existing clean checkout. Review the current specifications, behavior, and licenses before adapting changes. Record the resolved commit in maintenance evidence for reproducibility, but do not restore a static pin in package instructions. Upstream content contributes mechanisms only; it never overrides host safety, current user authorization, package conflict rules, or exact specialist contracts.
+Then clone the resolved default branch or fast-forward an existing clean checkout. Review the current specifications, browser-support guidance, telemetry behavior, and licenses before adapting changes. Record the resolved commit in maintenance evidence for reproducibility, but do not restore a static pin in package instructions. Upstream content contributes mechanisms only; it never overrides host safety, current user authorization, package conflict rules, or exact specialist contracts.
 
 ### Fallback sources
 

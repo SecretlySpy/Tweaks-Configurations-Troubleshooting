@@ -1,6 +1,6 @@
 # AGENTS.md — Autonomous Engineering and Delivery Protocol
 
-Revision: 2.9.2 · Updated: 2026-10-28 (Europe/London)
+Revision: 2.9.3 · Updated: 2026-11-22 (Europe/London)
 Protocol version: 3.3 · compact-revision: 1.6.0
 Account adaptation: 2026-10-07. Revision 2.5.0 binds the additional visual-aid catalog, including UML, without replacing the existing visual rules. Prior 2026-10-04 upstream revision plus supplied Graphify/Ponytail, Anti-Slop, compact index, verified setup-companion overlays, and portable RAG-engineering bindings retained.
 Depends on: [AIO.md](AIO.md)
@@ -19,7 +19,7 @@ Activate lenses through [Domain lenses](#domain-lenses). Distinguish symptoms fr
 
 For public-facing content, [Copywriting](copywriting.md) owns strategy/text across its supported channels; this protocol retains implementation/security/delivery. Pass facts, proof, audience/awareness/funnel context, voice, and channel limits. Preserve SMS opt-in, confidentiality, and the [reference-mirroring overlay](AIO.md#reference-mirroring) in downstream work.
 
-Apply [AIO algorithmic efficiency](AIO.md#algorithmic-efficiency-framework), [bounded revision](AIO.md#bounded-recursive-self-improvement), [RAG practices](AIO.md#rag-operating-practices), and the [Anti-Slop](AIO.md#anti-slop-operating-extract) / [Plannable](AIO.md#plannable-operating-extract) extracts. [Graphify](AIO.md#graphify-operating-extract) and [Ponytail](AIO.md#ponytail-operating-extract) are conditional operating extracts, not installed tools or new specialists. Do not duplicate those frameworks here except for engineering-specific bindings below.
+Apply [AIO algorithmic efficiency](AIO.md#algorithmic-efficiency-framework), [bounded revision](AIO.md#bounded-recursive-self-improvement), [RAG practices](AIO.md#rag-operating-practices), and the [Anti-Slop](AIO.md#anti-slop-operating-extract) / [Plannable](AIO.md#plannable-operating-extract) extracts. [Graphify](AIO.md#graphify-operating-extract), [Ponytail](AIO.md#ponytail-operating-extract), and [Modern Web Guidance](AIO.md#modern-web-guidance-operating-extract) are conditional operating extracts, not installed tools or new specialists. Do not duplicate those frameworks here except for engineering-specific bindings below.
 
 ### Embedded personal-style binding
 
@@ -45,6 +45,7 @@ This binding affects presentation only. Authority, safety, evidence, security, i
 - [Portable verification and sensitive-data bindings](#portable-verification-and-sensitive-data-bindings)
 - [Specialist handoffs (no double ownership)](#specialist-handoffs-no-double-ownership)
 - [Delivery workflow](#delivery-workflow)
+- [Browser platform guidance](#browser-platform-guidance)
 - [Documentation and handover](#documentation-and-handover)
 - [Completion report](#completion-report)
 - [Upstream updates](#upstream-updates)
@@ -222,6 +223,10 @@ For relevant UI specify information architecture/journeys; happy/error/recovery/
 For AI-assisted design-to-code work, consume Design Creator's [grounded design protocol](AIO.md#grounded-design-routing) as a scoped handoff: inspect approved requirements and existing designs, distinguish verified behavior from assumptions and proposals, reuse established tokens/components, and map each material screen, state, and interaction to acceptance checks before implementation. If a proposed design changes navigation, behavior, or scope, identify that decision explicitly; do not silently turn it into a product requirement. Verify implemented behavior in the actual runtime and relevant viewports/input methods. A design file, screenshot, generated mockup, or build pass alone does not prove functional usability, accessibility conformance, editable structure, or production readiness. Keep Design Creator's design ownership and Coding Companion's implementation/verification ownership separate.
 
 Check keyboard operation/logical focus/no traps; visible unobscured focus; normal text contrast **4.5:1**, qualifying large text/UI contrast **3:1**; **44×44 CSS px** targets when practical and applicable platform minimum otherwise with justification; meaning beyond color; reduced motion; **200% zoom** and narrow reflow; semantic HTML/names before ARIA; associated, actionable errors. Usability/accessibility outrank novelty. Preserve originality, rights, the mirroring overlay, and localized edit boundaries.
+
+### Browser platform guidance
+
+For browser-rendered UI, CSS, HTML, or client-side JavaScript work, apply [AIO's Modern Web Guidance operating extract](AIO.md#modern-web-guidance-operating-extract) before choosing a platform pattern or adding a dependency. Coding Companion owns implementation; Design Creator provides scoped interaction and accessibility requirements. Consult a relevant current guide, inspect its browser-support and fallback advice, and adapt it to the project's supported browsers and framework. Test the actual changed behavior, keyboard/accessibility states, and relevant browsers or label untested coverage. Keep HTML email under Email Marketing Development's inbox-client rules; a browser guide alone does not validate an email template.
 
 ### 4. Security and privacy
 

@@ -8,14 +8,14 @@ description: 'Create, critique, edit, and specify original, accessible, evidence
 
   '
 metadata:
-  portable-integration-revision: '2026-10-28.1'
+  portable-integration-revision: '2026-11-22.1'
   calibration-revision: '2026-10-17.2'
   calibration-status: 'instruction-update; model-trials-NOT_RUN'
   enhancement-version: 1.1.0
   compact-revision: 1.5.0
   installed-from: CORE-CONFIG-COMPACT-1
   installed-at: '2026-09-20'
-  updated-at: '2026-10-28'
+  updated-at: '2026-11-22'
   visual-aid-catalog: additive-1.0
 ---
 
@@ -176,6 +176,10 @@ Keep evidence types separate:
 - **User research** supports only the participants, tasks, methods, and findings actually observed.
 
 When formal QA is in scope, mark each applicable criterion PASS, FAIL, UNVERIFIED, or N/A with the evidence or reason. A missing tool means the check is UNVERIFIED, not passed. On delivery, state the completed artifact, verified checks, material inferred/proposed choices, and remaining gaps in proportion to the task. Do not report planned, simulated, or partially complete work as finished.
+
+## Browser UI guidance and handoff
+
+When the requested deliverable is an interactive web prototype or a browser UI specification that names a web implementation pattern, consult the applicable current [Modern Web Guidance extract](../AIO.md#modern-web-guidance-operating-extract) and relevant upstream guide. Check accessible native behavior, browser support, fallbacks, motion preferences, and keyboard/focus states before specifying the interaction. Mark a pattern as proposed until checked in the target runtime. Pass the tested constraints and any unverified browsers to Coding Companion for production implementation; retain Design Creator's ownership of visual/interaction decisions. Do not impose browser APIs on static imagery, native mobile UI, or HTML email.
 
 ## Deliverable and edit contract
 

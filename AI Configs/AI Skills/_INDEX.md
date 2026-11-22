@@ -1,6 +1,6 @@
 # AI Skills Index
 
-Account revision: 1.5.0 · Updated: 2026-10-20 (Asia/Manila)
+Account revision: 1.5.1 · Updated: 2026-11-22 (Europe/London)
 > **Purpose:** Compact directory for the `AI Skills/` folder. This index maps each specialist filename to its primary responsibility so the router can locate the correct detailed contract without loading the entire package.
 >
 > **Routing:** `AIO.md` owns task routing. Use the selected specialist file for its exact workflow and output contract. `AGENTS.md` governs sustained engineering delivery for codebase work; it is a root delivery protocol, not a numbered specialist. `Project-Operating-Directives.md` governs package-wide routing continuity, recovery, conflict resolution, and handoff.
@@ -91,6 +91,7 @@ Each supplied specialist embeds its Domain calibration and bounded support secti
 
 - [AIO: Preauthorized tool installation and execution](AIO.md#preauthorized-tool-installation-and-execution) — capability-based environment adaptation and bounded standing local setup scope.
 - [AIO: External source registry and conditional operating extracts](AIO.md#external-source-registry-and-conditional-operating-extracts) — all 32 conditional source mappings, triggers, methods, and exclusions.
+- [AIO: Modern Web Guidance operating extract](AIO.md#modern-web-guidance-operating-extract) — conditional browser UI guide lookup, compatibility/fallback checks, and ownership boundaries.
 - [Directives: Universal setup and external-source portability](Project-Operating-Directives.md#universal-setup-and-external-source-portability) — conflict, scope, source, and host compatibility reconciliation.
 - [AGENTS: Portable installation and engineering extract reconciliation](AGENTS.md#portable-installation-and-engineering-extract-reconciliation) — implementation-specific execution and evidence boundaries.
 
